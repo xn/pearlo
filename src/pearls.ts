@@ -1,10 +1,12 @@
 import { Quest, Task, CombatStrategy } from "grimoire-kolmafia";
 import {
+  abort,
   availableAmount,
   canAdventure,
   getWorkshed,
   Item,
   myAdventures,
+  numericModifier,
   print,
   retrieveItem,
   use,
@@ -16,7 +18,14 @@ import { buildPearlMacro, damagePlan } from "./combat";
 import { abortIfBeatenUp, asdonFualable, fuelUp, isOverDrunk } from "./lib";
 import { pearlMood } from "./mood";
 import { buildPearlOutfit } from "./outfit";
-import { PEARLS, PearlKey, PearlSpec, canBreathUnderwater, printSeaworthyDebug } from "./zones";
+import {
+  PEARL_RES_CAP,
+  PEARLS,
+  PearlKey,
+  PearlSpec,
+  canBreathUnderwater,
+  printSeaworthyDebug,
+} from "./zones";
 
 const breatheUnderwaterTask: Task = {
   name: "Breathe Underwater",
@@ -119,6 +128,15 @@ function pearlTask(spec: PearlSpec): Task {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
       plan = damagePlan(); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
+      if (args.major.requirecap) {
+        const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
+        const res = numericModifier(resName);
+        if (res < PEARL_RES_CAP) {
+          abort(
+            `pearlo: ${spec.key} res is ${res} (< ${PEARL_RES_CAP} cap) in ${spec.loc} and requirecap is set — fights would yield ${1.7 * Math.floor(res / 3)}% instead of 10%. Add resistance or drop requirecap.`,
+          );
+        }
+      }
     },
     do: spec.loc,
     choices: spec.choices ?? {},

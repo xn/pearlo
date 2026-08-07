@@ -41,6 +41,9 @@ export function canBreathUnderwater(): boolean {
   );
 }
 
+/** Resistance level where pearl progress caps at 10%/fight (docs/sea-reference.md §2). */
+export const PEARL_RES_CAP = 18;
+
 export type PearlKey = "spooky" | "sleaze" | "hot" | "stench" | "cold";
 
 export type PearlSpec = {

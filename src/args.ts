@@ -29,7 +29,12 @@ export const args = Args.create(
       help: "Comma-separated ordered subset of pearls to farm: spooky,sleaze,hot,stench,cold. No duplicates.",
       default: "spooky,sleaze,hot,stench,cold",
     }),
-    major: Args.group("Major Options", {}),
+    major: Args.group("Major Options", {
+      requirecap: Args.flag({
+        help: "Halt instead of adventuring whenever the zone's elemental resistance is below the 18-resistance progress cap (default: farm on at the reduced rate).",
+        default: false,
+      }),
+    }),
     minor: Args.group("Minor Options", {}),
     resources: Args.group("Resource Usage", {}),
 
