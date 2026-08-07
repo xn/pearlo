@@ -14,7 +14,7 @@ import {
 import { $effect, $item, AsdonMartin, get, have, set } from "libram";
 
 import { args } from "./args";
-import { buildPearlMacro, damagePlan } from "./combat";
+import { buildPearlMacro, damagePlan, weaponAttackPlan } from "./combat";
 import { abortIfBeatenUp, asdonFualable, fuelUp, isOverDrunk } from "./lib";
 import { pearlMood } from "./mood";
 import { buildPearlOutfit } from "./outfit";
@@ -121,13 +121,27 @@ function pearlTask(spec: PearlSpec): Task {
     after: ["Breathe Underwater", ...spec.after],
     completed: () => get(spec.obtained),
     ready: () =>
-      !isOverDrunk() &&
+      // Overdrunk farming is allowed only with Drunkula's wineglass (auto-detect).
+      (!isOverDrunk() || have($item`Drunkula's wineglass`)) &&
       canAdventure(spec.loc) &&
       myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
       plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
+      if (isOverDrunk()) {
+        // Wineglass combat is attack-only: no stuns, no items. Policy (user): halt
+        // entirely unless the equipped weapon one-shots the zone's toughest monster
+        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted.
+        const attack = weaponAttackPlan(spec.maxDef, spec.maxHp);
+        if (!attack.canOneShot) {
+          abort(
+            `pearlo: overdrunk in ${spec.loc} but the equipped weapon can't guarantee a one-shot ` +
+              `(damage floor ${attack.damage} vs ${spec.maxHp} HP, hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed vs Def ${spec.maxDef}`}). ` +
+              `Attack-only combat can't stun — improve weapon damage/${attack.ranged ? "Moxie" : "Muscle"} or wait for rollover.`,
+          );
+        }
+      }
       if (args.major.requirecap) {
         const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
         const res = numericModifier(resName);

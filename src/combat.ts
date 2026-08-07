@@ -1,6 +1,16 @@
-import { Item, haveEquipped, mpCost, myBuffedstat, numericModifier } from "kolmafia";
-import { $item, $skill, $stat, Macro, get, have } from "libram";
+import {
+  Item,
+  equippedItem,
+  getPower,
+  haveEquipped,
+  mpCost,
+  myBuffedstat,
+  numericModifier,
+  weaponType,
+} from "kolmafia";
+import { $item, $skill, $slot, $stat, Macro, get, have } from "libram";
 
+import { isOverDrunk } from "./lib";
 import { PearlSpec } from "./zones";
 
 export const ZONE_MAX_HP = 800; // ganger, giant squid — highest HP in any pearl zone
@@ -142,9 +152,50 @@ export function damagePlan(targetHp = ZONE_MAX_HP, prospectiveLanterns?: number)
  */
 export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan): Macro {
   void spec; // per-monster branches (stench-zone pufferfish/dragonfish stuns) arrive with those zones
+  if (isOverDrunk()) {
+    // Wineglass combat: every skill/item becomes a plain attack anyway — say so.
+    return new Macro().attack().repeat();
+  }
   const macro = new Macro();
   if (!plan.oneShot && have($skill`Entangling Noodles`)) {
     macro.trySkill($skill`Entangling Noodles`);
   }
   return macro.skill($skill`Saucegeyser`).repeat();
+}
+
+export type AttackPlan = {
+  damage: number;
+  hitGuaranteed: boolean;
+  canOneShot: boolean;
+  ranged: boolean;
+};
+
+/**
+ * Conservative plain-attack plan from the EQUIPPED weapon (wiki Weapon_Damage /
+ * Hit_Chance, fetched 2026-08-08): damage =
+ * floor((max(0, floor(stat×mult) − Def) + minWeaponRoll + flatWD [+ flatRanged]) × (1+pct%))
+ * + elemental; ranged uses Moxie×0.75 and adds flat Ranged Damage inside the multiplier;
+ * mysticality weapons hit and scale with Muscle. Hit is guaranteed when
+ * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20). Residual risk the model accepts:
+ * fumbles (~1/22) deal zero damage regardless of any "can't miss" source.
+ */
+export function weaponAttackPlan(targetDef: number, targetHp: number): AttackPlan {
+  const weapon = equippedItem($slot`weapon`);
+  const ranged = weaponType(weapon) === $stat`Moxie`;
+  const attackStat = myBuffedstat(ranged ? $stat`Moxie` : $stat`Muscle`);
+  const minRoll = Math.floor(getPower(weapon) / 10);
+  const flatWD = numericModifier("Weapon Damage");
+  const pctWD = numericModifier("Weapon Damage Percent") / 100;
+  const flatRanged = ranged ? numericModifier("Ranged Damage") : 0;
+  const elemental =
+    numericModifier("Hot Damage") +
+    numericModifier("Cold Damage") +
+    numericModifier("Spooky Damage") +
+    numericModifier("Stench Damage") +
+    numericModifier("Sleaze Damage");
+  const statTerm = Math.max(0, Math.floor(attackStat * (ranged ? 0.75 : 1)) - targetDef);
+  const damage = Math.floor((statTerm + minRoll + flatWD + flatRanged) * (1 + pctWD)) + elemental;
+  const r = 5 + Math.floor(Math.max(targetDef - 200, 0) / 20);
+  const hitGuaranteed = attackStat - r >= targetDef + 5;
+  return { damage, hitGuaranteed, canOneShot: hitGuaranteed && damage >= targetHp, ranged };
 }

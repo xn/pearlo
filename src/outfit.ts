@@ -14,6 +14,7 @@ import {
   pickPearlFamiliar,
   playerAirByEffect,
 } from "./familiar";
+import { isOverDrunk } from "./lib";
 import { PearlSpec, waterBreathingEquipment } from "./zones";
 
 // Never let the maximizer spend scarce charges on pearl fights: the broken champagne
@@ -53,17 +54,32 @@ export function capeMode(spec: PearlSpec): "kill" | "hold" {
 }
 
 export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
+  const overdrunk = isOverDrunk();
+
   // Equip only as much lantern gear (any slot) as the one-shot actually needs —
   // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
-  // computable (user design). Zero need = zero damage gear forced.
-  const needed = lanternComponentsNeededForOneShot(spec.maxHp);
-  const lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity);
-  const equip: Item[] = [...lanterns.equip];
-  const secondLantern = lanterns.secondOffhand;
+  // computable (user design). Zero need = zero damage gear forced. Overdrunk:
+  // lanterns duplicate SPELL components and the wineglass kills spells — skip all.
+  const equip: Item[] = [];
+  let secondLantern: Item | undefined;
+  if (!overdrunk) {
+    const needed = lanternComponentsNeededForOneShot(spec.maxHp);
+    const lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity);
+    equip.push(...lanterns.equip);
+    secondLantern = lanterns.secondOffhand;
+  } else {
+    // The wineglass IS the off-hand while overdrunk; weapon choice goes to the
+    // maximizer via the weapon-damage weights below.
+    equip.push($item`Drunkula's wineglass`);
+  }
 
   const modes: Modes = {};
   if (have($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
-  if (have($item`unwrapped knock-off retro superhero cape`) && !airRequiresBackSlot()) {
+  if (
+    !overdrunk &&
+    have($item`unwrapped knock-off retro superhero cape`) &&
+    !airRequiresBackSlot()
+  ) {
     equip.push($item`unwrapped knock-off retro superhero cape`);
     modes.retrocape = ["heck", capeMode(spec)];
   }
@@ -73,7 +89,12 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // The second lantern only reaches the Left-Hand Man when the one-shot still needs it.
   const familiarPlan = pickPearlFamiliar(spec, secondLantern);
 
-  const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen, 0.1 item`;
+  // Overdrunk: the maximizer picks the weapon ('effective' matches weapon class to
+  // the better attack stat; weapon-damage weights chase the one-shot floor).
+  const combatWeights = overdrunk
+    ? ", effective, 0.2 weapon damage, 0.2 weapon damage percent"
+    : ", 0.1 item";
+  const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen${combatWeights}`;
   const result: OutfitSpec = {
     modifier: familiarPlan.extraModifier
       ? `${baseModifier}, ${familiarPlan.extraModifier}`

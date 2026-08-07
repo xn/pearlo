@@ -60,11 +60,14 @@ export type PearlSpec = {
   choices?: { [id: number]: number };
   /** Highest monster HP in the zone (docs/sea-reference.md §3) — the one-shot target. */
   maxHp: number;
+  /** Highest monster Defense in the zone (docs/sea-reference.md §3) — the hit-guarantee target. */
+  maxDef: number;
 };
 
 export const PEARLS: PearlSpec[] = [
   {
     key: "spooky",
+    maxDef: 585,
     maxHp: 750,
     loc: $location`Anemone Mine`,
     element: $element`spooky`,
@@ -82,6 +85,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "sleaze",
+    maxDef: 630,
     maxHp: 800,
     loc: $location`The Dive Bar`,
     element: $element`sleaze`,
@@ -98,6 +102,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "hot",
+    maxDef: 450,
     maxHp: 800,
     loc: $location`The Marinara Trench`,
     element: $element`hot`,
@@ -116,6 +121,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "stench",
+    maxDef: 450,
     maxHp: 750,
     loc: $location`Madness Reef`,
     element: $element`stench`,
@@ -131,6 +137,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "cold",
+    maxDef: 360,
     maxHp: 800,
     loc: $location`The Briniest Deepests`,
     element: $element`cold`,
