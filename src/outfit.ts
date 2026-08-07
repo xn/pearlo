@@ -18,6 +18,10 @@ import { PearlSpec, waterBreathingEquipment } from "./zones";
 
 const OFFHAND_LANTERNS = $items`petrified wood water purifier, meteorb, snow mobile, big hot pepper`;
 
+// Never let the maximizer spend scarce charges on pearl fights: the broken champagne
+// bottle's +item drains its limited daily uses (user directive, 2026-08-07).
+const GLOBAL_AVOID = $items`broken champagne bottle`;
+
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot(): boolean {
   if (playerAirByEffect()) return false;
@@ -88,7 +92,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
       : baseModifier,
     equip,
     modes,
-    avoid: spec.avoid,
+    avoid: [...GLOBAL_AVOID, ...(spec.avoid ?? [])],
   };
   if (familiarPlan.familiar) result.familiar = familiarPlan.familiar;
   if (familiarPlan.famequip) result.famequip = familiarPlan.famequip;
