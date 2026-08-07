@@ -163,3 +163,8 @@ Runs in each task's `prepare()`:
   applied before monster resistance (irrelevant here: no resistances in pearl zones).
 - Retro cape in Heck General + Kill Me = back-slot spooky lantern (user); preferred over
   its Hold Me stun config under the round-1-kill philosophy (parka supplies the stagger).
+- Post-review amendments (user, 2026-08-07): effect lists sorted by verified enchantments
+  (only 6 of 20 grant resistance; Blood Bond dropped for its HP drain); **always run a
+  familiar** — ladder: elemental res (Cooler Yeti cold +1/11 lbs / Exotic Parrot / Mu) >
+  holding hands with lantern or maximizer-filled res slot > utility innate breathers
+  (Magic Dragonfish, Space Jellyfish, Barrrnacle, Emo Squid). `src/familiar.ts`.
