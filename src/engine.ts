@@ -22,6 +22,10 @@ import { canBreathUnderwater } from "./zones";
 export class PearloEngine extends Engine<never, Task> {
   private prepReportDone = false;
 
+  get prepReported(): boolean {
+    return this.prepReportDone;
+  }
+
   initPropertiesManager(manager: PropertiesManager): void {
     super.initPropertiesManager(manager);
     const bannedAutoRestorers = [

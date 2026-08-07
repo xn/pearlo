@@ -41,6 +41,18 @@ export function main(command?: string): void {
   } finally {
     engine.destruct();
   }
+  if (args.debug.prep && !engine.prepReported) {
+    print("pearlo prep: no zone task ran — nothing to prep:", "red");
+    for (const p of selected) {
+      if (get(p.obtained)) {
+        print(` ${p.key}: pearl already obtained today (resets at rollover)`);
+      } else if (!canAdventure(p.loc)) {
+        print(` ${p.key}: canAdventure(${p.loc}) is false`);
+      } else {
+        print(` ${p.key}: not ready (sober/turn-budget guard)`);
+      }
+    }
+  }
   print(`pearlo: spent ${myTurncount() - startTurns} turns, meat ${myMeat() - startMeat}`, "blue");
   for (const p of selected) {
     print(` ${p.key}: obtained=${get(p.obtained)} progress=${get(p.progress, 0)}%`);
