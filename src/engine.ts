@@ -2,6 +2,7 @@ import { Engine, Task } from "grimoire-kolmafia";
 import {
   Location,
   Slot,
+  equippedAmount,
   equippedItem,
   haveEffect,
   myAdventures,
@@ -58,6 +59,27 @@ export class PearloEngine extends Engine<never, Task> {
     // debug.prep: after the one prep report, stop scheduling anything.
     if (this.prepReportDone) return false;
     return super.available(task);
+  }
+
+  setChoices(task: Task, manager: PropertiesManager): void {
+    super.setChoices(task, manager);
+    // June cleaver noncombats (user-supplied pattern): skip while free skips remain
+    // (5/day), otherwise take the best option. Runs post-dress every execution so the
+    // skip counter stays current. Grimoire's shouldRepeatAdv re-adventures after a
+    // cleaver NC, so these don't cost pearl progress turns.
+    if (equippedAmount($item`June cleaver`) > 0) {
+      manager.setChoices({
+        1467: 3, // +adv
+        1468: get("_juneCleaverSkips", 0) < 5 ? 4 : 1,
+        1469: get("_juneCleaverSkips", 0) < 5 ? 4 : 3,
+        1470: 2, // teacher's pen
+        1471: get("_juneCleaverSkips", 0) < 5 ? 4 : 1,
+        1472: get("_juneCleaverSkips", 0) < 5 ? 4 : 2,
+        1473: get("_juneCleaverSkips", 0) < 5 ? 4 : 2,
+        1474: get("_juneCleaverSkips", 0) < 5 ? 4 : 2,
+        1475: get("_juneCleaverSkips", 0) < 5 ? 4 : 1,
+      });
+    }
   }
 
   do(task: Task): void {
