@@ -2,6 +2,7 @@ import { Modes, OutfitSpec } from "grimoire-kolmafia";
 import { Item, canEquip, toSlot } from "kolmafia";
 import { $item, $items, $slot, have } from "libram";
 
+import { args } from "./args";
 import {
   damagePlan,
   lanternComponentsNeededForOneShot,
@@ -68,9 +69,11 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
     equip.push(...lanterns.equip);
     secondLantern = lanterns.secondOffhand;
   } else {
-    // The wineglass IS the off-hand while overdrunk; weapon choice goes to the
-    // maximizer via the weapon-damage weights below.
+    // The wineglass IS the off-hand while overdrunk; the configured drunk weapon
+    // (default June cleaver) is forced when owned, else the maximizer chooses via
+    // the weapon-damage weights below.
     equip.push($item`Drunkula's wineglass`);
+    if (have(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
   }
 
   const modes: Modes = {};
@@ -89,10 +92,12 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // The second lantern only reaches the Left-Hand Man when the one-shot still needs it.
   const familiarPlan = pickPearlFamiliar(spec, secondLantern);
 
-  // Overdrunk: the maximizer picks the weapon ('effective' matches weapon class to
-  // the better attack stat; weapon-damage weights chase the one-shot floor).
+  // Overdrunk: weapon-damage weights chase the one-shot floor. 'effective' (weapon
+  // class matched to the better attack stat) only applies when NO weapon is forced —
+  // it could contradict the configured drunkweapon's class and fail every combination.
+  const weaponForced = overdrunk && have(args.major.drunkweapon);
   const combatWeights = overdrunk
-    ? ", effective, 0.2 weapon damage, 0.2 weapon damage percent"
+    ? `${weaponForced ? "" : ", effective"}, 0.2 weapon damage, 0.2 weapon damage percent`
     : ", 0.1 item";
   const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen${combatWeights}`;
   const result: OutfitSpec = {

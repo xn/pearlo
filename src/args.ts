@@ -38,6 +38,10 @@ export const args = Args.create(
         help: "Halt instead of adventuring whenever the zone's elemental resistance is below the 18-resistance progress cap (default: farm on at the reduced rate).",
         default: false,
       }),
+      drunkweapon: Args.item({
+        help: "Weapon to wield while farming overdrunk (wineglass attack-only mode).",
+        default: $item`June cleaver`,
+      }),
     }),
     minor: Args.group("Minor Options", {}),
     resources: Args.group("Resource Usage", {}),

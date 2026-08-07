@@ -195,8 +195,11 @@ export function requiredAttackFor(targetDef: number): number {
  * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20). Residual risk the model accepts:
  * fumbles (~1/22) deal zero damage regardless of any "can't miss" source.
  */
-export function weaponAttackPlan(targetDef: number, targetHp: number): AttackPlan {
-  const weapon = equippedItem($slot`weapon`);
+export function weaponAttackPlan(
+  targetDef: number,
+  targetHp: number,
+  weapon: Item = equippedItem($slot`weapon`),
+): AttackPlan {
   const ranged = weaponType(weapon) === $stat`Moxie`;
   const attackStat = myBuffedstat(ranged ? $stat`Moxie` : $stat`Muscle`);
   const minRoll = Math.floor(getPower(weapon) / 10);

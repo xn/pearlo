@@ -51,9 +51,10 @@ export function main(command?: string): void {
       print(` --- ${p.key} (${p.loc}) ---`, "blue");
       print(`  canAdventure: ${canAdventure(p.loc)}`);
       if (simDrunk) {
-        const attack = weaponAttackPlan(p.maxDef, p.maxHp);
+        const simWeapon = have(args.major.drunkweapon) ? args.major.drunkweapon : undefined;
+        const attack = weaponAttackPlan(p.maxDef, p.maxHp, simWeapon);
         print(
-          `  attack floor (equipped ${attack.ranged ? "ranged" : "melee"} weapon) vs ${p.maxHp} HP: ${attack.damage} — ` +
+          `  attack floor (${simWeapon ?? "equipped weapon"}, ${attack.ranged ? "ranged" : "melee"}) vs ${p.maxHp} HP: ${attack.damage} — ` +
             `hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed (need ${requiredAttackFor(p.maxDef)} ${attack.ranged ? "Moxie" : "Muscle"} vs Def ${p.maxDef})`} — ` +
             `one-shot: ${attack.canOneShot}`,
           attack.canOneShot ? "blue" : "red",
