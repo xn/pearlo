@@ -1,6 +1,8 @@
 import {
   Effect,
   Element,
+  hpCost,
+  mpCost,
   myFamiliar,
   myHp,
   myMaxhp,
@@ -8,6 +10,7 @@ import {
   myMp,
   restoreHp,
   restoreMp,
+  toSkill,
   use,
 } from "kolmafia";
 import { $effect, $effects, $elements, $familiar, $item, get, have } from "libram";
@@ -49,25 +52,60 @@ const FAMILIAR_WEIGHT_EFFECTS = $effects`Empathy, Leash of Linguini, Only Dogs L
 // Jackasses' Symphony +12 flat. Acquisition is free-first via canAcquireEffect.
 const SPELL_DAMAGE_EFFECTS = $effects`Carol of the Hells, Song of Sauce, Jackasses' Symphony of Destruction`;
 
+/** Effect lists that apply to this zone/state, in cast order (HP-costed blocks last). */
+function applicableBuffs(spec: PearlSpec): Effect[] {
+  return [
+    ...ALL_ELEMENT_RES_EFFECTS,
+    ...PARTIAL_RES_EFFECTS.filter(([, elements]) => elements.includes(spec.element)).map(
+      ([ef]) => ef,
+    ),
+    ...STAT_EFFECTS,
+    ...HP_EFFECTS,
+    ...(myFamiliar() !== $familiar.none ? FAMILIAR_WEIGHT_EFFECTS : []),
+    ...SPELL_DAMAGE_EFFECTS,
+    // HP-costed buffs (Blood Bubble 30 HP) last, right before restores recover the cost.
+    ...BLOCK_EFFECTS,
+  ];
+}
+
+/**
+ * MP/HP the pending skill-casts among `effects` would cost (missing effects whose
+ * default acquisition is a cast — same "cast 1 Skill Name" parse as canAcquireEffect).
+ */
+function pendingCastCosts(effects: Effect[]): { mp: number; hp: number } {
+  let mp = 0;
+  let hp = 0;
+  for (const ef of effects) {
+    if (have(ef) || !ef.default) continue;
+    const parts = ef.default.split(" ");
+    if (parts[0] !== "cast") continue;
+    const sk = toSkill(parts.slice(2).join(" "));
+    if (!have(sk)) continue;
+    mp += mpCost(sk);
+    hp += hpCost(sk);
+  }
+  return { mp, hp };
+}
+
 export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
   // Fishy: free pipe only in v1 (docs/consumption-reference.md)
   if (!have($effect`Fishy`) && have($item`fishy pipe`) && !get("_fishyPipeUsed")) {
     use($item`fishy pipe`);
   }
-  for (const ef of ALL_ELEMENT_RES_EFFECTS) tryAcquiringEffect(ef);
-  for (const [ef, elements] of PARTIAL_RES_EFFECTS) {
-    if (elements.includes(spec.element)) tryAcquiringEffect(ef);
-  }
-  for (const ef of STAT_EFFECTS) tryAcquiringEffect(ef);
-  for (const ef of HP_EFFECTS) tryAcquiringEffect(ef);
-  if (myFamiliar() !== $familiar.none) {
-    for (const ef of FAMILIAR_WEIGHT_EFFECTS) tryAcquiringEffect(ef);
-  }
-  for (const ef of SPELL_DAMAGE_EFFECTS) tryAcquiringEffect(ef);
-  // HP-costed buffs (Blood Bubble 30 HP) go last among buffs, right before the
-  // restores below recover what they spent.
-  for (const ef of BLOCK_EFFECTS) tryAcquiringEffect(ef);
-  // Explicit restores — auto-recovery is disabled by PearloEngine
+
+  const buffs = applicableBuffs(spec);
+
+  // BEFORE the mood: enough MP to actually cast the buffs (their summed cost can dwarf
+  // a fight's budget — Song of Sauce alone is 100 MP) and enough HP for HP-costed casts.
+  const pending = pendingCastCosts(buffs);
+  const mpNeeded = Math.max(pending.mp, 1.5 * mpPerFight);
+  if (myMp() < mpNeeded) restoreMp(Math.min(myMaxmp(), mpNeeded + mpPerFight));
+  if (myHp() <= pending.hp || myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
+
+  for (const ef of buffs) tryAcquiringEffect(ef);
+
+  // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight budget.
+  // Explicit restores; auto-recovery is disabled by PearloEngine.
   if (myMp() < 1.5 * mpPerFight) restoreMp(Math.min(myMaxmp(), 3 * mpPerFight));
   if (myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
 }
