@@ -54,8 +54,12 @@ const FAMILIAR_WEIGHT_EFFECTS = $effects`Empathy, Leash of Linguini, Only Dogs L
 const SPELL_DAMAGE_EFFECTS = $effects`Carol of the Hells, Song of Sauce, Jackasses' Symphony of Destruction`;
 
 // Weapon-damage % effects for wineglass (attack-only) combat: Carol of the Bulls,
-// Song of the North (user, 2026-08-08).
-const WEAPON_DAMAGE_EFFECTS = $effects`Carol of the Bulls, Song of the North`;
+// Song of the North (user, 2026-08-08); Frenzied, Bloody = Blood Frenzy's +50%
+// weapon damage for 30 HP — the comma in its name forces the singular template.
+const WEAPON_DAMAGE_EFFECTS = [
+  ...$effects`Carol of the Bulls, Song of the North`,
+  $effect`Frenzied, Bloody`,
+];
 
 /** Effect lists that apply to this zone/state, in cast order (HP-costed blocks last). */
 function applicableBuffs(spec: PearlSpec): Effect[] {
