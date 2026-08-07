@@ -49,18 +49,28 @@ module level. Run `yarn lint` after changes; there are no unit tests (nothing in
 
 ## Source layout
 
-- `src/main.ts` — entry point (currently a stub)
-- `src/pearls.ts` — the `PearlsQuest` grimoire Quest: a "Breathe Underwater" task (ballast
-  turtle → seal lung → potion of pneumaticity → tempura air → Asdon Waterproofly → fall back
-  to equipping breathing gear via `_subAquaEquipBreathing`) plus one task per pearl zone,
-  driven by a `PearlSpec` table (location, elemental-res modifier, custom `_unblemishedPearl*`
-  progress/obtained preferences)
-- `src/args.ts` — `Args.create("pearlo", ...)` CLI scaffolding; `toTempPref(name)` builds
-  `_pearlo_<name>` preference names
+- `src/main.ts` — real entry: `Args.fill` → help/version/sim handling → `PearloEngine.run()`
+  with `destruct()` in `finally` → session summary
+- `src/engine.ts` — `PearloEngine extends Engine`: auto-recovery triggers disabled
+  (`hpAutoRecovery: -0.05`), free rests banned from restorer lists, Doc Galaktik's tonic
+  added for MP; restores are explicit script calls
+- `src/pearls.ts` — `PEARLS: PearlSpec[]` zone table (key, location, element, parka mode,
+  `_unblemishedPearl*` prefs, avoid items) + `pearlTasks(selected)` factory: the "Breathe
+  Underwater" task followed by one guarded task per selected zone (sober check,
+  `canAdventure`, rollover-aware turn budget using observed progress rate)
+- `src/combat.ts` — conservative Saucegeyser damage floor (wiki formula + lantern
+  component counting), `damagePlan()` (casts/fight, MP budget), `buildPearlMacro`
+  (Entangling Noodles when not one-shotting, Saucegeyser repeat — non-melee everywhere)
+- `src/outfit.ts` — `buildPearlOutfit`: `"<element> res 18 max, sea, …"` modifier, CMoI +
+  off-hand lantern equips, parka mode per zone, retro cape as lantern (Kill Me) or stun
+  (Hold Me) via `capeMode()`, Left-Hand Man second lantern when Waterproofly covers breathing
+- `src/mood.ts` — `pearlMood`: fishy pipe, resistance + spell-damage effect lists via
+  `tryAcquiringEffect`, explicit `restoreMp`/`restoreHp` thresholds
+- `src/args.ts` — `Args.create("pearlo", ...)`; `pearls=` ordered-subset arg +
+  `selectedPearls()`; `toTempPref(name)` builds `_pearlo_<name>` preference names
 - `src/lib.ts` — `tryAcquiringEffect`/`canAcquireEffect` (parses `Effect.default` CLI strings,
   handles April Shower Thoughts shield, Powerful Glove, Heartstone swaps), Asdon fueling
-  helpers (`asdonFualable`, `fuelUp`)
-- `src/combat.ts`, `src/outfit.ts` — stubs (combat macros, familiar/outfit selection)
+  helpers, real organ predicates (`isOverDrunk` etc. — runtime limits, never constants)
 
 ### Pearl mechanics (verified against wiki: [Unblemished pearl])
 
