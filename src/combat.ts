@@ -3,6 +3,7 @@ import {
   equippedItem,
   getPower,
   haveEquipped,
+  itemAmount,
   mpCost,
   myBuffedstat,
   numericModifier,
@@ -171,6 +172,21 @@ export type AttackPlan = {
 };
 
 /**
+ * The wineglass must be in INVENTORY (or worn): the maximizer's speculation and the
+ * engine's dress (autoSatisfyWithCloset: false) can't reach closet/storage copies,
+ * so libram's have() saying yes is not enough.
+ */
+export function wineglassAccessible(): boolean {
+  return itemAmount($item`Drunkula's wineglass`) > 0 || haveEquipped($item`Drunkula's wineglass`);
+}
+
+/** Attack stat needed for a guaranteed hit vs this Defense (wiki Hit_Chance). */
+export function requiredAttackFor(targetDef: number): number {
+  const r = 5 + Math.floor(Math.max(targetDef - 200, 0) / 20);
+  return targetDef + 5 + r;
+}
+
+/**
  * Conservative plain-attack plan from the EQUIPPED weapon (wiki Weapon_Damage /
  * Hit_Chance, fetched 2026-08-08): damage =
  * floor((max(0, floor(stat×mult) − Def) + minWeaponRoll + flatWD [+ flatRanged]) × (1+pct%))
@@ -179,12 +195,6 @@ export type AttackPlan = {
  * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20). Residual risk the model accepts:
  * fumbles (~1/22) deal zero damage regardless of any "can't miss" source.
  */
-/** Attack stat needed for a guaranteed hit vs this Defense (wiki Hit_Chance). */
-export function requiredAttackFor(targetDef: number): number {
-  const r = 5 + Math.floor(Math.max(targetDef - 200, 0) / 20);
-  return targetDef + 5 + r;
-}
-
 export function weaponAttackPlan(targetDef: number, targetHp: number): AttackPlan {
   const weapon = equippedItem($slot`weapon`);
   const ranged = weaponType(weapon) === $stat`Moxie`;

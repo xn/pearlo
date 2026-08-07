@@ -3,7 +3,13 @@ import { canAdventure, maximize, myAdventures, myMeat, myTurncount, print } from
 import { $item, get, have, sinceKolmafiaRevision } from "libram";
 
 import { args, selectedPearls } from "./args";
-import { damagePlan, ownedLanternProspect, requiredAttackFor, weaponAttackPlan } from "./combat";
+import {
+  damagePlan,
+  ownedLanternProspect,
+  requiredAttackFor,
+  weaponAttackPlan,
+  wineglassAccessible,
+} from "./combat";
 import { PearloEngine } from "./engine";
 import { playerAirByEffect } from "./familiar";
 import { isOverDrunk } from "./lib";
@@ -30,11 +36,17 @@ export function main(command?: string): void {
     print(` adventures available: ${myAdventures()}`);
     if (simDrunk && !have($item`Drunkula's wineglass`)) {
       print(" no Drunkula's wineglass — overdrunk farming would not run at all", "red");
+    } else if (simDrunk && !wineglassAccessible()) {
+      print(
+        " Drunkula's wineglass is owned but NOT in inventory (closet/storage?) — neither the maximizer nor the dress can reach it there. Take it out first.",
+        "red",
+      );
     }
     // Per-element blocks (speculative — nothing is equipped; current familiar counts).
     const breathing = playerAirByEffect() ? "" : ", adventure underwater";
-    const wineglass =
-      simDrunk && have($item`Drunkula's wineglass`) ? ", +equip Drunkula's wineglass" : "";
+    // Only force the wineglass into the speculation when it is actually reachable —
+    // otherwise every combination FAILs on the +equip and the res verdict is garbage.
+    const wineglass = simDrunk && wineglassAccessible() ? ", +equip Drunkula's wineglass" : "";
     for (const p of selected) {
       print(` --- ${p.key} (${p.loc}) ---`, "blue");
       print(`  canAdventure: ${canAdventure(p.loc)}`);

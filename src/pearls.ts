@@ -14,7 +14,7 @@ import {
 import { $effect, $item, AsdonMartin, get, have, set } from "libram";
 
 import { args } from "./args";
-import { buildPearlMacro, damagePlan, weaponAttackPlan } from "./combat";
+import { buildPearlMacro, damagePlan, weaponAttackPlan, wineglassAccessible } from "./combat";
 import { abortIfBeatenUp, asdonFualable, fuelUp, isOverDrunk } from "./lib";
 import { pearlMood } from "./mood";
 import { buildPearlOutfit } from "./outfit";
@@ -121,8 +121,9 @@ function pearlTask(spec: PearlSpec): Task {
     after: ["Breathe Underwater", ...spec.after],
     completed: () => get(spec.obtained),
     ready: () =>
-      // Overdrunk farming is allowed only with Drunkula's wineglass (auto-detect).
-      (!isOverDrunk() || have($item`Drunkula's wineglass`)) &&
+      // Overdrunk farming is allowed only with Drunkula's wineglass reachable in
+      // inventory — closeted copies satisfy have() but not the maximizer or dress.
+      (!isOverDrunk() || wineglassAccessible()) &&
       canAdventure(spec.loc) &&
       myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
