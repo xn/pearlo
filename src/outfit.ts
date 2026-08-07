@@ -81,7 +81,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // The second lantern only reaches the Left-Hand Man when the one-shot still needs it.
   const familiarPlan = pickPearlFamiliar(spec, secondLantern);
 
-  const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen, 0.1 init`;
+  const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen, 0.1 item`;
   const result: OutfitSpec = {
     modifier: familiarPlan.extraModifier
       ? `${baseModifier}, ${familiarPlan.extraModifier}`
