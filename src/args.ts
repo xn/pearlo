@@ -88,7 +88,8 @@ export const args = Args.create(
   },
   {
     defaultGroupName: "Information",
-    positionalArgs: ["path"],
+    // positionalArgs: ["path"] belongs here once a real `path` arg exists (11,037
+    // Leagues support) — grimoire aborts at Args.create when the key is undefined.
   },
 );
 
