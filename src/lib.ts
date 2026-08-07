@@ -1,5 +1,6 @@
 import { step } from "grimoire-kolmafia";
 import {
+  abort,
   availableAmount,
   buy,
   cliExecute,
@@ -214,6 +215,19 @@ export function tryAcquiringEffect(ef: Effect, tryRegardless = false): void {
     cliExecute(efDefault.replace(/cast 1 /g, "cast "));
     if (usePowerfulGlove) equip($slot`acc3`, currentAcc3);
     if (useHeartstone) equip($slot`acc2`, currentAcc2);
+  }
+}
+
+/**
+ * Losing a combat inflicts Beaten Up (3 turns, heavy stat penalties). For pearlo that
+ * always means the damage/defense plan failed — continuing would burn 2-adventure
+ * underwater turns while crippled, so fail loudly instead.
+ */
+export function abortIfBeatenUp(context: string): void {
+  if (have($effect`Beaten Up`)) {
+    abort(
+      `pearlo: Beaten Up ${context} — a fight was lost. Check HP, damage plan, and restores before rerunning.`,
+    );
   }
 }
 

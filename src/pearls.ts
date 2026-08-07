@@ -13,7 +13,7 @@ import { $effect, $item, AsdonMartin, get, have, set } from "libram";
 
 import { args } from "./args";
 import { buildPearlMacro, damagePlan } from "./combat";
-import { asdonFualable, fuelUp, isOverDrunk } from "./lib";
+import { abortIfBeatenUp, asdonFualable, fuelUp, isOverDrunk } from "./lib";
 import { pearlMood } from "./mood";
 import { buildPearlOutfit } from "./outfit";
 import { PEARLS, PearlKey, PearlSpec, canBreathUnderwater, printSeaworthyDebug } from "./zones";
@@ -116,11 +116,13 @@ function pearlTask(spec: PearlSpec): Task {
       canAdventure(spec.loc) &&
       myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
+      abortIfBeatenUp(`before adventuring in ${spec.loc}`);
       plan = damagePlan(); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
     },
     do: spec.loc,
     post: () => {
+      abortIfBeatenUp(`after a combat in ${spec.loc}`);
       const previousRate = observedProgressRate.get(spec.key);
       const progress = get(spec.progress, 0);
       const last = lastRecordedProgress.get(spec.key);
