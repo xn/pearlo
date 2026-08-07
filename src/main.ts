@@ -64,7 +64,10 @@ export function main(command?: string): void {
           `  saucegeyser floor (best gear) vs ${p.maxHp} HP: ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
         );
       }
-      const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}${wineglass}`;
+      const combatWeights = simDrunk
+        ? ", effective, 0.2 weapon damage, 0.2 weapon damage percent"
+        : "";
+      const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}${wineglass}${combatWeights}`;
       const capMet = maximize(expr, true);
       print(
         `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"}${wineglass ? " (wineglass in off-hand)" : ""} — recommended equips:`,
