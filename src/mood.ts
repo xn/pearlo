@@ -13,7 +13,7 @@ import {
 import { $effect, $effects, $elements, $familiar, $item, get, have } from "libram";
 
 import { tryAcquiringEffect } from "./lib";
-import { PearlSpec } from "./pearls";
+import { PearlSpec } from "./zones";
 
 // Every list below is wiki-verified (effect pages fetched 2026-08-07); the original
 // usefulEffects list mixed genuine resistance with stat/HP/familiar buffs — sorted here.

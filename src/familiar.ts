@@ -1,7 +1,7 @@
 import { Familiar, Item, maximize } from "kolmafia";
 import { $effects, $element, $familiar, $items, have } from "libram";
 
-import { PearlSpec } from "./pearls";
+import { PearlSpec } from "./zones";
 
 export type FamiliarPlan = {
   familiar?: Familiar;

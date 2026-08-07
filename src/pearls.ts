@@ -1,133 +1,22 @@
-import { Quest, Task, CombatStrategy, Modes } from "grimoire-kolmafia";
+import { Quest, Task, CombatStrategy } from "grimoire-kolmafia";
 import {
   availableAmount,
-  booleanModifier,
   canAdventure,
-  canEquip,
-  Element,
   getWorkshed,
-  haveEffect,
   Item,
-  Location,
   myAdventures,
   print,
   retrieveItem,
   use,
 } from "kolmafia";
-import {
-  $effect,
-  $element,
-  $item,
-  $items,
-  $location,
-  AsdonMartin,
-  BooleanProperty,
-  get,
-  have,
-  NumericProperty,
-  set,
-} from "libram";
+import { $effect, $item, AsdonMartin, get, have, set } from "libram";
 
 import { args } from "./args";
 import { buildPearlMacro, damagePlan } from "./combat";
 import { asdonFualable, fuelUp, isOverDrunk } from "./lib";
 import { pearlMood } from "./mood";
 import { buildPearlOutfit } from "./outfit";
-
-/** Log Fishy / underwater state (call from main or when debugging seaworthy). */
-export function printSeaworthyDebug(where: string): void {
-  const fishyTurns = haveEffect($effect`Fishy`);
-  print(
-    `[pearlo/seaworthy ${where}] Fishy turns=${fishyTurns} | adventure underwater modifier=${booleanModifier("Adventure Underwater")} | _subAquaEquipBreathing=${get("_subAquaEquipBreathing", false)} | canBreathUnderwater=${canBreathUnderwater()} | isFishy=${isFishy()} | isSeaworthy=${isSeaworthy()}`,
-  );
-}
-
-export function isSeaworthy(): boolean {
-  return isFishy() && canBreathUnderwater();
-}
-
-export function isFishy(): boolean {
-  return have($effect`Fishy`);
-}
-
-export function canBreathUnderwater(): boolean {
-  return (
-    booleanModifier("Adventure Underwater") ||
-    (get("_subAquaEquipBreathing", false) &&
-      waterBreathingEquipment.some((item) => have(item) && canEquip(item)))
-  );
-}
-
-export const waterBreathingEquipment = $items`The Crown of Ed the Undying, aerated diving helmet, crappy Mer-kin mask, Mer-kin gladiator mask, Mer-kin scholar mask, old SCUBA tank, Elf Guard SCUBA tank`;
-export const familiarWaterBreathingEquipment = $items`das boot, little bitty bathysphere`;
-
-export type PearlKey = "spooky" | "sleaze" | "hot" | "stench" | "cold";
-
-export type PearlSpec = {
-  key: PearlKey;
-  loc: Location;
-  element: Element;
-  after: string[];
-  modifier: string;
-  parkaMode: Exclude<Modes["parka"], undefined>;
-  obtained: BooleanProperty;
-  progress: NumericProperty;
-  avoid?: Item[];
-};
-
-export const PEARLS: PearlSpec[] = [
-  {
-    key: "spooky",
-    loc: $location`Anemone Mine`,
-    element: $element`spooky`,
-    after: [],
-    modifier: "spooky res",
-    parkaMode: "ghostasaurus",
-    obtained: "_unblemishedPearlAnemoneMine",
-    progress: "_unblemishedPearlAnemoneMineProgress",
-    avoid: $items`Mer-kin digpick`,
-  },
-  {
-    key: "sleaze",
-    loc: $location`The Dive Bar`,
-    element: $element`sleaze`,
-    after: [],
-    modifier: "sleaze res",
-    parkaMode: "spikolodon",
-    obtained: "_unblemishedPearlDiveBar",
-    progress: "_unblemishedPearlDiveBarProgress",
-  },
-  {
-    key: "hot",
-    loc: $location`The Marinara Trench`,
-    element: $element`hot`,
-    after: [],
-    modifier: "hot res",
-    parkaMode: "pterodactyl",
-    obtained: "_unblemishedPearlMarinaraTrench",
-    progress: "_unblemishedPearlMarinaraTrenchProgress",
-  },
-  {
-    key: "stench",
-    loc: $location`Madness Reef`,
-    element: $element`stench`,
-    after: [],
-    modifier: "stench res",
-    parkaMode: "dilophosaur",
-    obtained: "_unblemishedPearlMadnessReef",
-    progress: "_unblemishedPearlMadnessReefProgress",
-  },
-  {
-    key: "cold",
-    loc: $location`The Briniest Deepests`,
-    element: $element`cold`,
-    after: [],
-    modifier: "cold res",
-    parkaMode: "kachungasaur",
-    obtained: "_unblemishedPearlTheBriniestDeepests",
-    progress: "_unblemishedPearlTheBriniestDeepestsProgress",
-  },
-];
+import { PEARLS, PearlKey, PearlSpec, canBreathUnderwater, printSeaworthyDebug } from "./zones";
 
 const breatheUnderwaterTask: Task = {
   name: "Breathe Underwater",

@@ -2,7 +2,7 @@ import { Args, ParseError } from "grimoire-kolmafia";
 import { abort, Item } from "kolmafia";
 import { $item } from "libram";
 
-import { PEARLS, PearlKey, PearlSpec } from "./pearls";
+import { PEARLS, PearlKey, PearlSpec } from "./zones";
 
 export const supportedWorksheds = [
   $item`none`,

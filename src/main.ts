@@ -5,7 +5,8 @@ import { get, sinceKolmafiaRevision } from "libram";
 import { args, selectedPearls } from "./args";
 import { damagePlan, ownedLanternProspect } from "./combat";
 import { PearloEngine } from "./engine";
-import { canBreathUnderwater, pearlTasks } from "./pearls";
+import { pearlTasks } from "./pearls";
+import { canBreathUnderwater } from "./zones";
 
 export function main(command?: string): void {
   sinceKolmafiaRevision(28100);

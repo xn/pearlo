@@ -9,7 +9,7 @@ import {
   pickPearlFamiliar,
   playerAirByEffect,
 } from "./familiar";
-import { PearlSpec, waterBreathingEquipment } from "./pearls";
+import { PearlSpec, waterBreathingEquipment } from "./zones";
 
 const OFFHAND_LANTERNS = $items`petrified wood water purifier, meteorb, snow mobile, big hot pepper`;
 

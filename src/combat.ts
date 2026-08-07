@@ -1,7 +1,7 @@
 import { Item, haveEquipped, mpCost, myBuffedstat, numericModifier } from "kolmafia";
 import { $item, $skill, $stat, Macro, get, have } from "libram";
 
-import { PearlSpec } from "./pearls";
+import { PearlSpec } from "./zones";
 
 export const ZONE_MAX_HP = 800; // ganger, giant squid — highest HP in any pearl zone
 
