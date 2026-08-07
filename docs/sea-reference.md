@@ -282,7 +282,13 @@ Combat notes:
 ## 4. Cross-zone summary for pearlo
 
 **Outfit targets per zone**: 18 of the zone's element resistance (cap; more is wasted for
-pearls) + an air source + familiar breathing. Prefer air sources without item/init penalties
+pearls) + an air source + familiar breathing. Effect-based resistance tops out at **+8
+all-element** (Egged On +3, Elemental Saucesphere +2, Feeling Peaceful +2, Astral Shell +1;
+wiki-verified 2026-08-07) plus **+8 more for cold/sleaze only** (Scarysauce +2 +
+Scariersauce +6, stacking — Scariersauce needs a velour viscometer wielded at cast time).
+So gear/parka must supply ≥10 resistance in hot/stench/spooky zones but as little as ≥2 in
+cold/sleaze zones with the full sauce stack — the Briniest Deepests (cold) is the easiest
+cap, another reason it's the v1 zone. Prefer air sources without item/init penalties
 (effects, Crown of Ed, Waterproofly). Moxie for full no-hit by zone: Mine 510 · Dive Bar
 **610** · Reef 510 (but dragonfish elemental hits bypass moxie) · Trench 560 · Deepests 435.
 Kill coverage: ~800 damage one-shots every pearl-zone monster (HP 500–800; all fixed-stat,
