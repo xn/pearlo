@@ -1,6 +1,8 @@
 import { Args, ParseError } from "grimoire-kolmafia";
-import { Item } from "kolmafia";
+import { abort, Item } from "kolmafia";
 import { $item } from "libram";
+
+import { PEARLS, PearlKey, PearlSpec } from "./pearls";
 
 export const supportedWorksheds = [
   $item`none`,
@@ -23,8 +25,10 @@ export const args = Args.create(
   {
     sim: Args.flag({ help: "Check if you have the requirements to run this script.", setting: "" }),
     version: Args.flag({ help: "Show script version and exit.", setting: "" }),
-    //  pearls: `pearlo pearls=spooky,sleaze,hot,stench,cold`
-    // the intent is to run the runs in that order. no dups. subset ok. default is as above.
+    pearls: Args.string({
+      help: "Comma-separated ordered subset of pearls to farm: spooky,sleaze,hot,stench,cold. No duplicates.",
+      default: "spooky,sleaze,hot,stench,cold",
+    }),
     major: Args.group("Major Options", {}),
     minor: Args.group("Minor Options", {}),
     resources: Args.group("Resource Usage", {}),
@@ -86,4 +90,27 @@ export const args = Args.create(
 const scriptName = Args.getMetadata(args).scriptName;
 export function toTempPref(name: string) {
   return `_${scriptName}_${name}`;
+}
+
+const PEARL_KEYS: PearlKey[] = ["spooky", "sleaze", "hot", "stench", "cold"];
+
+export function selectedPearls(): PearlSpec[] {
+  const keys = args.pearls
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter((s) => s.length > 0);
+  const seen = new Set<string>();
+  const result: PearlSpec[] = [];
+  for (const key of keys) {
+    if (!PEARL_KEYS.includes(key as PearlKey)) {
+      abort(`pearls=${args.pearls}: unknown pearl "${key}" (valid: ${PEARL_KEYS.join(",")})`);
+    }
+    if (seen.has(key)) abort(`pearls=${args.pearls}: duplicate pearl "${key}"`);
+    seen.add(key);
+    const spec = PEARLS.find((p) => p.key === key);
+    if (!spec) abort(`internal error: no PearlSpec for "${key}"`);
+    result.push(spec);
+  }
+  if (result.length === 0) abort(`pearls=${args.pearls}: no pearls selected`);
+  return result;
 }
