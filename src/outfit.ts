@@ -18,9 +18,12 @@ import {
 import { isOverDrunk } from "./lib";
 import { PearlSpec, waterBreathingEquipment } from "./zones";
 
-// Never let the maximizer spend scarce charges on pearl fights: the broken champagne
-// bottle's +item drains its limited daily uses (user directive, 2026-08-07).
-const GLOBAL_AVOID = $items`broken champagne bottle`;
+// Never let the maximizer equip these in pearl zones (user directives):
+// - broken champagne bottle: its +item drains limited daily charges (2026-08-07)
+// - Kramco Sausage-o-Matic™ (and replica): sausage goblin wanderers replace zone
+//   adventures — turns without pearl progress (2026-08-08)
+// - Möbius ring: interferes with zone adventuring (2026-08-08)
+const GLOBAL_AVOID = $items`broken champagne bottle, Kramco Sausage-o-Matic™, replica Kramco Sausage-o-Matic™, Möbius ring`;
 
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot(): boolean {
