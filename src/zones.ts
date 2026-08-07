@@ -53,6 +53,8 @@ export type PearlSpec = {
   obtained: BooleanProperty;
   progress: NumericProperty;
   avoid?: Item[];
+  /** choiceAdventure automation for the zone's noncombats (id → option). */
+  choices?: { [id: number]: number };
 };
 
 export const PEARLS: PearlSpec[] = [
@@ -76,6 +78,11 @@ export const PEARLS: PearlSpec[] = [
     parkaMode: "spikolodon",
     obtained: "_unblemishedPearlDiveBar",
     progress: "_unblemishedPearlDiveBarProgress",
+    // Barback (choice 309, appears only with Salacious Cocktailcrafting): option 2 =
+    // leave — pearl progress comes from combats; seaode collection isn't pearlo's job.
+    // The one-time AT/DB chains (307/308) are class-gated text the engine can't reach
+    // for other classes; their terminal choices are single-option anyway.
+    choices: { 309: 2 },
   },
   {
     key: "hot",

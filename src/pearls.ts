@@ -121,6 +121,7 @@ function pearlTask(spec: PearlSpec): Task {
       pearlMood(spec, plan.mpPerFight);
     },
     do: spec.loc,
+    choices: spec.choices ?? {},
     post: () => {
       abortIfBeatenUp(`after a combat in ${spec.loc}`);
       const previousRate = observedProgressRate.get(spec.key);
