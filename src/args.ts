@@ -1,0 +1,95 @@
+import { Args, ParseError } from "grimoire-kolmafia";
+import { Item } from "kolmafia";
+import { $familiar, $item } from "libram";
+
+export const supportedWorksheds = [
+  $item`none`,
+  $item`model train set`,
+  $item`cold medicine cabinet`,
+  $item`Asdon Martin keyfob (on ring)`,
+  $item`TakerSpace letter of Marque`,
+];
+
+function workshedParser(value: string) {
+  const item = Item.get(value);
+  if (!supportedWorksheds.includes(item))
+    return new ParseError(`received ${value} which was not a supported workshed`);
+  return item;
+}
+
+export const args = Args.create(
+  "pearlo",
+  'This is a script for farming unblemished pearls',
+  {
+    sim: Args.flag({ help: "Check if you have the requirements to run this script.", setting: "" }),
+    version: Args.flag({ help: "Show script version and exit.", setting: "" }),
+  //  pearls: `pearlo pearls=spooky,sleaze,hot,stench,cold`
+  // the intent is to run the runs in that order. no dups. subset ok. default is as above.
+    major: Args.group("Major Options", {
+
+    }),
+    minor: Args.group("Minor Options", {
+
+    }),
+    resources: Args.group("Resource Usage", {
+
+    }),
+
+    debug: Args.group("Debug Options", {
+      verbose: Args.flag({
+        help: "Print out a list of possible tasks at each step.",
+        default: false,
+      }),
+      ignoretasks: Args.string({
+        help: "A comma-separated list of task names that should not be done. Can be used as a workaround for script bugs where a task is crashing.",
+      }),
+      completedtasks: Args.string({
+        help: "A comma-separated list of task names the should be treated as completed. Can be used as a workaround for script bugs.",
+      }),
+      list: Args.flag({
+        help: "Show the status of all tasks and exit.",
+        setting: "",
+      }),
+      settings: Args.flag({
+        help: "Show the parsed value for all arguments and exit.",
+        setting: "",
+      }),
+      lastasdonbumperturn: Args.number({
+        help: "Set the last usage of Asdon Martin: Spring-Loaded Front Bumper, in case of a tracking issue",
+        hidden: true,
+      }),
+      ignorekeys: Args.flag({
+        help: "Ignore the check that all keys can be obtained. Typically for hardcore, if you plan to get your own keys",
+        default: false,
+      }),
+      halt: Args.number({
+        help: "Halt when you have this number of adventures remaining or fewer",
+        default: 0,
+      }),
+      verify: Args.flag({
+        help: "Verify that all supported paths pass basic checks",
+        hidden: true,
+        setting: "",
+      }),
+      allocate: Args.flag({
+        help: "Check the current task resource allocation",
+        hidden: true,
+        setting: "",
+      }),
+      pause: Args.flag({
+        help: "Pause before running .do() on the next task",
+        hidden: true,
+        setting: "",
+      }),
+    }),
+  },
+  {
+    defaultGroupName: "Information",
+    positionalArgs: ["path"],
+  }
+);
+
+const scriptName = Args.getMetadata(args).scriptName;
+export function toTempPref(name: string) {
+  return `_${scriptName}_${name}`;
+}
