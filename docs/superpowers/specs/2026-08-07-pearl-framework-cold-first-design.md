@@ -15,7 +15,7 @@ or guards halt it — with HP/MP sustained between fights.
 
 **Non-goals (v1)**: overdrunk/wineglass play (sober only); diet/organ-based Fishy (fishy
 pipe only); familiar strategy (run familiar-less unless Waterproofly is up); mall spending
-(free/owned only — price-cap arg comes later); the four other zones being *tested* (their
+(free/owned only — price-cap arg comes later); the four other zones being _tested_ (their
 specs exist; their quirks are data).
 
 ## Architecture
@@ -23,16 +23,16 @@ specs exist; their quirks are data).
 All capability checks are runtime probes (`have(...)`) — other characters degrade
 gracefully to fewer layers, never crash.
 
-| File | Responsibility |
-|---|---|
-| `src/args.ts` | Add `pearls` string arg: ordered no-dup subset of `spooky,sleaze,hot,stench,cold` (default = that full order), parsed/validated to `PearlSpec[]`. Existing debug group + `halt` stay. |
+| File                  | Responsibility                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `src/args.ts`         | Add `pearls` string arg: ordered no-dup subset of `spooky,sleaze,hot,stench,cold` (default = that full order), parsed/validated to `PearlSpec[]`. Existing debug group + `halt` stay.                                                                                                                                                                                                                                                                        |
 | `src/engine.ts` (new) | `PearloEngine extends Engine`. `initPropertiesManager` per the user's pattern: ban free-rest auto-restorers ("sleep on your clan sofa", "rest in your campaway tent", "rest at the chateau", "rest at your campground", "free rest"), add "doc galaktik's invigorating tonic" to MP items, `hpAutoRecovery: -0.05`, `mpAutoRecovery: -0.05` (auto-triggers OFF; script restores explicitly), `autoSatisfyWithCloset: false`, `maximizerCombinationLimit: 0`. |
-| `src/pearls.ts` | `PEARLS` table extended per zone: element, parka mode, `avoid` items (Mer-kin digpick in the Mine), zone quirk flags. Task factory: one task per *selected* pearl from shared builders. Existing "Breathe Underwater" task runs first. |
-| `src/outfit.ts` | `buildPearlOutfit(spec): OutfitSpec` (implements the stub). |
-| `src/combat.ts` | `buildPearlMacro(spec): Macro`, `saucegeyserDamage()`, `castsToKill(hp)`, `mpBudgetPerFight()`. |
-| `src/mood.ts` (new) | Buffs + restores ("mood is the idiom" — user). libram `Mood` where expressible; `tryAcquiringEffect` for sources `Mood` can't model. |
-| `src/lib.ts` | Implement the stubs for real: `isOverDrunk = myInebriety() > inebrietyLimit()`; capped predicates use `>=`. Never hard-code organ capacities. |
-| `src/main.ts` | Real entry: `sinceKolmafiaRevision`, `Args.fill` + help/sim/list, build quest from selected pearls, `try { engine.run() } finally { engine.destruct() }`, session summary (pearls obtained, turns spent, meat delta). |
+| `src/pearls.ts`       | `PEARLS` table extended per zone: element, parka mode, `avoid` items (Mer-kin digpick in the Mine), zone quirk flags. Task factory: one task per _selected_ pearl from shared builders. Existing "Breathe Underwater" task runs first.                                                                                                                                                                                                                       |
+| `src/outfit.ts`       | `buildPearlOutfit(spec): OutfitSpec` (implements the stub).                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `src/combat.ts`       | `buildPearlMacro(spec): Macro`, `saucegeyserDamage()`, `castsToKill(hp)`, `mpBudgetPerFight()`.                                                                                                                                                                                                                                                                                                                                                              |
+| `src/mood.ts` (new)   | Buffs + restores ("mood is the idiom" — user). libram `Mood` where expressible; `tryAcquiringEffect` for sources `Mood` can't model.                                                                                                                                                                                                                                                                                                                         |
+| `src/lib.ts`          | Implement the stubs for real: `isOverDrunk = myInebriety() > inebrietyLimit()`; capped predicates use `>=`. Never hard-code organ capacities.                                                                                                                                                                                                                                                                                                                |
+| `src/main.ts`         | Real entry: `sinceKolmafiaRevision`, `Args.fill` + help/sim/list, build quest from selected pearls, `try { engine.run() } finally { engine.destruct() }`, session summary (pearls obtained, turns spent, meat delta).                                                                                                                                                                                                                                        |
 
 ## Outfit (per zone)
 
@@ -57,8 +57,8 @@ gracefully to fewer layers, never crash.
     air (hat or effect); mode set via `modes: { retrocape: "heck kill" }` (libram
     modeable). Skipped automatically when the character's only air source is the
     old SCUBA tank.
-  Res cap keeps priority: after equipping damage gear, if `18 max` res is no longer met,
-  the builder drops damage gear first (verified via speculation before dressing).
+    Res cap keeps priority: after equipping damage gear, if `18 max` res is no longer met,
+    the builder drops damage gear first (verified via speculation before dressing).
 - Familiar: **Left-Hand Man holding a second owned lantern off-hand, but only when
   Driving Waterproofly (or Wet Willied) is active** (its famequip slot is the held
   off-hand, so das boot would defeat it). Otherwise: no familiar. Broader familiar
@@ -77,7 +77,7 @@ uncovered — and the combat plan arbitrates. Two-pass resolution per task execu
    participating) in **Kill Me** (lantern). Else: control config — cape in **Hold Me**
    (3-round stun stacking after Noodles); if still uncovered, drop the plan to
    stun+burst-and-restore and warn in `sim`.
-2. **Dress, then verify pass**: after `dress()`, recompute damage from *actual* equipped
+2. **Dress, then verify pass**: after `dress()`, recompute damage from _actual_ equipped
    modifiers (`numericModifier` reads real state) and set the macro's cast count and the
    fight's MP budget from observed numbers, not planned ones.
 
@@ -94,7 +94,7 @@ uncovered — and the combat plan arbitrates. Two-pass resolution per task execu
   **lanterns**: each equipped lantern (walked in the wiki's evaluation-order table)
   duplicates the current highest damage component as additional element component(s);
   chained lanterns compound. **Conservative modeling**: whether lantern damage receives
-  the % multiplier is wiki-unstated, so the calculator duplicates the *pre-multiplier*
+  the % multiplier is wiki-unstated, so the calculator duplicates the _pre-multiplier_
   component value (worst case) and flags the estimate as a floor. CMoI counts as one
   lantern adding 3 components at the (conservative) highest-component value, with the
   collision rule (a rolled element matching the spell's tuned element adds nothing) taken
@@ -106,6 +106,7 @@ uncovered — and the combat plan arbitrates. Two-pass resolution per task execu
 ## Mood & sustain (`src/mood.ts`)
 
 Runs in each task's `prepare()`:
+
 1. **Buff lists (data, not code)** — four categories, acquired free-first via libram
    `Mood` / `tryAcquiringEffect` with `canAcquireEffect` gating: Myst%; spell dmg %
    (Carol of the Hells, Song of Sauce if castable; Subtle and Quick to Anger is passive);
@@ -127,7 +128,7 @@ Runs in each task's `prepare()`:
   `myAdventures() − args.halt ≥ ceil(remainingProgress / expectedProgress) × (fishy ? 1 : 2)`
   with `expectedProgress = clamp(1.7 × floor(plannedRes / 3), 1.7, 10)`. `plannedRes`
   before dressing is optimistic (18) so `ready()` doesn't block on naked resistance; after
-  the first dress, `post()` records the *actual* per-fight progress delta from the
+  the first dress, `post()` records the _actual_ per-fight progress delta from the
   `_...Progress` pref and the budget check switches to observed rate — if the observed
   rate makes remaining turns exceed budget, the task stops being ready (skips, no abort).
   Never start (or continue) a zone rollover will erase.

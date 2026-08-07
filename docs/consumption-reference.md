@@ -17,12 +17,18 @@ the overdrunk/wineglass/Stooper rules constrain outfits and combat macros direct
 
 ```ts
 // kolmafia
-myFullness(); fullnessLimit();      // stomach used / capacity
-myInebriety(); inebrietyLimit();    // liver used / capacity
-mySpleenUse(); spleenLimit();       // spleen used / capacity
-canEat(); canDrink();               // false for Teetotaler/Oxygenarian-style restrictions
+myFullness();
+fullnessLimit(); // stomach used / capacity
+myInebriety();
+inebrietyLimit(); // liver used / capacity
+mySpleenUse();
+spleenLimit(); // spleen used / capacity
+canEat();
+canDrink(); // false for Teetotaler/Oxygenarian-style restrictions
 // libram
-getRemainingStomach(); getRemainingLiver(); getRemainingSpleen();
+getRemainingStomach();
+getRemainingLiver();
+getRemainingSpleen();
 ```
 
 **Never hard-code organ capacities (user directive).** The base values below (15/14/15) are
@@ -35,28 +41,29 @@ Correct predicates for the `src/lib.ts` stubs (per Drinking Mechanics):
 
 ```ts
 isStomachCapped = myFullness() >= fullnessLimit();
-isLiverCapped   = myInebriety() >= inebrietyLimit();
-isSpleenCapped  = mySpleenUse() >= spleenLimit();
-isOverDrunk     = myInebriety() > inebrietyLimit();   // strictly greater: 15+ at base 14
+isLiverCapped = myInebriety() >= inebrietyLimit();
+isSpleenCapped = mySpleenUse() >= spleenLimit();
+isOverDrunk = myInebriety() > inebrietyLimit(); // strictly greater: 15+ at base 14
 ```
 
 Per-item fit checks: a food/spleen item of size `s` is refused when `used + s > limit`
 (all-or-nothing, no partial). Booze is the exception — a drink that crosses the limit
-**succeeds** (that's how you overdrink); only *starting* a drink while already overdrunk is
+**succeeds** (that's how you overdrink); only _starting_ a drink while already overdrunk is
 refused ("You're way too drunk already.").
 
 ## 2. Capacities and rollover
 
-| Organ | Base cap | Overcap possible? | Over-cap state | Resets at rollover |
-|---|---|---|---|---|
-| Stomach | **15** | No (eating just fails) — only quantum-taco/path-end edge cases | **Food Coma** only; cannot adventure (since silent update Dec 16, 2025) | yes, to 0 |
-| Liver | **14** (adventuring limit) | **Yes, deliberately** — the crossing drink succeeds | **falling-down drunk** (see §3) | yes, to 0 |
-| Spleen | **15**, "cannot be exceeded" | Only by *losing capacity* (unequip a +spleen item, path end) | **jaundiced**: cannot adventure, only Strangers With Medical Advice | yes, to 0 |
+| Organ   | Base cap                     | Overcap possible?                                              | Over-cap state                                                          | Resets at rollover |
+| ------- | ---------------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------ |
+| Stomach | **15**                       | No (eating just fails) — only quantum-taco/path-end edge cases | **Food Coma** only; cannot adventure (since silent update Dec 16, 2025) | yes, to 0          |
+| Liver   | **14** (adventuring limit)   | **Yes, deliberately** — the crossing drink succeeds            | **falling-down drunk** (see §3)                                         | yes, to 0          |
+| Spleen  | **15**, "cannot be exceeded" | Only by _losing capacity_ (unequip a +spleen item, path end)   | **jaundiced**: cannot adventure, only Strangers With Medical Advice     | yes, to 0          |
 
 No class-based capacities exist — flat 15/14/15 for everyone; only paths/skills/items modify
-them. Being *at* cap has no penalty for any organ.
+them. Being _at_ cap has no penalty for any organ.
 
 **Capacity modifiers (non-path highlights)**
+
 - Stomach: Stomach of Steel +5 (steel lasagna; persists post-King, unpermable); lupine
   appetite hormones +3 (day); Pantsgiving up to +3 (5th/50th/500th/5000th combat of the day,
   only while currently full, pants must be equipped); cuppa Voraci tea +1 (day); distention
@@ -108,6 +115,7 @@ the standard overdrunk-farming enabler. Its costs, overdrunk or not:
 
 **The wineglass works underwater — user-confirmed in-game (2026-08).** Overdrunk pearl
 farming is therefore a real strategy, with these consequences:
+
 - The combat macro degenerates to `attack().repeat()` — which is **fatal against the
   acoustic electric eel** (melee counter ~89–100 HP per landed hit) and defenseless against
   the pufferfish poison (no stun possible). Overdrunk pearl farming in those zones needs
@@ -120,7 +128,7 @@ farming is therefore a real strategy, with these consequences:
 Stooper grants +1 liver **only while active**. It has no innate water-breathing, but —
 **user-confirmed (2026-08)** — like any familiar it works underwater with a familiar
 breathing enabler: **Driving Waterproofly** (covers the familiar for free), **das boot**
-(−10 fam weight), or **little bitty bathysphere** (−20 fam weight). So Stooper *can* be the
+(−10 fam weight), or **little bitty bathysphere** (−20 fam weight). So Stooper _can_ be the
 pearl-zone familiar when the +1 liver matters; with Waterproofly there's no weight penalty.
 Swap-out caution (mirrors the spleen jaundice rule): switching away from Stooper while
 drunkenness sits at the raised cap leaves you over cap.
@@ -137,7 +145,7 @@ drunkenness sits at the raised cap leaves you over cap.
    those monsters; otherwise treat `isOverDrunk()` as end-of-day.
 4. Jaundice guard: don't unequip +spleen equipment while spleen is at cap; don't switch away
    from Stooper while drunkenness sits at the raised cap.
-5. Eating/drinking order: apply milk of magnesium and Ode to Booze *before* the relevant
+5. Eating/drinking order: apply milk of magnesium and Ode to Booze _before_ the relevant
    consumable; overdrink only as the final action of the day.
 6. Never compare against literal 15/14/15 — capacities are dynamic; always read
    `fullnessLimit()`/`inebrietyLimit()`/`spleenLimit()` (or libram's `getRemaining*`) fresh.

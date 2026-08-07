@@ -25,8 +25,8 @@ a preference, a choice-adventure option):
 
 **pearlo** is a Kingdom of Loathing (KoL) farming script that collects unblemished pearls from
 the five Sea Floor zones (Anemone Mine, The Dive Bar, The Marinara Trench, Madness Reef, The
-Briniest Deepests). It is written in TypeScript, bundled with rollup, and executed *inside
-KoLmafia's embedded JavaScript (Rhino) runtime* — not Node. It is built on three libraries:
+Briniest Deepests). It is written in TypeScript, bundled with rollup, and executed _inside
+KoLmafia's embedded JavaScript (Rhino) runtime_ — not Node. It is built on three libraries:
 
 - **`kolmafia`** — ambient type declarations for KoLmafia's JS standard library (the runtime provides the real implementations)
 - **`libram`** — ergonomic helper layer: `$item`-style constants, typed preferences, `Macro` combat DSL, per-IOTM resource modules
@@ -320,8 +320,8 @@ re-export libram — import `Macro`, `$item`, `get`, etc. directly. Exports: `Ta
 
 You declare a flat list of `Task`s; `Engine.run()` repeatedly executes the **first task in
 list order** that is `available()` (= not over `limit.skip`, all `after` tasks completed,
-`ready()` true, `completed()` false). Ordering is emergent: `after` only *blocks*, it never
-*prioritizes* — list position is the priority.
+`ready()` true, `completed()` false). Ordering is emergent: `after` only _blocks_, it never
+_prioritizes_ — list position is the priority.
 
 ### Task
 
@@ -451,6 +451,7 @@ they reset on script restart. **Every adventuring task needs a `limit`.**
   ```
 
   (`prop=text` returns rendered HTML; page titles use underscores.)
+
 - **Reference scripts** built on the same stack, useful for idioms: loathers/garbage-collector
   (garbo, meat farming), Kasekopf/loop-casual, loathers/libram source for helper details.
 - **Local type sources of truth**: `node_modules/kolmafia/index.d.ts`,

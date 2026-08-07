@@ -13,7 +13,7 @@
 - Spec: `docs/superpowers/specs/2026-08-07-pearl-framework-cold-first-design.md` — read it before starting any task.
 - Domain reference: `docs/sea-reference.md`, `docs/consumption-reference.md`, `docs/maximizer-reference.md`. **Never invent game facts** (item/effect/skill names, numbers). Every `$item`/`$effect`/`$skill` literal used in this plan is already verified; do not add new ones without checking `node_modules/libram/dist/propertyTypes.d.ts` / the wiki refs.
 - No unit test framework exists and none is possible (the `kolmafia` package is throw-stubs outside mafia). The per-task verification cycle is: `yarn lint` (eslint + prettier) and `yarn build` (rollup) both exit 0. In-game behavior is verified at the end via `pearlo sim`.
-- Maximizer strings: cap markers attach to the *previous* keyword and `sea` resets that pointer — `"cold res 18 max, sea"`, never `"cold res, sea, 18 max"`.
+- Maximizer strings: cap markers attach to the _previous_ keyword and `sea` resets that pointer — `"cold res 18 max, sea"`, never `"cold res, sea, 18 max"`.
 - Never hard-code organ capacities; always `fullnessLimit()`/`inebrietyLimit()`/`spleenLimit()`.
 - No +ML modifiers anywhere.
 - Free/owned resources only (no mall buying) in v1.
@@ -25,9 +25,11 @@
 ### Task 0: Git hygiene (.gitignore + initial commit)
 
 **Files:**
+
 - Create: `.gitignore`
 
 **Interfaces:**
+
 - Consumes: nothing
 - Produces: a clean repo baseline every later task commits onto
 
@@ -62,9 +64,11 @@ git commit -m "chore: initial commit — pearlo scaffolding, docs, spec"
 ### Task 1: Real organ predicates in `lib.ts`
 
 **Files:**
+
 - Modify: `src/lib.ts` (the four stub functions at the bottom, currently returning `false`)
 
 **Interfaces:**
+
 - Consumes: `kolmafia` `myFullness/fullnessLimit/myInebriety/inebrietyLimit/mySpleenUse/spleenLimit`
 - Produces: `isStomachCapped(): boolean`, `isLiverCapped(): boolean`, `isSpleenCapped(): boolean`, `isOverDrunk(): boolean` — used by Task 7 (guards)
 
@@ -106,9 +110,11 @@ git commit -m "feat: real organ predicates (query limits at runtime, never hard-
 ### Task 2: Zone data — extend `PEARLS` and export `PearlSpec`
 
 **Files:**
+
 - Modify: `src/pearls.ts` (the `PearlSpec` type and `PEARLS` array)
 
 **Interfaces:**
+
 - Consumes: existing `PEARLS` entries
 - Produces: `export type PearlSpec` with new fields `element: Element`, `parkaMode: string`, `key: PearlKey`; `export type PearlKey = "spooky" | "sleaze" | "hot" | "stench" | "cold"`; `export const PEARLS: PearlSpec[]` — consumed by Tasks 3, 5, 6, 7, 8
 
@@ -134,13 +140,13 @@ export type PearlSpec = {
 
 Add to each `PEARLS` entry (zone → element → parka mode, per `docs/sea-reference.md`):
 
-| loc | key | element | parkaMode |
-|---|---|---|---|
-| Anemone Mine | `"spooky"` | `$element`spooky`` | `"ghostasaurus"` |
-| The Dive Bar | `"sleaze"` | `$element`sleaze`` | `"spikolodon"` |
-| The Marinara Trench | `"hot"` | `$element`hot`` | `"pterodactyl"` |
-| Madness Reef | `"stench"` | `$element`stench`` | `"dilophosaur"` |
-| The Briniest Deepests | `"cold"` | `$element`cold`` | `"kachungasaur"` |
+| loc                   | key        | element            | parkaMode        |
+| --------------------- | ---------- | ------------------ | ---------------- |
+| Anemone Mine          | `"spooky"` | `$element`spooky`` | `"ghostasaurus"` |
+| The Dive Bar          | `"sleaze"` | `$element`sleaze`` | `"spikolodon"`   |
+| The Marinara Trench   | `"hot"`    | `$element`hot``    | `"pterodactyl"`  |
+| Madness Reef          | `"stench"` | `$element`stench`` | `"dilophosaur"`  |
+| The Briniest Deepests | `"cold"`   | `$element`cold``   | `"kachungasaur"` |
 
 Import `Element` from `kolmafia` and `$element` from `libram`. Keep every existing field
 (including `avoid: $items`Mer-kin digpick`` on Anemone Mine) unchanged.
@@ -164,9 +170,11 @@ git commit -m "feat: extend PEARLS zone table with element, parka mode, and key"
 ### Task 3: `pearls=` argument and selection parsing
 
 **Files:**
+
 - Modify: `src/args.ts`
 
 **Interfaces:**
+
 - Consumes: `PearlKey`, `PEARLS`, `PearlSpec` from `src/pearls.ts`
 - Produces: `args.pearls: string` (grimoire arg, default `"spooky,sleaze,hot,stench,cold"`); `export function selectedPearls(): PearlSpec[]` — ordered, validated; throws (via `abort`) on unknown or duplicate keys. Consumed by Tasks 7, 8.
 
@@ -187,7 +195,10 @@ Append at the bottom of the file:
 const PEARL_KEYS: PearlKey[] = ["spooky", "sleaze", "hot", "stench", "cold"];
 
 export function selectedPearls(): PearlSpec[] {
-  const keys = args.pearls.split(",").map((s) => s.trim().toLowerCase()).filter((s) => s.length > 0);
+  const keys = args.pearls
+    .split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter((s) => s.length > 0);
   const seen = new Set<string>();
   const result: PearlSpec[] = [];
   for (const key of keys) {
@@ -225,9 +236,11 @@ git commit -m "feat: pearls= ordered-subset argument with validation"
 ### Task 4: `PearloEngine` with the restore-pattern properties
 
 **Files:**
+
 - Create: `src/engine.ts`
 
 **Interfaces:**
+
 - Consumes: `grimoire-kolmafia` `Engine`, `Task`; `libram` `PropertiesManager`, `get`
 - Produces: `export class PearloEngine extends Engine<never, Task>` — consumed by Task 8 (`main.ts`)
 
@@ -287,9 +300,11 @@ git commit -m "feat: PearloEngine — auto-recovery off, curated restorers, no f
 ### Task 5: Combat — damage calculator and macro builder
 
 **Files:**
+
 - Modify: `src/combat.ts` (currently a 2-line comment stub)
 
 **Interfaces:**
+
 - Consumes: `PearlSpec` from `./pearls`; `kolmafia` `haveEquipped, myBuffedstat, numericModifier, mpCost`; `libram` `$item, $skill, $stat, Macro, have`
 - Produces (consumed by Tasks 6, 7, 8):
   - `export type DamagePlan = { perCast: number; casts: number; mpPerFight: number; oneShot: boolean }`
@@ -422,9 +437,11 @@ git commit -m "feat: conservative Saucegeyser damage plan and pearl-zone kill ma
 ### Task 6: Outfit builder (res cap first, lantern gear, cape mode, familiar)
 
 **Files:**
+
 - Modify: `src/outfit.ts` (currently a stub)
 
 **Interfaces:**
+
 - Consumes: `PearlSpec` from `./pearls`; `damagePlan, ownedLanternProspect` from `./combat`; `OutfitSpec` from `grimoire-kolmafia`; `libram` `$familiar, $item, $items, AsdonMartin, have`; `kolmafia` `Familiar`
 - Produces: `export function buildPearlOutfit(spec: PearlSpec): OutfitSpec` — consumed by Task 7. Cape mode decision: `export function capeMode(): "kill" | "hold"`.
 
@@ -458,7 +475,8 @@ export function capeMode(): "kill" | "hold" {
 
 export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   const equip = [];
-  if (have($item`Congressional Medal of Insanity`)) equip.push($item`Congressional Medal of Insanity`);
+  if (have($item`Congressional Medal of Insanity`))
+    equip.push($item`Congressional Medal of Insanity`);
   const lantern = OFFHAND_LANTERNS.find((i) => have(i));
   if (lantern) equip.push(lantern);
 
@@ -488,9 +506,10 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
 ```
 
 Notes for the implementer:
+
 - Add `$effect` to the libram import.
 - The retro cape is intentionally NOT equipped here yet: it needs non-back air. v1 rule: only add `$item`unwrapped knock-off retro superhero cape`` to `equip` (and set `modes.retrocape`) when the character has a *hat* breathing source or an air *effect* active — implement as: `if (have($item`unwrapped knock-off retro superhero cape`) && !airRequiresBackSlot()) { equip.push(cape); modes.retrocape = ["heck", capeMode() === "kill" ? "kill" : "hold"]; }` where `airRequiresBackSlot()` returns true when the only owned breathing option is `$item`old SCUBA tank`` (reuse `waterBreathingEquipment` from `./pearls` minus back-slot items to decide). Check the exact `Modes` shape for `retrocape` in `node_modules/libram/dist/maximize.d.ts` before writing it — if it is a single string, use `"heck kill"` form.
-- Res cap keeps priority per spec: grimoire's `equip` list on an OutfitSpec is best-effort when merged through `Outfit.from` (items that can't fit are skipped), and the maximizer only optimizes leftover slots — but a forced `equip` that *fits* yet ruins resistance is possible. v1 accepts this risk for the two damage items only (they occupy acc + offhand; res lives mostly in hat/back/pants/effects), and `sim` (Task 8) reports the post-dress res score so regressions are visible. Do not force anything else.
+- Res cap keeps priority per spec: grimoire's `equip` list on an OutfitSpec is best-effort when merged through `Outfit.from` (items that can't fit are skipped), and the maximizer only optimizes leftover slots — but a forced `equip` that _fits_ yet ruins resistance is possible. v1 accepts this risk for the two damage items only (they occupy acc + offhand; res lives mostly in hat/back/pants/effects), and `sim` (Task 8) reports the post-dress res score so regressions are visible. Do not force anything else.
 
 - [ ] **Step 2: Lint + build**
 
@@ -509,10 +528,12 @@ git commit -m "feat: pearl outfit builder — res cap first, lantern gear, cape/
 ### Task 7: Mood + task factory (buffs, restores, guards, budget)
 
 **Files:**
+
 - Create: `src/mood.ts`
 - Modify: `src/pearls.ts` (replace the inline `PEARLS.map` task body with the factory; keep the Breathe Underwater task)
 
 **Interfaces:**
+
 - Consumes: everything above
 - Produces: `export function pearlMood(spec: PearlSpec, mpPerFight: number): void` (mood.ts); `export function pearlTasks(selected: PearlSpec[]): Task[]` (pearls.ts) — consumed by Task 8
 
@@ -637,9 +658,11 @@ git commit -m "feat: mood (buffs, fishy pipe, explicit restores) and pearl task 
 ### Task 8: `main.ts` — wiring, sim report, run loop
 
 **Files:**
+
 - Modify: `src/main.ts` (currently a hello-world stub)
 
 **Interfaces:**
+
 - Consumes: everything above
 - Produces: the `main(command?: string)` entry KoLmafia invokes
 
@@ -649,7 +672,14 @@ Replace `src/main.ts` with:
 
 ```ts
 import { Args, getTasks } from "grimoire-kolmafia";
-import { canAdventure, myAdventures, myMeat, myTurncount, print, sinceKolmafiaRevision } from "kolmafia";
+import {
+  canAdventure,
+  myAdventures,
+  myMeat,
+  myTurncount,
+  print,
+  sinceKolmafiaRevision,
+} from "kolmafia";
 import { sinceKolmafiaRevision as libramSince } from "libram";
 
 import { args, selectedPearls } from "./args";
@@ -671,7 +701,9 @@ export function main(command?: string): void {
     print(` pearls selected: ${selected.map((p) => p.key).join(", ")}`);
     print(` can breathe underwater: ${canBreathUnderwater()}`);
     for (const p of selected) print(` canAdventure(${p.loc}): ${canAdventure(p.loc)}`);
-    print(` saucegeyser floor (best gear): ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`);
+    print(
+      ` saucegeyser floor (best gear): ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
+    );
     print(` adventures available: ${myAdventures()}`);
     return;
   }
@@ -692,6 +724,7 @@ export function main(command?: string): void {
 ```
 
 Implementer notes:
+
 - `sinceKolmafiaRevision` exists in BOTH `kolmafia` (ASH builtin) and `libram`; use ONE —
   prefer the libram one (throws `KolmafiaVersionError` cleanly) and delete the other import.
   Pick revision 28100 (the peer-dep floor); do not invent a higher number.
@@ -721,9 +754,11 @@ git commit -m "feat: main entry — args, sim report, engine run with destruct g
 ### Task 9: Final verification + docs touch-up
 
 **Files:**
+
 - Modify: `CLAUDE.md` (source-layout section)
 
 **Interfaces:**
+
 - Consumes: the finished build
 - Produces: shippable v1
 

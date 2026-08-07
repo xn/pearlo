@@ -1,6 +1,6 @@
 import { Args, ParseError } from "grimoire-kolmafia";
 import { Item } from "kolmafia";
-import { $familiar, $item } from "libram";
+import { $item } from "libram";
 
 export const supportedWorksheds = [
   $item`none`,
@@ -10,7 +10,7 @@ export const supportedWorksheds = [
   $item`TakerSpace letter of Marque`,
 ];
 
-function workshedParser(value: string) {
+export function workshedParser(value: string) {
   const item = Item.get(value);
   if (!supportedWorksheds.includes(item))
     return new ParseError(`received ${value} which was not a supported workshed`);
@@ -19,21 +19,15 @@ function workshedParser(value: string) {
 
 export const args = Args.create(
   "pearlo",
-  'This is a script for farming unblemished pearls',
+  "This is a script for farming unblemished pearls",
   {
     sim: Args.flag({ help: "Check if you have the requirements to run this script.", setting: "" }),
     version: Args.flag({ help: "Show script version and exit.", setting: "" }),
-  //  pearls: `pearlo pearls=spooky,sleaze,hot,stench,cold`
-  // the intent is to run the runs in that order. no dups. subset ok. default is as above.
-    major: Args.group("Major Options", {
-
-    }),
-    minor: Args.group("Minor Options", {
-
-    }),
-    resources: Args.group("Resource Usage", {
-
-    }),
+    //  pearls: `pearlo pearls=spooky,sleaze,hot,stench,cold`
+    // the intent is to run the runs in that order. no dups. subset ok. default is as above.
+    major: Args.group("Major Options", {}),
+    minor: Args.group("Minor Options", {}),
+    resources: Args.group("Resource Usage", {}),
 
     debug: Args.group("Debug Options", {
       verbose: Args.flag({
@@ -86,7 +80,7 @@ export const args = Args.create(
   {
     defaultGroupName: "Information",
     positionalArgs: ["path"],
-  }
+  },
 );
 
 const scriptName = Args.getMetadata(args).scriptName;

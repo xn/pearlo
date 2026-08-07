@@ -2,7 +2,5 @@
 //
 
 export function buildOutfit() {
-  return {
-
-  }
+  return {};
 }

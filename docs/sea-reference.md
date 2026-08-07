@@ -18,15 +18,15 @@ way of breathing underwater...").
 
 **Permanent equipment** (note the built-in penalties — they matter at −200% pressure zones):
 
-| Item | Slot | Side effects |
-|---|---|---|
-| aerated diving helmet | hat | +3 Stench res; **−25% item drops; −50% init** |
-| crappy / gladiator / scholar Mer-kin mask | hat | same as diving helmet |
-| old SCUBA tank | back | **−50% item drops; −100% init** (10k meat from An Old Man post-L11; quest item) |
-| The Crown of Ed the Undying | hat | +50 max HP/MP; **+25% init** (needs golden fish Edpiece) — the only penalty-free init source |
-| Elf Guard SCUBA tank | back | All Attributes −25%; max HP/MP −100 |
-| oxygenated eggnog helmet | hat | −100% item; −100% init (Crimbo 2019) |
-| really, really nice swimming trunks | pants | +100 all stats underwater (11,037 Leagues path quest item) |
+| Item                                      | Slot  | Side effects                                                                                 |
+| ----------------------------------------- | ----- | -------------------------------------------------------------------------------------------- |
+| aerated diving helmet                     | hat   | +3 Stench res; **−25% item drops; −50% init**                                                |
+| crappy / gladiator / scholar Mer-kin mask | hat   | same as diving helmet                                                                        |
+| old SCUBA tank                            | back  | **−50% item drops; −100% init** (10k meat from An Old Man post-L11; quest item)              |
+| The Crown of Ed the Undying               | hat   | +50 max HP/MP; **+25% init** (needs golden fish Edpiece) — the only penalty-free init source |
+| Elf Guard SCUBA tank                      | back  | All Attributes −25%; max HP/MP −100                                                          |
+| oxygenated eggnog helmet                  | hat   | −100% item; −100% init (Crimbo 2019)                                                         |
+| really, really nice swimming trunks       | pants | +100 all stats underwater (11,037 Leagues path quest item)                                   |
 
 **Effect-based air** (no equipment penalty; the four starred are untradeable and 1/day each):
 Driving Waterproofly (Asdon Martin, 30 adv, 37 fuel — **also covers the familiar**);
@@ -52,11 +52,11 @@ various 5-turn fish meats. Warm Belly adds +10 turns when eating Fishy-granting 
 
 ### 1.3 Pressure penalties (meat, item, AND initiative)
 
-| Penalty | Pearl zones affected | Others |
-|---|---|---|
-| **−200% ("Intense")** | **Anemone Mine, The Dive Bar, The Marinara Trench** | The Caliginous Abyss |
-| **−100% ("The Sea Floor")** | **Madness Reef** | Octopus's Garden, Wreck, Outpost, Skate Park, Coral Corral |
-| **−75% ("High")** | **The Briniest Deepests** | — |
+| Penalty                     | Pearl zones affected                                | Others                                                     |
+| --------------------------- | --------------------------------------------------- | ---------------------------------------------------------- |
+| **−200% ("Intense")**       | **Anemone Mine, The Dive Bar, The Marinara Trench** | The Caliginous Abyss                                       |
+| **−100% ("The Sea Floor")** | **Madness Reef**                                    | Octopus's Garden, Wreck, Outpost, Skate Park, Coral Corral |
+| **−75% ("High")**           | **The Briniest Deepests**                           | —                                                          |
 
 Reducers ("Makes you a better diver") stack but only up to the zone's penalty (cap at 0%,
 never a bonus): Finstrong 30% (Comet the Roller Skate, 1/day), cozy scimitar / Staff of the
@@ -139,13 +139,14 @@ Noncombats: one-time Seal Clubber/Turtle Tamer chain only — Lost and Found and
 (Mine) → Kids Today → **Not a Micro Fish (choice 306, option 1)** teaching Harpoon! (SC) or
 Summon Leviatuga (TT).
 
-| Monster (id) | HP/Atk/Def/Init/no-hit | Phylum | Element | Meat | Drops |
-|---|---|---|---|---|---|
-| Anemone combatant (766) | 600/400/**585**/25/410 | fish | none | 80–120 | anemone nematocyst 25%, anemone sauce 50% |
-| killer clownfish (767) | 700/500/450/75/510 | **horror** | **sleaze; weak vs cold & spooky** | 240–360 | high-pressure seltzer bottle 25%, midget clownfish 1% (Grandpa "clownfish" gated), rough fish scale 4% |
-| Mer-kin miner (765) | 750/450/405/50/460 | mer-kin | none | 160–240 | Mer-kin digpick 40%, Mer-kin thingpouch 25% (→2–4 sand dollars 80%), Mer-kin foodbucket 5% |
+| Monster (id)            | HP/Atk/Def/Init/no-hit | Phylum     | Element                           | Meat    | Drops                                                                                                  |
+| ----------------------- | ---------------------- | ---------- | --------------------------------- | ------- | ------------------------------------------------------------------------------------------------------ |
+| Anemone combatant (766) | 600/400/**585**/25/410 | fish       | none                              | 80–120  | anemone nematocyst 25%, anemone sauce 50%                                                              |
+| killer clownfish (767)  | 700/500/450/75/510     | **horror** | **sleaze; weak vs cold & spooky** | 240–360 | high-pressure seltzer bottle 25%, midget clownfish 1% (Grandpa "clownfish" gated), rough fish scale 4% |
+| Mer-kin miner (765)     | 750/450/405/50/460     | mer-kin    | none                              | 160–240 | Mer-kin digpick 40%, Mer-kin thingpouch 25% (→2–4 sand dollars 80%), Mer-kin foodbucket 5%             |
 
 Combat notes:
+
 - **Anemone combatant's successful attacks can inflict Majorly Poisoned (10 turns: All
   Attributes −90% and −11)** — the zone's kill spiral; under it the clownfish (Atk 500) hits
   hard. Cures: anti-anti-antidote, Disco Power Nap, Spew Poison. Its Def 585 makes physical
@@ -164,17 +165,18 @@ Sea Floor. Unlock beyond Sea Floor access: not explicitly documented. Combat rat
 Noncombats: one-time Accordion Thief chain (No Country Music for Old Men → Salty Old Men →
 **Boxing the Juke, choice 308, option 1** → skill Donho's Bubbly Ballad) and Disco Bandit
 chain (Bar Hunting → The Salt of the Sea → **Ode to the Sea, choice 307, option 1** → seaode
-+ skill Salacious Cocktailcrafting). Repeatable: **Barback (choice 309)** — option 1 gets a
-seaode (3/day cap, needs Salacious Cocktailcrafting), option 2 leaves. Lucky: **Razor,
-Scooter** → shavin' razor (→ Hairless and Airless, 20% pressure reduction).
+
+- skill Salacious Cocktailcrafting). Repeatable: **Barback (choice 309)** — option 1 gets a
+  seaode (3/day cap, needs Salacious Cocktailcrafting), option 2 leaves. Lucky: **Razor,
+  Scooter** → shavin' razor (→ Hairless and Airless, 20% pressure reduction).
 
 All three monsters: element none, meat 160–240.
 
-| Monster (id) | HP/Atk/Def/Init/no-hit | Phylum | Drops |
-|---|---|---|---|
-| lounge lizardfish (770) | 550/400/**630**/100/410 | fish | slug of shochu 20%, amber aviator shades 5%, hair of the fish 5% (Grandpa "Lizardfish" gated), rough fish scale 4% |
-| Mer-kin tippler (768) | 750/**600**/360/25/**610** | mer-kin | Mer-kin weaksauce 50%, Alewife™ Ale 40%, slug of vodka 20%, Mer-kin pinkslip 5%, Mer-kin foodbucket 5% |
-| nurse shark (769) | 800/450/405/50/460 | fish | slug of rum 20%, blank prescription sheet 10% (Grandpa "Nurse" gated), nurse's hat 5%, sea salt scrubs 5% |
+| Monster (id)            | HP/Atk/Def/Init/no-hit     | Phylum  | Drops                                                                                                              |
+| ----------------------- | -------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| lounge lizardfish (770) | 550/400/**630**/100/410    | fish    | slug of shochu 20%, amber aviator shades 5%, hair of the fish 5% (Grandpa "Lizardfish" gated), rough fish scale 4% |
+| Mer-kin tippler (768)   | 750/**600**/360/25/**610** | mer-kin | Mer-kin weaksauce 50%, Alewife™ Ale 40%, slug of vodka 20%, Mer-kin pinkslip 5%, Mer-kin foodbucket 5%             |
+| nurse shark (769)       | 800/450/405/50/460         | fish    | slug of rum 20%, blank prescription sheet 10% (Grandpa "Nurse" gated), nurse's hat 5%, sea salt scrubs 5%          |
 
 Combat notes: only elemental damage in the zone is one **stench** hit message from the
 lizardfish — sleaze res is purely for the pearl. The tippler's Atk 600 / no-hit **610** is
@@ -193,13 +195,14 @@ appears only after asking Grandpa about "Scales"; option 1 opens **The Economist
 
 All three monsters: **HP 750**, phylum fish, element none.
 
-| Monster (id) | Atk/Def/Init/no-hit | Meat | Drops |
-|---|---|---|---|
-| jamfish (759) | 400/360/0/410 | 0 | jellyfish gel 10% (Grandpa "Reef" gated), jamfish jam 5%, jam band 5%, seaweed 5% |
-| magic dragonfish (758) | **500**/360/50/510 | 200 | dragonfish caviar 5%, rough fish scale 4%, seaweed 5% |
-| pufferfish (757) | 400/**450**/**100**/410 | 200 | pufferfish spine 5%, rough fish scale 4%, seaweed 5% |
+| Monster (id)           | Atk/Def/Init/no-hit     | Meat | Drops                                                                             |
+| ---------------------- | ----------------------- | ---- | --------------------------------------------------------------------------------- |
+| jamfish (759)          | 400/360/0/410           | 0    | jellyfish gel 10% (Grandpa "Reef" gated), jamfish jam 5%, jam band 5%, seaweed 5% |
+| magic dragonfish (758) | **500**/360/50/510      | 200  | dragonfish caviar 5%, rough fish scale 4%, seaweed 5%                             |
+| pufferfish (757)       | 400/**450**/**100**/410 | 200  | pufferfish spine 5%, rough fish scale 4%, seaweed 5%                              |
 
 Combat notes:
+
 - **jamfish**: successful attacks can inflict **Majorly Poisoned** (same −90%/−11 effect as
   the Anemone combatant's).
 - **magic dragonfish**: hits with stench/spooky/cold/sleaze/hot messages — **its elemental
@@ -229,12 +232,12 @@ adds a free 1/day no-globe option; costs an adventure only on success); **A Vent
 Tempuramancy). **Into the Abyss (choice 1220)** — Space Jellyfish familiar over ~400 lbs →
 crushed steamer trunk, once per ascension.
 
-| Monster (id) | HP/Atk/Def/Init/no-hit | Phylum | Element | Meat | Drops |
-|---|---|---|---|---|---|
-| diving belle (762) | 750/400/**450**/50/410 | **undead** | **spooky** | **none** | comb jelly 40%, salinated mint julep 30%, diving muff 3%, water-polo mitt (one-time, Grandpa "Belle" gated, rate unknown) |
-| fisherfish (764) | 650/**550**/427/100/**560** | fish | none | 240–360 | halibut 3% (Grandpa "Fisherfish" gated), rough fish scale 3%, glowing esca 2% |
-| giant squid (763) | **800**/500/405/75/510 | fish | none | 240–360 | inky squid sauce 50%, ink bladder 30% |
-| Mer-kin diver (761) | 700/475/427/75/485 | mer-kin | none (but one **hot**-damage attack) | 160–240 | Mer-kin thingpouch 25%, Mer-kin foodbucket 15%, **Mer-kin pressureglobe 10%**, Mer-kin hookspear 2% |
+| Monster (id)        | HP/Atk/Def/Init/no-hit      | Phylum     | Element                              | Meat     | Drops                                                                                                                     |
+| ------------------- | --------------------------- | ---------- | ------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| diving belle (762)  | 750/400/**450**/50/410      | **undead** | **spooky**                           | **none** | comb jelly 40%, salinated mint julep 30%, diving muff 3%, water-polo mitt (one-time, Grandpa "Belle" gated, rate unknown) |
+| fisherfish (764)    | 650/**550**/427/100/**560** | fish       | none                                 | 240–360  | halibut 3% (Grandpa "Fisherfish" gated), rough fish scale 3%, glowing esca 2%                                             |
+| giant squid (763)   | **800**/500/405/75/510      | fish       | none                                 | 240–360  | inky squid sauce 50%, ink bladder 30%                                                                                     |
+| Mer-kin diver (761) | 700/475/427/75/485          | mer-kin    | none (but one **hot**-damage attack) | 160–240  | Mer-kin thingpouch 25%, Mer-kin foodbucket 15%, **Mer-kin pressureglobe 10%**, Mer-kin hookspear 2%                       |
 
 Combat notes: hot res pulls double duty (pearl + the diver's boiling-globe attack); spooky
 res mitigates the belle (spooky hit + spooky crit; her drops can't be yellow-rayed). No-hit
@@ -256,13 +259,14 @@ Inappropriate Backrub) remove the flip-out **without losing the bonus drop**.
 
 All three monsters: phylum fish, element none, meat base 240.
 
-| Monster (id) | HP/Atk/Def/Init/no-hit | Drops |
-|---|---|---|
-| acoustic electric eel (736) | 500/400/360/**200**/410 | dull fish scale 14.9%, eel sauce 9.7% (Grandpa "Eel" gated), eel battery 8.9% (**Fishbreath only**), eel skin 3.9% |
-| decent white shark (735) | 600/**425**/337/150/435 | dull fish scale 15%, shark cartilage 10% (**Fishbreath only**), shark jumper 3% (Torso Awaregness only), shark tooth 2% ×2 rolls |
-| ganger (737) | **800**/375/360/100/385 | dull fish scale 13.6%, temporary teardrop tattoo 9% (**Fishbreath only**), ganger bandana 2.3% |
+| Monster (id)                | HP/Atk/Def/Init/no-hit  | Drops                                                                                                                            |
+| --------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| acoustic electric eel (736) | 500/400/360/**200**/410 | dull fish scale 14.9%, eel sauce 9.7% (Grandpa "Eel" gated), eel battery 8.9% (**Fishbreath only**), eel skin 3.9%               |
+| decent white shark (735)    | 600/**425**/337/150/435 | dull fish scale 15%, shark cartilage 10% (**Fishbreath only**), shark jumper 3% (Torso Awaregness only), shark tooth 2% ×2 rolls |
+| ganger (737)                | **800**/375/360/100/385 | dull fish scale 13.6%, temporary teardrop tattoo 9% (**Fishbreath only**), ganger bandana 2.3%                                   |
 
 Combat notes:
+
 - **⚠ acoustic electric eel counters every landed MELEE attack for ~89–100 HP** ("You get
   the bejesus shocked out of you"). Macro branch: never `attack` / melee the eel — use
   spells, ranged, or skills. (Defeating it with a Space Jellyfish out grants
@@ -285,6 +289,7 @@ Kill coverage: ~800 damage one-shots every pearl-zone monster (HP 500–800; all
 no physical resistance, CLEESH-immune).
 
 **Mandatory macro branches**:
+
 - acoustic electric eel (Deepests): **no melee attacks** — spell/skill kill.
 - pufferfish (Reef): win initiative → **stun round 1** → burst (poison doubles per acted
   round, triggers hit-or-miss, kills through victory).
@@ -317,7 +322,7 @@ at 0.
 
 Four familiars matter for hitting the 18-resistance pearl cap (wiki pages fetched
 2026-08-06). All four say "Cannot breathe underwater" on the wiki — per user-confirmed
-mechanics that only means *no innate breathing*: each works underwater with an enabler.
+mechanics that only means _no innate breathing_: each works underwater with an enabler.
 The catch is **which enabler**: das boot (−10 fam weight) and little bitty bathysphere
 (−20) occupy the familiar-equipment slot these familiars want for other things, so
 **Driving Waterproofly (or Wet Willied) is the enabler of choice for all four**.
@@ -348,7 +353,7 @@ equipUsingFamiliar`) **automatically switches the outfit's familiar to Left-Hand
 Disembodied Hand** when asked for a second off-hand / extra weapon — it refuses "Single
 Equip" items and only fires when the outfit has no familiar set and the famequip slot is
 free. So `outfit.equip($item\`some resistance off-hand\`)` twice does the Left-Hand Man
-dance itself — but it *consumes the familiar choice*.
+dance itself — but it _consumes the familiar choice_.
 
 ### Weight-scaling resistance familiars
 
@@ -360,12 +365,12 @@ dance itself — but it *consumes the familiar choice*.
   cracker (≥1 resistance level lost). Does not attack.
 - **Mu** (#265, rare Pokéfam from Tall Grass). "Gives elemental resistances based on weight
   like Exotic Parrot" (the wiki gives no independent table). Also attacks with prismatic
-  damage — weight/6..weight/3 *per element*, every round at ≥26 lbs — which is relevant
+  damage — weight/6..weight/3 _per element_, every round at ≥26 lbs — which is relevant
   underwater where all pearl-zone monsters have no elemental resistance. Its `luck incense`
   (+10 wt, **+25% item**) disappears at end of day. Can't bjorn/enthrone.
 
 Slot rule for both hands — **user-confirmed (2026-08)**: they accept generic familiar
-equipment normally, but the famequip slot is one slot — das boot *or* the held
+equipment normally, but the famequip slot is one slot — das boot _or_ the held
 weapon/off-hand, never both. Underwater with breathing gear on the familiar, a holding
 familiar contributes nothing extra; only Waterproofly/Wet Willied preserves their value.
 
@@ -379,6 +384,7 @@ and the magic dragonfish (elemental attacks bypass Moxie; stun prevents The Colo
 ### Mechanics
 
 Four attack-prevention categories:
+
 - **Stagger** — blocks the current round only; 100% unless the monster has stagger
   immunity. Staggers take priority over stuns and **don't consume a stun charge** that
   round.
@@ -389,7 +395,7 @@ Four attack-prevention categories:
 - **Block** — negates only the damage; monster passives still fire. Blocks keep working
   above +151 ML where stuns/staggers fail.
 
-A stunned monster skips *most but not all* special actions; whether a stun suppresses
+A stunned monster skips _most but not all_ special actions; whether a stun suppresses
 already-started pufferfish poison ticks is **[NOT ON WIKI]** — the confirmed play is to
 prevent the first tick entirely (stun before it ever acts).
 
@@ -427,20 +433,20 @@ The standout combat-control + resistance item for pearlo (user-flagged; wiki-ver
 
 ### Other stun sources (facts table; recommendations below)
 
-| Source | Rounds | Cost / gating | Notes |
-|---|---|---|---|
-| **anemone nematocyst** | **3–4 in the sea** (1–2 on land) | consumed; drops 25% from Anemone combatant (Mine) | The Sea's native stun — farm the Mine first, spend them in the Reef |
-| **Unwrapped knock-off retro superhero cape** (Heck General / Hold Me config) | 3 | **back slot**; automatic at combat start | Competes with old SCUBA tank for the back slot; pair with hat/effect air |
-| Entangling Noodles | 3–5 | 3 MP; **Pastamancer only** (mere stagger otherwise) | Can't combine with Shadow Noodles |
-| Shadow Noodles | 3–5 | 30 MP (Dreadsylvania skill) | Also delevels 8–10 |
-| Club Foot | 2–4 | 8 MP; **Seal Clubber**, scales with Fury + club | 3+ Fury w/ club = 4 rounds |
-| Shell Up | 3–5 | 6 MP; **Turtle Tamer** + Storm blessing | Only fires if the attack *would have hit* |
-| Soul Bubble | 3–4 | 5 Soulsauce; **Sauceror** | Timer doesn't tick on rounds the monster wouldn't act |
-| The Lost Comb | 3 | reusable ×3 | |
-| shadow ice | 12–15 | consumed (Shadow Rift) | Longest stun in the game |
-| really nice net | 3 (staggers on use-round) | consumed | Also delevels 70% |
-| Accordion Bash | 3+ | 5 MP, accordion in weapon slot | **User-ruled out as a solution** (weapon-slot cost) |
-| Rain-Doh blue balls | 2 | not consumed, 1/combat | **Most players don't have Rain-Doh** — don't default to it |
+| Source                                                                       | Rounds                           | Cost / gating                                       | Notes                                                                    |
+| ---------------------------------------------------------------------------- | -------------------------------- | --------------------------------------------------- | ------------------------------------------------------------------------ |
+| **anemone nematocyst**                                                       | **3–4 in the sea** (1–2 on land) | consumed; drops 25% from Anemone combatant (Mine)   | The Sea's native stun — farm the Mine first, spend them in the Reef      |
+| **Unwrapped knock-off retro superhero cape** (Heck General / Hold Me config) | 3                                | **back slot**; automatic at combat start            | Competes with old SCUBA tank for the back slot; pair with hat/effect air |
+| Entangling Noodles                                                           | 3–5                              | 3 MP; **Pastamancer only** (mere stagger otherwise) | Can't combine with Shadow Noodles                                        |
+| Shadow Noodles                                                               | 3–5                              | 30 MP (Dreadsylvania skill)                         | Also delevels 8–10                                                       |
+| Club Foot                                                                    | 2–4                              | 8 MP; **Seal Clubber**, scales with Fury + club     | 3+ Fury w/ club = 4 rounds                                               |
+| Shell Up                                                                     | 3–5                              | 6 MP; **Turtle Tamer** + Storm blessing             | Only fires if the attack _would have hit_                                |
+| Soul Bubble                                                                  | 3–4                              | 5 Soulsauce; **Sauceror**                           | Timer doesn't tick on rounds the monster wouldn't act                    |
+| The Lost Comb                                                                | 3                                | reusable ×3                                         |                                                                          |
+| shadow ice                                                                   | 12–15                            | consumed (Shadow Rift)                              | Longest stun in the game                                                 |
+| really nice net                                                              | 3 (staggers on use-round)        | consumed                                            | Also delevels 70%                                                        |
+| Accordion Bash                                                               | 3+                               | 5 MP, accordion in weapon slot                      | **User-ruled out as a solution** (weapon-slot cost)                      |
+| Rain-Doh blue balls                                                          | 2                                | not consumed, 1/combat                              | **Most players don't have Rain-Doh** — don't default to it               |
 
 Underwater-only prevention on the wiki is stagger-class, not stun (fishy wand ~3.7% of
 rounds; Electrical Eelgrass, chance unspaded) — don't build on those.
@@ -459,6 +465,7 @@ Reef, the stench mode is dilophosaur anyway — Spit jurassic acid is a guarante
 free kill every 99 turns as a topper for whichever fight the macro likes least.)
 
 Fallbacks when one-shot damage isn't available:
+
 1. **Jurassic Parka** stagger + **win initiative**, then **stun** (anemone nematocyst,
    3–4 rounds underwater, self-farmed in the Mine; or a class stun) and burst inside the
    window — the stagger covers the round the stun spends casting.
@@ -476,6 +483,7 @@ monster); funkslinging two stun items; nematocyst behavior in non-Sea underwater
 
 Deleveling weakens the monster without touching stat gains. Why it matters given the
 formulas (from `Hit_Chance`/`Monsters`):
+
 - Player hit chance: `(6 + attack − monsterDefense)/11`, clamped — **each point of Defense
   removed ≈ +9.1% hit chance**. Relevant vs lounge lizardfish (Def 630) and Anemone
   combatant (Def 585) for weapon-based plans.
@@ -485,7 +493,8 @@ formulas (from `Hit_Chance`/`Monsters`):
 - Monster hit chance ≈ `55 + (Atk − Mox) × 5.5` %.
 
 Key caveats (wiki-stated):
-- **Deleveling does NOT fix stun resistance** — that keys off *bonus ML* only. It also
+
+- **Deleveling does NOT fix stun resistance** — that keys off _bonus ML_ only. It also
   doesn't change stat gains (unlike ±ML).
 - Percentage-vs-flat stacking order, universal floors, and caps are all **unstated**
   (only Curse of Weaksauce documents "attack not below 1, defense unbounded below").
@@ -496,21 +505,21 @@ Key caveats (wiki-stated):
 
 ### Sources worth pearlo's attention
 
-| Source | Delevel | Extras / gating |
-|---|---|---|
-| **really nice net** | **−70% Atk & Def** | **+3-round stun** — the premier combo item (Elf Operative drop; availability varies) |
-| crayon shavings | ~−30% both | cheap consumable (Artistic Goth Kid drop) |
-| Micrometeorite (Meteor Lore) | −25% (decays −1%/use to −10% floor, daily reset) | also staggers, 1/combat |
-| Curse of Weaksauce (Sauceror, 8 MP) | ~−3%/round, every round | MP refunded on spell kill |
-| **barnacle-encrusted sweater** | −20% always | ⚠ it's a **shirt** — mutually exclusive with the Jurassic Parka |
-| Chester's sunglasses / The Lost Glasses | −15% Def always | accessory slot |
-| "of Hatred" pieces | −10% Def each, always | also +spell damage (feeds the one-shot plan) |
-| **sea lasso** (Coral Corral) | unspaded, grows with use | underwater-only, also staggers, reusable until it breaks |
-| **fishy wand** (fam equip) | −15–20 Atk on proc (~3.7%/round) | underwater only |
-| Mer-kin mouthsoap | −250 to −300 | Mer-kin only; also staggers them |
-| CSA obedience grenade | −5% | +3-round stun |
-| Delevel familiars: **Barrrnacle, Emo Squid, Space Jellyfish** | wt/2 Atk&Def at combat start (4.5×wt% chance; Jellyfish 100%) | **all three breathe underwater innately** — no enabler needed |
-| Amplifiers: dark porquoise ring (×2), Ruthless Efficiency (+50%) | — | multiply all deleveling |
+| Source                                                           | Delevel                                                       | Extras / gating                                                                      |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **really nice net**                                              | **−70% Atk & Def**                                            | **+3-round stun** — the premier combo item (Elf Operative drop; availability varies) |
+| crayon shavings                                                  | ~−30% both                                                    | cheap consumable (Artistic Goth Kid drop)                                            |
+| Micrometeorite (Meteor Lore)                                     | −25% (decays −1%/use to −10% floor, daily reset)              | also staggers, 1/combat                                                              |
+| Curse of Weaksauce (Sauceror, 8 MP)                              | ~−3%/round, every round                                       | MP refunded on spell kill                                                            |
+| **barnacle-encrusted sweater**                                   | −20% always                                                   | ⚠ it's a **shirt** — mutually exclusive with the Jurassic Parka                      |
+| Chester's sunglasses / The Lost Glasses                          | −15% Def always                                               | accessory slot                                                                       |
+| "of Hatred" pieces                                               | −10% Def each, always                                         | also +spell damage (feeds the one-shot plan)                                         |
+| **sea lasso** (Coral Corral)                                     | unspaded, grows with use                                      | underwater-only, also staggers, reusable until it breaks                             |
+| **fishy wand** (fam equip)                                       | −15–20 Atk on proc (~3.7%/round)                              | underwater only                                                                      |
+| Mer-kin mouthsoap                                                | −250 to −300                                                  | Mer-kin only; also staggers them                                                     |
+| CSA obedience grenade                                            | −5%                                                           | +3-round stun                                                                        |
+| Delevel familiars: **Barrrnacle, Emo Squid, Space Jellyfish**    | wt/2 Atk&Def at combat start (4.5×wt% chance; Jellyfish 100%) | **all three breathe underwater innately** — no enabler needed                        |
+| Amplifiers: dark porquoise ring (×2), Ruthless Efficiency (+50%) | —                                                             | multiply all deleveling                                                              |
 
 ### Fit with the combat plan
 

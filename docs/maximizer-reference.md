@@ -14,14 +14,14 @@ pearlo hits the maximizer through grimoire `OutfitSpec.modifier` and libram
   Bare keyword = weight 1; `-` = −1. Whole expression lowercased. Quote keywords containing
   digits or `+`/`-` (`"spooky resistance"` is fine unquoted; quoting is for odd names).
 - Score = Σ weight × min(value, per-modifier max), over current effects + speculated gear.
-- **`N min` / `N max` are separate keywords attaching to the *previous* numeric keyword**:
+- **`N min` / `N max` are separate keywords attaching to the _previous_ numeric keyword**:
   - `spooky res 18 max` → resistance beyond 18 contributes **exactly nothing** to the
     score. This is pearlo's core idiom: **the right pearl objective is
     `"<element> res 18 max"`** — it stops the maximizer from trading anything for res #19.
   - `18 min` sets a failed flag if unreachable — **the best outfit is still equipped**;
     `maximize()` just returns `false`. Use it only as a failure signal
     (`spooky res 18 max 18 min`), not as a guard.
-  - A leading `N max` (no preceding modifier) caps the *total* score and stops enumeration
+  - A leading `N max` (no preceding modifier) caps the _total_ score and stops enumeration
     early — a real speed win when usable.
   - Limits on negatively-weighted modifiers "won't quite work as expected" (help text's own
     words; exact semantics undocumented).
@@ -38,7 +38,7 @@ pearlo hits the maximizer through grimoire `OutfitSpec.modifier` and libram
 ## 2. Equipment directives
 
 - **Slot restriction**: `hat, weapon, offhand, back, shirt, pants, acc1-3,
-  familiar`/`familiarequip`, `holster`, `crown-of-thrones`, `buddy-bjorn`, `card-sleeve`,
+familiar`/`familiarequip`, `holster`, `crown-of-thrones`, `buddy-bjorn`, `card-sleeve`,
   `bootskin`, `bootspur`, `hats`. Positive = only these slots may change; negative = all
   but these (`maximize meat, -acc1`).
 - `empty` — only currently-empty slots (+) or non-empty (−).
@@ -51,7 +51,7 @@ pearlo hits the maximizer through grimoire `OutfitSpec.modifier` and libram
 - `outfit <name>` / `-outfit <name>`; bare `+outfit` keeps the current outfit.
 - Weapon-type: `melee`, `effective` (weapon type suited to your better attack stat; also
   can't-miss attacks since PR #3296), `handed`, `type <x>`, `club/sword/knife/utensil/
-  accordion`, `shield` (implies 1-handed).
+accordion`, `shield` (implies 1-handed).
 - `current`/`-current`: whether currently-worn gear is considered (default on in
   HC/Ronin; `maximizerAlwaysCurrent` pref).
 - **Familiars**: `switch <familiar>` lets the maximizer compare/switch familiars
@@ -59,7 +59,7 @@ pearlo hits the maximizer through grimoire `OutfitSpec.modifier` and libram
   Nothing switches unless asked.
 - **Left-Hand Man / Disembodied Hand / Hatrack / Scarecrow are modeled**: the evaluator
   budgets an extra off-hand when Left-Hand Man is in play (etc.), and since PR #3491
-  `equip X`/`bonus X` requirements can be satisfied *via* the Left-Hand Man — which also
+  `equip X`/`bonus X` requirements can be satisfied _via_ the Left-Hand Man — which also
   means the maximizer may route a forced item to the familiar's hands instead of yours.
 - There is no `none`/`unequip` keyword (unequipping is internal).
 
@@ -84,19 +84,19 @@ So a pearl-zone modifier looks like:
 ## 4. ASH/JS `maximize()` semantics
 
 ```ts
-maximize(str, speculateOnly)                       // ≡ (str, 0, 0, speculateOnly)
-maximize(str, maxPrice, priceLevel, speculateOnly) // boolean
+maximize(str, speculateOnly); // ≡ (str, 0, 0, speculateOnly)
+maximize(str, maxPrice, priceLevel, speculateOnly); // boolean
 //   maxPrice <= 0 → falls back to autoBuyPriceLimit
 //   priceLevel: 0 = DONT_CHECK, 1 = BUYABLE_ONLY, 2 = ALL
-maximize(str, maxPrice, priceLevel, speculateOnly, showEquipment) // boost record[]
-maximize(str, maxPrice, priceLevel, equipScope, filters)          // PR #3287 overload
+maximize(str, maxPrice, priceLevel, speculateOnly, showEquipment); // boost record[]
+maximize(str, maxPrice, priceLevel, equipScope, filters); // PR #3287 overload
 //   equipScope: -1 EQUIP_NOW, 0 SPECULATE_INVENTORY, 1 +CREATABLE, 2 ANY
 //   filters: substring list of {equip, cast, wish, usable, booze, food, spleen, other}
-currentMaximizerScore(expr)  // score current state without enumeration (PR #3287)
+currentMaximizerScore(expr); // score current state without enumeration (PR #3287)
 ```
 
 - **The boolean return is `!failed`** — `false` means a `min`/boolean/outfit requirement
-  was unmet, *not* that nothing was equipped. The best-found gear is equipped regardless
+  was unmet, _not_ that nothing was equipped. The best-found gear is equipped regardless
   (when not speculating). Grimoire's `Outfit.dress()` does its own post-verification and
   throws, which is the stronger guard.
 - `currentMaximizerScore("spooky res 18 max, sea")` is the cheap way to ask "am I already

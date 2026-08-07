@@ -7,17 +7,23 @@ import {
   Effect,
   equip,
   equippedItem,
+  fullnessLimit,
   getFuel,
   haveEquipped,
   holiday,
+  inebrietyLimit,
   mpCost,
   myAscensions,
   myClass,
+  myFullness,
+  myInebriety,
   myMeat,
   myMp,
+  mySpleenUse,
   print,
   restoreMp,
   retrieveItem,
+  spleenLimit,
   toItem,
   toSkill,
   use,
@@ -205,17 +211,16 @@ export function tryAcquiringEffect(ef: Effect, tryRegardless = false): void {
   }
 }
 
+export function isLiverCapped(): boolean {
+  return myInebriety() >= inebrietyLimit();
+}
+export function isStomachCapped(): boolean {
+  return myFullness() >= fullnessLimit();
+}
+export function isSpleenCapped(): boolean {
+  return mySpleenUse() >= spleenLimit();
+}
 
-export function isLiverCapped() {
-  return false;
-}
-export function isStomachCapped() {
-  return false;
-}
-export function isSpleenCapped() {
-  return false;
-}
-
-export function isOverDrunk() {
-  return false;
+export function isOverDrunk(): boolean {
+  return myInebriety() > inebrietyLimit();
 }
