@@ -8,6 +8,7 @@ import {
   myMaxhp,
   myMaxmp,
   myMp,
+  print,
   restoreHp,
   restoreMp,
   toSkill,
@@ -88,6 +89,15 @@ function pendingCastCosts(effects: Effect[]): { mp: number; hp: number } {
 }
 
 export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
+  // Lucky! converts the next adventure in Lucky-capable zones (Dive Bar: Razor,
+  // Scooter; Reef: Dragon the Line) into a noncombat — a turn with no pearl progress
+  // (cost us a turn in the 2026-08-07 session). Spend it elsewhere first.
+  if (have($effect`Lucky!`)) {
+    print(
+      `pearlo: Lucky! is active — the next ${spec.loc} adventure may be its Lucky noncombat instead of a pearl fight. Consider spending Lucky elsewhere first.`,
+      "red",
+    );
+  }
   // Fishy: free pipe only in v1 (docs/consumption-reference.md)
   if (!have($effect`Fishy`) && have($item`fishy pipe`) && !get("_fishyPipeUsed")) {
     use($item`fishy pipe`);

@@ -1,4 +1,4 @@
-import { Familiar, Item, maximize } from "kolmafia";
+import { Familiar, Item, maximize, myFamiliar, useFamiliar } from "kolmafia";
 import { $effects, $element, $familiar, $items, have } from "libram";
 
 import { PearlSpec } from "./zones";
@@ -50,6 +50,11 @@ export function playerAirByEffect(): boolean {
  * independent of equipment choices).
  */
 export function resCapMetWithoutFamiliar(spec: PearlSpec): boolean {
+  // The speculation includes the ACTIVE familiar's contributions, which contaminated
+  // the benchmark (session log 2026-08-07: res familiar equipped on fight N made
+  // fight N+1 conclude "cap met without familiar", drop it, and fight at 8.3%/10% —
+  // alternating). Drop the familiar first so the benchmark is honestly familiar-free.
+  if (myFamiliar() !== $familiar.none) useFamiliar($familiar.none);
   const breathing = playerAirByEffect() ? "" : ", adventure underwater";
   return maximize(`${spec.key} res 18 max 18 min${breathing}`, true);
 }
