@@ -2,7 +2,12 @@ import { Modes, OutfitSpec } from "grimoire-kolmafia";
 import { Item, canEquip, toSlot } from "kolmafia";
 import { $item, $items, $slot, have } from "libram";
 
-import { damagePlan, ownedLanternProspect } from "./combat";
+import {
+  damagePlan,
+  lanternComponents,
+  lanternComponentsNeededForOneShot,
+  ownedLanternProspect,
+} from "./combat";
 import {
   FamiliarPlan,
   familiarBreathesFree,
@@ -46,12 +51,23 @@ export function capeMode(): "kill" | "hold" {
 }
 
 export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
+  // Equip only as much damage gear as the one-shot actually needs (user feedback:
+  // full CMoI+lantern stacking is overkill) — greedy over component values.
   const equip: Item[] = [];
-  if (have($item`Congressional Medal of Insanity`)) {
-    equip.push($item`Congressional Medal of Insanity`);
-  }
+  let componentsNeeded = lanternComponentsNeededForOneShot();
   const ownedLanterns = OFFHAND_LANTERNS.filter((i) => have(i));
-  if (ownedLanterns.length > 0) equip.push(ownedLanterns[0]);
+  let secondLantern: Item | undefined;
+  if (componentsNeeded > 0 && ownedLanterns.length > 0) {
+    equip.push(ownedLanterns[0]);
+    componentsNeeded -= lanternComponents(ownedLanterns[0]);
+  }
+  if (componentsNeeded > 0 && have($item`Congressional Medal of Insanity`)) {
+    equip.push($item`Congressional Medal of Insanity`);
+    componentsNeeded -= lanternComponents($item`Congressional Medal of Insanity`);
+  }
+  if (componentsNeeded > 0 && ownedLanterns.length > 1) {
+    secondLantern = ownedLanterns[1];
+  }
 
   const modes: Modes = {};
   if (have($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
@@ -62,7 +78,8 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
 
   // Always run a familiar (user decision) via two-pass planning: benchmark res without
   // familiar help, then spend the slot on res (maximizer `switch` picks) or damage/utility.
-  const familiarPlan = pickPearlFamiliar(spec, ownedLanterns[1]);
+  // The second lantern only reaches the Left-Hand Man when the one-shot still needs it.
+  const familiarPlan = pickPearlFamiliar(spec, secondLantern);
 
   const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen, 0.1 init`;
   const result: OutfitSpec = {

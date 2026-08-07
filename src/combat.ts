@@ -24,6 +24,12 @@ const LANTERN_COMPONENTS: [Item, number][] = [
   [$item`big hot pepper`, 1],
 ];
 
+/** Conservative lantern-component value of a single item (0 if it isn't a lantern). */
+export function lanternComponents(item: Item): number {
+  const entry = LANTERN_COMPONENTS.find(([i]) => i === item);
+  return entry ? entry[1] : 0;
+}
+
 function capeIsKillLantern(): boolean {
   return (
     haveEquipped($item`unwrapped knock-off retro superhero cape`) &&
@@ -67,6 +73,19 @@ export function saucegeyserDamage(prospectiveLanterns?: number): number {
   const base = Math.ceil((1 + pct / 100) * preMult);
   const lanterns = prospectiveLanterns ?? equippedLanternComponents();
   return base + lanterns * Math.max(0, preMult);
+}
+
+/**
+ * Minimal lantern components needed to one-shot the zone's toughest monster from the
+ * current (pre-lantern-gear) state. 0 = raw Saucegeyser already suffices; Infinity =
+ * even every owned component can't reach it (equip them all, plan multi-cast).
+ */
+export function lanternComponentsNeededForOneShot(targetHp = ZONE_MAX_HP): number {
+  const max = ownedLanternProspect();
+  for (let k = 0; k <= max; k++) {
+    if (saucegeyserDamage(k) >= targetHp) return k;
+  }
+  return Infinity;
 }
 
 export function damagePlan(targetHp = ZONE_MAX_HP, prospectiveLanterns?: number): DamagePlan {

@@ -95,17 +95,19 @@ export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
 
   const buffs = applicableBuffs(spec);
 
-  // BEFORE the mood: enough MP to actually cast the buffs (their summed cost can dwarf
-  // a fight's budget — Song of Sauce alone is 100 MP) and enough HP for HP-costed casts.
+  // MP economy (user feedback: hovering at ~2 casts of MP against a huge pool is way
+  // too low): keep a real buffer — trigger below 5 fights' worth, refill to 20 fights'
+  // worth (capped by max MP), and never below the pending buff casts' summed cost.
   const pending = pendingCastCosts(buffs);
-  const mpNeeded = Math.max(pending.mp, 1.5 * mpPerFight);
-  if (myMp() < mpNeeded) restoreMp(Math.min(myMaxmp(), mpNeeded + mpPerFight));
+  const mpTrigger = Math.max(pending.mp, 5 * mpPerFight);
+  const mpTarget = Math.min(myMaxmp(), Math.max(pending.mp + 5 * mpPerFight, 20 * mpPerFight));
+  if (myMp() < mpTrigger) restoreMp(mpTarget);
   if (myHp() <= pending.hp || myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
 
   for (const ef of buffs) tryAcquiringEffect(ef);
 
-  // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight budget.
+  // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight buffer.
   // Explicit restores; auto-recovery is disabled by PearloEngine.
-  if (myMp() < 1.5 * mpPerFight) restoreMp(Math.min(myMaxmp(), 3 * mpPerFight));
+  if (myMp() < 5 * mpPerFight) restoreMp(Math.min(myMaxmp(), 20 * mpPerFight));
   if (myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
 }
