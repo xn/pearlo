@@ -1,0 +1,66 @@
+name: Build pearlo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "package.json"
+      - "yarn.lock"
+      - "rollup.config.ts"
+      - "tsconfig.json"
+  workflow_dispatch:
+
+env:
+  node-version: "24"
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js ${{ env.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.node-version }}
+
+      # Yarn 4 via corepack (package.json packageManager field)
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Install build dependencies
+        run: yarn install --immutable
+
+      - name: Build
+        run: |
+          yarn build
+          mkdir BUILD
+          cp -r dist/scripts BUILD/scripts
+          cp README.md BUILD/README.md
+
+      - name: Configure Git information
+        run: |
+          git config --global user.name "Build Script"
+          git config --global user.email "<>"
+
+      - name: Synchronize & push into release branch
+        run: |
+          git fetch --all
+          echo "Switching into release"
+          git stash && git stash clear
+          git switch release 2>/dev/null || git switch --orphan release
+
+          shopt -s extglob dotglob
+          rm -rf !(BUILD|.git)
+          mv BUILD/scripts scripts
+          mv BUILD/README.md README.md
+          rm -rf BUILD
+          git add scripts README.md
+          git commit -m "Automated build"
+          git push -f origin release
