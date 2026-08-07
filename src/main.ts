@@ -22,22 +22,23 @@ export function main(command?: string): void {
   }
   const selected = selectedPearls();
   if (args.sim) {
-    const plan = damagePlan(undefined, ownedLanternProspect());
     print("pearlo sim:", "blue");
     print(` pearls selected: ${selected.map((p) => p.key).join(", ")}`);
     print(` can breathe underwater: ${canBreathUnderwater()}`);
-    for (const p of selected) print(` canAdventure(${p.loc}): ${canAdventure(p.loc)}`);
-    print(
-      ` saucegeyser floor (best gear): ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
-    );
     print(` adventures available: ${myAdventures()}`);
-    // Per-element speculative outfits (nothing is equipped; current familiar counts).
+    // Per-element blocks (speculative — nothing is equipped; current familiar counts).
     const breathing = playerAirByEffect() ? "" : ", adventure underwater";
     for (const p of selected) {
+      const plan = damagePlan(p.maxHp, ownedLanternProspect());
+      print(` --- ${p.key} (${p.loc}) ---`, "blue");
+      print(`  canAdventure: ${canAdventure(p.loc)}`);
+      print(
+        `  saucegeyser floor (best gear) vs ${p.maxHp} HP: ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
+      );
       const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}`;
       const capMet = maximize(expr, true);
       print(
-        ` ${p.key}: ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"} — recommended equips:`,
+        `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"} — recommended equips:`,
         capMet ? "blue" : "red",
       );
       for (const boost of maximize(expr, 0, 0, true, true)) {

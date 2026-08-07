@@ -58,11 +58,14 @@ export type PearlSpec = {
   avoid?: Item[];
   /** choiceAdventure automation for the zone's noncombats (id → option). */
   choices?: { [id: number]: number };
+  /** Highest monster HP in the zone (docs/sea-reference.md §3) — the one-shot target. */
+  maxHp: number;
 };
 
 export const PEARLS: PearlSpec[] = [
   {
     key: "spooky",
+    maxHp: 750,
     loc: $location`Anemone Mine`,
     element: $element`spooky`,
     after: [],
@@ -79,6 +82,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "sleaze",
+    maxHp: 800,
     loc: $location`The Dive Bar`,
     element: $element`sleaze`,
     after: [],
@@ -94,6 +98,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "hot",
+    maxHp: 800,
     loc: $location`The Marinara Trench`,
     element: $element`hot`,
     after: [],
@@ -111,6 +116,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "stench",
+    maxHp: 750,
     loc: $location`Madness Reef`,
     element: $element`stench`,
     after: [],
@@ -125,6 +131,7 @@ export const PEARLS: PearlSpec[] = [
   },
   {
     key: "cold",
+    maxHp: 800,
     loc: $location`The Briniest Deepests`,
     element: $element`cold`,
     after: [],

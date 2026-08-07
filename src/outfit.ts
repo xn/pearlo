@@ -47,8 +47,8 @@ function breathingKeywords(plan: FamiliarPlan): string {
  * Hold Me (3-round stun) when we need more control than Noodles provides.
  * See the outfit-combat contract in the spec.
  */
-export function capeMode(): "kill" | "hold" {
-  const plan = damagePlan(undefined, ownedLanternProspect());
+export function capeMode(spec: PearlSpec): "kill" | "hold" {
+  const plan = damagePlan(spec.maxHp, ownedLanternProspect());
   return plan.casts <= 3 ? "kill" : "hold";
 }
 
@@ -56,7 +56,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // Equip only as much lantern gear (any slot) as the one-shot actually needs —
   // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
   // computable (user design). Zero need = zero damage gear forced.
-  const needed = lanternComponentsNeededForOneShot();
+  const needed = lanternComponentsNeededForOneShot(spec.maxHp);
   const lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity);
   const equip: Item[] = [...lanterns.equip];
   const secondLantern = lanterns.secondOffhand;
@@ -65,7 +65,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   if (have($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
   if (have($item`unwrapped knock-off retro superhero cape`) && !airRequiresBackSlot()) {
     equip.push($item`unwrapped knock-off retro superhero cape`);
-    modes.retrocape = ["heck", capeMode()];
+    modes.retrocape = ["heck", capeMode(spec)];
   }
 
   // Always run a familiar (user decision) via two-pass planning: benchmark res without

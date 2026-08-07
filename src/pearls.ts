@@ -115,7 +115,7 @@ function turnsNeeded(spec: PearlSpec): number {
 }
 
 function pearlTask(spec: PearlSpec): Task {
-  let plan = damagePlan();
+  let plan = damagePlan(spec.maxHp);
   return {
     name: `${spec.loc}`,
     after: ["Breathe Underwater", ...spec.after],
@@ -126,7 +126,7 @@ function pearlTask(spec: PearlSpec): Task {
       myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
-      plan = damagePlan(); // post-dress: real equipped modifiers
+      plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
       if (args.major.requirecap) {
         const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
