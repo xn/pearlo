@@ -24,6 +24,10 @@ export const args = Args.create(
   "This is a script for farming unblemished pearls",
   {
     sim: Args.flag({ help: "Check if you have the requirements to run this script.", setting: "" }),
+    drunk: Args.flag({
+      help: "With sim: report the overdrunk (wineglass, attack-only) plan as if you were falling-down drunk.",
+      setting: "",
+    }),
     version: Args.flag({ help: "Show script version and exit.", setting: "" }),
     pearls: Args.string({
       help: "Comma-separated ordered subset of pearls to farm: spooky,sleaze,hot,stench,cold. No duplicates.",

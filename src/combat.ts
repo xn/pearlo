@@ -179,6 +179,12 @@ export type AttackPlan = {
  * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20). Residual risk the model accepts:
  * fumbles (~1/22) deal zero damage regardless of any "can't miss" source.
  */
+/** Attack stat needed for a guaranteed hit vs this Defense (wiki Hit_Chance). */
+export function requiredAttackFor(targetDef: number): number {
+  const r = 5 + Math.floor(Math.max(targetDef - 200, 0) / 20);
+  return targetDef + 5 + r;
+}
+
 export function weaponAttackPlan(targetDef: number, targetHp: number): AttackPlan {
   const weapon = equippedItem($slot`weapon`);
   const ranged = weaponType(weapon) === $stat`Moxie`;

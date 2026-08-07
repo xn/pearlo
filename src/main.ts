@@ -1,11 +1,12 @@
 import { Args, getTasks } from "grimoire-kolmafia";
 import { canAdventure, maximize, myAdventures, myMeat, myTurncount, print } from "kolmafia";
-import { get, sinceKolmafiaRevision } from "libram";
+import { $item, get, have, sinceKolmafiaRevision } from "libram";
 
 import { args, selectedPearls } from "./args";
-import { damagePlan, ownedLanternProspect } from "./combat";
+import { damagePlan, ownedLanternProspect, requiredAttackFor, weaponAttackPlan } from "./combat";
 import { PearloEngine } from "./engine";
 import { playerAirByEffect } from "./familiar";
+import { isOverDrunk } from "./lib";
 import { pearlTasks } from "./pearls";
 import { PEARL_RES_CAP, canBreathUnderwater } from "./zones";
 
@@ -22,23 +23,39 @@ export function main(command?: string): void {
   }
   const selected = selectedPearls();
   if (args.sim) {
-    print("pearlo sim:", "blue");
+    const simDrunk = args.drunk || isOverDrunk();
+    print(`pearlo sim${simDrunk ? " (overdrunk mode)" : ""}:`, "blue");
     print(` pearls selected: ${selected.map((p) => p.key).join(", ")}`);
     print(` can breathe underwater: ${canBreathUnderwater()}`);
     print(` adventures available: ${myAdventures()}`);
+    if (simDrunk && !have($item`Drunkula's wineglass`)) {
+      print(" no Drunkula's wineglass — overdrunk farming would not run at all", "red");
+    }
     // Per-element blocks (speculative — nothing is equipped; current familiar counts).
     const breathing = playerAirByEffect() ? "" : ", adventure underwater";
+    const wineglass =
+      simDrunk && have($item`Drunkula's wineglass`) ? ", +equip Drunkula's wineglass" : "";
     for (const p of selected) {
-      const plan = damagePlan(p.maxHp, ownedLanternProspect());
       print(` --- ${p.key} (${p.loc}) ---`, "blue");
       print(`  canAdventure: ${canAdventure(p.loc)}`);
-      print(
-        `  saucegeyser floor (best gear) vs ${p.maxHp} HP: ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
-      );
-      const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}`;
+      if (simDrunk) {
+        const attack = weaponAttackPlan(p.maxDef, p.maxHp);
+        print(
+          `  attack floor (equipped ${attack.ranged ? "ranged" : "melee"} weapon) vs ${p.maxHp} HP: ${attack.damage} — ` +
+            `hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed (need ${requiredAttackFor(p.maxDef)} ${attack.ranged ? "Moxie" : "Muscle"} vs Def ${p.maxDef})`} — ` +
+            `one-shot: ${attack.canOneShot}`,
+          attack.canOneShot ? "blue" : "red",
+        );
+      } else {
+        const plan = damagePlan(p.maxHp, ownedLanternProspect());
+        print(
+          `  saucegeyser floor (best gear) vs ${p.maxHp} HP: ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
+        );
+      }
+      const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}${wineglass}`;
       const capMet = maximize(expr, true);
       print(
-        `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"} — recommended equips:`,
+        `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"}${wineglass ? " (wineglass in off-hand)" : ""} — recommended equips:`,
         capMet ? "blue" : "red",
       );
       for (const boost of maximize(expr, 0, 0, true, true)) {
