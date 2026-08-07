@@ -42,16 +42,20 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
     modes.retrocape = ["heck", capeMode()];
   }
 
-  // Always run a familiar (user decision): elemental res > holding hands > utility.
+  // Always run a familiar (user decision) via two-pass planning: benchmark res without
+  // familiar help, then spend the slot on res (maximizer `switch` picks) or damage/utility.
   const familiarPlan = pickPearlFamiliar(spec, ownedLanterns[1]);
 
+  const baseModifier = `${spec.key} res 18 max, sea, 0.05 hp regen, 0.05 mp regen, 0.1 init`;
   const result: OutfitSpec = {
-    modifier: `${spec.key} res 18 max, sea, 0.05 hp regen, 0.05 mp regen, 0.1 init`,
+    modifier: familiarPlan.extraModifier
+      ? `${baseModifier}, ${familiarPlan.extraModifier}`
+      : baseModifier,
     equip,
     modes,
-    familiar: familiarPlan.familiar,
     avoid: spec.avoid,
   };
+  if (familiarPlan.familiar) result.familiar = familiarPlan.familiar;
   if (familiarPlan.famequip) result.famequip = familiarPlan.famequip;
   return result;
 }
