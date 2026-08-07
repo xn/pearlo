@@ -537,7 +537,9 @@ stagger/stun covers the cast; (3) **deleveling makes the fallback rounds safe** 
 no-hit thresholds (deleveled Atk vs the tippler's 610 bar), less chip damage, and better
 weapon hit chance where spells aren't available. The Space Jellyfish is a standout: innate
 water-breather, 100% start-of-combat delevel, plus its Trench/eel utilities — a strong
-default when no resistance/holding familiar is needed.
+default when no resistance/holding familiar is needed. (Magic Dragonfish's weight-scaled
+spell% was considered for this role and ruled out — not impactful enough in practice;
+user decision 2026-08-07.)
 
 ### Choosing for pearlo
 

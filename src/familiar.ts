@@ -20,15 +20,10 @@ export function familiarBreathesFree(): boolean {
 const BREATHING_FAMEQUIP = $items`das boot, little bitty bathysphere`;
 
 // Innate water-breathers useful as utility picks (docs/sea-reference.md §1.5):
-// Magic Dragonfish: +spell damage % = 2×weight, uncapped underwater — feeds Saucegeyser.
 // Space Jellyfish: 100% start-of-combat delevel + Trench/eel utilities.
 // Barrrnacle / Emo Squid: start-of-combat delevelers.
-const UTILITY_BREATHERS = [
-  $familiar`Magic Dragonfish`,
-  $familiar`Space Jellyfish`,
-  $familiar`Barrrnacle`,
-  $familiar`Emo Squid`,
-];
+// (Magic Dragonfish's spell% was evaluated and ruled out — not impactful enough; user 2026-08-07.)
+const UTILITY_BREATHERS = [$familiar`Space Jellyfish`, $familiar`Barrrnacle`, $familiar`Emo Squid`];
 
 // Cooler Yeti (famid 324): +1 Cold Resistance per 11 lbs, item drops, start-of-combat
 // delevel (wiki Data:Cooler Yeti, fetched 2026-08-07). Newer than our typings — resolve
@@ -82,8 +77,7 @@ function resFamiliarSwitches(spec: PearlSpec): string {
 /**
  * Two-pass familiar planning (user design, 2026-08-07). Always run a familiar:
  * - Res cap already met without familiar help → the slot goes to damage/utility:
- *   holding hands with a second lantern (breathing-free only), else Magic Dragonfish
- *   (+2%/lb spell damage, uncapped underwater), else other innate breathers.
+ *   holding hands with a second lantern (breathing-free only), else delevel breathers.
  * - Cap NOT met → hand the choice to the maximizer with `switch` directives over
  *   elemental familiars and the holding hands; it weighs their res contributions
  *   (including hand-held res gear) against the rest of the outfit.
