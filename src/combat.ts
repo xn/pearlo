@@ -12,23 +12,24 @@ export type DamagePlan = {
   oneShot: boolean;
 };
 
-// Lantern components added per equipped source, conservative counts.
-// CMoI rolls 3 random elements; worst case one collides with the geyser's tune → 2.
-// petrified wood water purifier adds cold AND sleaze → 2.
-// See docs/sea-reference.md and the Lanterns notes in the spec.
-const LANTERN_COMPONENTS: [Item, number][] = [
-  [$item`Congressional Medal of Insanity`, 2],
-  [$item`petrified wood water purifier`, 2],
-  [$item`meteorb`, 1],
-  [$item`snow mobile`, 1],
-  [$item`big hot pepper`, 1],
+// Lantern gear across ALL slots (user insight: a lantern ≈ an extra cast folded into
+// the round, and any slot's lantern counts). Conservative component values:
+// CMoI rolls 3 random elements, worst case one collides with the geyser's tune → 2;
+// water purifier = cold AND sleaze → 2; wizard's pouch = hot AND physical → 2
+// (physical is unresisted in pearl zones). Ordered by preference: components first,
+// then slot scarcity. porcelain porkpie is EXCLUDED: its lantern only applies to
+// Pastamancer-class spells, and Saucegeyser is a Sauceror spell.
+// Rain-Doh green lantern last (rarity, per user). Retro cape handled via its mode.
+type LanternGear = { item: Item; components: number; slot: "off-hand" | "accessory" };
+const LANTERN_GEAR: LanternGear[] = [
+  { item: $item`Congressional Medal of Insanity`, components: 2, slot: "accessory" },
+  { item: $item`petrified wood water purifier`, components: 2, slot: "off-hand" },
+  { item: $item`petrified wood wizard's pouch`, components: 2, slot: "accessory" },
+  { item: $item`meteorb`, components: 1, slot: "off-hand" },
+  { item: $item`snow mobile`, components: 1, slot: "off-hand" },
+  { item: $item`big hot pepper`, components: 1, slot: "off-hand" },
+  { item: $item`Rain-Doh green lantern`, components: 1, slot: "off-hand" },
 ];
-
-/** Conservative lantern-component value of a single item (0 if it isn't a lantern). */
-export function lanternComponents(item: Item): number {
-  const entry = LANTERN_COMPONENTS.find(([i]) => i === item);
-  return entry ? entry[1] : 0;
-}
 
 function capeIsKillLantern(): boolean {
   return (
@@ -40,8 +41,8 @@ function capeIsKillLantern(): boolean {
 
 export function equippedLanternComponents(): number {
   let n = 0;
-  for (const [item, components] of LANTERN_COMPONENTS) {
-    if (haveEquipped(item)) n += components;
+  for (const gear of LANTERN_GEAR) {
+    if (haveEquipped(gear.item)) n += gear.components;
   }
   if (capeIsKillLantern()) n += 1;
   return n;
@@ -50,11 +51,48 @@ export function equippedLanternComponents(): number {
 /** Upper bound on lantern components if we equip everything we own (planning pass). */
 export function ownedLanternProspect(): number {
   let n = 0;
-  for (const [item, components] of LANTERN_COMPONENTS) {
-    if (have(item)) n += components;
+  for (const gear of LANTERN_GEAR) {
+    if (have(gear.item)) n += gear.components;
   }
   if (have($item`unwrapped knock-off retro superhero cape`)) n += 1;
   return n;
+}
+
+export type LanternSelection = {
+  /** Items to force-equip on the player (accessories + at most one off-hand). */
+  equip: Item[];
+  /** A further owned off-hand lantern for the Left-Hand Man, when still needed. */
+  secondOffhand?: Item;
+};
+
+/**
+ * Greedy selection of just enough owned lantern gear to cover `needed` components.
+ * The player has one off-hand slot; a second off-hand lantern is only proposed (for
+ * the Left-Hand Man) when the player-slot gear still leaves components uncovered.
+ */
+export function selectLanternGear(needed: number): LanternSelection {
+  const equip: Item[] = [];
+  let secondOffhand: Item | undefined;
+  let offhandsUsed = 0;
+  let remaining = needed;
+  for (const gear of LANTERN_GEAR) {
+    if (remaining <= 0) break;
+    if (!have(gear.item)) continue;
+    if (gear.slot === "off-hand") {
+      if (offhandsUsed === 0) {
+        equip.push(gear.item);
+        offhandsUsed++;
+        remaining -= gear.components;
+      } else if (secondOffhand === undefined) {
+        secondOffhand = gear.item;
+        remaining -= gear.components;
+      }
+    } else {
+      equip.push(gear.item);
+      remaining -= gear.components;
+    }
+  }
+  return { equip, secondOffhand };
 }
 
 /**
