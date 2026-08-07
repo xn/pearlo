@@ -79,6 +79,11 @@ export const args = Args.create(
         hidden: true,
         setting: "",
       }),
+      prep: Args.flag({
+        help: "Do all preparation (breathing, outfit, buffs, restores) for the next zone task, print a state report, and stop without spending an adventure.",
+        default: false,
+        setting: "",
+      }),
     }),
   },
   {
