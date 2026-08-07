@@ -4,6 +4,7 @@ import {
   booleanModifier,
   canEquip,
   Effect,
+  Element,
   getWorkshed,
   haveEffect,
   Item,
@@ -14,6 +15,7 @@ import {
 } from "kolmafia";
 import {
   $effect,
+  $element,
   $item,
   $items,
   $location,
@@ -54,49 +56,69 @@ export function canBreathUnderwater(): boolean {
 export const waterBreathingEquipment = $items`The Crown of Ed the Undying, aerated diving helmet, crappy Mer-kin mask, Mer-kin gladiator mask, Mer-kin scholar mask, old SCUBA tank, Elf Guard SCUBA tank`;
 export const familiarWaterBreathingEquipment = $items`das boot, little bitty bathysphere`;
 
-type PearlSpec = {
+export type PearlKey = "spooky" | "sleaze" | "hot" | "stench" | "cold";
+
+export type PearlSpec = {
+  key: PearlKey;
   loc: Location;
+  element: Element;
   after: string[];
   modifier: string;
+  parkaMode: string;
   obtained: BooleanProperty;
   progress: NumericProperty;
   avoid?: Item[];
 };
 
-const PEARLS: PearlSpec[] = [
+export const PEARLS: PearlSpec[] = [
   {
+    key: "spooky",
     loc: $location`Anemone Mine`,
+    element: $element`spooky`,
     after: [],
     modifier: "spooky res",
+    parkaMode: "ghostasaurus",
     obtained: "_unblemishedPearlAnemoneMine",
     progress: "_unblemishedPearlAnemoneMineProgress",
     avoid: $items`Mer-kin digpick`,
   },
   {
+    key: "sleaze",
     loc: $location`The Dive Bar`,
+    element: $element`sleaze`,
     after: [],
     modifier: "sleaze res",
+    parkaMode: "spikolodon",
     obtained: "_unblemishedPearlDiveBar",
     progress: "_unblemishedPearlDiveBarProgress",
   },
   {
+    key: "hot",
     loc: $location`The Marinara Trench`,
+    element: $element`hot`,
     after: [],
     modifier: "hot res",
+    parkaMode: "pterodactyl",
     obtained: "_unblemishedPearlMarinaraTrench",
     progress: "_unblemishedPearlMarinaraTrenchProgress",
   },
   {
+    key: "stench",
     loc: $location`Madness Reef`,
+    element: $element`stench`,
     after: [],
     modifier: "stench res",
+    parkaMode: "dilophosaur",
     obtained: "_unblemishedPearlMadnessReef",
     progress: "_unblemishedPearlMadnessReefProgress",
   },
   {
+    key: "cold",
     loc: $location`The Briniest Deepests`,
+    element: $element`cold`,
     after: [],
     modifier: "cold res",
+    parkaMode: "kachungasaur",
     obtained: "_unblemishedPearlTheBriniestDeepests",
     progress: "_unblemishedPearlTheBriniestDeepestsProgress",
   },
