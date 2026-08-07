@@ -1,14 +1,15 @@
-import { Quest, Task, OutfitSpec, CombatStrategy, Modes } from "grimoire-kolmafia";
+import { Quest, Task, CombatStrategy, Modes } from "grimoire-kolmafia";
 import {
   availableAmount,
   booleanModifier,
+  canAdventure,
   canEquip,
-  Effect,
   Element,
   getWorkshed,
   haveEffect,
   Item,
   Location,
+  myAdventures,
   print,
   retrieveItem,
   use,
@@ -27,7 +28,11 @@ import {
   set,
 } from "libram";
 
-import { asdonFualable, fuelUp, tryAcquiringEffect } from "./lib";
+import { args } from "./args";
+import { buildPearlMacro, damagePlan } from "./combat";
+import { asdonFualable, fuelUp, isOverDrunk } from "./lib";
+import { pearlMood } from "./mood";
+import { buildPearlOutfit } from "./outfit";
 
 /** Log Fishy / underwater state (call from main or when debugging seaworthy). */
 export function printSeaworthyDebug(where: string): void {
@@ -124,124 +129,132 @@ export const PEARLS: PearlSpec[] = [
   },
 ];
 
+const breatheUnderwaterTask: Task = {
+  name: "Breathe Underwater",
+  completed: () => canBreathUnderwater(),
+  do: () => {
+    print('[pearlo/seaworthy] task "Breathe Underwater": picking a breathing strategy…');
+    const tryAcquireAndUse = (item: Item, label: string): boolean => {
+      print(`[pearlo/seaworthy] → ${label}`);
+      if (availableAmount(item) <= 0) retrieveItem(item);
+      if (availableAmount(item) <= 0) {
+        print(`[pearlo/seaworthy] ${label} unavailable; trying next breathing strategy`);
+        return false;
+      }
+      if (!use(item)) {
+        print(`[pearlo/seaworthy] ${label} failed to use; trying next breathing strategy`);
+        return false;
+      }
+      return true;
+    };
+
+    let strategySucceeded = false;
+
+    if (have($item`ballast turtle`) && !get("_ballastTurtleUsed")) {
+      print("[pearlo/seaworthy] → using ballast turtle");
+      strategySucceeded = use($item`ballast turtle`);
+    }
+    if (strategySucceeded) {
+      printSeaworthyDebug("after Breathe Underwater do()");
+      return;
+    }
+
+    if (have($item`hyperinflated seal lung`) && !get("_hyperinflatedSealLungUsed", false)) {
+      print("[pearlo/seaworthy] → using hyperinflated seal lung");
+      strategySucceeded = use($item`hyperinflated seal lung`);
+    }
+    if (strategySucceeded) {
+      printSeaworthyDebug("after Breathe Underwater do()");
+      return;
+    }
+
+    if (!get("_pneumaticityPotionUsed", false)) {
+      strategySucceeded = tryAcquireAndUse(
+        $item`pressurized potion of pneumaticity`,
+        "pressurized potion of pneumaticity",
+      );
+    }
+    if (strategySucceeded) {
+      printSeaworthyDebug("after Breathe Underwater do()");
+      return;
+    }
+
+    if (!get("_tempuraAirUsed", false)) {
+      strategySucceeded = tryAcquireAndUse($item`tempura air`, "tempura air");
+    }
+    if (strategySucceeded) {
+      printSeaworthyDebug("after Breathe Underwater do()");
+      return;
+    }
+
+    if (getWorkshed() === $item`Asdon Martin keyfob (on ring)` && asdonFualable(37)) {
+      print("[pearlo/seaworthy] → Asdon Waterproofly");
+      fuelUp();
+      strategySucceeded = AsdonMartin.drive(AsdonMartin.Driving.Waterproofly);
+    }
+
+    if (!strategySucceeded) {
+      print(
+        "[pearlo/seaworthy] → no consumable/Asdon path succeeded; setting _subAquaEquipBreathing (equip breathing gear)",
+      );
+      set("_subAquaEquipBreathing", true);
+    }
+
+    printSeaworthyDebug("after Breathe Underwater do()");
+  },
+  limit: { soft: 1000 },
+};
+
+const observedProgressRate = new Map<PearlKey, number>();
+const lastRecordedProgress = new Map<PearlKey, number>();
+
+function turnsNeeded(spec: PearlSpec): number {
+  const remaining = 100 - get(spec.progress, 0);
+  const optimistic = 10; // 1.7 * floor(18/3), capped at 10 — see docs/sea-reference.md
+  const rate = observedProgressRate.get(spec.key) ?? optimistic;
+  const perTurn = have($effect`Fishy`) ? 1 : 2;
+  return Math.ceil(remaining / Math.max(1.7, rate)) * perTurn;
+}
+
+function pearlTask(spec: PearlSpec): Task {
+  let plan = damagePlan();
+  return {
+    name: `${spec.loc}`,
+    after: ["Breathe Underwater", ...spec.after],
+    completed: () => get(spec.obtained),
+    ready: () =>
+      !isOverDrunk() &&
+      canAdventure(spec.loc) &&
+      myAdventures() - args.debug.halt >= turnsNeeded(spec),
+    prepare: () => {
+      plan = damagePlan(); // post-dress: real equipped modifiers
+      pearlMood(spec, plan.mpPerFight);
+    },
+    do: spec.loc,
+    post: () => {
+      const previousRate = observedProgressRate.get(spec.key);
+      const progress = get(spec.progress, 0);
+      const last = lastRecordedProgress.get(spec.key);
+      if (last !== undefined && progress > last) {
+        const delta = progress - last;
+        observedProgressRate.set(
+          spec.key,
+          previousRate === undefined ? delta : (previousRate + delta) / 2,
+        );
+      }
+      lastRecordedProgress.set(spec.key, progress);
+    },
+    outfit: () => buildPearlOutfit(spec),
+    combat: new CombatStrategy().macro(() => buildPearlMacro(spec, plan)),
+    limit: { soft: 30 },
+  };
+}
+
+export function pearlTasks(selected: PearlSpec[]): Task[] {
+  return [breatheUnderwaterTask, ...selected.map(pearlTask)];
+}
+
 export const PearlsQuest: Quest<Task> = {
   name: "Pearls",
-  tasks: [
-    {
-      name: "Breathe Underwater",
-      completed: () => canBreathUnderwater(),
-      do: () => {
-        print('[pearlo/seaworthy] task "Breathe Underwater": picking a breathing strategy…');
-        const tryAcquireAndUse = (item: Item, label: string): boolean => {
-          print(`[pearlo/seaworthy] → ${label}`);
-          if (availableAmount(item) <= 0) retrieveItem(item);
-          if (availableAmount(item) <= 0) {
-            print(`[pearlo/seaworthy] ${label} unavailable; trying next breathing strategy`);
-            return false;
-          }
-          if (!use(item)) {
-            print(`[pearlo/seaworthy] ${label} failed to use; trying next breathing strategy`);
-            return false;
-          }
-          return true;
-        };
-
-        let strategySucceeded = false;
-
-        if (have($item`ballast turtle`) && !get("_ballastTurtleUsed")) {
-          print("[pearlo/seaworthy] → using ballast turtle");
-          strategySucceeded = use($item`ballast turtle`);
-        }
-        if (strategySucceeded) {
-          printSeaworthyDebug("after Breathe Underwater do()");
-          return;
-        }
-
-        if (have($item`hyperinflated seal lung`) && !get("_hyperinflatedSealLungUsed", false)) {
-          print("[pearlo/seaworthy] → using hyperinflated seal lung");
-          strategySucceeded = use($item`hyperinflated seal lung`);
-        }
-        if (strategySucceeded) {
-          printSeaworthyDebug("after Breathe Underwater do()");
-          return;
-        }
-
-        if (!get("_pneumaticityPotionUsed", false)) {
-          strategySucceeded = tryAcquireAndUse(
-            $item`pressurized potion of pneumaticity`,
-            "pressurized potion of pneumaticity",
-          );
-        }
-        if (strategySucceeded) {
-          printSeaworthyDebug("after Breathe Underwater do()");
-          return;
-        }
-
-        if (!get("_tempuraAirUsed", false)) {
-          strategySucceeded = tryAcquireAndUse($item`tempura air`, "tempura air");
-        }
-        if (strategySucceeded) {
-          printSeaworthyDebug("after Breathe Underwater do()");
-          return;
-        }
-
-        if (getWorkshed() === $item`Asdon Martin keyfob (on ring)` && asdonFualable(37)) {
-          print("[pearlo/seaworthy] → Asdon Waterproofly");
-          fuelUp();
-          strategySucceeded = AsdonMartin.drive(AsdonMartin.Driving.Waterproofly);
-        }
-
-        if (!strategySucceeded) {
-          print(
-            "[pearlo/seaworthy] → no consumable/Asdon path succeeded; setting _subAquaEquipBreathing (equip breathing gear)",
-          );
-          set("_subAquaEquipBreathing", true);
-        }
-
-        printSeaworthyDebug("after Breathe Underwater do()");
-      },
-      limit: { soft: 1000 },
-    },
-    ...PEARLS.map((p: PearlSpec): Task => ({
-      name: `${p.loc}`,
-      after: p.after,
-      completed: () => get(p.obtained),
-      prepare: () => {
-        const usefulEffects: Effect[] = [
-          $effect`Astral Shell`,
-          $effect`Egged On`,
-          $effect`Elemental Saucesphere`,
-          $effect`Feeling Peaceful`,
-          $effect`Blood Bond`,
-          $effect`Empathy`,
-          $effect`Scarysauce`,
-          $effect`Scariersauce`,
-          $effect`Feeling Peaceful`,
-          $effect`Leash of Linguini`,
-          $effect`A Few Extra Pounds`,
-          $effect`Big`,
-          $effect`Mariachi Mood`,
-          $effect`Patience of the Tortoise`,
-          $effect`Power Ballad of the Arrowsmith`,
-          $effect`Quiet Determination`,
-          $effect`Reptilian Fortitude`,
-          $effect`Saucemastery`,
-          $effect`Seal Clubbing Frenzy`,
-          $effect`Song of Starch`,
-          $effect`Stevedave's Shanty of Superiority`,
-        ];
-        usefulEffects.forEach((ef) => tryAcquiringEffect(ef, true));
-      },
-      do: p.loc,
-      combat: new CombatStrategy(),
-      outfit: () => {
-        const result: OutfitSpec = {
-          modifier: p.modifier,
-          avoid: p.avoid,
-        };
-        return result;
-      },
-      limit: { soft: 20 },
-    })),
-  ],
+  tasks: pearlTasks(PEARLS),
 };
