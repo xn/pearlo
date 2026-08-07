@@ -1,20 +1,38 @@
 import { Modes, OutfitSpec } from "grimoire-kolmafia";
 import { Item, canEquip, toSlot } from "kolmafia";
-import { $effects, $item, $items, $slot, have } from "libram";
+import { $item, $items, $slot, have } from "libram";
 
 import { damagePlan, ownedLanternProspect } from "./combat";
-import { pickPearlFamiliar } from "./familiar";
+import {
+  FamiliarPlan,
+  familiarBreathesFree,
+  pickPearlFamiliar,
+  playerAirByEffect,
+} from "./familiar";
 import { PearlSpec, waterBreathingEquipment } from "./pearls";
 
 const OFFHAND_LANTERNS = $items`petrified wood water purifier, meteorb, snow mobile, big hot pepper`;
 
-// Effect-based air supplies (docs/sea-reference.md §1.1) — no equipment slot cost.
-const AIR_EFFECTS = $effects`Driving Waterproofly, Oxygenated Blood, Pneumatic, Pumped Stomach, Really Deep Breath, Mer-kinny Flavor, Hyperoxygenated Blood`;
-
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot(): boolean {
-  if (AIR_EFFECTS.some((ef) => have(ef))) return false;
+  if (playerAirByEffect()) return false;
   return !waterBreathingEquipment.some((i) => toSlot(i) !== $slot`back` && have(i) && canEquip(i));
+}
+
+/**
+ * Breathing keywords are needed exactly when air is NOT guaranteed independent of the
+ * maximizer's choices (user refinement, 2026-08-07): an air *effect* covers the player;
+ * a familiar-air effect or an innately water-breathing familiar covers the familiar.
+ * Equipment-derived air must stay constrained, or the maximizer may strip the gear.
+ */
+function breathingKeywords(plan: FamiliarPlan): string {
+  const playerCovered = playerAirByEffect();
+  const familiarCovered =
+    familiarBreathesFree() || (plan.familiar !== undefined && plan.familiar.underwater);
+  if (!playerCovered && !familiarCovered) return ", sea";
+  if (!playerCovered) return ", adventure underwater";
+  if (!familiarCovered) return ", underwater familiar";
+  return "";
 }
 
 /**
@@ -46,7 +64,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // familiar help, then spend the slot on res (maximizer `switch` picks) or damage/utility.
   const familiarPlan = pickPearlFamiliar(spec, ownedLanterns[1]);
 
-  const baseModifier = `${spec.key} res 18 max, sea, 0.05 hp regen, 0.05 mp regen, 0.1 init`;
+  const baseModifier = `${spec.key} res 18 max${breathingKeywords(familiarPlan)}, 0.05 hp regen, 0.05 mp regen, 0.1 init`;
   const result: OutfitSpec = {
     modifier: familiarPlan.extraModifier
       ? `${baseModifier}, ${familiarPlan.extraModifier}`

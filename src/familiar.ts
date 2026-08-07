@@ -38,15 +38,25 @@ function coolerYeti(): Familiar {
   return Familiar.get("Cooler Yeti");
 }
 
+// Effect-based air supplies for the player (docs/sea-reference.md §1.1).
+const PLAYER_AIR_EFFECTS = $effects`Driving Waterproofly, Oxygenated Blood, Pneumatic, Pumped Stomach, Really Deep Breath, Mer-kinny Flavor, Hyperoxygenated Blood`;
+
+/** Player air guaranteed by an active effect — no equipment slot involved. */
+export function playerAirByEffect(): boolean {
+  return PLAYER_AIR_EFFECTS.some((ef) => have(ef));
+}
+
 /**
  * Pass 1 of two-pass outfitting (user design, 2026-08-07): speculate WITHOUT familiar
  * help — is the 18-res cap reachable from gear/effects alone? `18 max 18 min` makes the
- * speculative maximize() return false exactly when the cap can't be met. Speculation runs
- * against current state; an active familiar's res contribution could skew this slightly,
- * which we accept in v1.
+ * speculative maximize() return false exactly when the cap can't be met. Only constrain
+ * player breathing, and only when it isn't already effect-covered (user refinement:
+ * breathing keywords are needed exactly when an effect doesn't already guarantee air
+ * independent of equipment choices).
  */
 export function resCapMetWithoutFamiliar(spec: PearlSpec): boolean {
-  return maximize(`${spec.key} res 18 max 18 min, sea`, true);
+  const breathing = playerAirByEffect() ? "" : ", adventure underwater";
+  return maximize(`${spec.key} res 18 max 18 min${breathing}`, true);
 }
 
 /**
