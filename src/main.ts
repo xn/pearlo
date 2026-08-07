@@ -1,12 +1,13 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { canAdventure, myAdventures, myMeat, myTurncount, print } from "kolmafia";
+import { canAdventure, maximize, myAdventures, myMeat, myTurncount, print } from "kolmafia";
 import { get, sinceKolmafiaRevision } from "libram";
 
 import { args, selectedPearls } from "./args";
 import { damagePlan, ownedLanternProspect } from "./combat";
 import { PearloEngine } from "./engine";
+import { playerAirByEffect } from "./familiar";
 import { pearlTasks } from "./pearls";
-import { canBreathUnderwater } from "./zones";
+import { PEARL_RES_CAP, canBreathUnderwater } from "./zones";
 
 export function main(command?: string): void {
   sinceKolmafiaRevision(28100);
@@ -30,6 +31,19 @@ export function main(command?: string): void {
       ` saucegeyser floor (best gear): ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
     );
     print(` adventures available: ${myAdventures()}`);
+    // Per-element speculative outfits (nothing is equipped; current familiar counts).
+    const breathing = playerAirByEffect() ? "" : ", adventure underwater";
+    for (const p of selected) {
+      const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}`;
+      const capMet = maximize(expr, true);
+      print(
+        ` ${p.key}: ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"} — recommended equips:`,
+        capMet ? "blue" : "red",
+      );
+      for (const boost of maximize(expr, 0, 0, true, true)) {
+        if (boost.command.startsWith("equip")) print(`   ${boost.display}`);
+      }
+    }
     return;
   }
 
