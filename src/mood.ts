@@ -53,6 +53,10 @@ const FAMILIAR_WEIGHT_EFFECTS = $effects`Empathy, Leash of Linguini, Only Dogs L
 // Jackasses' Symphony +12 flat. Acquisition is free-first via canAcquireEffect.
 const SPELL_DAMAGE_EFFECTS = $effects`Carol of the Hells, Song of Sauce, Jackasses' Symphony of Destruction`;
 
+// Weapon-damage % effects for wineglass (attack-only) combat: Carol of the Bulls,
+// Song of the North (user, 2026-08-08).
+const WEAPON_DAMAGE_EFFECTS = $effects`Carol of the Bulls, Song of the North`;
+
 /** Effect lists that apply to this zone/state, in cast order (HP-costed blocks last). */
 function applicableBuffs(spec: PearlSpec): Effect[] {
   return [
@@ -63,8 +67,9 @@ function applicableBuffs(spec: PearlSpec): Effect[] {
     ...STAT_EFFECTS,
     ...HP_EFFECTS,
     ...(myFamiliar() !== $familiar.none ? FAMILIAR_WEIGHT_EFFECTS : []),
-    // Wineglass combat kills spells — spell-damage songs are dead weight overdrunk.
-    ...(isOverDrunk() ? [] : SPELL_DAMAGE_EFFECTS),
+    // Wineglass combat kills spells — spell-damage songs are dead weight overdrunk;
+    // weapon-damage songs take their place (and vice versa while sober).
+    ...(isOverDrunk() ? WEAPON_DAMAGE_EFFECTS : SPELL_DAMAGE_EFFECTS),
     // HP-costed buffs (Blood Bubble 30 HP) last, right before restores recover the cost.
     // (Blood Bubble is a noncombat cast; its first-hit block still works overdrunk.)
     ...BLOCK_EFFECTS,
