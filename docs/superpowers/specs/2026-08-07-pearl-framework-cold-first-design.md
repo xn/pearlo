@@ -168,3 +168,9 @@ Runs in each task's `prepare()`:
   familiar** — ladder: elemental res (Cooler Yeti cold +1/11 lbs / Exotic Parrot / Mu) >
   holding hands with lantern or maximizer-filled res slot > utility innate breathers
   (Magic Dragonfish, Space Jellyfish, Barrrnacle, Emo Squid). `src/familiar.ts`.
+- Two-pass outfitting (user, 2026-08-07): pass 1 speculates
+  `"<element> res 18 max 18 min, sea"` without familiar help; if the cap needs the
+  familiar, the outfit string gains `switch <familiar>` directives (res familiars +
+  holding hands) and the maximizer picks — `sea` makes it enforce Underwater Familiar
+  (boot-equip or reject) on its own. If the cap is met alone, the slot pivots to
+  damage/utility per the ladder.
