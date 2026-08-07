@@ -67,7 +67,12 @@ export const PEARLS: PearlSpec[] = [
     parkaMode: "ghostasaurus",
     obtained: "_unblemishedPearlAnemoneMine",
     progress: "_unblemishedPearlAnemoneMineProgress",
+    // NEVER equip the digpick here — it swaps the whole zone to the mining mini-game
+    // (no combats, no pearl progress). docs/sea-reference.md §3.1.
     avoid: $items`Mer-kin digpick`,
+    // Not a Micro Fish (306, one-time SC/TT chain): option 1 is the only button and
+    // teaches Harpoon!/Summon Leviatuga.
+    choices: { 306: 1 },
   },
   {
     key: "sleaze",
@@ -93,6 +98,13 @@ export const PEARLS: PearlSpec[] = [
     parkaMode: "pterodactyl",
     obtained: "_unblemishedPearlMarinaraTrench",
     progress: "_unblemishedPearlMarinaraTrenchProgress",
+    // You've Hit Bottom (302 Sauceror / 303 Pastamancer, one-time): option 1 teaches
+    // Deep Saucery / Tempuramancy — Tempuramancy unlocks the tempura air supply.
+    // A Vent Horizon (304): conjure bubbling tempura batter for 200 MP, 3/day — feeds
+    // the breathing task's tempura air path; failure costs nothing.
+    // There is Sauce at the Bottom of the Ocean (305): leave — globes aren't pearlo's job.
+    // Into the Abyss (1220, Space Jellyfish ≥400 lbs, once/ascension): nevermind.
+    choices: { 302: 1, 303: 1, 304: 1, 305: 2, 1220: 2 },
   },
   {
     key: "stench",
@@ -103,6 +115,10 @@ export const PEARLS: PearlSpec[] = [
     parkaMode: "dilophosaur",
     obtained: "_unblemishedPearlMadnessReef",
     progress: "_unblemishedPearlMadnessReefProgress",
+    // Heavily Invested in Pun Futures (311, free, Grandpa-gated): leave; The Economist
+    // of Scales (310, nested, free): take your leave (option 3). Scale trading is a
+    // manual activity, not pearl farming.
+    choices: { 310: 3, 311: 2 },
   },
   {
     key: "cold",
