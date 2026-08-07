@@ -1,4 +1,4 @@
-import { Quest, Task, OutfitSpec, CombatStrategy } from "grimoire-kolmafia";
+import { Quest, Task, OutfitSpec, CombatStrategy, Modes } from "grimoire-kolmafia";
 import {
   availableAmount,
   booleanModifier,
@@ -64,7 +64,7 @@ export type PearlSpec = {
   element: Element;
   after: string[];
   modifier: string;
-  parkaMode: string;
+  parkaMode: Exclude<Modes["parka"], undefined>;
   obtained: BooleanProperty;
   progress: NumericProperty;
   avoid?: Item[];
