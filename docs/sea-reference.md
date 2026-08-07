@@ -399,7 +399,10 @@ Four attack-prevention categories:
 - **Quick-cast** — skill doesn't advance the round at all (no passives, no familiar act,
   no attack).
 - **Block** — negates only the damage; monster passives still fire. Blocks keep working
-  above +151 ML where stuns/staggers fail.
+  above +151 ML where stuns/staggers fail. Notable for pearlo: **Blood Bubble** (Sauceror
+  skill, Booke of Vampyric Knowledge, permable) — **costs 30 HP, not MP**, 3 turns of
+  "the first hit per combat auto-misses" (multi-attack monsters can still land extras).
+  Blood Bond likewise costs HP. Stacks with the parka stagger as a second free layer.
 
 A stunned monster skips _most but not all_ special actions; whether a stun suppresses
 already-started pufferfish poison ticks is **[NOT ON WIKI]** — the confirmed play is to

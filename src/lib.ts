@@ -11,11 +11,13 @@ import {
   getFuel,
   haveEquipped,
   holiday,
+  hpCost,
   inebrietyLimit,
   mpCost,
   myAscensions,
   myClass,
   myFullness,
+  myHp,
   myInebriety,
   myMeat,
   myMp,
@@ -112,8 +114,12 @@ export function canAcquireEffect(ef: Effect): boolean {
         case "use": // We have the item
           if (ef === $effect`Sparkling Consciousness` && get("_fireworkUsed")) return false;
           return have(toItem(target));
-        case "cast":
-          return have(toSkill(target)) && myMp() >= mpCost(toSkill(target)); // We have the skill and can cast it
+        case "cast": {
+          // We have the skill and can afford it — some skills (Blood Bubble,
+          // Blood Bond) cost HP rather than MP; never cast into unconsciousness.
+          const sk = toSkill(target);
+          return have(sk) && myMp() >= mpCost(sk) && myHp() > hpCost(sk);
+        }
         case "cargo":
           return false; // Don't acquire effects with cargo (items are usually way more useful)
         case "synthesize":
