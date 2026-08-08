@@ -2701,6 +2701,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"garbo-lib@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "garbo-lib@npm:1.0.3"
+  peerDependencies:
+    kolmafia: ^5.28389.0
+    libram: ^0.11.9
+  checksum: 10c0/09b7662d701b2a51532433b0d6eecea88f77033a86c183ebb1c0821fc29cdda7801d5de34b8368bd1e21d0236b0e42431136d7f1a2d487efa59856a47f3c0404
+  languageName: node
+  linkType: hard
+
 "gensync@npm:^1.0.0-beta.2":
   version: 1.0.0-beta.2
   resolution: "gensync@npm:1.0.0-beta.2"
@@ -3390,6 +3400,7 @@ __metadata:
     eslint: "npm:^10.8.0"
     eslint-config-prettier: "npm:^10.1.8"
     eslint-plugin-libram: "npm:^0.6.0"
+    garbo-lib: "npm:^1.0.3"
     grimoire-kolmafia: "npm:^0.3.33"
     jiti: "npm:^2.6.1"
     kolmafia: "npm:latest"
