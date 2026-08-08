@@ -13,6 +13,7 @@ import {
   FamiliarPlan,
   familiarBreathesFree,
   pickPearlFamiliar,
+  pickUtilityFamiliar,
   playerAirByEffect,
 } from "./familiar";
 import { allOrganEquipment, liverMode, requiredOrganEquipment, wineglassMode } from "./organs";
@@ -28,6 +29,11 @@ const GLOBAL_AVOID = $items`broken champagne bottle, Kramco Sausage-o-Matic™, 
 // Stooper-displacement notices are per-zone-per-session — buildPearlOutfit runs
 // before every fight, and repeating the line each combat is noise.
 const stooperNoticePrinted = new Set<string>();
+
+// Outfit-override warnings (avoided pieces dropped, mandatory-layer collisions) are also
+// per-zone-per-session — same rationale as stooperNoticePrinted.
+const avoidNoticePrinted = new Set<string>();
+const collisionNoticePrinted = new Set<string>();
 
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot(): boolean {
@@ -144,6 +150,12 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
       );
     }
     familiarPlan = { familiar: override, famequip };
+  } else if (outfitName !== undefined) {
+    // Outfit-override zones skip the res benchmark entirely — the saved outfit IS the
+    // res plan, so a res-switch familiar (which the override path would drop anyway,
+    // since only .familiar/.famequip are honored, never .extraModifier) makes no sense.
+    // Always get a concrete utility/breathing familiar when one is available.
+    familiarPlan = pickUtilityFamiliar();
   } else {
     // Always run a familiar (user decision) via two-pass planning: benchmark res
     // without familiar help, then spend the slot on res (maximizer `switch` picks) or
@@ -158,11 +170,42 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
     // Saved-outfit override: the user's outfit IS the res plan. Its pieces are forced
     // through the normal equip path so grimoire's dress verifies them (and throws on
     // collisions with the mandatory layer — intended UX). The maximizer's only job is
-    // patching air into slots the outfit leaves free. Avoided pieces (e.g. Kramco)
-    // stay avoided; the dress error surfaces the conflict.
+    // patching air into slots the outfit leaves free.
+    //
+    // Grimoire's dress applies `spec.avoid` only to the maximizer's own picks, never to
+    // forced `equip` items — so an avoided piece (Kramco, Möbius ring, etc.) sitting in
+    // the saved outfit would otherwise be force-equipped despite being avoided. Filter
+    // it out here instead of trusting `avoid` to catch it downstream.
     const pieces = outfitPieces(outfitName);
-    equip.push(...pieces);
-    if (pieces.includes($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
+    const dropped = pieces.filter((p) => avoid.includes(p));
+    const kept = pieces.filter((p) => !avoid.includes(p));
+    if (dropped.length > 0 && !avoidNoticePrinted.has(spec.key)) {
+      avoidNoticePrinted.add(spec.key);
+      print(
+        `pearlo: ${spec.key} outfit override dropped ${dropped.join(", ")} — avoided in pearl zones`,
+        "red",
+      );
+    }
+
+    // A kept piece that lands in a slot the mandatory layer (organ extenders, lanterns,
+    // cape) already occupies will make grimoire's dress throw. Warn with the specific
+    // slot/piece up front rather than leaving the user to decode dress's generic error;
+    // don't abort here — the dress still throws its own error and is the real guard.
+    const mandatorySlots = new Set(equip.map((i) => toSlot(i)));
+    const collisions = kept.filter((p) => mandatorySlots.has(toSlot(p)));
+    if (collisions.length > 0 && !collisionNoticePrinted.has(spec.key)) {
+      collisionNoticePrinted.add(spec.key);
+      for (const p of collisions) {
+        print(
+          `pearlo: ${spec.key} outfit override piece ${p} collides with mandatory ${toSlot(p)} gear — ` +
+            `the dress will fail; remove it from the saved outfit or clear the override.`,
+          "red",
+        );
+      }
+    }
+
+    equip.push(...kept);
+    if (kept.includes($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
     const breathing = breathingKeywords(familiarPlan).replace(/^, /, "");
     const result: OutfitSpec = { equip, modes, avoid };
     if (breathing.length > 0) result.modifier = breathing;

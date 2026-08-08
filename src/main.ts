@@ -145,8 +145,9 @@ export function main(command?: string): void {
         : "";
       const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}${wineglass}${combatWeights}`;
       const capMet = maximize(expr, true);
+      const overrideNote = outfitOverride(p.key) !== undefined ? " (ignores zone overrides)" : "";
       print(
-        `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"}${wineglass ? " (wineglass in off-hand)" : ""} — recommended equips:`,
+        `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"}${wineglass ? " (wineglass in off-hand)" : ""} — recommended equips:${overrideNote}`,
         capMet ? "blue" : "red",
       );
       for (const boost of maximize(expr, 0, 0, true, true)) {

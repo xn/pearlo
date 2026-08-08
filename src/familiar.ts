@@ -80,20 +80,13 @@ export function resFamiliarSwitches(spec: PearlSpec): string {
 }
 
 /**
- * Two-pass familiar planning (user design, 2026-08-07). Always run a familiar:
- * - Res cap already met without familiar help → the slot goes to damage/utility:
- *   holding hands with a second lantern (breathing-free only), else delevel breathers.
- * - Cap NOT met → hand the choice to the maximizer with `switch` directives over
- *   elemental familiars and the holding hands; it weighs their res contributions
- *   (including hand-held res gear) against the rest of the outfit.
+ * Damage/utility familiar plan, independent of the res benchmark: holding hands with a
+ * second lantern (breathing-free only), else delevel breathers, else a weight familiar
+ * strapped with breathing gear, else no familiar. Used directly by outfit-override zones
+ * (whose saved outfit already IS the res plan, so no res-switch offer applies) and as the
+ * fallback tail of pickPearlFamiliar's two-pass plan.
  */
-export function pickPearlFamiliar(spec: PearlSpec, secondLantern?: Item): FamiliarPlan {
-  if (!resCapMetWithoutFamiliar(spec)) {
-    const switches = resFamiliarSwitches(spec);
-    if (switches.length > 0) return { extraModifier: switches };
-    // No res-capable familiar owned — fall through to damage/utility below.
-  }
-
+export function pickUtilityFamiliar(secondLantern?: Item): FamiliarPlan {
   if (familiarBreathesFree()) {
     for (const hand of [$familiar`Left-Hand Man`, $familiar`Disembodied Hand`]) {
       if (!have(hand)) continue;
@@ -117,4 +110,22 @@ export function pickPearlFamiliar(spec: PearlSpec, secondLantern?: Item): Famili
     if (any) return { familiar: any, famequip: boot };
   }
   return {};
+}
+
+/**
+ * Two-pass familiar planning (user design, 2026-08-07). Always run a familiar:
+ * - Res cap already met without familiar help → the slot goes to damage/utility:
+ *   holding hands with a second lantern (breathing-free only), else delevel breathers.
+ * - Cap NOT met → hand the choice to the maximizer with `switch` directives over
+ *   elemental familiars and the holding hands; it weighs their res contributions
+ *   (including hand-held res gear) against the rest of the outfit.
+ */
+export function pickPearlFamiliar(spec: PearlSpec, secondLantern?: Item): FamiliarPlan {
+  if (!resCapMetWithoutFamiliar(spec)) {
+    const switches = resFamiliarSwitches(spec);
+    if (switches.length > 0) return { extraModifier: switches };
+    // No res-capable familiar owned — fall through to damage/utility below.
+  }
+
+  return pickUtilityFamiliar(secondLantern);
 }

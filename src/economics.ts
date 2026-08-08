@@ -3,12 +3,15 @@ import type { ValueFunctions } from "garbo-lib";
 import {
   Familiar,
   Item,
+  Slot,
+  equippedItem,
   haveEffect,
   historicalPrice,
   maximize,
   myBuffedstat,
   myFamiliar,
   npcPrice,
+  numericModifier,
   outfitPieces,
   print,
   useFamiliar,
@@ -211,6 +214,20 @@ function speculativeResFloor(spec: PearlSpec, forceEquip: Item[], familiar?: Fam
   }
 }
 
+/**
+ * Conservative res estimate for an outfit-override zone: forced items' own res plus
+ * the player's current non-equipment res (effects, passives, current familiar).
+ * ESTIMATE: free slots may add a little res in the real run (they keep whatever the
+ * breathing-only maximize leaves there), and the current familiar's res may not match
+ * the zone's utility familiar — deliberately conservative, never optimistic.
+ */
+function overrideResEstimate(spec: PearlSpec, forcedItems: Item[]): number {
+  const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
+  const equippedContribution = sum(Slot.all(), (s) => numericModifier(equippedItem(s), resName));
+  const nonEquipment = Math.max(0, numericModifier(resName) - equippedContribution);
+  return nonEquipment + sum(forcedItems, (i) => numericModifier(i, resName));
+}
+
 // ---------- per-zone economics ----------
 
 export type ZoneEconomics = {
@@ -247,10 +264,18 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): Zo
   // and an override familiar is pinned exactly like Stooper (skipping the maximizer's
   // familiar switches). Stooper still displaces the override in stooper mode.
   const outfitName = outfitOverride(spec.key);
-  if (outfitName !== undefined) equips.push(...outfitPieces(outfitName));
+  const overridePieces = outfitName !== undefined ? outfitPieces(outfitName) : [];
+  equips.push(...overridePieces);
   const familiar = mode === "stooper" ? $familiar`Stooper` : familiarOverride(spec.key);
 
-  const res = speculativeResFloor(spec, equips, familiar);
+  // speculativeResFloor lets the maximizer fill outfit-free slots with res gear and
+  // offer familiar switches — help the real override run never gets (its outfit is
+  // forced verbatim, its familiar is a plain breathing/utility pick). Price override
+  // zones with a conservative arithmetic estimate instead.
+  const res =
+    outfitName !== undefined
+      ? overrideResEstimate(spec, equips)
+      : speculativeResFloor(spec, equips, familiar);
   const ratePct = progressRatePct(res);
   const fights = Math.ceil((100 - get(spec.progress, 0)) / ratePct);
   // A fishy fight costs 1 turn, a non-fishy fight costs 2 — spend the (threaded) budget
@@ -262,8 +287,12 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): Zo
   // Wineglass fights are one-shot-or-abort (pearls.ts prepare guard), so 1 cast.
   const casts = wineglass ? 1 : plan.casts;
   // The devilbone corset (stomach extender) occupies the shirt slot, displacing the
-  // Jurassic Parka's round-1 stagger.
-  const parkaDisplaced = forced.includes($item`devilbone corset`);
+  // Jurassic Parka's round-1 stagger. An outfit override instead displaces the parka
+  // whenever the saved outfit itself doesn't include it.
+  const parkaDisplaced =
+    outfitName !== undefined
+      ? !overridePieces.includes($item`Jurassic Parka`)
+      : forced.includes($item`devilbone corset`);
   const exposed = roundsExposed(casts, wineglass, parkaDisplaced);
 
   const pearlMeat = pearlValue();

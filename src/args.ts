@@ -1,6 +1,6 @@
 import { Args, ParseError } from "grimoire-kolmafia";
 import { abort, Familiar, Item } from "kolmafia";
-import { $item, get } from "libram";
+import { $familiar, $item, get } from "libram";
 
 import { PEARLS, PearlKey, PearlSpec } from "./zones";
 
@@ -183,20 +183,27 @@ export function selectedPearls(): PearlSpec[] {
   return result;
 }
 
-/** The user's forced familiar for this zone, if any (Zone Overrides group). */
+/**
+ * The user's forced familiar for this zone, if any (Zone Overrides group). Args.familiar
+ * parses the string "none" to Familiar.none rather than undefined, which would otherwise
+ * read as an active (but broken) override — normalize it away here.
+ */
 export function familiarOverride(key: PearlKey): Familiar | undefined {
-  switch (key) {
-    case "spooky":
-      return args.overrides.spookyfamiliar;
-    case "sleaze":
-      return args.overrides.sleazefamiliar;
-    case "hot":
-      return args.overrides.hotfamiliar;
-    case "stench":
-      return args.overrides.stenchfamiliar;
-    case "cold":
-      return args.overrides.coldfamiliar;
-  }
+  const value = (() => {
+    switch (key) {
+      case "spooky":
+        return args.overrides.spookyfamiliar;
+      case "sleaze":
+        return args.overrides.sleazefamiliar;
+      case "hot":
+        return args.overrides.hotfamiliar;
+      case "stench":
+        return args.overrides.stenchfamiliar;
+      case "cold":
+        return args.overrides.coldfamiliar;
+    }
+  })();
+  return value === undefined || value === $familiar.none ? undefined : value;
 }
 
 /** The user's saved-outfit name for this zone, if any. Empty prefs count as unset. */
