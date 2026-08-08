@@ -1,8 +1,8 @@
 import { Modes, OutfitSpec } from "grimoire-kolmafia";
-import { Item, canEquip, toSlot } from "kolmafia";
+import { Item, abort, canEquip, outfitPieces, print, toSlot } from "kolmafia";
 import { $familiar, $item, $items, $slot, have } from "libram";
 
-import { args } from "./args";
+import { args, familiarOverride, outfitOverride } from "./args";
 import {
   damagePlan,
   lanternComponentsNeededForOneShot,
@@ -24,6 +24,10 @@ import { PearlSpec, familiarWaterBreathingEquipment, waterBreathingEquipment } f
 //   adventures — turns without pearl progress (2026-08-08)
 // - Möbius ring: interferes with zone adventuring (2026-08-08)
 const GLOBAL_AVOID = $items`broken champagne bottle, Kramco Sausage-o-Matic™, replica Kramco Sausage-o-Matic™, Möbius ring`;
+
+// Stooper-displacement notices are per-zone-per-session — buildPearlOutfit runs
+// before every fight, and repeating the line each combat is noise.
+const stooperNoticePrinted = new Set<string>();
 
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot(): boolean {
@@ -61,6 +65,7 @@ export function capeMode(spec: PearlSpec): "kill" | "hold" {
 
 export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   const overdrunk = wineglassMode();
+  const outfitName = outfitOverride(spec.key);
 
   // Organ extenders first — they win their slots. Required extenders are the law
   // (no adventuring without them); the overcapped flag forces the full set for
@@ -69,21 +74,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   const organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
   const equip: Item[] = [...organEquip];
 
-  // Equip only as much lantern gear (any slot) as the one-shot actually needs —
-  // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
-  // computable (user design). Zero need = zero damage gear forced. Overdrunk:
-  // lanterns duplicate SPELL components and the wineglass kills spells — skip all.
-  let secondLantern: Item | undefined;
-  if (!overdrunk) {
-    const needed = lanternComponentsNeededForOneShot(spec.maxHp);
-    const accessoryBudget = 3 - organEquip.filter((i) => toSlot(i) === $slot`acc1`).length;
-    const lanterns = selectLanternGear(
-      Number.isFinite(needed) ? needed : Infinity,
-      accessoryBudget,
-    );
-    equip.push(...lanterns.equip);
-    secondLantern = lanterns.secondOffhand;
-  } else {
+  if (overdrunk) {
     // The wineglass IS the off-hand while overdrunk. A required angelbone totem
     // displaces the configured drunkweapon (best-effort attack combat, user decision);
     // otherwise the drunkweapon (default June cleaver) is forced when owned.
@@ -92,10 +83,28 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
     if (!totemForced && have(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
   }
 
+  // Equip only as much lantern gear (any slot) as the one-shot actually needs —
+  // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
+  // computable (user design). Zero need = zero damage gear forced. Overdrunk:
+  // lanterns duplicate SPELL components and the wineglass kills spells — skip all.
+  // An outfit override owns ALL damage gear itself — skip lanterns there too.
+  let secondLantern: Item | undefined;
+  if (!overdrunk && outfitName === undefined) {
+    const needed = lanternComponentsNeededForOneShot(spec.maxHp);
+    const accessoryBudget = 3 - organEquip.filter((i) => toSlot(i) === $slot`acc1`).length;
+    const lanterns = selectLanternGear(
+      Number.isFinite(needed) ? needed : Infinity,
+      accessoryBudget,
+    );
+    equip.push(...lanterns.equip);
+    secondLantern = lanterns.secondOffhand;
+  }
+
   const modes: Modes = {};
-  if (have($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
+  if (outfitName === undefined && have($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
   if (
     !overdrunk &&
+    outfitName === undefined &&
     have($item`unwrapped knock-off retro superhero cape`) &&
     !airRequiresBackSlot()
   ) {
@@ -103,20 +112,64 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
     modes.retrocape = ["heck", capeMode(spec)];
   }
 
-  // Always run a familiar (user decision) via two-pass planning: benchmark res without
-  // familiar help, then spend the slot on res (maximizer `switch` picks) or damage/utility.
-  // The second lantern only reaches the Left-Hand Man when the one-shot still needs it.
-  // Stooper rescue pins the familiar — its +1 liver only counts while active. It
-  // breathes via famequip gear unless a familiar-air effect already covers it.
-  const familiarPlan: FamiliarPlan =
-    liverMode() === "stooper"
-      ? {
-          familiar: $familiar`Stooper`,
-          famequip: familiarBreathesFree()
-            ? undefined
-            : familiarWaterBreathingEquipment.find((i) => have(i)),
-        }
-      : pickPearlFamiliar(spec, secondLantern);
+  // Familiar precedence: Stooper liver-rescue pin (its +1 only counts while active)
+  // → per-zone familiar override → two-pass computed plan (user decision).
+  const override = familiarOverride(spec.key);
+  let familiarPlan: FamiliarPlan;
+  if (liverMode() === "stooper") {
+    if (override !== undefined && override !== $familiar`Stooper`) {
+      if (!stooperNoticePrinted.has(spec.key)) {
+        stooperNoticePrinted.add(spec.key);
+        print(
+          `pearlo: ${spec.key} familiar override ${override} displaced by Stooper (liver rescue needs its +1)`,
+        );
+      }
+    }
+    familiarPlan = {
+      familiar: $familiar`Stooper`,
+      famequip: familiarBreathesFree()
+        ? undefined
+        : familiarWaterBreathingEquipment.find((i) => have(i)),
+    };
+  } else if (override !== undefined) {
+    // An override familiar gets breathing gear and nothing else — the Left-Hand Man
+    // second-lantern hand-off does not apply to overrides (spec).
+    const needsGear = !familiarBreathesFree() && !override.underwater;
+    const famequip = needsGear ? familiarWaterBreathingEquipment.find((i) => have(i)) : undefined;
+    if (needsGear && famequip === undefined) {
+      abort(
+        `pearlo: ${spec.key} familiar override ${override} cannot breathe underwater — ` +
+          `own das boot / little bitty bathysphere, or get a familiar-air effect ` +
+          `(Driving Waterproofly / Wet Willied), or drop the override.`,
+      );
+    }
+    familiarPlan = { familiar: override, famequip };
+  } else {
+    // Always run a familiar (user decision) via two-pass planning: benchmark res
+    // without familiar help, then spend the slot on res (maximizer `switch` picks) or
+    // damage/utility. The second lantern only reaches the Left-Hand Man when the
+    // one-shot still needs it.
+    familiarPlan = pickPearlFamiliar(spec, secondLantern);
+  }
+
+  const avoid = [...GLOBAL_AVOID, ...(spec.avoid ?? [])];
+
+  if (outfitName !== undefined) {
+    // Saved-outfit override: the user's outfit IS the res plan. Its pieces are forced
+    // through the normal equip path so grimoire's dress verifies them (and throws on
+    // collisions with the mandatory layer — intended UX). The maximizer's only job is
+    // patching air into slots the outfit leaves free. Avoided pieces (e.g. Kramco)
+    // stay avoided; the dress error surfaces the conflict.
+    const pieces = outfitPieces(outfitName);
+    equip.push(...pieces);
+    if (pieces.includes($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
+    const breathing = breathingKeywords(familiarPlan).replace(/^, /, "");
+    const result: OutfitSpec = { equip, modes, avoid };
+    if (breathing.length > 0) result.modifier = breathing;
+    if (familiarPlan.familiar) result.familiar = familiarPlan.familiar;
+    if (familiarPlan.famequip) result.famequip = familiarPlan.famequip;
+    return result;
+  }
 
   // Overdrunk: weapon-damage weights chase the one-shot floor. 'effective' (weapon
   // class matched to the better attack stat) only applies when NO weapon is forced —
@@ -133,7 +186,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
       : baseModifier,
     equip,
     modes,
-    avoid: [...GLOBAL_AVOID, ...(spec.avoid ?? [])],
+    avoid,
   };
   if (familiarPlan.familiar) result.familiar = familiarPlan.familiar;
   if (familiarPlan.famequip) result.famequip = familiarPlan.famequip;
