@@ -1,6 +1,7 @@
 import {
   Effect,
   Element,
+  haveEffect,
   hpCost,
   mpCost,
   myFamiliar,
@@ -16,6 +17,7 @@ import {
 } from "kolmafia";
 import { $effect, $effects, $elements, $familiar, $item, get, have } from "libram";
 
+import { args } from "./args";
 import { tryAcquiringEffect } from "./lib";
 import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
@@ -103,8 +105,10 @@ function pendingCastCosts(effects: Effect[]): { mp: number; hp: number } {
 export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
   // Lucky! converts the next adventure in Lucky-capable zones (Dive Bar: Razor,
   // Scooter; Reef: Dragon the Line) into a noncombat — a turn with no pearl progress
-  // (cost us a turn in the 2026-08-07 session). Spend it elsewhere first.
-  if (have($effect`Lucky!`)) {
+  // (cost us a turn in the 2026-08-07 session). With the luckyfishy refresh enabled
+  // and Fishy low, the Get Fishy task consumes it productively before we get here;
+  // otherwise it is still a live hazard worth flagging.
+  if (have($effect`Lucky!`) && (haveEffect($effect`Fishy`) > 1 || !args.resources.luckyfishy)) {
     print(
       `pearlo: Lucky! is active — the next ${spec.loc} adventure may be its Lucky noncombat instead of a pearl fight. Consider spending Lucky elsewhere first.`,
       "red",

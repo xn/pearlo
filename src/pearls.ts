@@ -1,9 +1,10 @@
-import { Quest, Task, CombatStrategy } from "grimoire-kolmafia";
+import { Quest, Task, CombatStrategy, OutfitSpec } from "grimoire-kolmafia";
 import {
   abort,
   availableAmount,
   canAdventure,
   getWorkshed,
+  haveEffect,
   Item,
   myAdventures,
   numericModifier,
@@ -11,11 +12,13 @@ import {
   retrieveItem,
   use,
 } from "kolmafia";
-import { $effect, $item, AsdonMartin, get, have, set } from "libram";
+import { $effect, $familiar, $item, $location, AsdonMartin, get, have, Macro, set } from "libram";
 
 import { args } from "./args";
 import { buildPearlMacro, damagePlan, weaponAttackPlan, wineglassAccessible } from "./combat";
 import { zoneVerdict } from "./economics";
+import { pickUtilityFamiliar, playerAirByEffect } from "./familiar";
+import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fishy";
 import { abortIfBeatenUp, asdonFualable, fuelUp } from "./lib";
 import { pearlMood } from "./mood";
 import { wineglassMode } from "./organs";
@@ -105,6 +108,56 @@ const breatheUnderwaterTask: Task = {
   limit: { soft: 1000 },
 };
 
+/**
+ * Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md): when Fishy
+ * is down to ≤1 turn, acquire Lucky! and adventure in The Brinier Deepers — its lucky
+ * NC "The Haggling" grants 20 turns of Fishy. Placed before the zone tasks: list
+ * position is grimoire priority, so this preempts zones whenever Fishy runs low. NOT
+ * in any zone's `after` — with no Lucky! source left this task simply never readies
+ * and zones fall back to 2-turn fights.
+ */
+function getFishyTask(selected: PearlSpec[]): Task {
+  return {
+    name: "Get Fishy",
+    after: ["Breathe Underwater"],
+    // >1 (not >0): with exactly 1 turn left the trip itself still rides the old
+    // Fishy turn (The Haggling costs 1 adventure with Fishy, 2 without).
+    completed: () => haveEffect($effect`Fishy`) > 1,
+    ready: () =>
+      args.resources.luckyfishy &&
+      canBreathUnderwater() &&
+      // The free fishy pipe is strictly cheaper (no turn, no Lucky!) — let
+      // pearlMood spend it first; this task covers the post-pipe day.
+      !(have($item`fishy pipe`) && !get("_fishyPipeUsed")) &&
+      remainingPearlFights(selected) > 0 &&
+      (have($effect`Lucky!`) || luckySourceAvailable(remainingPearlFights(selected))) &&
+      myAdventures() - args.debug.halt >= (haveEffect($effect`Fishy`) > 0 ? 1 : 2),
+    prepare: () => {
+      if (!acquireLucky(remainingPearlFights(selected))) {
+        abort(
+          "pearlo: could not acquire Lucky! for the Fishy refresh — every source in " +
+            "the cascade failed. The Brinier Deepers is not safe without it.",
+        );
+      }
+    },
+    do: $location`The Brinier Deepers`,
+    outfit: (): OutfitSpec => {
+      // Noncombat trip: only breathing matters. pickUtilityFamiliar guarantees a
+      // familiar that can breathe (or none); the maximizer patches player breathing
+      // only when no effect already covers it.
+      const plan = pickUtilityFamiliar();
+      const spec: OutfitSpec = { familiar: plan.familiar ?? $familiar.none };
+      if (plan.famequip !== undefined) spec.famequip = plan.famequip;
+      if (!playerAirByEffect()) spec.modifier = "adventure underwater";
+      return spec;
+    },
+    // With Lucky! up the encounter is guaranteed to be The Haggling; a combat means
+    // the plan is broken (out-of-plan monsters here) — fail loudly.
+    combat: new CombatStrategy().macro(Macro.abort()),
+    limit: { soft: 10 }, // realistic ceiling ~6 refreshes/day
+  };
+}
+
 const observedProgressRate = new Map<PearlKey, number>();
 const lastRecordedProgress = new Map<PearlKey, number>();
 
@@ -181,7 +234,7 @@ function pearlTask(spec: PearlSpec): Task {
 }
 
 export function pearlTasks(selected: PearlSpec[]): Task[] {
-  return [breatheUnderwaterTask, ...selected.map(pearlTask)];
+  return [breatheUnderwaterTask, getFishyTask(selected), ...selected.map(pearlTask)];
 }
 
 export const PearlsQuest: Quest<Task> = {
