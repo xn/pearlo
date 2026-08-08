@@ -130,20 +130,66 @@ const RES_STEPS = [18, 15, 12, 9, 6, 3];
 /**
  * Highest progress-relevant resistance floor this configuration can reach. Progress
  * only moves in steps of 3 res (floor(res/3)), so stepping down RES_STEPS is exact at
- * the granularity that matters. Speculative maximizes are local computation. The
- * familiar-switch directives mirror the real outfit's two-pass planning; the Stooper
- * configuration pins the familiar instead (its +1 liver only counts while active).
+ * the granularity that matters. Speculative maximizes are local computation.
+ *
+ * Two flavors are evaluated when the familiar slot is free, and the better floor wins,
+ * because none of resFamiliarSwitches' candidates (Exotic Parrot, Mu, Left-Hand Man,
+ * Disembodied Hand, Cooler Yeti) breathe underwater innately:
+ * - Familiar-free: no familiar switches offered, so only the player's own breathing is
+ *   constrained — always legally reachable regardless of familiar-breathing gear owned.
+ * - Switch: offers resFamiliarSwitches(spec), constrained by `sea` (Adventure Underwater
+ *   + Underwater Familiar) — or just `underwater familiar` when the player's breathing
+ *   is already effect-covered — so the maximizer boot-equips or rejects non-breathing
+ *   switch candidates on its own, exactly as the real outfit does (src/familiar.ts).
+ * The pinned-familiar case (Stooper) instead pays the familiar-breathing cost directly:
+ * `underwater familiar` is added unless the familiar already breathes for free (effect
+ * or innately underwater) — its +1 liver only counts while active, so it can't be
+ * swapped out the way switch candidates can.
  */
 function speculativeResFloor(spec: PearlSpec, forceEquip: Item[], familiar?: Familiar): number {
   const saved = myFamiliar();
   try {
-    useFamiliar(familiar ?? $familiar.none);
-    const breathing = playerAirByEffect() ? "" : ", adventure underwater";
     const equips = forceEquip.map((i) => `, +equip ${i}`).join("");
-    const switches = familiar === undefined ? resFamiliarSwitches(spec) : "";
-    const suffix = switches.length > 0 ? `, ${switches}` : "";
+    const playerBreathing = playerAirByEffect() ? "" : ", adventure underwater";
+
+    if (familiar === undefined) {
+      useFamiliar($familiar.none);
+      let floor = 0;
+      for (const n of RES_STEPS) {
+        if (maximize(`${spec.key} res ${n} max ${n} min${playerBreathing}${equips}`, true)) {
+          floor = n;
+          break;
+        }
+      }
+
+      const switches = resFamiliarSwitches(spec);
+      if (switches.length > 0) {
+        const familiarBreathing = playerAirByEffect() ? ", underwater familiar" : ", sea";
+        for (const n of RES_STEPS) {
+          if (
+            maximize(
+              `${spec.key} res ${n} max ${n} min${familiarBreathing}${equips}, ${switches}`,
+              true,
+            )
+          ) {
+            floor = Math.max(floor, n);
+            break;
+          }
+        }
+      }
+      return floor;
+    }
+
+    useFamiliar(familiar);
+    const familiarBreathing =
+      !familiarBreathesFree() && !familiar.underwater ? ", underwater familiar" : "";
     for (const n of RES_STEPS) {
-      if (maximize(`${spec.key} res ${n} max ${n} min${breathing}${equips}${suffix}`, true)) {
+      if (
+        maximize(
+          `${spec.key} res ${n} max ${n} min${playerBreathing}${familiarBreathing}${equips}`,
+          true,
+        )
+      ) {
         return n;
       }
     }
