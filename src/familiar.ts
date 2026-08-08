@@ -65,7 +65,7 @@ export function resCapMetWithoutFamiliar(spec: PearlSpec): boolean {
  * maximizer fills with res gear). With `sea` in the string the maximizer also enforces
  * Underwater Familiar — it boot-equips or rejects non-breathers on its own.
  */
-function resFamiliarSwitches(spec: PearlSpec): string {
+export function resFamiliarSwitches(spec: PearlSpec): string {
   const candidates: Familiar[] = [
     ...(spec.element === $element`cold` ? [coolerYeti()] : []),
     $familiar`Exotic Parrot`,
