@@ -3,6 +3,7 @@ import type { ValueFunctions } from "garbo-lib";
 import {
   Familiar,
   Item,
+  haveEffect,
   historicalPrice,
   maximize,
   myBuffedstat,
@@ -80,6 +81,16 @@ export function progressRatePct(res: number): number {
   return Math.max(1.7, Math.min(10, 1.7 * Math.floor(res / 3)));
 }
 
+const FISHY_PIPE_TURNS = 10; // fishy pipe grants 10 turns of Fishy, 1/day (docs/sea-reference.md, wiki-verified)
+
+/** Fights that can be covered by Fishy — turns already up plus an unused fishy pipe's 10. */
+export function fishyFightsAvailable(): number {
+  return (
+    haveEffect($effect`Fishy`) +
+    (have($item`fishy pipe`) && !get("_fishyPipeUsed") ? FISHY_PIPE_TURNS : 0)
+  );
+}
+
 // ---------- rough combat-cost model ----------
 
 /**
@@ -102,8 +113,8 @@ function expectedHpLossPerRound(maxAtk: number): number {
  * under pressure penalties (ESTIMATE). Entangling Noodles buys ~3 stunned rounds in
  * sober multi-cast fights (docs/sea-reference.md §6).
  */
-function roundsExposed(casts: number, wineglass: boolean): number {
-  const stagger = have($item`Jurassic Parka`) ? 1 : 0.5;
+function roundsExposed(casts: number, wineglass: boolean, parkaDisplaced: boolean): number {
+  const stagger = !parkaDisplaced && have($item`Jurassic Parka`) ? 1 : 0.5;
   const stun = !wineglass && casts > 1 && have($skill`Entangling Noodles`) ? 3 : 0;
   return Math.max(0, casts - stagger - stun);
 }
@@ -162,7 +173,7 @@ function speculativeResFloor(spec: PearlSpec, forceEquip: Item[], familiar?: Fam
         }
       }
 
-      const switches = resFamiliarSwitches(spec);
+      const switches = floor < RES_STEPS[0] ? resFamiliarSwitches(spec) : [];
       if (switches.length > 0) {
         const familiarBreathing = playerAirByEffect() ? ", underwater familiar" : ", sea";
         for (const n of RES_STEPS) {
@@ -208,6 +219,7 @@ export type ZoneEconomics = {
   ratePct: number;
   fights: number;
   turns: number;
+  fishyUsed: number;
   pearlMeat: number;
   turnCost: number;
   mpCost: number;
@@ -217,22 +229,36 @@ export type ZoneEconomics = {
   go: boolean;
 };
 
-function evaluateZone(spec: PearlSpec, mode: LiverMode): ZoneEconomics {
+function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): ZoneEconomics {
   const wineglass = mode === "wineglass";
   const forced = args.major.overcapped ? allOrganEquipment(mode) : requiredOrganEquipment(mode);
   const equips = [...forced];
-  if (wineglass) equips.push($item`Drunkula's wineglass`);
+  if (wineglass) {
+    equips.push($item`Drunkula's wineglass`);
+    // Mirror the real outfit: the drunkweapon takes the weapon slot unless the totem
+    // forces it for organ capacity — otherwise this would speculate the weapon slot as
+    // free res space the real dress never gives it.
+    if (!forced.includes($item`angelbone totem`) && have(args.major.drunkweapon)) {
+      equips.push(args.major.drunkweapon);
+    }
+  }
   const familiar = mode === "stooper" ? $familiar`Stooper` : undefined;
 
   const res = speculativeResFloor(spec, equips, familiar);
   const ratePct = progressRatePct(res);
   const fights = Math.ceil((100 - get(spec.progress, 0)) / ratePct);
-  const turns = fights * (have($effect`Fishy`) ? 1 : 2);
+  // A fishy fight costs 1 turn, a non-fishy fight costs 2 — spend the (threaded) budget
+  // on this zone's fights before falling back to the full 2-turn cost.
+  const fishyUsed = Math.min(fights, fishyFights);
+  const turns = fights * 2 - fishyUsed;
 
   const plan = damagePlan(spec.maxHp);
   // Wineglass fights are one-shot-or-abort (pearls.ts prepare guard), so 1 cast.
   const casts = wineglass ? 1 : plan.casts;
-  const exposed = roundsExposed(casts, wineglass);
+  // The devilbone corset (stomach extender) occupies the shirt slot, displacing the
+  // Jurassic Parka's round-1 stagger.
+  const parkaDisplaced = forced.includes($item`devilbone corset`);
+  const exposed = roundsExposed(casts, wineglass, parkaDisplaced);
 
   const pearlMeat = pearlValue();
   const turnCost = turns * args.major.voa;
@@ -248,6 +274,7 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode): ZoneEconomics {
     ratePct,
     fights,
     turns,
+    fishyUsed,
     pearlMeat,
     turnCost,
     mpCost,
@@ -284,6 +311,18 @@ function candidateLiverModes(): LiverMode[] {
   return candidates.length > 0 ? candidates : ["wineglass"];
 }
 
+/** Sum of per-zone profit under `mode`, threading the Fishy-fight budget across zones. */
+function scoreLiverMode(selected: PearlSpec[], mode: LiverMode): number {
+  let budget = fishyFightsAvailable();
+  let total = 0;
+  for (const spec of selected) {
+    const v = evaluateZone(spec, mode, budget);
+    total += v.profit;
+    budget = Math.max(0, budget - Math.min(v.fights, budget));
+  }
+  return total;
+}
+
 /**
  * Pick the most profitable viable liver mode across the selected zones and lock it in
  * (setLiverMode). Organ state doesn't change mid-run — pearlo neither eats nor drinks —
@@ -294,7 +333,7 @@ export function chooseLiverConfiguration(selected: PearlSpec[]): LiverMode {
   const best =
     candidates.length === 1
       ? candidates[0]
-      : maxBy(candidates, (mode) => sum(selected, (spec) => evaluateZone(spec, mode).profit));
+      : maxBy(candidates, (mode) => scoreLiverMode(selected, mode));
   setLiverMode(best);
   return best;
 }
@@ -303,13 +342,35 @@ export function chooseLiverConfiguration(selected: PearlSpec[]): LiverMode {
 
 const verdictCache = new Map<PearlKey, ZoneEconomics>();
 
-/** Cached per-zone verdict under the chosen liver mode — cheap enough for ready(). */
+/**
+ * Cached per-zone verdict under the chosen liver mode — cheap enough for ready(). A cold
+ * cache (or one recomputed after the liver mode changed) falls back to the full Fishy
+ * budget for a single zone; call primeZoneVerdicts() first to get budget-threaded
+ * verdicts across the whole selected set.
+ */
 export function zoneVerdict(spec: PearlSpec): ZoneEconomics {
   const cached = verdictCache.get(spec.key);
-  if (cached !== undefined) return cached;
-  const verdict = evaluateZone(spec, liverMode());
+  if (cached !== undefined && cached.mode === liverMode()) return cached;
+  const verdict = evaluateZone(spec, liverMode(), fishyFightsAvailable());
   verdictCache.set(spec.key, verdict);
   return verdict;
+}
+
+/**
+ * Recompute every selected zone's verdict under the chosen liver mode, threading the
+ * Fishy-fight budget across zones in the order they'll be farmed, and populate the
+ * cache. Call this before any zoneVerdict() lookups so those reads reflect the shared
+ * budget instead of each independently assuming the full budget is theirs alone.
+ */
+export function primeZoneVerdicts(selected: PearlSpec[]): void {
+  verdictCache.clear();
+  const mode = liverMode();
+  let budget = fishyFightsAvailable();
+  for (const spec of selected) {
+    const verdict = evaluateZone(spec, mode, budget);
+    verdictCache.set(spec.key, verdict);
+    budget = Math.max(0, budget - verdict.fishyUsed);
+  }
 }
 
 export function printProfitReport(selected: PearlSpec[]): void {
@@ -321,7 +382,7 @@ export function printProfitReport(selected: PearlSpec[]): void {
     print(` --- ${spec.key} (${spec.loc}) ---`, "blue");
     print(
       `  res ${v.res} → ${v.ratePct}%/fight → ${v.fights} fights, ${v.turns} turns` +
-        `${have($effect`Fishy`) ? " (Fishy)" : " (NO Fishy: 2 turns each)"}`,
+        ` (Fishy covers ${v.fishyUsed} of ${v.fights} fights)`,
     );
     print(
       `  costs: turns ${fmt(v.turnCost)} + MP ${fmt(v.mpCost)} + HP ${fmt(v.hpCost)} + cures ${fmt(v.cureCost)}`,

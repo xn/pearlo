@@ -10,7 +10,12 @@ import {
   weaponAttackPlan,
   wineglassAccessible,
 } from "./combat";
-import { chooseLiverConfiguration, printProfitReport, zoneVerdict } from "./economics";
+import {
+  chooseLiverConfiguration,
+  primeZoneVerdicts,
+  printProfitReport,
+  zoneVerdict,
+} from "./economics";
 import { PearloEngine } from "./engine";
 import { playerAirByEffect } from "./familiar";
 import {
@@ -37,8 +42,9 @@ export function main(command?: string): void {
   }
   const selected = selectedPearls();
   // Liver mode is chosen once — organ state doesn't change mid-run (pearlo neither
-  // eats nor drinks). The drunk flag short-circuits the chooser for what-if sims.
-  if (args.drunk) setLiverMode("wineglass");
+  // eats nor drinks). The drunk flag is a what-if override for sim/profit reporting
+  // only — it must never leak into a real (turn-spending) run.
+  if (args.drunk && (args.sim || args.profit)) setLiverMode("wineglass");
   else chooseLiverConfiguration(selected);
 
   if (args.profit) {
@@ -48,6 +54,7 @@ export function main(command?: string): void {
         "red",
       );
     }
+    primeZoneVerdicts(selected);
     printProfitReport(selected);
     return;
   }
@@ -63,6 +70,14 @@ export function main(command?: string): void {
       const forced = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
       print(
         ` forced organ equipment${args.major.overcapped ? " (overcapped flag: full set)" : ""}: ${forced.length > 0 ? forced.join(", ") : "none"}`,
+      );
+    }
+    primeZoneVerdicts(selected);
+    for (const spec of selected) {
+      const v = zoneVerdict(spec);
+      print(
+        `  ${spec.key}: expected profit ${Math.round(v.profit)} meat — ${v.go ? "GO" : "SKIP"}`,
+        v.go ? "blue" : "red",
       );
     }
     if (!canFixOvercap()) {
@@ -125,6 +140,7 @@ export function main(command?: string): void {
         "cleaners, or wait for rollover.",
     );
   }
+  primeZoneVerdicts(selected);
   for (const spec of selected) {
     const verdict = zoneVerdict(spec);
     if (!verdict.go && !args.major.force) {
@@ -133,6 +149,13 @@ export function main(command?: string): void {
         "red",
       );
     }
+  }
+  if (!args.major.force && selected.every((s) => !zoneVerdict(s).go)) {
+    print(
+      "pearlo: every selected zone fails the profit gate — nothing to farm (use force to override).",
+      "red",
+    );
+    return;
   }
 
   const startTurns = myTurncount();
@@ -150,6 +173,8 @@ export function main(command?: string): void {
         print(` ${p.key}: pearl already obtained today (resets at rollover)`);
       } else if (!canAdventure(p.loc)) {
         print(` ${p.key}: canAdventure(${p.loc}) is false`);
+      } else if (!zoneVerdict(p).go && !args.major.force) {
+        print(` ${p.key}: skipped by the profit gate (expected loss)`);
       } else {
         print(` ${p.key}: not ready (sober/turn-budget guard)`);
       }
