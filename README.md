@@ -45,6 +45,11 @@ Useful options:
 - `overcapped` — force-equip **all** owned organ extenders (angelbone/devilbone gear)
   while running turns, keeping the extended stomach/liver/spleen caps available for
   mid-day consumption
+- `luckyfishy=false` — disable the Lucky!-based Fishy refresh (on by default; uses the
+  Aug. 2nd scepter cast, owned 11-leaf clovers, the free pill keeper use, and up to 3
+  hermit clovers per day)
+- `cloverprice=N` — also buy mall 11-leaf clovers for the refresh, at most N meat each
+  (default 0 = never; purchases are skipped when the remaining farming can't repay them)
 - `halt=N` — stop when N or fewer adventures remain
 
 ## Overcapped organs
@@ -73,6 +78,16 @@ maximizer only patches breathing into slots it leaves free — while the safety 
 still apply and win their slots. Override familiars get breathing gear automatically;
 the Stooper pin takes precedence over a familiar override when it's serving as your
 liver rescue. The profit model prices overridden zones as they will actually run.
+
+## Fishy refreshes
+
+Underwater turns cost 2 adventures without Fishy and 1 with it. Beyond the free fishy
+pipe, pearlo refreshes Fishy whenever it runs out: it grabs the Lucky! intrinsic
+(Aug. 2nd scepter → owned 11-leaf clovers → free pill keeper "Surprise Me" → hermit
+clovers → mall clovers under `cloverprice`) and spends one adventure in The Brinier
+Deepers, where the lucky noncombat The Haggling grants 20 more turns of Fishy. The
+profit model prices these trips (clover cost + trip turn) into its GO/SKIP verdicts,
+and `sim` reports which Lucky! sources are available today.
 
 The script requires Sea access, a way to breathe underwater, and (for a sober run) a
 spell-based kill — it is tuned for Saucegeyser. Overdrunk farming requires Drunkula's

@@ -61,6 +61,10 @@ module level. Run `yarn lint` after changes; there are no unit tests (nothing in
 - `src/combat.ts` — conservative Saucegeyser damage floor (wiki formula + lantern
   component counting), `damagePlan()` (casts/fight, MP budget), `buildPearlMacro`
   (Entangling Noodles when not one-shotting, Saucegeyser repeat — non-melee everywhere)
+- `src/fishy.ts` — Lucky!-based Fishy refresh: acquisition cascade (Aug. 2nd scepter →
+  owned clovers → free pill keeper → hermit → mall under `cloverprice`), refresh-cost
+  estimates for economics, sim report lines; The Haggling (Brinier Deepers lucky NC)
+  grants 20 Fishy turns
 - `src/outfit.ts` — `buildPearlOutfit`: `"<element> res 18 max, sea, …"` modifier, CMoI +
   off-hand lantern equips, parka mode per zone, retro cape as lantern (Kill Me) or stun
   (Hold Me) via `capeMode()`, Left-Hand Man second lantern when Waterproofly covers breathing

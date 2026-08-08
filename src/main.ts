@@ -29,6 +29,7 @@ import {
 } from "./economics";
 import { PearloEngine } from "./engine";
 import { playerAirByEffect } from "./familiar";
+import { luckySourceReport } from "./fishy";
 import {
   allOrganEquipment,
   canFixOvercap,
@@ -86,6 +87,7 @@ export function main(command?: string): void {
     print(`pearlo sim${simDrunk ? " (overdrunk mode)" : ""}:`, "blue");
     print(` pearls selected: ${selected.map((p) => p.key).join(", ")}`);
     print(` can breathe underwater: ${canBreathUnderwater()}`);
+    for (const line of luckySourceReport()) print(line);
     print(` adventures available: ${myAdventures()}`);
     for (const line of organStatusReport()) print(line);
     {
