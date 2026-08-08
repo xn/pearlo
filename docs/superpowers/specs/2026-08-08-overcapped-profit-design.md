@@ -116,8 +116,9 @@ session.
   two-pass benchmarking machinery in `src/familiar.ts` already models this).
 - `turnsPerPearl(rate, fishy)` = `ceil(100 / rate) × (fishy ? 1 : 2)`.
 - Costs per pearl (rough, user-approved):
-  - MP: `casts/fight × MP/cast` from `damagePlan()` × Doc Galaktik tonic meat-per-MP,
-    net of maximized MP regen. Zero in wineglass configurations (no spells).
+  - MP: `casts/fight × MP/cast` from `damagePlan()` × Doc Galaktik tonic meat-per-MP.
+    Maximized MP-regen offsets are deliberately ignored — a small conservative
+    overestimate. Zero in wineglass configurations (no spells).
   - HP: expected damage taken per fight (monster attack vs our defense, §7 formulas,
     rounds from the combat plan) × meat-per-HP restored.
   - Debuffs: cure price (garbo value of anti-anti-antidote / soft green echo eyedrop
