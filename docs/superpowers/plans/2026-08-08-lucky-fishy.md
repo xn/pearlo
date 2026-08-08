@@ -33,10 +33,12 @@
 ### Task 1: `resources` args + `src/fishy.ts` acquisition module
 
 **Files:**
+
 - Modify: `src/args.ts` (the empty `resources: Args.group("Resource Usage", {})` at line ~96)
 - Create: `src/fishy.ts`
 
 **Interfaces:**
+
 - Consumes: `args` from `./args`, `PearlSpec` from `./zones`.
 - Produces (used by Tasks 2–4):
   - `HAGGLING_FISHY_TURNS: number` (= 20)
@@ -132,8 +134,7 @@ const LUCKY_SOURCES: LuckySource[] = [
   },
   {
     name: "pill keeper (free Surprise Me)",
-    available: () =>
-      have($item`Eight Days a Week Pill Keeper`) && !get("_freePillKeeperUsed"),
+    available: () => have($item`Eight Days a Week Pill Keeper`) && !get("_freePillKeeperUsed"),
     acquire: () => cliExecute("pillkeeper free lucky"),
   },
   {
@@ -257,10 +258,12 @@ git commit -m "feat: Lucky! acquisition cascade + luckyfishy/cloverprice args"
 ### Task 2: "Get Fishy" task + narrowed Lucky warning
 
 **Files:**
+
 - Modify: `src/pearls.ts` (imports, new task factory, `pearlTasks`)
 - Modify: `src/mood.ts` (the Lucky! warning block at lines ~104–112)
 
 **Interfaces:**
+
 - Consumes: `acquireLucky`, `luckySourceAvailable`, `remainingPearlFights` from `./fishy` (Task 1); `pickUtilityFamiliar`, `playerAirByEffect` from `./familiar`; `canBreathUnderwater` from `./zones`.
 - Produces: `pearlTasks(selected)` now returns `[breatheUnderwaterTask, getFishyTask(selected), ...zones]` — no signature change, callers unaffected.
 
@@ -269,8 +272,8 @@ git commit -m "feat: Lucky! acquisition cascade + luckyfishy/cloverprice args"
 Add imports: `haveEffect`, `abort` is already imported; from `kolmafia` add `haveEffect`; from `libram` add `$effect` is already there — add `$familiar`, `$location`, `Macro`; add `OutfitSpec` to the grimoire import; new project imports:
 
 ```ts
-import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fishy";
 import { pickUtilityFamiliar, playerAirByEffect } from "./familiar";
+import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fishy";
 ```
 
 Add the task factory after `breatheUnderwaterTask`:
@@ -340,20 +343,17 @@ export function pearlTasks(selected: PearlSpec[]): Task[] {
 Add `import { args } from "./args";` and `haveEffect` to the kolmafia import. Replace the warning block:
 
 ```ts
-  // Lucky! converts the next adventure in Lucky-capable zones (Dive Bar: Razor,
-  // Scooter; Reef: Dragon the Line) into a noncombat — a turn with no pearl progress
-  // (cost us a turn in the 2026-08-07 session). With the luckyfishy refresh enabled
-  // and Fishy low, the Get Fishy task consumes it productively before we get here;
-  // otherwise it is still a live hazard worth flagging.
-  if (
-    have($effect`Lucky!`) &&
-    (haveEffect($effect`Fishy`) > 1 || !args.resources.luckyfishy)
-  ) {
-    print(
-      `pearlo: Lucky! is active — the next ${spec.loc} adventure may be its Lucky noncombat instead of a pearl fight. Consider spending Lucky elsewhere first.`,
-      "red",
-    );
-  }
+// Lucky! converts the next adventure in Lucky-capable zones (Dive Bar: Razor,
+// Scooter; Reef: Dragon the Line) into a noncombat — a turn with no pearl progress
+// (cost us a turn in the 2026-08-07 session). With the luckyfishy refresh enabled
+// and Fishy low, the Get Fishy task consumes it productively before we get here;
+// otherwise it is still a live hazard worth flagging.
+if (have($effect`Lucky!`) && (haveEffect($effect`Fishy`) > 1 || !args.resources.luckyfishy)) {
+  print(
+    `pearlo: Lucky! is active — the next ${spec.loc} adventure may be its Lucky noncombat instead of a pearl fight. Consider spending Lucky elsewhere first.`,
+    "red",
+  );
+}
 ```
 
 - [ ] **Step 3: Verify**
@@ -373,9 +373,11 @@ git commit -m "feat: Get Fishy task — Lucky!-driven Fishy refresh via The Hagg
 ### Task 3: economics — FishyBudget with priced refreshes
 
 **Files:**
+
 - Modify: `src/economics.ts` (fishyFightsAvailable → fishyBudget; evaluateZone; scoreLiverMode; zoneVerdict; primeZoneVerdicts; ZoneEconomics; printProfitReport)
 
 **Interfaces:**
+
 - Consumes: `luckyRefreshCosts`, `HAGGLING_FISHY_TURNS` from `./fishy` (Task 1).
 - Produces: `fishyBudget(): FishyBudget` replaces the exported `fishyFightsAvailable()` (only economics-internal callers exist — verified by grep; no other module imports it). `ZoneEconomics` gains `refreshesUsed: number` and `refreshCost: number`.
 
@@ -415,41 +417,41 @@ Add the import: `import { HAGGLING_FISHY_TURNS, luckyRefreshCosts } from "./fish
 Change the signature to `function evaluateZone(spec: PearlSpec, mode: LiverMode, budget: FishyBudget): ZoneEconomics` and replace the two lines
 
 ```ts
-  const fishyUsed = Math.min(fights, fishyFights);
-  const turns = fights * 2 - fishyUsed;
+const fishyUsed = Math.min(fights, fishyFights);
+const turns = fights * 2 - fishyUsed;
 ```
 
 with:
 
 ```ts
-  // Spend the threaded budget on this zone's fights, topping it up with Lucky!
-  // refreshes while each pays for itself. ESTIMATE: a refresh is modeled as +19
-  // fishy fights and +1 trip turn — the Get Fishy task triggers at ≤1 Fishy turn
-  // remaining, so the trip rides the old block's last turn (The Haggling grants
-  // HAGGLING_FISHY_TURNS = 20; one goes to the next trip at steady state).
-  let pool = budget.fights;
-  let refreshesUsed = 0;
-  let refreshCost = 0;
-  let fishyUsed = Math.min(fights, pool);
-  while (fishyUsed < fights && budget.refreshCosts.length > 0) {
-    const meat = budget.refreshCosts[0];
-    const coverable = Math.min(HAGGLING_FISHY_TURNS - 1, fights - fishyUsed);
-    // Each covered fight saves one turn; the trip costs one — net (coverable-1) turns.
-    if ((coverable - 1) * args.major.voa < meat) break;
-    budget.refreshCosts.shift();
-    refreshesUsed += 1;
-    refreshCost += meat;
-    pool += HAGGLING_FISHY_TURNS - 1;
-    fishyUsed = Math.min(fights, pool);
-  }
-  budget.fights = pool - fishyUsed; // leftover Fishy turns carry to the next zone
-  const turns = fights * 2 - fishyUsed + refreshesUsed;
+// Spend the threaded budget on this zone's fights, topping it up with Lucky!
+// refreshes while each pays for itself. ESTIMATE: a refresh is modeled as +19
+// fishy fights and +1 trip turn — the Get Fishy task triggers at ≤1 Fishy turn
+// remaining, so the trip rides the old block's last turn (The Haggling grants
+// HAGGLING_FISHY_TURNS = 20; one goes to the next trip at steady state).
+let pool = budget.fights;
+let refreshesUsed = 0;
+let refreshCost = 0;
+let fishyUsed = Math.min(fights, pool);
+while (fishyUsed < fights && budget.refreshCosts.length > 0) {
+  const meat = budget.refreshCosts[0];
+  const coverable = Math.min(HAGGLING_FISHY_TURNS - 1, fights - fishyUsed);
+  // Each covered fight saves one turn; the trip costs one — net (coverable-1) turns.
+  if ((coverable - 1) * args.major.voa < meat) break;
+  budget.refreshCosts.shift();
+  refreshesUsed += 1;
+  refreshCost += meat;
+  pool += HAGGLING_FISHY_TURNS - 1;
+  fishyUsed = Math.min(fights, pool);
+}
+budget.fights = pool - fishyUsed; // leftover Fishy turns carry to the next zone
+const turns = fights * 2 - fishyUsed + refreshesUsed;
 ```
 
 Add `refreshesUsed` and `refreshCost` to the `ZoneEconomics` type and the returned object, and subtract the meat in the profit line:
 
 ```ts
-  const profit = pearlMeat - turnCost - mpCost - hpCost - cureCost - refreshCost;
+const profit = pearlMeat - turnCost - mpCost - hpCost - cureCost - refreshCost;
 ```
 
 - [ ] **Step 3: Update the three callers**
@@ -487,14 +489,14 @@ export function primeZoneVerdicts(selected: PearlSpec[]): void {
 Replace the fights/turns print with:
 
 ```ts
-    print(
-      `  res ${v.res} → ${v.ratePct}%/fight → ${v.fights} fights, ${v.turns} turns` +
-        ` (Fishy covers ${v.fishyUsed} of ${v.fights} fights` +
-        (v.refreshesUsed > 0
-          ? `, incl. ${v.refreshesUsed} Lucky! refresh trip(s) costing ${fmt(v.refreshCost)} meat`
-          : "") +
-        `)`,
-    );
+print(
+  `  res ${v.res} → ${v.ratePct}%/fight → ${v.fights} fights, ${v.turns} turns` +
+    ` (Fishy covers ${v.fishyUsed} of ${v.fights} fights` +
+    (v.refreshesUsed > 0
+      ? `, incl. ${v.refreshesUsed} Lucky! refresh trip(s) costing ${fmt(v.refreshCost)} meat`
+      : "") +
+    `)`,
+);
 ```
 
 - [ ] **Step 5: Verify**
@@ -514,11 +516,13 @@ git commit -m "feat: profit model prices Lucky!-refresh Fishy budget across zone
 ### Task 4: sim report + docs
 
 **Files:**
+
 - Modify: `src/main.ts` (sim block, line ~88 after "can breathe underwater")
 - Modify: `README.md` (Useful options list + new section after "Per-zone overrides")
 - Modify: `CLAUDE.md` (Source layout list)
 
 **Interfaces:**
+
 - Consumes: `luckySourceReport` from `./fishy` (Task 1).
 
 - [ ] **Step 1: Add the sim lines in `src/main.ts`**
@@ -526,7 +530,7 @@ git commit -m "feat: profit model prices Lucky!-refresh Fishy budget across zone
 Import `luckySourceReport` from `./fishy`. In the `args.sim` block, directly after the `print(` can breathe underwater: ...`)` line, add:
 
 ```ts
-    for (const line of luckySourceReport()) print(line);
+for (const line of luckySourceReport()) print(line);
 ```
 
 - [ ] **Step 2: README**

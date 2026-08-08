@@ -20,7 +20,7 @@ can cost real meat (mall 11-leaf clovers), so spending must be configurable.
   2 adventures if encountered without Fishy, 1 with — so refreshing at ≤1 Fishy turn
   remaining is optimal. Plain noncombat, no choice adventure to answer.
 - **Lucky!** is an intrinsic: no turn countdown, persists over rollover, expires only when
-  a lucky adventure is encountered. While active, the *next* adventure in any
+  a lucky adventure is encountered. While active, the _next_ adventure in any
   lucky-capable zone becomes its lucky NC — the Dive Bar and Madness Reef have their own
   lucky NCs, so a stray Lucky! wastes a pearl turn there (existing `pearlMood` warning).
 - **Lucky! sources** (wiki page "Lucky!"): 11-leaf clover, pill keeper "Surprise Me",
