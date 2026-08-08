@@ -31,7 +31,7 @@ economics) and the outfit/familiar machinery in `src/outfit.ts` / `src/familiar.
 **Non-goals**
 
 - No per-zone modifier-string or item-list outfit forms (user chose saved outfits).
-- No validation that a saved outfit is *sensible* (wrong element, no res) — that is
+- No validation that a saved outfit is _sensible_ (wrong element, no res) — that is
   the point of an override; `requirecap` and the profit report surface consequences.
 - No per-zone liver-mode overrides; the liver mode stays a whole-run decision.
 
@@ -54,10 +54,10 @@ silently.)
 New `Args.group("Zone Overrides", …)` with ten entries — all optional (no default →
 `undefined` when unset), all mafia-pref-backed (`pearlo_spookyfamiliar`, …):
 
-| Arg | Type | Meaning |
-| --- | --- | --- |
-| `spookyfamiliar` … `coldfamiliar` (×5) | `Args.familiar` | Force this familiar in that zone. |
-| `spookyoutfit` … `coldoutfit` (×5) | `Args.string` | Saved KoL custom outfit to wear in that zone. |
+| Arg                                    | Type            | Meaning                                       |
+| -------------------------------------- | --------------- | --------------------------------------------- |
+| `spookyfamiliar` … `coldfamiliar` (×5) | `Args.familiar` | Force this familiar in that zone.             |
+| `spookyoutfit` … `coldoutfit` (×5)     | `Args.string`   | Saved KoL custom outfit to wear in that zone. |
 
 Helpers in `src/args.ts` (typed against `PearlKey`):
 
