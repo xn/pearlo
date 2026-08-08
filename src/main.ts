@@ -1,5 +1,5 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { canAdventure, maximize, myAdventures, myMeat, myTurncount, print } from "kolmafia";
+import { abort, canAdventure, maximize, myAdventures, myMeat, myTurncount, print } from "kolmafia";
 import { $item, get, have, sinceKolmafiaRevision } from "libram";
 
 import { args, selectedPearls } from "./args";
@@ -10,9 +10,17 @@ import {
   weaponAttackPlan,
   wineglassAccessible,
 } from "./combat";
+import { chooseLiverConfiguration, printProfitReport, zoneVerdict } from "./economics";
 import { PearloEngine } from "./engine";
 import { playerAirByEffect } from "./familiar";
-import { isOverDrunk } from "./lib";
+import {
+  allOrganEquipment,
+  canFixOvercap,
+  organStatusReport,
+  requiredOrganEquipment,
+  setLiverMode,
+  wineglassMode,
+} from "./organs";
 import { pearlTasks } from "./pearls";
 import { PEARL_RES_CAP, canBreathUnderwater } from "./zones";
 
@@ -28,12 +36,41 @@ export function main(command?: string): void {
     return;
   }
   const selected = selectedPearls();
+  // Liver mode is chosen once — organ state doesn't change mid-run (pearlo neither
+  // eats nor drinks). The drunk flag short-circuits the chooser for what-if sims.
+  if (args.drunk) setLiverMode("wineglass");
+  else chooseLiverConfiguration(selected);
+
+  if (args.profit) {
+    if (!canFixOvercap()) {
+      print(
+        "pearlo: stomach/spleen overcapped beyond owned extenders — the run would halt.",
+        "red",
+      );
+    }
+    printProfitReport(selected);
+    return;
+  }
+
   if (args.sim) {
-    const simDrunk = args.drunk || isOverDrunk();
+    const simDrunk = wineglassMode();
     print(`pearlo sim${simDrunk ? " (overdrunk mode)" : ""}:`, "blue");
     print(` pearls selected: ${selected.map((p) => p.key).join(", ")}`);
     print(` can breathe underwater: ${canBreathUnderwater()}`);
     print(` adventures available: ${myAdventures()}`);
+    for (const line of organStatusReport()) print(line);
+    {
+      const forced = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
+      print(
+        ` forced organ equipment${args.major.overcapped ? " (overcapped flag: full set)" : ""}: ${forced.length > 0 ? forced.join(", ") : "none"}`,
+      );
+    }
+    if (!canFixOvercap()) {
+      print(
+        " stomach/spleen overcapped beyond owned extenders — the run would halt (mojo filter / organ cleaners / rollover).",
+        "red",
+      );
+    }
     if (simDrunk && !have($item`Drunkula's wineglass`)) {
       print(" no Drunkula's wineglass — overdrunk farming would not run at all", "red");
     } else if (simDrunk && !wineglassAccessible()) {
@@ -79,6 +116,23 @@ export function main(command?: string): void {
       }
     }
     return;
+  }
+
+  if (!canFixOvercap()) {
+    abort(
+      "pearlo: stomach or spleen is overcapped beyond what owned extenders can fix — " +
+        "adventuring is impossible (Food Coma / jaundiced). Use a mojo filter or organ " +
+        "cleaners, or wait for rollover.",
+    );
+  }
+  for (const spec of selected) {
+    const verdict = zoneVerdict(spec);
+    if (!verdict.go && !args.major.force) {
+      print(
+        `pearlo: skipping ${spec.key} (${spec.loc}) — expected profit ${Math.round(verdict.profit)} meat. Run with force to farm it anyway.`,
+        "red",
+      );
+    }
   }
 
   const startTurns = myTurncount();

@@ -15,8 +15,10 @@ import { $effect, $item, AsdonMartin, get, have, set } from "libram";
 
 import { args } from "./args";
 import { buildPearlMacro, damagePlan, weaponAttackPlan, wineglassAccessible } from "./combat";
-import { abortIfBeatenUp, asdonFualable, fuelUp, isOverDrunk } from "./lib";
+import { zoneVerdict } from "./economics";
+import { abortIfBeatenUp, asdonFualable, fuelUp } from "./lib";
 import { pearlMood } from "./mood";
+import { wineglassMode } from "./organs";
 import { buildPearlOutfit } from "./outfit";
 import {
   PEARL_RES_CAP,
@@ -121,16 +123,19 @@ function pearlTask(spec: PearlSpec): Task {
     after: ["Breathe Underwater", ...spec.after],
     completed: () => get(spec.obtained),
     ready: () =>
-      // Overdrunk farming is allowed only with Drunkula's wineglass reachable in
-      // inventory — closeted copies satisfy have() but not the maximizer or dress.
-      (!isOverDrunk() || wineglassAccessible()) &&
+      // Wineglass farming needs the glass reachable in inventory — closeted copies
+      // satisfy have() but not the maximizer or dress.
+      (!wineglassMode() || wineglassAccessible()) &&
+      // Profit gate: zoneVerdict is cached after its first computation, so this stays
+      // cheap for the engine's per-iteration ready() polling.
+      (args.major.force || zoneVerdict(spec).go) &&
       canAdventure(spec.loc) &&
       myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
       plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
-      if (isOverDrunk()) {
+      if (wineglassMode()) {
         // Wineglass combat is attack-only: no stuns, no items. Policy (user): halt
         // entirely unless the equipped weapon one-shots the zone's toughest monster
         // with a guaranteed hit. Residual ~1/22 fumble risk is accepted.
