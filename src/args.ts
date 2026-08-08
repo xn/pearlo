@@ -1,6 +1,6 @@
 import { Args, ParseError } from "grimoire-kolmafia";
 import { abort, Item } from "kolmafia";
-import { $item } from "libram";
+import { $item, get } from "libram";
 
 import { PEARLS, PearlKey, PearlSpec } from "./zones";
 
@@ -28,6 +28,10 @@ export const args = Args.create(
       help: "With sim: report the overdrunk (wineglass, attack-only) plan as if you were falling-down drunk.",
       setting: "",
     }),
+    profit: Args.flag({
+      help: "Print the expected profit report (per-zone liver configuration, costs, verdict) and exit without spending turns.",
+      setting: "",
+    }),
     version: Args.flag({ help: "Show script version and exit.", setting: "" }),
     pearls: Args.string({
       help: "Comma-separated ordered subset of pearls to farm: spooky,sleaze,hot,stench,cold. No duplicates.",
@@ -41,6 +45,19 @@ export const args = Args.create(
       drunkweapon: Args.item({
         help: "Weapon to wield while farming overdrunk (wineglass attack-only mode).",
         default: $item`June cleaver`,
+      }),
+      overcapped: Args.flag({
+        setting: "",
+        help: "Force equip organ expanding equipment such as angelbone totem while running turns.",
+        default: false,
+      }),
+      voa: Args.number({
+        help: "Meat value of an adventure, used for all profit decisions.",
+        default: get("valueOfAdventure"),
+      }),
+      force: Args.flag({
+        help: "Farm zones even when the profit model expects them to lose meat.",
+        default: false,
       }),
     }),
     minor: Args.group("Minor Options", {}),
