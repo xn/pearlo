@@ -80,11 +80,15 @@ export type LanternSelection = {
  * Greedy selection of just enough owned lantern gear to cover `needed` components.
  * The player has one off-hand slot; a second off-hand lantern is only proposed (for
  * the Left-Hand Man) when the player-slot gear still leaves components uncovered.
+ *
+ * `accessorySlots`: organ extenders may pre-claim accessory slots; lantern gear must
+ * not overflow the three accessory slots or Outfit.dress() throws.
  */
-export function selectLanternGear(needed: number): LanternSelection {
+export function selectLanternGear(needed: number, accessorySlots = 3): LanternSelection {
   const equip: Item[] = [];
   let secondOffhand: Item | undefined;
   let offhandsUsed = 0;
+  let accessoriesUsed = 0;
   let remaining = needed;
   for (const gear of LANTERN_GEAR) {
     if (remaining <= 0) break;
@@ -99,7 +103,9 @@ export function selectLanternGear(needed: number): LanternSelection {
         remaining -= gear.components;
       }
     } else {
+      if (accessoriesUsed >= accessorySlots) continue;
       equip.push(gear.item);
+      accessoriesUsed++;
       remaining -= gear.components;
     }
   }

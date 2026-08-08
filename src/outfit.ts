@@ -76,7 +76,11 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   let secondLantern: Item | undefined;
   if (!overdrunk) {
     const needed = lanternComponentsNeededForOneShot(spec.maxHp);
-    const lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity);
+    const accessoryBudget = 3 - organEquip.filter((i) => toSlot(i) === $slot`acc1`).length;
+    const lanterns = selectLanternGear(
+      Number.isFinite(needed) ? needed : Infinity,
+      accessoryBudget,
+    );
     equip.push(...lanterns.equip);
     secondLantern = lanterns.secondOffhand;
   } else {
