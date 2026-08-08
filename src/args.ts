@@ -1,5 +1,5 @@
 import { Args, ParseError } from "grimoire-kolmafia";
-import { abort, Item } from "kolmafia";
+import { abort, Familiar, Item } from "kolmafia";
 import { $item, get } from "libram";
 
 import { PEARLS, PearlKey, PearlSpec } from "./zones";
@@ -58,6 +58,38 @@ export const args = Args.create(
       force: Args.flag({
         help: "Farm zones even when the profit model expects them to lose meat.",
         default: false,
+      }),
+    }),
+    overrides: Args.group("Zone Overrides", {
+      spookyfamiliar: Args.familiar({
+        help: "Force this familiar in the Anemone Mine (spooky pearl zone).",
+      }),
+      sleazefamiliar: Args.familiar({
+        help: "Force this familiar in The Dive Bar (sleaze pearl zone).",
+      }),
+      hotfamiliar: Args.familiar({
+        help: "Force this familiar in The Marinara Trench (hot pearl zone).",
+      }),
+      stenchfamiliar: Args.familiar({
+        help: "Force this familiar in the Madness Reef (stench pearl zone).",
+      }),
+      coldfamiliar: Args.familiar({
+        help: "Force this familiar in The Briniest Deepests (cold pearl zone).",
+      }),
+      spookyoutfit: Args.string({
+        help: "Saved KoL custom outfit to wear in the Anemone Mine (spooky pearl zone).",
+      }),
+      sleazeoutfit: Args.string({
+        help: "Saved KoL custom outfit to wear in The Dive Bar (sleaze pearl zone).",
+      }),
+      hotoutfit: Args.string({
+        help: "Saved KoL custom outfit to wear in The Marinara Trench (hot pearl zone).",
+      }),
+      stenchoutfit: Args.string({
+        help: "Saved KoL custom outfit to wear in the Madness Reef (stench pearl zone).",
+      }),
+      coldoutfit: Args.string({
+        help: "Saved KoL custom outfit to wear in The Briniest Deepests (cold pearl zone).",
       }),
     }),
     minor: Args.group("Minor Options", {}),
@@ -149,4 +181,39 @@ export function selectedPearls(): PearlSpec[] {
   }
   if (result.length === 0) abort(`pearls=${args.pearls}: no pearls selected`);
   return result;
+}
+
+/** The user's forced familiar for this zone, if any (Zone Overrides group). */
+export function familiarOverride(key: PearlKey): Familiar | undefined {
+  switch (key) {
+    case "spooky":
+      return args.overrides.spookyfamiliar;
+    case "sleaze":
+      return args.overrides.sleazefamiliar;
+    case "hot":
+      return args.overrides.hotfamiliar;
+    case "stench":
+      return args.overrides.stenchfamiliar;
+    case "cold":
+      return args.overrides.coldfamiliar;
+  }
+}
+
+/** The user's saved-outfit name for this zone, if any. Empty prefs count as unset. */
+export function outfitOverride(key: PearlKey): string | undefined {
+  const value = (() => {
+    switch (key) {
+      case "spooky":
+        return args.overrides.spookyoutfit;
+      case "sleaze":
+        return args.overrides.sleazeoutfit;
+      case "hot":
+        return args.overrides.hotoutfit;
+      case "stench":
+        return args.overrides.stenchoutfit;
+      case "cold":
+        return args.overrides.coldoutfit;
+    }
+  })();
+  return value !== undefined && value.length > 0 ? value : undefined;
 }
