@@ -1,8 +1,18 @@
 import { Args, getTasks } from "grimoire-kolmafia";
-import { abort, canAdventure, maximize, myAdventures, myMeat, myTurncount, print } from "kolmafia";
+import {
+  abort,
+  canAdventure,
+  getOutfits,
+  haveOutfit,
+  maximize,
+  myAdventures,
+  myMeat,
+  myTurncount,
+  print,
+} from "kolmafia";
 import { $item, get, have, sinceKolmafiaRevision } from "libram";
 
-import { args, selectedPearls } from "./args";
+import { args, outfitOverride, selectedPearls } from "./args";
 import {
   damagePlan,
   ownedLanternProspect,
@@ -12,6 +22,7 @@ import {
 } from "./combat";
 import {
   chooseLiverConfiguration,
+  overrideReportLines,
   primeZoneVerdicts,
   printProfitReport,
   zoneVerdict,
@@ -41,6 +52,17 @@ export function main(command?: string): void {
     return;
   }
   const selected = selectedPearls();
+  // Zone Overrides validation: a saved-outfit name that doesn't exist would otherwise
+  // surface as a confusing empty-pieces dress much later.
+  for (const spec of selected) {
+    const outfitName = outfitOverride(spec.key);
+    if (outfitName !== undefined && !haveOutfit(outfitName)) {
+      abort(
+        `pearlo: ${spec.key} outfit override "${outfitName}" is not a saved custom outfit ` +
+          `(saved outfits: ${getOutfits().join(", ") || "none"})`,
+      );
+    }
+  }
   // Liver mode is chosen once — organ state doesn't change mid-run (pearlo neither
   // eats nor drinks). The drunk flag is a what-if override for sim/profit reporting
   // only — it must never leak into a real (turn-spending) run.
@@ -79,6 +101,7 @@ export function main(command?: string): void {
         `  ${spec.key}: expected profit ${Math.round(v.profit)} meat — ${v.go ? "GO" : "SKIP"}`,
         v.go ? "blue" : "red",
       );
+      for (const line of overrideReportLines(spec)) print(line);
     }
     if (!canFixOvercap()) {
       print(
