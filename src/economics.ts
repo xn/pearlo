@@ -9,12 +9,13 @@ import {
   myBuffedstat,
   myFamiliar,
   npcPrice,
+  outfitPieces,
   print,
   useFamiliar,
 } from "kolmafia";
 import { $effect, $familiar, $item, $skill, $stat, get, have, maxBy, sum } from "libram";
 
-import { args } from "./args";
+import { args, familiarOverride, outfitOverride } from "./args";
 import { damagePlan, wineglassAccessible } from "./combat";
 import { familiarBreathesFree, playerAirByEffect, resFamiliarSwitches } from "./familiar";
 import {
@@ -242,7 +243,12 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): Zo
       equips.push(args.major.drunkweapon);
     }
   }
-  const familiar = mode === "stooper" ? $familiar`Stooper` : undefined;
+  // Price overrides as they will run: outfit pieces are forced into the speculation
+  // and an override familiar is pinned exactly like Stooper (skipping the maximizer's
+  // familiar switches). Stooper still displaces the override in stooper mode.
+  const outfitName = outfitOverride(spec.key);
+  if (outfitName !== undefined) equips.push(...outfitPieces(outfitName));
+  const familiar = mode === "stooper" ? $familiar`Stooper` : familiarOverride(spec.key);
 
   const res = speculativeResFloor(spec, equips, familiar);
   const ratePct = progressRatePct(res);
@@ -380,6 +386,7 @@ export function printProfitReport(selected: PearlSpec[]): void {
   for (const spec of selected) {
     const v = zoneVerdict(spec);
     print(` --- ${spec.key} (${spec.loc}) ---`, "blue");
+    for (const line of overrideReportLines(spec)) print(line);
     print(
       `  res ${v.res} → ${v.ratePct}%/fight → ${v.fights} fights, ${v.turns} turns` +
         ` (Fishy covers ${v.fishyUsed} of ${v.fights} fights)`,
@@ -392,4 +399,19 @@ export function printProfitReport(selected: PearlSpec[]): void {
       v.go ? "blue" : "red",
     );
   }
+}
+
+/** One line per active override for this zone (sim + profit report). */
+export function overrideReportLines(spec: PearlSpec): string[] {
+  const lines: string[] = [];
+  const familiar = familiarOverride(spec.key);
+  if (familiar !== undefined) {
+    const displaced = liverMode() === "stooper" && familiar !== $familiar`Stooper`;
+    lines.push(`  override: familiar ${familiar}${displaced ? " (displaced by Stooper)" : ""}`);
+  }
+  const outfitName = outfitOverride(spec.key);
+  if (outfitName !== undefined) {
+    lines.push(`  override: outfit ${outfitName} (${outfitPieces(outfitName).length} pieces)`);
+  }
+  return lines;
 }
