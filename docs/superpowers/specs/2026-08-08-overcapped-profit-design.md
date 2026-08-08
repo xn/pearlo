@@ -37,14 +37,14 @@ prices each zone, and gates unprofitable farming. Companion references:
 
 2026 Standard rewards, one per organ per alignment, all `+1` capacity **while equipped**:
 
-| Item                 | Slot                    | Organ   | Other enchantments                          |
-| -------------------- | ----------------------- | ------- | ------------------------------------------- |
-| angelbone chopsticks | accessory               | Stomach | 7–11 HP regen/adv, 15% avoid enemy attack   |
-| devilbone corset     | **shirt**               | Stomach | **+13 ML**, hot damage on attacks           |
-| angelbone dice       | accessory               | Liver   | 7–11 HP regen/adv, 15% avoid enemy attack   |
-| devilbone rosary     | accessory               | Liver   | **+13 ML**, hot damage on attacks           |
-| angelbone totem      | **weapon (1-h totem)**  | Spleen  | 7–11 HP regen/adv, 15% avoid enemy attack   |
-| devilbone greaves    | **pants**               | Spleen  | **+13 ML**, hot damage on attacks           |
+| Item                 | Slot                   | Organ   | Other enchantments                        |
+| -------------------- | ---------------------- | ------- | ----------------------------------------- |
+| angelbone chopsticks | accessory              | Stomach | 7–11 HP regen/adv, 15% avoid enemy attack |
+| devilbone corset     | **shirt**              | Stomach | **+13 ML**, hot damage on attacks         |
+| angelbone dice       | accessory              | Liver   | 7–11 HP regen/adv, 15% avoid enemy attack |
+| devilbone rosary     | accessory              | Liver   | **+13 ML**, hot damage on attacks         |
+| angelbone totem      | **weapon (1-h totem)** | Spleen  | 7–11 HP regen/adv, 15% avoid enemy attack |
+| devilbone greaves    | **pants**              | Spleen  | **+13 ML**, hot damage on attacks         |
 
 Overcap states (consumption-reference §2): stomach over limit = **Food Coma, cannot
 adventure**; spleen over limit = **jaundiced, cannot adventure** (reachable only by
@@ -60,16 +60,16 @@ Colors... (−5 all res, cuts progress rate) → **soft green echo eyedrop antid
 
 ## Architecture
 
-| File                    | Responsibility                                                                                                                                                                 |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `src/organs.ts` (new)   | Extender table + organ-state queries: baselines, overages, minimal required sets, `effectivelyOverDrunk()`, `canFixOvercap()`. All computed at call time — nothing module-level. |
-| `src/economics.ts` (new)| garbo-lib `makeValue()` wrapper, pearl/cure valuation, per-zone per-configuration profit math, liver-configuration chooser, go/no-go verdicts, profit-report printer.            |
-| `src/args.ts`           | New args: `overcapped`, `voa`, `force` (Major); `profit` (Information, exits like `sim`).                                                                                        |
-| `src/outfit.ts`         | Push forced extenders into `equip`; parka mode skipped when the corset is forced; totem/drunkweapon clash resolution; consume the chosen liver configuration instead of raw `isOverDrunk()`. |
-| `src/mood.ts`           | Spell-suppression branch keyed on the chosen configuration (wineglass mode), not raw `isOverDrunk()`.                                                                           |
-| `src/pearls.ts`         | Zone guards use `effectivelyOverDrunk()`/configuration; go/no-go gate per zone (skipped zones log the verdict; `force` overrides).                                              |
-| `src/main.ts`           | `profit` action handling; `sim` gains organ-state + configuration lines; halt path for unfixable overcap.                                                                       |
-| `src/lib.ts`            | `isOverDrunk()` etc. stay as raw state predicates; mode decisions move to `organs.ts` (call sites updated).                                                                     |
+| File                     | Responsibility                                                                                                                                                                               |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `src/organs.ts` (new)    | Extender table + organ-state queries: baselines, overages, minimal required sets, `effectivelyOverDrunk()`, `canFixOvercap()`. All computed at call time — nothing module-level.             |
+| `src/economics.ts` (new) | garbo-lib `makeValue()` wrapper, pearl/cure valuation, per-zone per-configuration profit math, liver-configuration chooser, go/no-go verdicts, profit-report printer.                        |
+| `src/args.ts`            | New args: `overcapped`, `voa`, `force` (Major); `profit` (Information, exits like `sim`).                                                                                                    |
+| `src/outfit.ts`          | Push forced extenders into `equip`; parka mode skipped when the corset is forced; totem/drunkweapon clash resolution; consume the chosen liver configuration instead of raw `isOverDrunk()`. |
+| `src/mood.ts`            | Spell-suppression branch keyed on the chosen configuration (wineglass mode), not raw `isOverDrunk()`.                                                                                        |
+| `src/pearls.ts`          | Zone guards use `effectivelyOverDrunk()`/configuration; go/no-go gate per zone (skipped zones log the verdict; `force` overrides).                                                           |
+| `src/main.ts`            | `profit` action handling; `sim` gains organ-state + configuration lines; halt path for unfixable overcap.                                                                                    |
+| `src/lib.ts`             | `isOverDrunk()` etc. stay as raw state predicates; mode decisions move to `organs.ts` (call sites updated).                                                                                  |
 
 ## `src/organs.ts`
 
@@ -80,7 +80,7 @@ Colors... (−5 all res, cuts progress rate) → **soft green echo eyedrop antid
   totem there is last-resort).
 - `baselineLimit(organ)`: `fullnessLimit()` / `inebrietyLimit()` / `spleenLimit()`
   minus the +1 of each currently-equipped extender for that organ; for liver, also
-  minus Stooper's +1 when Stooper is the *current* familiar (its contribution is not
+  minus Stooper's +1 when Stooper is the _current_ familiar (its contribution is not
   guaranteed once the outfit's familiar plan runs). Never hard-code capacities.
 - `overage(organ)` = `usage − baselineLimit(organ)`, floored at 0.
 - `requiredOrganEquipment(wineglassMode: boolean): Item[]` — minimal owned set:
@@ -93,7 +93,7 @@ Colors... (−5 all res, cuts progress rate) → **soft green echo eyedrop antid
 - `allOrganEquipment(wineglassMode: boolean): Item[]` — every owned extender, minus
   liver extenders in wineglass mode, for the `overcapped` flag.
 - `effectivelyOverDrunk()`: `myInebriety() > baselineLimit(liver) + (owned liver
-  extenders) + (Stooper in terrarium ? 1 : 0)` — drunk beyond any conceivable rescue,
+extenders) + (Stooper in terrarium ? 1 : 0)` — drunk beyond any conceivable rescue,
   so wineglass mode is certain without running the chooser. When it is false but
   `overage(liver) > 0`, the **chosen configuration** (economics chooser) is the single
   source of truth for wineglass-vs-rescue — a rescue that is non-viable in practice
@@ -133,8 +133,8 @@ session.
      familiar slot (priced by the speculative res drop);
   3. **wineglass**: always viable when the wineglass is owned (attack-only, drunkweapon
      one-shot, per existing overdrunk mode).
-  Pick max `zoneProfit`. Not-overdrunk characters skip the chooser entirely — familiar
-  planning stays res-driven as today.
+     Pick max `zoneProfit`. Not-overdrunk characters skip the chooser entirely — familiar
+     planning stays res-driven as today.
 - **Go/no-go**: if the best configuration's profit `< 0`, the zone is skipped with a
   logged verdict; `force` farms it anyway. The unfixable-overcap halt is not a profit
   verdict and is not forceable.
@@ -144,12 +144,12 @@ session.
 
 ## Args (`src/args.ts`)
 
-| Arg          | Group       | Type   | Default                      | Meaning                                                                                       |
-| ------------ | ----------- | ------ | ---------------------------- | --------------------------------------------------------------------------------------------- |
-| `overcapped` | Major       | flag   | false (`setting: ""`)        | Force-equip **all** owned organ extenders while running turns (consumption headroom).          |
-| `voa`        | Major       | number | `get("valueOfAdventure")`    | Meat value of an adventure for all profit math.                                               |
-| `force`      | Major       | flag   | false                        | Farm zones the profit model rejects (negative expected profit).                               |
-| `profit`     | Information | flag   | `setting: ""`                | Print the profit report and exit without spending turns (like `sim`).                         |
+| Arg          | Group       | Type   | Default                   | Meaning                                                                               |
+| ------------ | ----------- | ------ | ------------------------- | ------------------------------------------------------------------------------------- |
+| `overcapped` | Major       | flag   | false (`setting: ""`)     | Force-equip **all** owned organ extenders while running turns (consumption headroom). |
+| `voa`        | Major       | number | `get("valueOfAdventure")` | Meat value of an adventure for all profit math.                                       |
+| `force`      | Major       | flag   | false                     | Farm zones the profit model rejects (negative expected profit).                       |
+| `profit`     | Information | flag   | `setting: ""`             | Print the profit report and exit without spending turns (like `sim`).                 |
 
 `overcapped` OFF still auto-equips `requiredOrganEquipment()` — required gear is
 state-driven, never opt-in (without it there is no adventuring at all).

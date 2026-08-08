@@ -47,9 +47,11 @@
 ### Task 1: `src/organs.ts` — organ state + extender selection
 
 **Files:**
+
 - Create: `src/organs.ts`
 
 **Interfaces:**
+
 - Consumes: `kolmafia` (`fullnessLimit`, `inebrietyLimit`, `spleenLimit`, `myFullness`, `myInebriety`, `mySpleenUse`, `myFamiliar`, `haveEquipped`, `Item`), `libram` (`$familiar`, `$item`, `have`).
 - Produces (used by every later task):
   - `type Organ = "stomach" | "liver" | "spleen"`
@@ -271,9 +273,11 @@ git commit -m "feat: organs module — extender selection, liver mode, overcap s
 ### Task 2: args — `overcapped`, `voa`, `force`, `profit`
 
 **Files:**
+
 - Modify: `src/args.ts`
 
 **Interfaces:**
+
 - Consumes: existing `Args.create` structure (`src/args.ts:22-107`).
 - Produces: `args.major.overcapped: boolean`, `args.major.voa: number`, `args.major.force: boolean`, `args.profit: boolean`. Later tasks reference exactly these paths.
 
@@ -329,9 +333,11 @@ git commit -m "feat: overcapped, voa, force, and profit args"
 ### Task 3: `zones.ts` — `maxAtk` per zone
 
 **Files:**
+
 - Modify: `src/zones.ts` (PearlSpec type ~line 49, the five PEARLS entries)
 
 **Interfaces:**
+
 - Produces: `PearlSpec.maxAtk: number` — consumed by the economics HP-cost model in Task 4.
 
 - [ ] **Step 1: Add the field**
@@ -339,18 +345,18 @@ git commit -m "feat: overcapped, voa, force, and profit args"
 In the `PearlSpec` type, directly after `maxDef: number;` add:
 
 ```ts
-  /** Highest monster Attack in the zone (docs/sea-reference.md §3 stat tables). */
-  maxAtk: number;
+/** Highest monster Attack in the zone (docs/sea-reference.md §3 stat tables). */
+maxAtk: number;
 ```
 
 Add to each PEARLS entry, next to its existing `maxDef`/`maxHp` (values from the §3 tables — the zone keys identify the entries):
 
-| key (zone) | add |
-| --- | --- |
-| `spooky` (Anemone Mine) | `maxAtk: 500,` (killer clownfish) |
-| `sleaze` (The Dive Bar) | `maxAtk: 600,` (Mer-kin tippler) |
-| `hot` (The Marinara Trench) | `maxAtk: 550,` (fisherfish) |
-| `stench` (Madness Reef) | `maxAtk: 500,` (magic dragonfish) |
+| key (zone)                     | add                                 |
+| ------------------------------ | ----------------------------------- |
+| `spooky` (Anemone Mine)        | `maxAtk: 500,` (killer clownfish)   |
+| `sleaze` (The Dive Bar)        | `maxAtk: 600,` (Mer-kin tippler)    |
+| `hot` (The Marinara Trench)    | `maxAtk: 550,` (fisherfish)         |
+| `stench` (Madness Reef)        | `maxAtk: 500,` (magic dragonfish)   |
 | `cold` (The Briniest Deepests) | `maxAtk: 425,` (decent white shark) |
 
 - [ ] **Step 2: Lint + build**
@@ -370,10 +376,12 @@ git commit -m "feat: per-zone max monster attack data for the profit model"
 ### Task 4: `src/economics.ts` — valuation, cost model, chooser, report
 
 **Files:**
+
 - Create: `src/economics.ts`
 - Modify: `src/familiar.ts` (export one existing private function)
 
 **Interfaces:**
+
 - Consumes: Task 1's organs API, Task 2's `args.major.voa`/`args.major.overcapped`, Task 3's `spec.maxAtk`; `damagePlan`, `wineglassAccessible` from `src/combat.ts`; `playerAirByEffect`, `familiarBreathesFree` from `src/familiar.ts`; `familiarWaterBreathingEquipment` from `src/zones.ts`; `makeValue` from `garbo-lib`.
 - Produces (consumed by Task 6):
   - `type ZoneEconomics = { key: PearlKey; mode: LiverMode; res: number; ratePct: number; fights: number; turns: number; pearlMeat: number; turnCost: number; mpCost: number; hpCost: number; cureCost: number; profit: number; go: boolean }`
@@ -696,11 +704,13 @@ git commit -m "feat: economics module — garbo-lib valuation, zone profit, live
 ### Task 5: mode plumbing — `combat.ts`, `mood.ts`, `outfit.ts`
 
 **Files:**
+
 - Modify: `src/combat.ts:14,156` (macro branch)
 - Modify: `src/mood.ts:19,76` (buff selection)
 - Modify: `src/outfit.ts` (extender equips, weapon-slot resolution, Stooper pin, breathing)
 
 **Interfaces:**
+
 - Consumes: `wineglassMode`, `liverMode`, `requiredOrganEquipment`, `allOrganEquipment` from Task 1; `args.major.overcapped` from Task 2.
 - Produces: no new exports — behavioral change only. After this task the raw `isOverDrunk()` remains only in `src/lib.ts` (state predicate) and nowhere else.
 
@@ -756,65 +766,65 @@ import { $familiar, $item, $items, $slot, have } from "libram";
 In `buildPearlOutfit`, replace the body from `const overdrunk = isOverDrunk();` (line 61) through the wineglass else-branch (line 80) with:
 
 ```ts
-  const overdrunk = wineglassMode();
+const overdrunk = wineglassMode();
 
-  // Organ extenders first — they win their slots. Required extenders are the law
-  // (no adventuring without them); the overcapped flag forces the full set for
-  // consumption headroom. A forced corset simply occupies the shirt: the parka never
-  // equips and its mode is a harmless no-op; the maximizer chases res elsewhere.
-  const organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
-  const equip: Item[] = [...organEquip];
+// Organ extenders first — they win their slots. Required extenders are the law
+// (no adventuring without them); the overcapped flag forces the full set for
+// consumption headroom. A forced corset simply occupies the shirt: the parka never
+// equips and its mode is a harmless no-op; the maximizer chases res elsewhere.
+const organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
+const equip: Item[] = [...organEquip];
 
-  // Equip only as much lantern gear (any slot) as the one-shot actually needs —
-  // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
-  // computable (user design). Zero need = zero damage gear forced. Overdrunk:
-  // lanterns duplicate SPELL components and the wineglass kills spells — skip all.
-  let secondLantern: Item | undefined;
-  if (!overdrunk) {
-    const needed = lanternComponentsNeededForOneShot(spec.maxHp);
-    const lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity);
-    equip.push(...lanterns.equip);
-    secondLantern = lanterns.secondOffhand;
-  } else {
-    // The wineglass IS the off-hand while overdrunk. A required angelbone totem
-    // displaces the configured drunkweapon (best-effort attack combat, user decision);
-    // otherwise the drunkweapon (default June cleaver) is forced when owned.
-    equip.push($item`Drunkula's wineglass`);
-    const totemForced = organEquip.includes($item`angelbone totem`);
-    if (!totemForced && have(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
-  }
+// Equip only as much lantern gear (any slot) as the one-shot actually needs —
+// a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
+// computable (user design). Zero need = zero damage gear forced. Overdrunk:
+// lanterns duplicate SPELL components and the wineglass kills spells — skip all.
+let secondLantern: Item | undefined;
+if (!overdrunk) {
+  const needed = lanternComponentsNeededForOneShot(spec.maxHp);
+  const lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity);
+  equip.push(...lanterns.equip);
+  secondLantern = lanterns.secondOffhand;
+} else {
+  // The wineglass IS the off-hand while overdrunk. A required angelbone totem
+  // displaces the configured drunkweapon (best-effort attack combat, user decision);
+  // otherwise the drunkweapon (default June cleaver) is forced when owned.
+  equip.push($item`Drunkula's wineglass`);
+  const totemForced = organEquip.includes($item`angelbone totem`);
+  if (!totemForced && have(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
+}
 ```
 
 The `weaponForced` line (currently line 101) must count the totem as a forced weapon too — replace it with:
 
 ```ts
-  const weaponForced =
-    overdrunk && (organEquip.includes($item`angelbone totem`) || have(args.major.drunkweapon));
+const weaponForced =
+  overdrunk && (organEquip.includes($item`angelbone totem`) || have(args.major.drunkweapon));
 ```
 
 Replace the familiar-plan line (line 96, `const familiarPlan = pickPearlFamiliar(spec, secondLantern);`) with:
 
 ```ts
-  // Stooper rescue pins the familiar — its +1 liver only counts while active. It
-  // breathes via famequip gear unless a familiar-air effect already covers it.
-  const familiarPlan: FamiliarPlan =
-    liverMode() === "stooper"
-      ? {
-          familiar: $familiar`Stooper`,
-          famequip: familiarBreathesFree()
-            ? undefined
-            : familiarWaterBreathingEquipment.find((i) => have(i)),
-        }
-      : pickPearlFamiliar(spec, secondLantern);
+// Stooper rescue pins the familiar — its +1 liver only counts while active. It
+// breathes via famequip gear unless a familiar-air effect already covers it.
+const familiarPlan: FamiliarPlan =
+  liverMode() === "stooper"
+    ? {
+        familiar: $familiar`Stooper`,
+        famequip: familiarBreathesFree()
+          ? undefined
+          : familiarWaterBreathingEquipment.find((i) => have(i)),
+      }
+    : pickPearlFamiliar(spec, secondLantern);
 ```
 
 In `breathingKeywords` (line 40), a forced breathing famequip must count as covering the familiar — replace the `familiarCovered` computation with:
 
 ```ts
-  const familiarCovered =
-    familiarBreathesFree() ||
-    (plan.familiar !== undefined && plan.familiar.underwater) ||
-    (plan.famequip !== undefined && familiarWaterBreathingEquipment.includes(plan.famequip));
+const familiarCovered =
+  familiarBreathesFree() ||
+  (plan.familiar !== undefined && plan.familiar.underwater) ||
+  (plan.famequip !== undefined && familiarWaterBreathingEquipment.includes(plan.famequip));
 ```
 
 - [ ] **Step 4: Lint + build**
@@ -834,10 +844,12 @@ git commit -m "feat: organ extenders and liver mode drive combat, mood, and outf
 ### Task 6: `pearls.ts` guards + `main.ts` startup, profit action, sim lines
 
 **Files:**
+
 - Modify: `src/pearls.ts:18,126,133` (ready/prepare guards)
 - Modify: `src/main.ts` (startup sequencing, profit action, sim additions, unfixable halt)
 
 **Interfaces:**
+
 - Consumes: `chooseLiverConfiguration`, `zoneVerdict`, `printProfitReport` (Task 4); `canFixOvercap`, `effectivelyOverDrunk`, `organStatusReport`, `setLiverMode`, `wineglassMode` (Task 1); `args.major.force`, `args.profit` (Task 2).
 - Produces: final behavior. No new exports.
 
@@ -846,9 +858,9 @@ git commit -m "feat: organ extenders and liver mode drive combat, mood, and outf
 Import line 18 becomes:
 
 ```ts
+import { zoneVerdict } from "./economics";
 import { abortIfBeatenUp, asdonFualable, fuelUp } from "./lib";
 import { wineglassMode } from "./organs";
-import { zoneVerdict } from "./economics";
 ```
 
 The `ready` guard (lines 123-128) becomes:
@@ -892,66 +904,63 @@ Add `abort` to the kolmafia import (line 2).
 After `const selected = selectedPearls();` (line 30), insert the mode decision — `drunk` remains the "pretend wineglass" sim flag:
 
 ```ts
-  // Liver mode is chosen once — organ state doesn't change mid-run (pearlo neither
-  // eats nor drinks). The drunk flag short-circuits the chooser for what-if sims.
-  if (args.drunk) setLiverMode("wineglass");
-  else chooseLiverConfiguration(selected);
+// Liver mode is chosen once — organ state doesn't change mid-run (pearlo neither
+// eats nor drinks). The drunk flag short-circuits the chooser for what-if sims.
+if (args.drunk) setLiverMode("wineglass");
+else chooseLiverConfiguration(selected);
 
-  if (args.profit) {
-    if (!canFixOvercap()) {
-      print(
-        "pearlo: stomach/spleen overcapped beyond owned extenders — the run would halt.",
-        "red",
-      );
-    }
-    printProfitReport(selected);
-    return;
+if (args.profit) {
+  if (!canFixOvercap()) {
+    print("pearlo: stomach/spleen overcapped beyond owned extenders — the run would halt.", "red");
   }
+  printProfitReport(selected);
+  return;
+}
 ```
 
 In the sim block, replace `const simDrunk = args.drunk || isOverDrunk();` (line 32) with:
 
 ```ts
-    const simDrunk = wineglassMode();
+const simDrunk = wineglassMode();
 ```
 
 and after the `adventures available` line (line 36) add:
 
 ```ts
-    for (const line of organStatusReport()) print(line);
-    {
-      const forced = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
-      print(
-        ` forced organ equipment${args.major.overcapped ? " (overcapped flag: full set)" : ""}: ${forced.length > 0 ? forced.join(", ") : "none"}`,
-      );
-    }
-    if (!canFixOvercap()) {
-      print(
-        " stomach/spleen overcapped beyond owned extenders — the run would halt (mojo filter / organ cleaners / rollover).",
-        "red",
-      );
-    }
+for (const line of organStatusReport()) print(line);
+{
+  const forced = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
+  print(
+    ` forced organ equipment${args.major.overcapped ? " (overcapped flag: full set)" : ""}: ${forced.length > 0 ? forced.join(", ") : "none"}`,
+  );
+}
+if (!canFixOvercap()) {
+  print(
+    " stomach/spleen overcapped beyond owned extenders — the run would halt (mojo filter / organ cleaners / rollover).",
+    "red",
+  );
+}
 ```
 
 Before the engine construction (line 84-86, `const startTurns = ...`), insert the run-path gates:
 
 ```ts
-  if (!canFixOvercap()) {
-    abort(
-      "pearlo: stomach or spleen is overcapped beyond what owned extenders can fix — " +
-        "adventuring is impossible (Food Coma / jaundiced). Use a mojo filter or organ " +
-        "cleaners, or wait for rollover.",
+if (!canFixOvercap()) {
+  abort(
+    "pearlo: stomach or spleen is overcapped beyond what owned extenders can fix — " +
+      "adventuring is impossible (Food Coma / jaundiced). Use a mojo filter or organ " +
+      "cleaners, or wait for rollover.",
+  );
+}
+for (const spec of selected) {
+  const verdict = zoneVerdict(spec);
+  if (!verdict.go && !args.major.force) {
+    print(
+      `pearlo: skipping ${spec.key} (${spec.loc}) — expected profit ${Math.round(verdict.profit)} meat. Run with force to farm it anyway.`,
+      "red",
     );
   }
-  for (const spec of selected) {
-    const verdict = zoneVerdict(spec);
-    if (!verdict.go && !args.major.force) {
-      print(
-        `pearlo: skipping ${spec.key} (${spec.loc}) — expected profit ${Math.round(verdict.profit)} meat. Run with force to farm it anyway.`,
-        "red",
-      );
-    }
-  }
+}
 ```
 
 - [ ] **Step 3: Lint + build + call-site sweep**
