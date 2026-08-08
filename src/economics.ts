@@ -21,6 +21,7 @@ import { $effect, $familiar, $item, $skill, $stat, get, have, maxBy, sum } from 
 import { args, familiarOverride, outfitOverride } from "./args";
 import { damagePlan, wineglassAccessible } from "./combat";
 import { familiarBreathesFree, playerAirByEffect, resFamiliarSwitches } from "./familiar";
+import { HAGGLING_FISHY_TURNS, luckyRefreshCosts } from "./fishy";
 import {
   LiverMode,
   allOrganEquipment,
@@ -87,12 +88,27 @@ export function progressRatePct(res: number): number {
 
 const FISHY_PIPE_TURNS = 10; // fishy pipe grants 10 turns of Fishy, 1/day (docs/sea-reference.md, wiki-verified)
 
-/** Fights that can be covered by Fishy — turns already up plus an unused fishy pipe's 10. */
-export function fishyFightsAvailable(): number {
+/** Fights coverable by Fishy sources already on hand — active turns + unused pipe. */
+function baseFishyFights(): number {
   return (
     haveEffect($effect`Fishy`) +
     (have($item`fishy pipe`) && !get("_fishyPipeUsed") ? FISHY_PIPE_TURNS : 0)
   );
+}
+
+// Most refreshes the model plans with: all five zones cost ≤ ~50 capped fights,
+// and each refresh nets 19 (see evaluateZone) — 6 leaves slack for uncapped-rate days.
+const MAX_MODEL_REFRESHES = 6;
+
+/**
+ * The threaded Fishy budget: fights already covered, plus the Lucky!-refresh cascade
+ * as a queue of estimated meat costs (cascade order — free sources first). evaluateZone
+ * consumes it mutably as zones claim fights.
+ */
+export type FishyBudget = { fights: number; refreshCosts: number[] };
+
+export function fishyBudget(): FishyBudget {
+  return { fights: baseFishyFights(), refreshCosts: luckyRefreshCosts(MAX_MODEL_REFRESHES) };
 }
 
 // ---------- rough combat-cost model ----------
@@ -238,6 +254,8 @@ export type ZoneEconomics = {
   fights: number;
   turns: number;
   fishyUsed: number;
+  refreshesUsed: number;
+  refreshCost: number;
   pearlMeat: number;
   turnCost: number;
   mpCost: number;
@@ -247,7 +265,7 @@ export type ZoneEconomics = {
   go: boolean;
 };
 
-function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): ZoneEconomics {
+function evaluateZone(spec: PearlSpec, mode: LiverMode, budget: FishyBudget): ZoneEconomics {
   const wineglass = mode === "wineglass";
   const forced = args.major.overcapped ? allOrganEquipment(mode) : requiredOrganEquipment(mode);
   const equips = [...forced];
@@ -279,9 +297,28 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): Zo
   const ratePct = progressRatePct(res);
   const fights = Math.ceil((100 - get(spec.progress, 0)) / ratePct);
   // A fishy fight costs 1 turn, a non-fishy fight costs 2 — spend the (threaded) budget
-  // on this zone's fights before falling back to the full 2-turn cost.
-  const fishyUsed = Math.min(fights, fishyFights);
-  const turns = fights * 2 - fishyUsed;
+  // on this zone's fights, topping it up with Lucky! refreshes while each pays for
+  // itself. ESTIMATE: a refresh is modeled as +19 fishy fights and +1 trip turn — the
+  // Get Fishy task triggers at ≤1 Fishy turn remaining, so the trip rides the old
+  // block's last turn (The Haggling grants HAGGLING_FISHY_TURNS = 20; one goes to the
+  // next trip at steady state).
+  let pool = budget.fights;
+  let refreshesUsed = 0;
+  let refreshCost = 0;
+  let fishyUsed = Math.min(fights, pool);
+  while (fishyUsed < fights && budget.refreshCosts.length > 0) {
+    const meat = budget.refreshCosts[0];
+    const coverable = Math.min(HAGGLING_FISHY_TURNS - 1, fights - fishyUsed);
+    // Each covered fight saves one turn; the trip costs one — net (coverable-1) turns.
+    if ((coverable - 1) * args.major.voa < meat) break;
+    budget.refreshCosts.shift();
+    refreshesUsed += 1;
+    refreshCost += meat;
+    pool += HAGGLING_FISHY_TURNS - 1;
+    fishyUsed = Math.min(fights, pool);
+  }
+  budget.fights = pool - fishyUsed; // leftover Fishy turns carry to the next zone
+  const turns = fights * 2 - fishyUsed + refreshesUsed;
 
   const plan = damagePlan(spec.maxHp);
   // Wineglass fights are one-shot-or-abort (pearls.ts prepare guard), so 1 cast.
@@ -300,7 +337,7 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): Zo
   const mpCost = wineglass ? 0 : plan.mpPerFight * fights * meatPerMp();
   const hpCost = expectedHpLossPerRound(spec.maxAtk) * exposed * fights * meatPerHp();
   const cureCost = cureCostPerFight(spec, exposed) * fights;
-  const profit = pearlMeat - turnCost - mpCost - hpCost - cureCost;
+  const profit = pearlMeat - turnCost - mpCost - hpCost - cureCost - refreshCost;
 
   return {
     key: spec.key,
@@ -310,6 +347,8 @@ function evaluateZone(spec: PearlSpec, mode: LiverMode, fishyFights: number): Zo
     fights,
     turns,
     fishyUsed,
+    refreshesUsed,
+    refreshCost,
     pearlMeat,
     turnCost,
     mpCost,
@@ -348,12 +387,10 @@ function candidateLiverModes(): LiverMode[] {
 
 /** Sum of per-zone profit under `mode`, threading the Fishy-fight budget across zones. */
 function scoreLiverMode(selected: PearlSpec[], mode: LiverMode): number {
-  let budget = fishyFightsAvailable();
+  const budget = fishyBudget();
   let total = 0;
   for (const spec of selected) {
-    const v = evaluateZone(spec, mode, budget);
-    total += v.profit;
-    budget = Math.max(0, budget - Math.min(v.fights, budget));
+    total += evaluateZone(spec, mode, budget).profit;
   }
   return total;
 }
@@ -386,7 +423,7 @@ const verdictCache = new Map<PearlKey, ZoneEconomics>();
 export function zoneVerdict(spec: PearlSpec): ZoneEconomics {
   const cached = verdictCache.get(spec.key);
   if (cached !== undefined && cached.mode === liverMode()) return cached;
-  const verdict = evaluateZone(spec, liverMode(), fishyFightsAvailable());
+  const verdict = evaluateZone(spec, liverMode(), fishyBudget());
   verdictCache.set(spec.key, verdict);
   return verdict;
 }
@@ -400,11 +437,9 @@ export function zoneVerdict(spec: PearlSpec): ZoneEconomics {
 export function primeZoneVerdicts(selected: PearlSpec[]): void {
   verdictCache.clear();
   const mode = liverMode();
-  let budget = fishyFightsAvailable();
+  const budget = fishyBudget();
   for (const spec of selected) {
-    const verdict = evaluateZone(spec, mode, budget);
-    verdictCache.set(spec.key, verdict);
-    budget = Math.max(0, budget - verdict.fishyUsed);
+    verdictCache.set(spec.key, evaluateZone(spec, mode, budget));
   }
 }
 
@@ -418,7 +453,11 @@ export function printProfitReport(selected: PearlSpec[]): void {
     for (const line of overrideReportLines(spec)) print(line);
     print(
       `  res ${v.res} → ${v.ratePct}%/fight → ${v.fights} fights, ${v.turns} turns` +
-        ` (Fishy covers ${v.fishyUsed} of ${v.fights} fights)`,
+        ` (Fishy covers ${v.fishyUsed} of ${v.fights} fights${
+          v.refreshesUsed > 0
+            ? `, incl. ${v.refreshesUsed} Lucky! refresh trip(s) costing ${fmt(v.refreshCost)} meat`
+            : ""
+        })`,
     );
     print(
       `  costs: turns ${fmt(v.turnCost)} + MP ${fmt(v.mpCost)} + HP ${fmt(v.hpCost)} + cures ${fmt(v.cureCost)}`,
