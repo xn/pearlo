@@ -11,7 +11,7 @@ import {
 } from "kolmafia";
 import { $item, $skill, $slot, $stat, Macro, get, have } from "libram";
 
-import { isOverDrunk } from "./lib";
+import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
 
 export const ZONE_MAX_HP = 800; // ganger, giant squid — highest HP in any pearl zone
@@ -153,7 +153,7 @@ export function damagePlan(targetHp = ZONE_MAX_HP, prospectiveLanterns?: number)
  */
 export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan): Macro {
   void spec; // per-monster branches (stench-zone pufferfish/dragonfish stuns) arrive with those zones
-  if (isOverDrunk()) {
+  if (wineglassMode()) {
     // Wineglass combat: every skill/item becomes a plain attack anyway — say so.
     return new Macro().attack().repeat();
   }

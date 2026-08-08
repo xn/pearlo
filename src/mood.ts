@@ -16,7 +16,8 @@ import {
 } from "kolmafia";
 import { $effect, $effects, $elements, $familiar, $item, get, have } from "libram";
 
-import { isOverDrunk, tryAcquiringEffect } from "./lib";
+import { tryAcquiringEffect } from "./lib";
+import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
 
 // Every list below is wiki-verified (effect pages fetched 2026-08-07); the original
@@ -73,7 +74,7 @@ function applicableBuffs(spec: PearlSpec): Effect[] {
     ...(myFamiliar() !== $familiar.none ? FAMILIAR_WEIGHT_EFFECTS : []),
     // Wineglass combat kills spells — spell-damage songs are dead weight overdrunk;
     // weapon-damage songs take their place (and vice versa while sober).
-    ...(isOverDrunk() ? WEAPON_DAMAGE_EFFECTS : SPELL_DAMAGE_EFFECTS),
+    ...(wineglassMode() ? WEAPON_DAMAGE_EFFECTS : SPELL_DAMAGE_EFFECTS),
     // HP-costed buffs (Blood Bubble 30 HP) last, right before restores recover the cost.
     // (Blood Bubble is a noncombat cast; its first-hit block still works overdrunk.)
     ...BLOCK_EFFECTS,

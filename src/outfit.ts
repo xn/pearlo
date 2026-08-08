@@ -1,6 +1,6 @@
 import { Modes, OutfitSpec } from "grimoire-kolmafia";
 import { Item, canEquip, toSlot } from "kolmafia";
-import { $item, $items, $slot, have } from "libram";
+import { $familiar, $item, $items, $slot, have } from "libram";
 
 import { args } from "./args";
 import {
@@ -15,8 +15,8 @@ import {
   pickPearlFamiliar,
   playerAirByEffect,
 } from "./familiar";
-import { isOverDrunk } from "./lib";
-import { PearlSpec, waterBreathingEquipment } from "./zones";
+import { allOrganEquipment, liverMode, requiredOrganEquipment, wineglassMode } from "./organs";
+import { PearlSpec, familiarWaterBreathingEquipment, waterBreathingEquipment } from "./zones";
 
 // Never let the maximizer equip these in pearl zones (user directives):
 // - broken champagne bottle: its +item drains limited daily charges (2026-08-07)
@@ -40,7 +40,9 @@ function airRequiresBackSlot(): boolean {
 function breathingKeywords(plan: FamiliarPlan): string {
   const playerCovered = playerAirByEffect();
   const familiarCovered =
-    familiarBreathesFree() || (plan.familiar !== undefined && plan.familiar.underwater);
+    familiarBreathesFree() ||
+    (plan.familiar !== undefined && plan.familiar.underwater) ||
+    (plan.famequip !== undefined && familiarWaterBreathingEquipment.includes(plan.famequip));
   if (!playerCovered && !familiarCovered) return ", sea";
   if (!playerCovered) return ", adventure underwater";
   if (!familiarCovered) return ", underwater familiar";
@@ -58,13 +60,19 @@ export function capeMode(spec: PearlSpec): "kill" | "hold" {
 }
 
 export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
-  const overdrunk = isOverDrunk();
+  const overdrunk = wineglassMode();
+
+  // Organ extenders first — they win their slots. Required extenders are the law
+  // (no adventuring without them); the overcapped flag forces the full set for
+  // consumption headroom. A forced corset simply occupies the shirt: the parka never
+  // equips and its mode is a harmless no-op; the maximizer chases res elsewhere.
+  const organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
+  const equip: Item[] = [...organEquip];
 
   // Equip only as much lantern gear (any slot) as the one-shot actually needs —
   // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
   // computable (user design). Zero need = zero damage gear forced. Overdrunk:
   // lanterns duplicate SPELL components and the wineglass kills spells — skip all.
-  const equip: Item[] = [];
   let secondLantern: Item | undefined;
   if (!overdrunk) {
     const needed = lanternComponentsNeededForOneShot(spec.maxHp);
@@ -72,11 +80,12 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
     equip.push(...lanterns.equip);
     secondLantern = lanterns.secondOffhand;
   } else {
-    // The wineglass IS the off-hand while overdrunk; the configured drunk weapon
-    // (default June cleaver) is forced when owned, else the maximizer chooses via
-    // the weapon-damage weights below.
+    // The wineglass IS the off-hand while overdrunk. A required angelbone totem
+    // displaces the configured drunkweapon (best-effort attack combat, user decision);
+    // otherwise the drunkweapon (default June cleaver) is forced when owned.
     equip.push($item`Drunkula's wineglass`);
-    if (have(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
+    const totemForced = organEquip.includes($item`angelbone totem`);
+    if (!totemForced && have(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
   }
 
   const modes: Modes = {};
@@ -93,12 +102,23 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // Always run a familiar (user decision) via two-pass planning: benchmark res without
   // familiar help, then spend the slot on res (maximizer `switch` picks) or damage/utility.
   // The second lantern only reaches the Left-Hand Man when the one-shot still needs it.
-  const familiarPlan = pickPearlFamiliar(spec, secondLantern);
+  // Stooper rescue pins the familiar — its +1 liver only counts while active. It
+  // breathes via famequip gear unless a familiar-air effect already covers it.
+  const familiarPlan: FamiliarPlan =
+    liverMode() === "stooper"
+      ? {
+          familiar: $familiar`Stooper`,
+          famequip: familiarBreathesFree()
+            ? undefined
+            : familiarWaterBreathingEquipment.find((i) => have(i)),
+        }
+      : pickPearlFamiliar(spec, secondLantern);
 
   // Overdrunk: weapon-damage weights chase the one-shot floor. 'effective' (weapon
   // class matched to the better attack stat) only applies when NO weapon is forced —
   // it could contradict the configured drunkweapon's class and fail every combination.
-  const weaponForced = overdrunk && have(args.major.drunkweapon);
+  const weaponForced =
+    overdrunk && (organEquip.includes($item`angelbone totem`) || have(args.major.drunkweapon));
   const combatWeights = overdrunk
     ? `${weaponForced ? "" : ", effective"}, 0.2 weapon damage, 0.2 weapon damage percent`
     : ", 0.1 item";
