@@ -23224,6 +23224,10 @@ function canBreathUnderwater() {
 
 /** Resistance level where pearl progress caps at 10%/fight (docs/sea-reference.md §2). */
 var PEARL_RES_CAP = 18;
+/** Mafia numeric-modifier name for a pearl element's resistance level. */
+function resModifierName(key) {
+  return "".concat(key.charAt(0).toUpperCase()).concat(key.slice(1), " Resistance");
+}
 var PEARLS = [{
   key: "spooky",
   maxDef: 585,
@@ -25424,9 +25428,16 @@ function resCapMetWithoutFamiliar(spec) {
   // the benchmark (session log 2026-08-07: res familiar equipped on fight N made
   // fight N+1 conclude "cap met without familiar", drop it, and fight at 8.3%/10% —
   // alternating). Drop the familiar first so the benchmark is honestly familiar-free.
-  if (require$$0.myFamiliar() !== $familiar.none) require$$0.useFamiliar($familiar.none);
+  var priorFamiliar = require$$0.myFamiliar();
+  if (priorFamiliar !== $familiar.none) require$$0.useFamiliar($familiar.none);
   var breathing = playerAirByEffect() ? "" : ", adventure underwater";
-  return require$$0.maximize("".concat(spec.key, " res 18 max 18 min").concat(breathing), true);
+  var met = require$$0.maximize("".concat(spec.key, " res 18 max 18 min").concat(breathing), true);
+  // The 2026-08-07 fix above did NOT stop the flip-flop: session 2026-08-09 alternated
+  // capMet true/false every Anemone Mine fight even familiar-free, tracking whichever
+  // outfit the previous fight left equipped. Log the benchmark's inputs and answer each
+  // call so the flapping input can be identified from a normal session log.
+  require$$0.print("[pearlo/resbench] ".concat(spec.key, ": capMet=").concat(met, " wornRes=").concat(require$$0.numericModifier(resModifierName(spec.key)), " ") + "priorFamiliar=".concat(priorFamiliar, " airByEffect=").concat(playerAirByEffect()));
+  return met;
 }
 
 /**
@@ -26466,6 +26477,18 @@ var stooperNoticePrinted = new Set();
 var avoidNoticePrinted = new Set();
 var collisionNoticePrinted = new Set();
 
+/**
+ * Which familiar plan the last buildPearlOutfit took for each zone. "switch" is the
+ * only path where the maximizer picks the familiar itself — and the only one observed
+ * landing below the res cap (session 2026-08-09: parrot builds fought at 8.3%/fight),
+ * so it's the only path the post-dress fallback in pearls.ts re-dresses away from.
+ */
+
+var familiarPlanPaths = new Map();
+function familiarPlanPathFor(key) {
+  return familiarPlanPaths.get(key);
+}
+
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot() {
   if (playerAirByEffect()) return false;
@@ -26497,6 +26520,7 @@ function capeMode(spec) {
   return plan.casts <= 3 ? "kill" : "hold";
 }
 function buildPearlOutfit(spec) {
+  var forceUtilityFamiliar = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
   var overdrunk = wineglassMode();
   var outfitName = outfitOverride(spec.key);
 
@@ -26539,6 +26563,7 @@ function buildPearlOutfit(spec) {
   // → per-zone familiar override → two-pass computed plan (user decision).
   var override = familiarOverride(spec.key);
   var familiarPlan;
+  var planPath;
   if (liverMode() === "stooper") {
     if (override !== undefined && override !== $familiar(_templateObject9$1 || (_templateObject9$1 = _taggedTemplateLiteral(["Stooper"])))) {
       if (!stooperNoticePrinted.has(spec.key)) {
@@ -26550,6 +26575,7 @@ function buildPearlOutfit(spec) {
       familiar: $familiar(_templateObject0$1 || (_templateObject0$1 = _taggedTemplateLiteral(["Stooper"]))),
       famequip: familiarBreathesFree() ? undefined : familiarWaterBreathingEquipment.find(i => have$1a(i))
     };
+    planPath = "stooper";
   } else if (override !== undefined) {
     // An override familiar gets breathing gear and nothing else — the Left-Hand Man
     // second-lantern hand-off does not apply to overrides (spec).
@@ -26562,19 +26588,28 @@ function buildPearlOutfit(spec) {
       familiar: override,
       famequip
     };
+    planPath = "familiar-override";
   } else if (outfitName !== undefined) {
     // Outfit-override zones skip the res benchmark entirely — the saved outfit IS the
     // res plan, so a res-switch familiar (which the override path would drop anyway,
     // since only .familiar/.famequip are honored, never .extraModifier) makes no sense.
     // Always get a concrete utility/breathing familiar when one is available.
     familiarPlan = pickUtilityFamiliar();
+    planPath = "outfit-override";
+  } else if (forceUtilityFamiliar) {
+    // Post-dress fallback (pearls.ts): the switch-path build landed under the res cap
+    // in the real game — skip the benchmark and take the utility plan directly.
+    familiarPlan = pickUtilityFamiliar(secondLantern);
+    planPath = "utility";
   } else {
     // Always run a familiar (user decision) via two-pass planning: benchmark res
     // without familiar help, then spend the slot on res (maximizer `switch` picks) or
     // damage/utility. The second lantern only reaches the Left-Hand Man when the
     // one-shot still needs it.
     familiarPlan = pickPearlFamiliar(spec, secondLantern);
+    planPath = familiarPlan.extraModifier !== undefined ? "switch" : "utility";
   }
+  familiarPlanPaths.set(spec.key, planPath);
   var avoid = [].concat(_toConsumableArray(GLOBAL_AVOID), _toConsumableArray(spec.avoid ?? []));
   if (outfitName !== undefined) {
     // Saved-outfit override: the user's outfit IS the res plan. Its pieces are forced
@@ -26781,6 +26816,16 @@ function pearlTask(spec) {
     args.major.force || zoneVerdict(spec).go) && require$$0.canAdventure(spec.loc) && require$$0.myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
       abortIfBeatenUp("before adventuring in ".concat(spec.loc));
+      // Post-dress res verification (session 2026-08-09): switch-path builds landed at
+      // 15–17 real res while the maximizer's model said 18 — 8.3%/fight instead of 10%.
+      // When that happens, re-dress with the utility-familiar build, which hit the cap
+      // every fight that session. Runs before damagePlan/mood so both see final gear.
+      var dressedRes = require$$0.numericModifier(resModifierName(spec.key));
+      if (dressedRes < PEARL_RES_CAP && familiarPlanPathFor(spec.key) === "switch") {
+        require$$0.print("pearlo: ".concat(spec.loc, " dressed to ").concat(dressedRes, " ").concat(spec.key, " res (< ").concat(PEARL_RES_CAP, " cap) on the ") + "maximizer switch path \u2014 re-dressing with the utility-familiar build", "red");
+        Outfit.from(buildPearlOutfit(spec, true), new Error("pearlo: fallback outfit for ".concat(spec.loc, " could not be built"))).dress();
+        require$$0.print("pearlo: ".concat(spec.loc, " fallback build reaches ").concat(require$$0.numericModifier(resModifierName(spec.key)), " ").concat(spec.key, " res"));
+      }
       plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
       if (wineglassMode()) {
@@ -26793,8 +26838,7 @@ function pearlTask(spec) {
         }
       }
       if (args.major.requirecap) {
-        var resName = "".concat(spec.key.charAt(0).toUpperCase()).concat(spec.key.slice(1), " Resistance");
-        var res = require$$0.numericModifier(resName);
+        var res = require$$0.numericModifier(resModifierName(spec.key));
         if (res < PEARL_RES_CAP) {
           require$$0.abort("pearlo: ".concat(spec.key, " res is ").concat(res, " (< ").concat(PEARL_RES_CAP, " cap) in ").concat(spec.loc, " and requirecap is set \u2014 fights would yield ").concat(1.7 * Math.floor(res / 3), "% instead of 10%. Add resistance or drop requirecap."));
         }
