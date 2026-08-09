@@ -95,8 +95,8 @@ export const args = Args.create(
     minor: Args.group("Minor Options", {}),
     resources: Args.group("Resource Usage", {
       luckyfishy: Args.flag({
-        help: "Refresh Fishy via Lucky! + The Haggling in The Brinier Deepers when it runs out (Aug. 2nd scepter, owned clovers, free pill keeper, hermit; see cloverprice for mall). Disable to save those daily resources for other scripts.",
-        default: true,
+        help: "Refresh Fishy via Lucky! + The Haggling in The Brinier Deepers when it runs out (Aug. 2nd scepter, owned clovers, free pill keeper, hermit; see cloverprice for mall). Off by default — enable to spend those daily resources on Fishy.",
+        default: false,
       }),
       cloverprice: Args.number({
         help: "Max meat to pay per mall 11-leaf clover for the Fishy refresh. 0 (default) never buys from the mall — free/owned sources only.",
