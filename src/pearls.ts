@@ -3,8 +3,10 @@ import {
   abort,
   availableAmount,
   canAdventure,
+  cliExecute,
   getWorkshed,
   haveEffect,
+  haveEquipped,
   Item,
   myAdventures,
   numericModifier,
@@ -134,6 +136,11 @@ function getFishyTask(selected: PearlSpec[]): Task {
       (have($effect`Lucky!`) || luckySourceAvailable(remainingPearlFights(selected))) &&
       myAdventures() - args.debug.halt >= (haveEffect($effect`Fishy`) > 0 ? 1 : 2),
     prepare: () => {
+      // A worn Peridot of Peril could fire its monster-select NC (1557) here instead
+      // of the guaranteed Haggling — and any combat trips this task's abort macro.
+      // The trip outfit doesn't ask for the Peridot, but a copy left equipped by a
+      // previous dress survives (this outfit maximizes nothing beyond breathing).
+      if (haveEquipped($item`Peridot of Peril`)) cliExecute("unequip Peridot of Peril");
       if (!acquireLucky(remainingPearlFights(selected))) {
         abort(
           "pearlo: could not acquire Lucky! for the Fishy refresh — every source in " +
@@ -231,7 +238,12 @@ function pearlTask(spec: PearlSpec): Task {
       }
     },
     do: spec.loc,
-    choices: spec.choices ?? {},
+    // 1557 = Peering Through Your Peridot (first adventure of the day per zone with
+    // the Peridot of Peril equipped — the maximizer picks it for its +item/regen).
+    // Selecting a monster enters that fight immediately (no turn lost), so answer with
+    // the zone's safest pick; unanswered, the NC halts the script. Property format
+    // "1&bandersnatch=<monsterid>" is mafia's Map-the-Monsters-style encoding.
+    choices: { ...(spec.choices ?? {}), 1557: `1&bandersnatch=${spec.peridotMonster.id}` },
     post: () => {
       abortIfBeatenUp(`after a combat in ${spec.loc}`);
       const previousRate = observedProgressRate.get(spec.key);

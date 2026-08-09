@@ -1,10 +1,20 @@
 import { Modes } from "grimoire-kolmafia";
-import { Element, Item, Location, booleanModifier, canEquip, haveEffect, print } from "kolmafia";
+import {
+  Element,
+  Item,
+  Location,
+  Monster,
+  booleanModifier,
+  canEquip,
+  haveEffect,
+  print,
+} from "kolmafia";
 import {
   $effect,
   $element,
   $items,
   $location,
+  $monster,
   BooleanProperty,
   NumericProperty,
   get,
@@ -63,6 +73,15 @@ export type PearlSpec = {
   avoid?: Item[];
   /** choiceAdventure automation for the zone's noncombats (id → option). */
   choices?: { [id: number]: number };
+  /**
+   * Monster to pick when the Peridot of Peril's "Peering Through Your Peridot" NC
+   * (choice 1557) fires — first adventure of the day per zone with the Peridot
+   * equipped; selection enters that combat immediately, no turn lost. The maximizer
+   * likes the Peridot (+15% item, HP/MP regen match the outfit tie-breaker weights),
+   * so the NC WILL fire; unanswered it halts the script. Picks are the zone's safest
+   * monster per docs/sea-reference.md §3.
+   */
+  peridotMonster: Monster;
   /** Highest monster HP in the zone (docs/sea-reference.md §3) — the one-shot target. */
   maxHp: number;
   /** Highest monster Defense in the zone (docs/sea-reference.md §3) — the hit-guarantee target. */
@@ -90,6 +109,10 @@ export const PEARLS: PearlSpec[] = [
     // Not a Micro Fish (306, one-time SC/TT chain): option 1 is the only button and
     // teaches Harpoon!/Summon Leviatuga.
     choices: { 306: 1 },
+    // Dodges the Anemone combatant's Majorly Poisoned spiral; the clownfish's sleaze/
+    // spooky hits are half-soaked by the zone's 18 spooky res, and its seltzer drop
+    // restores 150–200 MP (§3.1).
+    peridotMonster: $monster`killer clownfish`,
   },
   {
     key: "sleaze",
@@ -108,6 +131,9 @@ export const PEARLS: PearlSpec[] = [
     // The one-time AT/DB chains (307/308) are class-gated text the engine can't reach
     // for other classes; their terminal choices are single-option anyway.
     choices: { 309: 2 },
+    // Lowest HP (550) and Attack (400) in the zone; the tippler's 600 Attack is the
+    // Sea's hardest hitter (§3.2).
+    peridotMonster: $monster`lounge lizardfish`,
   },
   {
     key: "hot",
@@ -128,6 +154,9 @@ export const PEARLS: PearlSpec[] = [
     // There is Sauce at the Bottom of the Ocean (305): leave — globes aren't pearlo's job.
     // Into the Abyss (1220, Space Jellyfish ≥400 lbs, once/ascension): nevermind.
     choices: { 302: 1, 303: 1, 304: 1, 305: 2, 1220: 2 },
+    // Lowest HP (700) in the zone and its only elemental attack is hot — fully soaked
+    // by the zone's 18 hot res; the belle deals unmitigated spooky (§3.4).
+    peridotMonster: $monster`Mer-kin diver`,
   },
   {
     key: "stench",
@@ -145,6 +174,10 @@ export const PEARLS: PearlSpec[] = [
     // of Scales (310, nested, free): take your leave (option 3). Scale trading is a
     // manual activity, not pearl farming.
     choices: { 310: 3, 311: 2 },
+    // 0 initiative — we always win init, so the parka stagger lands before its
+    // poison-on-hit can. The dragonfish's The Colors... (−5 all res) threatens pearl
+    // progress and the pufferfish jabs its spine even on a miss (§3.3).
+    peridotMonster: $monster`jamfish`,
   },
   {
     key: "cold",
@@ -158,5 +191,8 @@ export const PEARLS: PearlSpec[] = [
     parkaMode: "kachungasaur",
     obtained: "_unblemishedPearlTheBriniestDeepests",
     progress: "_unblemishedPearlTheBriniestDeepestsProgress",
+    // Never the acoustic electric eel (counters every landed melee for ~89–100); the
+    // ganger's 800 HP is the harder one-shot (§3.5).
+    peridotMonster: $monster`decent white shark`,
   },
 ];
