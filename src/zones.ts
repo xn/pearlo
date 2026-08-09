@@ -46,6 +46,11 @@ export const PEARL_RES_CAP = 18;
 
 export type PearlKey = "spooky" | "sleaze" | "hot" | "stench" | "cold";
 
+/** Mafia numeric-modifier name for a pearl element's resistance level. */
+export function resModifierName(key: PearlKey): string {
+  return `${key.charAt(0).toUpperCase()}${key.slice(1)} Resistance`;
+}
+
 export type PearlSpec = {
   key: PearlKey;
   loc: Location;

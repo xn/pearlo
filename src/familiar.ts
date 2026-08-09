@@ -1,7 +1,15 @@
-import { Familiar, Item, maximize, myFamiliar, useFamiliar } from "kolmafia";
+import {
+  Familiar,
+  Item,
+  maximize,
+  myFamiliar,
+  numericModifier,
+  print,
+  useFamiliar,
+} from "kolmafia";
 import { $effects, $element, $familiar, $items, have } from "libram";
 
-import { PearlSpec } from "./zones";
+import { PearlSpec, resModifierName } from "./zones";
 
 export type FamiliarPlan = {
   familiar?: Familiar;
@@ -54,9 +62,19 @@ export function resCapMetWithoutFamiliar(spec: PearlSpec): boolean {
   // the benchmark (session log 2026-08-07: res familiar equipped on fight N made
   // fight N+1 conclude "cap met without familiar", drop it, and fight at 8.3%/10% —
   // alternating). Drop the familiar first so the benchmark is honestly familiar-free.
-  if (myFamiliar() !== $familiar.none) useFamiliar($familiar.none);
+  const priorFamiliar = myFamiliar();
+  if (priorFamiliar !== $familiar.none) useFamiliar($familiar.none);
   const breathing = playerAirByEffect() ? "" : ", adventure underwater";
-  return maximize(`${spec.key} res 18 max 18 min${breathing}`, true);
+  const met = maximize(`${spec.key} res 18 max 18 min${breathing}`, true);
+  // The 2026-08-07 fix above did NOT stop the flip-flop: session 2026-08-09 alternated
+  // capMet true/false every Anemone Mine fight even familiar-free, tracking whichever
+  // outfit the previous fight left equipped. Log the benchmark's inputs and answer each
+  // call so the flapping input can be identified from a normal session log.
+  print(
+    `[pearlo/resbench] ${spec.key}: capMet=${met} wornRes=${numericModifier(resModifierName(spec.key))} ` +
+      `priorFamiliar=${priorFamiliar} airByEffect=${playerAirByEffect()}`,
+  );
+  return met;
 }
 
 /**

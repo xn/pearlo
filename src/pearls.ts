@@ -1,4 +1,4 @@
-import { Quest, Task, CombatStrategy, OutfitSpec } from "grimoire-kolmafia";
+import { Quest, Task, CombatStrategy, Outfit, OutfitSpec } from "grimoire-kolmafia";
 import {
   abort,
   availableAmount,
@@ -22,7 +22,7 @@ import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fish
 import { abortIfBeatenUp, asdonFualable, fuelUp } from "./lib";
 import { pearlMood } from "./mood";
 import { wineglassMode } from "./organs";
-import { buildPearlOutfit } from "./outfit";
+import { buildPearlOutfit, familiarPlanPathFor } from "./outfit";
 import {
   PEARL_RES_CAP,
   PEARLS,
@@ -30,6 +30,7 @@ import {
   PearlSpec,
   canBreathUnderwater,
   printSeaworthyDebug,
+  resModifierName,
 } from "./zones";
 
 const breatheUnderwaterTask: Task = {
@@ -186,6 +187,25 @@ function pearlTask(spec: PearlSpec): Task {
       myAdventures() - args.debug.halt >= turnsNeeded(spec),
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
+      // Post-dress res verification (session 2026-08-09): switch-path builds landed at
+      // 15–17 real res while the maximizer's model said 18 — 8.3%/fight instead of 10%.
+      // When that happens, re-dress with the utility-familiar build, which hit the cap
+      // every fight that session. Runs before damagePlan/mood so both see final gear.
+      const dressedRes = numericModifier(resModifierName(spec.key));
+      if (dressedRes < PEARL_RES_CAP && familiarPlanPathFor(spec.key) === "switch") {
+        print(
+          `pearlo: ${spec.loc} dressed to ${dressedRes} ${spec.key} res (< ${PEARL_RES_CAP} cap) on the ` +
+            `maximizer switch path — re-dressing with the utility-familiar build`,
+          "red",
+        );
+        Outfit.from(
+          buildPearlOutfit(spec, true),
+          new Error(`pearlo: fallback outfit for ${spec.loc} could not be built`),
+        ).dress();
+        print(
+          `pearlo: ${spec.loc} fallback build reaches ${numericModifier(resModifierName(spec.key))} ${spec.key} res`,
+        );
+      }
       plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
       if (wineglassMode()) {
@@ -202,8 +222,7 @@ function pearlTask(spec: PearlSpec): Task {
         }
       }
       if (args.major.requirecap) {
-        const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
-        const res = numericModifier(resName);
+        const res = numericModifier(resModifierName(spec.key));
         if (res < PEARL_RES_CAP) {
           abort(
             `pearlo: ${spec.key} res is ${res} (< ${PEARL_RES_CAP} cap) in ${spec.loc} and requirecap is set — fights would yield ${1.7 * Math.floor(res / 3)}% instead of 10%. Add resistance or drop requirecap.`,

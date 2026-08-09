@@ -35,6 +35,20 @@ const stooperNoticePrinted = new Set<string>();
 const avoidNoticePrinted = new Set<string>();
 const collisionNoticePrinted = new Set<string>();
 
+/**
+ * Which familiar plan the last buildPearlOutfit took for each zone. "switch" is the
+ * only path where the maximizer picks the familiar itself — and the only one observed
+ * landing below the res cap (session 2026-08-09: parrot builds fought at 8.3%/fight),
+ * so it's the only path the post-dress fallback in pearls.ts re-dresses away from.
+ */
+export type FamiliarPlanPath =
+  "stooper" | "familiar-override" | "outfit-override" | "switch" | "utility";
+const familiarPlanPaths = new Map<string, FamiliarPlanPath>();
+
+export function familiarPlanPathFor(key: string): FamiliarPlanPath | undefined {
+  return familiarPlanPaths.get(key);
+}
+
 /** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
 function airRequiresBackSlot(): boolean {
   if (playerAirByEffect()) return false;
@@ -69,7 +83,7 @@ export function capeMode(spec: PearlSpec): "kill" | "hold" {
   return plan.casts <= 3 ? "kill" : "hold";
 }
 
-export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
+export function buildPearlOutfit(spec: PearlSpec, forceUtilityFamiliar = false): OutfitSpec {
   const overdrunk = wineglassMode();
   const outfitName = outfitOverride(spec.key);
 
@@ -122,6 +136,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
   // → per-zone familiar override → two-pass computed plan (user decision).
   const override = familiarOverride(spec.key);
   let familiarPlan: FamiliarPlan;
+  let planPath: FamiliarPlanPath;
   if (liverMode() === "stooper") {
     if (override !== undefined && override !== $familiar`Stooper`) {
       if (!stooperNoticePrinted.has(spec.key)) {
@@ -137,6 +152,7 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
         ? undefined
         : familiarWaterBreathingEquipment.find((i) => have(i)),
     };
+    planPath = "stooper";
   } else if (override !== undefined) {
     // An override familiar gets breathing gear and nothing else — the Left-Hand Man
     // second-lantern hand-off does not apply to overrides (spec).
@@ -150,19 +166,28 @@ export function buildPearlOutfit(spec: PearlSpec): OutfitSpec {
       );
     }
     familiarPlan = { familiar: override, famequip };
+    planPath = "familiar-override";
   } else if (outfitName !== undefined) {
     // Outfit-override zones skip the res benchmark entirely — the saved outfit IS the
     // res plan, so a res-switch familiar (which the override path would drop anyway,
     // since only .familiar/.famequip are honored, never .extraModifier) makes no sense.
     // Always get a concrete utility/breathing familiar when one is available.
     familiarPlan = pickUtilityFamiliar();
+    planPath = "outfit-override";
+  } else if (forceUtilityFamiliar) {
+    // Post-dress fallback (pearls.ts): the switch-path build landed under the res cap
+    // in the real game — skip the benchmark and take the utility plan directly.
+    familiarPlan = pickUtilityFamiliar(secondLantern);
+    planPath = "utility";
   } else {
     // Always run a familiar (user decision) via two-pass planning: benchmark res
     // without familiar help, then spend the slot on res (maximizer `switch` picks) or
     // damage/utility. The second lantern only reaches the Left-Hand Man when the
     // one-shot still needs it.
     familiarPlan = pickPearlFamiliar(spec, secondLantern);
+    planPath = familiarPlan.extraModifier !== undefined ? "switch" : "utility";
   }
+  familiarPlanPaths.set(spec.key, planPath);
 
   const avoid = [...GLOBAL_AVOID, ...(spec.avoid ?? [])];
 
