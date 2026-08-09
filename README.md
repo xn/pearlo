@@ -45,7 +45,7 @@ Useful options:
 - `overcapped` — force-equip **all** owned organ extenders (angelbone/devilbone gear)
   while running turns, keeping the extended stomach/liver/spleen caps available for
   mid-day consumption
-- `luckyfishy=false` — disable the Lucky!-based Fishy refresh (on by default; uses the
+- `luckyfishy` — enable the Lucky!-based Fishy refresh (off by default; uses the
   Aug. 2nd scepter cast, owned 11-leaf clovers, the free pill keeper use, and up to 3
   hermit clovers per day)
 - `cloverprice=N` — also buy mall 11-leaf clovers for the refresh, at most N meat each
