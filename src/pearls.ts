@@ -191,7 +191,11 @@ function pearlTask(spec: PearlSpec): Task {
       // cheap for the engine's per-iteration ready() polling.
       (args.major.force || zoneVerdict(spec).go) &&
       canAdventure(spec.loc) &&
-      myAdventures() - args.debug.halt >= turnsNeeded(spec),
+      // strand: farm down to the halt floor even mid-pearl (screech rundown);
+      // otherwise a zone must be finishable above the floor so pearl progress
+      // is never stranded.
+      myAdventures() - args.debug.halt >=
+        (args.major.strand ? (have($effect`Fishy`) ? 1 : 2) : turnsNeeded(spec)),
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
       // Post-dress res verification (session 2026-08-09): switch-path builds landed at

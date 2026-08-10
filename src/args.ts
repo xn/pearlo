@@ -59,6 +59,10 @@ export const args = Args.create(
         help: "Farm zones even when the profit model expects them to lose meat.",
         default: false,
       }),
+      strand: Args.flag({
+        help: "Permit stranding partial pearl progress: farm selected zones down to the halt floor even mid-pearl (screech rundown use; pair with force and halt).",
+        default: false,
+      }),
     }),
     overrides: Args.group("Zone Overrides", {
       spookyfamiliar: Args.familiar({
