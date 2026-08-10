@@ -95,6 +95,34 @@ export const args = Args.create(
       coldoutfit: Args.string({
         help: "Saved KoL custom outfit to wear in The Briniest Deepests (cold pearl zone).",
       }),
+      // Res top-up potion lists: the mood uses these (inventory only, strongest
+      // first) until the zone's dressed res reaches the 18 progress cap. The
+      // overcapped bone set fills weapon/shirt/pants/all accessories, so gear
+      // alone lands well short (2026-08-10 session: res 10-15, 5-8.3%/fight).
+      spookyresitems: Args.string({
+        help: "Comma-separated potions to use (if in inventory) until spooky res caps in the Anemone Mine. Empty disables.",
+        default: "scroll of minor invulnerability, pec oil, gray seashell, marzipan skull",
+      }),
+      sleazeresitems: Args.string({
+        help: "Comma-separated potions to use (if in inventory) until sleaze res caps in The Dive Bar. Empty disables.",
+        default: "scroll of minor invulnerability, pec oil, yellow seashell, sleaze powder",
+      }),
+      hotresitems: Args.string({
+        help: "Comma-separated potions to use (if in inventory) until hot res caps in The Marinara Trench. Empty disables.",
+        default: "scroll of minor invulnerability, pec oil, magenta seashell",
+      }),
+      stenchresitems: Args.string({
+        help: "Comma-separated potions to use (if in inventory) until stench res caps in the Madness Reef. Empty disables.",
+        default: "scroll of minor invulnerability, pec oil, green seashell, stench powder",
+      }),
+      coldresitems: Args.string({
+        // Cold dresses worst (res 10), needing +8: seashell before the lone
+        // 50-adv Ancient Protector Soda so the plentiful +1 caps the stack
+        // first. No sticky lava globs -- cheap but mall stock is too thin.
+        help: "Comma-separated potions to use (if in inventory) until cold res caps in The Briniest Deepests. Empty disables.",
+        default:
+          "scroll of minor invulnerability, pec oil, programmable turtle, cyan seashell, Ancient Protector Soda, cold powder",
+      }),
     }),
     minor: Args.group("Minor Options", {}),
     resources: Args.group("Resource Usage", {

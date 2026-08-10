@@ -1,17 +1,22 @@
 import {
   Effect,
   Element,
+  Item,
+  effectModifier,
   haveEffect,
   hpCost,
+  itemAmount,
   mpCost,
   myFamiliar,
   myHp,
   myMaxhp,
   myMaxmp,
   myMp,
+  numericModifier,
   print,
   restoreHp,
   restoreMp,
+  toItem,
   toSkill,
   use,
 } from "kolmafia";
@@ -20,7 +25,7 @@ import { $effect, $effects, $elements, $familiar, $item, get, have } from "libra
 import { args } from "./args";
 import { tryAcquiringEffect } from "./lib";
 import { wineglassMode } from "./organs";
-import { PearlSpec } from "./zones";
+import { PEARL_RES_CAP, PearlKey, PearlSpec, resModifierName } from "./zones";
 
 // Every list below is wiki-verified (effect pages fetched 2026-08-07); the original
 // usefulEffects list mixed genuine resistance with stat/HP/familiar buffs — sorted here.
@@ -63,6 +68,76 @@ const WEAPON_DAMAGE_EFFECTS = [
   ...$effects`Carol of the Bulls, Song of the North`,
   $effect`Frenzied, Bloody`,
 ];
+
+/** Per-zone res top-up potions (overrides.<key>resitems), parsed and warned once. */
+const resItemCache = new Map<PearlKey, Item[]>();
+function resItems(key: PearlKey): Item[] {
+  const cached = resItemCache.get(key);
+  if (cached) return cached;
+  const raw = {
+    spooky: args.overrides.spookyresitems,
+    sleaze: args.overrides.sleazeresitems,
+    hot: args.overrides.hotresitems,
+    stench: args.overrides.stenchresitems,
+    cold: args.overrides.coldresitems,
+  }[key];
+  const items: Item[] = [];
+  for (const name of raw
+    .split(",")
+    .map((s) => s.trim())
+    .filter((s) => s !== "")) {
+    const it = toItem(name);
+    if (it === $item.none) {
+      print(`pearlo: unknown item "${name}" in ${key}resitems — skipping it.`, "red");
+    } else {
+      items.push(it);
+    }
+  }
+  resItemCache.set(key, items);
+  return items;
+}
+
+const resShortfallWarned = new Set<PearlKey>();
+
+/**
+ * Turns of effect needed to finish this pearl: remaining fights at the capped
+ * 10%/fight rate, doubled without Fishy (underwater fights cost 2 turns).
+ */
+function coverageTurns(spec: PearlSpec): number {
+  const fights = Math.ceil((100 - get(spec.progress, 0)) / 10);
+  return fights * (have($effect`Fishy`) ? 1 : 2);
+}
+
+/**
+ * Chew through the zone's configured potion list (strongest first, inventory
+ * only — nothing is purchased) until dressed res reaches the progress cap.
+ * Runs after the skill buffs so free casts count before potions are spent.
+ * Each potion is used in bulk — enough copies for the effect to outlast the
+ * rest of the pearl — so short-duration potions (powders, marzipan skulls)
+ * don't drop a tier on expiry boundaries mid-zone; anything that still
+ * expires early is re-upped by the next pre-fight mood pass.
+ */
+function topUpRes(spec: PearlSpec): void {
+  const resName = resModifierName(spec.key);
+  if (numericModifier(resName) >= PEARL_RES_CAP) return;
+  const need = coverageTurns(spec);
+  for (const it of resItems(spec.key)) {
+    if (numericModifier(resName) >= PEARL_RES_CAP) break;
+    if (!have(it)) continue;
+    const ef = effectModifier(it, "Effect");
+    if (ef !== $effect.none && have(ef)) continue;
+    const duration = Math.max(1, numericModifier(it, "Effect Duration"));
+    use(it, Math.min(itemAmount(it), Math.ceil(need / duration)));
+  }
+  const finalRes = numericModifier(resName);
+  if (finalRes < PEARL_RES_CAP && !resShortfallWarned.has(spec.key)) {
+    resShortfallWarned.add(spec.key);
+    print(
+      `pearlo: ${spec.key} res is ${finalRes} after the ${spec.key}resitems top-up (< ${PEARL_RES_CAP} cap) — pearl progress runs below 10%/fight. Stock more of the list or extend it.`,
+      "red",
+    );
+  }
+}
 
 /** Effect lists that apply to this zone/state, in cast order (HP-costed blocks last). */
 function applicableBuffs(spec: PearlSpec): Effect[] {
@@ -131,6 +206,8 @@ export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
   if (myHp() <= pending.hp || myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
 
   for (const ef of buffs) tryAcquiringEffect(ef);
+
+  topUpRes(spec);
 
   // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight buffer.
   // Explicit restores; auto-recovery is disabled by PearloEngine.
