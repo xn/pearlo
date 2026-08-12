@@ -23,7 +23,7 @@ Verified facts (wiki + mafia `monsters.txt`, loopstar sea path, 2026-08-12):
   Occurs anywhere while the Möbius ring is equipped; loopstar caps at
   `_timeCopsFoughtToday < 11` and treats it as a plain hard kill underwater.
 - **NC 1562 "Time is a Möbius Strip"**: fires only while the ring is worn. Option
-  *numbers rotate between visits* — loopstar answers it by matching option **text**.
+  _numbers rotate between visits_ — loopstar answers it by matching option **text**.
   "I'm not messing with the timeline!" skips the adventure at no cost. Other options
   change Paradoxicity (which reshapes the ring's enchantments) and/or grant items.
 
@@ -58,7 +58,7 @@ stat-scaling wanderers. Both macros layer stagger-deleveling before the stun+kil
 
 Macro order per fight (both monsters): Micrometeorite → funksling
 [train whistle + HOA citation pad] in one round (user direction; guarded by
-`have($skill\`Ambidextrous Funkslinging\`)` via libram's `tryFunkslingItem`,
+`have($skill\`Ambidextrous Funkslinging\`)`via libram's`tryFunkslingItem`,
 which pairs items but does not itself check the skill — fall back to sequential
 `tryItem`s without it) → Noodles → Saucegeyser repeat. The staggers cover the
 early rounds while attack melts (0.75 × 0.75 × 0.70 ≈ 39% of original vs the
@@ -66,6 +66,7 @@ goblin's Moxie+ attack); Noodles holds the tail. All steps are
 `trySkill`/`tryItem`, so missing items or MP degrade gracefully to the next layer.
 
 Why this suffices:
+
 - Goblin: we always act first (init -10000), so the chain starts before any hit.
 - Time cop: wins initiative, but the Jurassic Parka's automatic round-1 stagger
   covers its first action.

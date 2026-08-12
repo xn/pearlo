@@ -21,9 +21,11 @@
 ### Task 1: Un-avoid Kramco and Möbius ring
 
 **Files:**
+
 - Modify: `src/outfit.ts:22-27` (the `GLOBAL_AVOID` comment + constant)
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces: no API change — `GLOBAL_AVOID` keeps its name and type (`Item[]`), smaller contents.
 
@@ -67,10 +69,12 @@ git commit -m "feat: allow Kramco and Möbius ring in pearl-zone outfits"
 ### Task 2: Wanderer survival macro
 
 **Files:**
+
 - Modify: `src/combat.ts` (imports + new exports after `buildPearlMacro`, which ends at line 171)
 - Modify: `src/pearls.ts` (import at line 20; `combat:` at line 266)
 
 **Interfaces:**
+
 - Consumes: `wineglassMode()` from `./organs` (already imported in combat.ts).
 - Produces: `WANDERER_MONSTERS: Monster[]` and `buildWandererMacro(): Macro`, both exported from `src/combat.ts`.
 
@@ -104,7 +108,10 @@ export function buildWandererMacro(): Macro {
   } else {
     macro.tryItem($item`train whistle`).tryItem($item`HOA citation pad`);
   }
-  return macro.trySkill($skill`Entangling Noodles`).skill($skill`Saucegeyser`).repeat();
+  return macro
+    .trySkill($skill`Entangling Noodles`)
+    .skill($skill`Saucegeyser`)
+    .repeat();
 }
 ```
 
@@ -157,11 +164,13 @@ git commit -m "feat: delevel-stagger survival macro for sausage goblin and time 
 ### Task 3: NC 1562 choice script
 
 **Files:**
+
 - Create: `src/choice.ts`
 - Modify: `rollup.config.ts` (the `export default` array, last lines of the file)
 - Modify: `src/engine.ts:48-55` (`manager.set({...})` in `initPropertiesManager`)
 
 **Interfaces:**
+
 - Consumes: nothing from other tasks.
 - Produces: `dist/scripts/pearlo/pearlo-choice.js`, exporting mafia's choice-script hook `main(choice: number, page: string): void`; registered under the `choiceAdventureScript` property (bare filename — mafia resolves it recursively under scripts/, same as loopstar's `loopstar_choice.js`).
 
@@ -217,17 +226,17 @@ export default [{ pearlo: "src/main.ts" }, { "pearlo-choice": "src/choice.ts" }]
 In `src/engine.ts`, add one property to the existing `manager.set({...})` call:
 
 ```ts
-    manager.set({
-      autoSatisfyWithCloset: false,
-      hpAutoRecovery: -0.05,
-      mpAutoRecovery: -0.05,
-      maximizerCombinationLimit: 0,
-      hpAutoRecoveryItems: hpItems,
-      mpAutoRecoveryItems: mpItems,
-      // NC 1562 (Möbius ring) has rotating option numbers — answered by text in the
-      // bundled pearlo-choice script. Restored by destruct() like every setting here.
-      choiceAdventureScript: "pearlo-choice.js",
-    });
+manager.set({
+  autoSatisfyWithCloset: false,
+  hpAutoRecovery: -0.05,
+  mpAutoRecovery: -0.05,
+  maximizerCombinationLimit: 0,
+  hpAutoRecoveryItems: hpItems,
+  mpAutoRecoveryItems: mpItems,
+  // NC 1562 (Möbius ring) has rotating option numbers — answered by text in the
+  // bundled pearlo-choice script. Restored by destruct() like every setting here.
+  choiceAdventureScript: "pearlo-choice.js",
+});
 ```
 
 - [ ] **Step 4: Verify both bundles build**
@@ -247,6 +256,7 @@ git commit -m "feat: pearlo-choice script skips the Möbius Strip NC by option t
 ### Task 4: Document the new delevel tools in sea-reference
 
 **Files:**
+
 - Modify: `docs/sea-reference.md` (the "Sources worth pearlo's attention" table, rows around line 521)
 
 **Interfaces:** none (docs only).
@@ -256,8 +266,8 @@ git commit -m "feat: pearlo-choice script skips the Möbius Strip NC by option t
 Insert directly below the existing `Micrometeorite (Meteor Lore)` row:
 
 ```markdown
-| train whistle (Crimbo 2022)                                      | −25% both, first use per combat                               | also staggers; combat item, funkslings with the HOA pad                              |
-| HOA citation pad (Dreadsylvania)                                 | −30% both                                                     | 100% stagger but **only vs dude/hippy/orc** (time cop yes, goblin unverified); 2nd use same combat is a free twiddle |
+| train whistle (Crimbo 2022) | −25% both, first use per combat | also staggers; combat item, funkslings with the HOA pad |
+| HOA citation pad (Dreadsylvania) | −30% both | 100% stagger but **only vs dude/hippy/orc** (time cop yes, goblin unverified); 2nd use same combat is a free twiddle |
 ```
 
 - [ ] **Step 2: Verify + commit**
