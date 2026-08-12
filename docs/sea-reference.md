@@ -514,21 +514,23 @@ Key caveats (wiki-stated):
 
 ### Sources worth pearlo's attention
 
-| Source                                                           | Delevel                                                       | Extras / gating                                                                      |
-| ---------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **really nice net**                                              | **−70% Atk & Def**                                            | **+3-round stun** — the premier combo item (Elf Operative drop; availability varies) |
-| crayon shavings                                                  | ~−30% both                                                    | cheap consumable (Artistic Goth Kid drop)                                            |
-| Micrometeorite (Meteor Lore)                                     | −25% (decays −1%/use to −10% floor, daily reset)              | also staggers, 1/combat                                                              |
-| Curse of Weaksauce (Sauceror, 8 MP)                              | ~−3%/round, every round                                       | MP refunded on spell kill                                                            |
-| **barnacle-encrusted sweater**                                   | −20% always                                                   | ⚠ it's a **shirt** — mutually exclusive with the Jurassic Parka                      |
-| Chester's sunglasses / The Lost Glasses                          | −15% Def always                                               | accessory slot                                                                       |
-| "of Hatred" pieces                                               | −10% Def each, always                                         | also +spell damage (feeds the one-shot plan)                                         |
-| **sea lasso** (Coral Corral)                                     | unspaded, grows with use                                      | underwater-only, also staggers, reusable until it breaks                             |
-| **fishy wand** (fam equip)                                       | −15–20 Atk on proc (~3.7%/round)                              | underwater only                                                                      |
-| Mer-kin mouthsoap                                                | −250 to −300                                                  | Mer-kin only; also staggers them                                                     |
-| CSA obedience grenade                                            | −5%                                                           | +3-round stun                                                                        |
-| Delevel familiars: **Barrrnacle, Emo Squid, Space Jellyfish**    | wt/2 Atk&Def at combat start (4.5×wt% chance; Jellyfish 100%) | **all three breathe underwater innately** — no enabler needed                        |
-| Amplifiers: dark porquoise ring (×2), Ruthless Efficiency (+50%) | —                                                             | multiply all deleveling                                                              |
+| Source                                                           | Delevel                                                       | Extras / gating                                                                                                      |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **really nice net**                                              | **−70% Atk & Def**                                            | **+3-round stun** — the premier combo item (Elf Operative drop; availability varies)                                 |
+| crayon shavings                                                  | ~−30% both                                                    | cheap consumable (Artistic Goth Kid drop)                                                                            |
+| Micrometeorite (Meteor Lore)                                     | −25% (decays −1%/use to −10% floor, daily reset)              | also staggers, 1/combat                                                                                              |
+| train whistle (Crimbo 2022)                                      | −25% both, first use per combat                               | also staggers; combat item, funkslings with the HOA pad                                                              |
+| HOA citation pad (Dreadsylvania)                                 | −30% both                                                     | 100% stagger but **only vs dude/hippy/orc** (time cop yes, goblin unverified); 2nd use same combat is a free twiddle |
+| Curse of Weaksauce (Sauceror, 8 MP)                              | ~−3%/round, every round                                       | MP refunded on spell kill                                                                                            |
+| **barnacle-encrusted sweater**                                   | −20% always                                                   | ⚠ it's a **shirt** — mutually exclusive with the Jurassic Parka                                                      |
+| Chester's sunglasses / The Lost Glasses                          | −15% Def always                                               | accessory slot                                                                                                       |
+| "of Hatred" pieces                                               | −10% Def each, always                                         | also +spell damage (feeds the one-shot plan)                                                                         |
+| **sea lasso** (Coral Corral)                                     | unspaded, grows with use                                      | underwater-only, also staggers, reusable until it breaks                                                             |
+| **fishy wand** (fam equip)                                       | −15–20 Atk on proc (~3.7%/round)                              | underwater only                                                                                                      |
+| Mer-kin mouthsoap                                                | −250 to −300                                                  | Mer-kin only; also staggers them                                                                                     |
+| CSA obedience grenade                                            | −5%                                                           | +3-round stun                                                                                                        |
+| Delevel familiars: **Barrrnacle, Emo Squid, Space Jellyfish**    | wt/2 Atk&Def at combat start (4.5×wt% chance; Jellyfish 100%) | **all three breathe underwater innately** — no enabler needed                                                        |
+| Amplifiers: dark porquoise ring (×2), Ruthless Efficiency (+50%) | —                                                             | multiply all deleveling                                                                                              |
 
 ### Fit with the combat plan
 
