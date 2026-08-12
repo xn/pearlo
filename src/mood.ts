@@ -102,10 +102,15 @@ const resShortfallWarned = new Set<PearlKey>();
 /**
  * Turns of effect needed to finish this pearl: remaining fights at the capped
  * 10%/fight rate, doubled without Fishy (underwater fights cost 2 turns).
+ * Padded by 2 adventures of slack: non-fight turns (the zone's Lucky! NC,
+ * wandering NCs) burn effect turns without pearl progress, and a potion that
+ * expires one fight early drops that fight to 8.3% — a whole extra fight
+ * (2026-08-11 Dive Bar: "Razor, Scooter" ate turn 1 of an exactly-10-turn
+ * Sleaze-Resistant Trousers stack).
  */
 function coverageTurns(spec: PearlSpec): number {
   const fights = Math.ceil((100 - get(spec.progress, 0)) / 10);
-  return fights * (have($effect`Fishy`) ? 1 : 2);
+  return (fights + 2) * (have($effect`Fishy`) ? 1 : 2);
 }
 
 /**
