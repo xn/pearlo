@@ -17,7 +17,14 @@ import {
 import { $effect, $familiar, $item, $location, AsdonMartin, get, have, Macro, set } from "libram";
 
 import { args } from "./args";
-import { buildPearlMacro, damagePlan, weaponAttackPlan, wineglassAccessible } from "./combat";
+import {
+  buildPearlMacro,
+  buildWandererMacro,
+  damagePlan,
+  WANDERER_MONSTERS,
+  weaponAttackPlan,
+  wineglassAccessible,
+} from "./combat";
 import { zoneVerdict } from "./economics";
 import { pickUtilityFamiliar, playerAirByEffect } from "./familiar";
 import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fishy";
@@ -263,7 +270,9 @@ function pearlTask(spec: PearlSpec): Task {
       lastRecordedProgress.set(spec.key, progress);
     },
     outfit: () => buildPearlOutfit(spec),
-    combat: new CombatStrategy().macro(() => buildPearlMacro(spec, plan)),
+    combat: new CombatStrategy()
+      .macro(() => buildWandererMacro(), WANDERER_MONSTERS)
+      .macro(() => buildPearlMacro(spec, plan)),
     limit: { soft: 30 },
   };
 }

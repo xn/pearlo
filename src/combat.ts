@@ -9,7 +9,7 @@ import {
   numericModifier,
   weaponType,
 } from "kolmafia";
-import { $item, $skill, $slot, $stat, Macro, get, have } from "libram";
+import { $item, $monsters, $skill, $slot, $stat, Macro, get, have } from "libram";
 
 import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
@@ -168,6 +168,31 @@ export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan): Macro {
     macro.trySkill($skill`Entangling Noodles`);
   }
   return macro.skill($skill`Saucegeyser`).repeat();
+}
+
+// Wanderers injected by un-banned equipment (Kramco → sausage goblin, Möbius ring →
+// time cop). Both scale off our stats, so the zone's tuned one-shot plan doesn't
+// apply — layer stagger-deleveling, then stun, then geyser (spec 2026-08-12):
+// Micrometeorite −25% + stagger; train whistle −25% Atk/Def + stagger; HOA citation
+// pad −30% + 100% stagger vs dudes (time cop; undocumented vs the goblin, but the
+// funkslung pair costs no extra round). Goblin never acts first (init -10000); the
+// time cop's init 250 is covered by the parka's automatic round-1 stagger.
+export const WANDERER_MONSTERS = $monsters`sausage goblin, time cop`;
+
+export function buildWandererMacro(): Macro {
+  if (wineglassMode()) {
+    return new Macro().attack().repeat();
+  }
+  const macro = new Macro().trySkill($skill`Micrometeorite`);
+  if (have($skill`Ambidextrous Funkslinging`)) {
+    macro.tryFunkslingItem($item`train whistle`, $item`HOA citation pad`);
+  } else {
+    macro.tryItem($item`train whistle`).tryItem($item`HOA citation pad`);
+  }
+  return macro
+    .trySkill($skill`Entangling Noodles`)
+    .skill($skill`Saucegeyser`)
+    .repeat();
 }
 
 export type AttackPlan = {
