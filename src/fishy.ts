@@ -1,7 +1,10 @@
 import {
   buy,
   cliExecute,
+  equip,
+  equippedItem,
   hermit,
+  haveEquipped,
   historicalPrice,
   itemAmount,
   mallPrice,
@@ -10,7 +13,17 @@ import {
   use,
   useSkill,
 } from "kolmafia";
-import { $effect, $item, $skill, AugustScepter, get, have, sum } from "libram";
+import {
+  $effect,
+  $item,
+  $skill,
+  $slot,
+  AprilingBandHelmet,
+  AugustScepter,
+  get,
+  have,
+  sum,
+} from "libram";
 
 import { args } from "./args";
 import { PearlSpec } from "./zones";
@@ -26,6 +39,14 @@ export const HAGGLING_FISHY_TURNS = 20;
 const CLOVER = $item`11-leaf clover`;
 const AUG_2 = $skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`;
 const HERMIT_CLOVER_LIMIT = 3; // wiki The Hermitage: "(Limit 3 per day)", pref _cloversPurchased
+const SAXOPHONE = $item`Apriling band saxophone`; // 3 plays/day, each grants Lucky!
+const HEARTSTONE = $item`Heartstone`;
+const HEARTSTONE_LUCK = $skill`Heartstone: %luck`; // 1/day, needs Heartstone equipped
+
+/** Heartstone: LUCK unlocked, unused today, and the stone is on hand? */
+function heartstoneLuckAvailable(): boolean {
+  return have(HEARTSTONE) && get("heartstoneLuckUnlocked") && !get("_heartstoneLuckUsed");
+}
 
 /**
  * Meat cost of a hermit clover — mafia auto-buys chewing gum on a string (one worthless
@@ -50,8 +71,30 @@ function mallWorthIt(remainingFights: number, price: number): boolean {
   return Math.min(HAGGLING_FISHY_TURNS, remainingFights) * args.major.voa >= price;
 }
 
-// Cascade order fixed by user decision (2026-08-08): scepter first, then free-first.
+// Cascade order fixed by user decision (2026-08-12): Lucky!-dedicated daily sources
+// (saxophone, Heartstone) before the scepter — its 5 shared Aug. casts are flexible —
+// then free-first among the clover-shaped sources.
 const LUCKY_SOURCES: LuckySource[] = [
+  {
+    name: "Apriling band saxophone",
+    // canPlay covers helmet ownership, uses left, and conjure-if-missing (all local state).
+    available: () => AprilingBandHelmet.canPlay(SAXOPHONE, true),
+    acquire: () => AprilingBandHelmet.play(SAXOPHONE, true),
+  },
+  {
+    name: "Heartstone: LUCK",
+    available: heartstoneLuckAvailable,
+    acquire: () => {
+      // The cast only works while the stone is worn — swap it into acc2 and back,
+      // the same pattern lib.ts uses for the other Heartstone skills.
+      const swap = !haveEquipped(HEARTSTONE);
+      const currentAcc2 = equippedItem($slot`acc2`);
+      if (swap) equip($slot`acc2`, HEARTSTONE);
+      const cast = useSkill(HEARTSTONE_LUCK, 1);
+      if (swap) equip($slot`acc2`, currentAcc2);
+      return cast;
+    },
+  },
   {
     name: "Aug. 2nd scepter skill",
     available: () => AugustScepter.have() && AugustScepter.canCast(2),
@@ -128,6 +171,10 @@ export function acquireLucky(remainingFights: number): boolean {
 export function luckyRefreshCosts(maxCount: number): number[] {
   if (!args.resources.luckyfishy) return [];
   const costs: number[] = [];
+  if (AprilingBandHelmet.canPlay(SAXOPHONE, true)) {
+    for (let i = 0; i < SAXOPHONE.dailyusesleft; i++) costs.push(0);
+  }
+  if (heartstoneLuckAvailable()) costs.push(0);
   if (AugustScepter.have() && AugustScepter.canCast(2)) costs.push(0);
   for (let i = 0; i < itemAmount(CLOVER); i++) costs.push(0);
   if (have($item`Eight Days a Week Pill Keeper`) && !get("_freePillKeeperUsed")) {
@@ -146,6 +193,16 @@ export function luckySourceReport(): string[] {
   if (!args.resources.luckyfishy) {
     return [" lucky fishy refresh: disabled (luckyfishy=false)"];
   }
+  const saxophone = !AprilingBandHelmet.have()
+    ? "helmet not owned"
+    : `${SAXOPHONE.dailyusesleft} play(s) left today`;
+  const heartstone = !have(HEARTSTONE)
+    ? "not owned"
+    : !get("heartstoneLuckUnlocked")
+      ? "LUCK not unlocked"
+      : get("_heartstoneLuckUsed")
+        ? "used today"
+        : "available";
   const scepter = !AugustScepter.have()
     ? "not owned"
     : AugustScepter.canCast(2)
@@ -162,6 +219,8 @@ export function luckySourceReport(): string[] {
       : "disabled (cloverprice=0)";
   return [
     ` lucky fishy refresh (The Haggling: +${HAGGLING_FISHY_TURNS} Fishy per trip):`,
+    `  Apriling band saxophone: ${saxophone}`,
+    `  Heartstone: LUCK: ${heartstone}`,
     `  Aug. 2nd scepter: ${scepter}`,
     `  11-leaf clovers in inventory: ${itemAmount(CLOVER)}`,
     `  pill keeper: ${pillkeeper}`,

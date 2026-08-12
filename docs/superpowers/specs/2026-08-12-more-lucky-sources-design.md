@@ -48,14 +48,14 @@ entries keep their relative order.
    `get("heartstoneLuckUnlocked")` ∧ `!get("_heartstoneLuckUsed")`; `acquire`: equip
    Heartstone to acc2, `useSkill($skill`Heartstone: %luck`)`, restore the previous
    acc2 — the same swap pattern `lib.ts` uses for Ultraheart/Best Pals.
-3. Aug. 2nd scepter *(existing)*
-4. owned 11-leaf clovers *(existing)*
-5. free pill keeper *(existing)*
-6. hermit clovers *(existing)*
-7. mall clovers *(existing)*
+3. Aug. 2nd scepter _(existing)_
+4. owned 11-leaf clovers _(existing)_
+5. free pill keeper _(existing)_
+6. hermit clovers _(existing)_
+7. mall clovers _(existing)_
 
 **Why 1–2:** all three free daily sources are use-it-or-lose-it, but the saxophone and
-Heartstone LUCK can *only* produce Lucky!, while the scepter's 5 shared Aug. casts can
+Heartstone LUCK can _only_ produce Lucky!, while the scepter's 5 shared Aug. casts can
 go to any Aug. skill — the least flexible resources burn first. Owned clovers are
 tradeable assets and the free pill keeper use is contested by other pill keeper
 effects, so everything free-and-daily precedes them.
