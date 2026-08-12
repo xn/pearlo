@@ -21,10 +21,9 @@ import { PearlSpec, familiarWaterBreathingEquipment, waterBreathingEquipment } f
 
 // Never let the maximizer equip these in pearl zones (user directives):
 // - broken champagne bottle: its +item drains limited daily charges (2026-08-07)
-// - Kramco Sausage-o-Matic™ (and replica): sausage goblin wanderers replace zone
-//   adventures — turns without pearl progress (2026-08-08)
-// - Möbius ring: interferes with zone adventuring (2026-08-08)
-const GLOBAL_AVOID = $items`broken champagne bottle, Kramco Sausage-o-Matic™, replica Kramco Sausage-o-Matic™, Möbius ring`;
+// (Kramco and Möbius ring were un-banned 2026-08-12 — their wanderers/NC are now
+// handled by the wanderer macro in combat.ts and the pearlo-choice script.)
+const GLOBAL_AVOID = $items`broken champagne bottle`;
 
 // Stooper-displacement notices are per-zone-per-session — buildPearlOutfit runs
 // before every fight, and repeating the line each combat is noise.
