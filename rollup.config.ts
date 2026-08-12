@@ -59,7 +59,7 @@ const baseSettings = {
     : undefined,
 } satisfies RollupOptions;
 
-export default [{ pearlo: "src/main.ts" }].map((input) => ({
+export default [{ pearlo: "src/main.ts" }, { "pearlo-choice": "src/choice.ts" }].map((input) => ({
   input,
   ...baseSettings,
 }));

@@ -52,6 +52,9 @@ export class PearloEngine extends Engine<never, Task> {
       maximizerCombinationLimit: 0,
       hpAutoRecoveryItems: hpItems,
       mpAutoRecoveryItems: mpItems,
+      // NC 1562 (Möbius ring) has rotating option numbers — answered by text in the
+      // bundled pearlo-choice script. Restored by destruct() like every setting here.
+      choiceAdventureScript: "pearlo-choice.js",
     });
   }
 
