@@ -2,6 +2,7 @@ import {
   Effect,
   Element,
   Item,
+  buy,
   effectModifier,
   haveEffect,
   hpCost,
@@ -114,13 +115,15 @@ function coverageTurns(spec: PearlSpec): number {
 }
 
 /**
- * Chew through the zone's configured potion list (strongest first, inventory
- * only — nothing is purchased) until dressed res reaches the progress cap.
- * Runs after the skill buffs so free casts count before potions are spent.
- * Each potion is used in bulk — enough copies for the effect to outlast the
- * rest of the pearl — so short-duration potions (powders, marzipan skulls)
- * don't drop a tier on expiry boundaries mid-zone; anything that still
- * expires early is re-upped by the next pre-fight mood pass.
+ * Chew through the zone's configured potion list (strongest first) until
+ * dressed res reaches the progress cap. Inventory only by default; with
+ * resources.potionprice set, shortfalls are bought from the mall at up to
+ * that price per potion. Runs after the skill buffs so free casts count
+ * before potions are spent. Each potion is used in bulk — enough copies for
+ * the effect to outlast the rest of the pearl — so short-duration potions
+ * (powders, marzipan skulls) don't drop a tier on expiry boundaries
+ * mid-zone; anything that still expires early is re-upped by the next
+ * pre-fight mood pass.
  */
 function topUpRes(spec: PearlSpec): void {
   const resName = resModifierName(spec.key);
@@ -128,17 +131,21 @@ function topUpRes(spec: PearlSpec): void {
   const need = coverageTurns(spec);
   for (const it of resItems(spec.key)) {
     if (numericModifier(resName) >= PEARL_RES_CAP) break;
-    if (!have(it)) continue;
     const ef = effectModifier(it, "Effect");
     if (ef !== $effect.none && have(ef)) continue;
     const duration = Math.max(1, numericModifier(it, "Effect Duration"));
-    use(it, Math.min(itemAmount(it), Math.ceil(need / duration)));
+    const want = Math.ceil(need / duration);
+    if (itemAmount(it) < want && args.resources.potionprice > 0 && it.tradeable) {
+      buy(it, want - itemAmount(it), args.resources.potionprice);
+    }
+    if (itemAmount(it) === 0) continue;
+    use(it, Math.min(itemAmount(it), want));
   }
   const finalRes = numericModifier(resName);
   if (finalRes < PEARL_RES_CAP && !resShortfallWarned.has(spec.key)) {
     resShortfallWarned.add(spec.key);
     print(
-      `pearlo: ${spec.key} res is ${finalRes} after the ${spec.key}resitems top-up (< ${PEARL_RES_CAP} cap) — pearl progress runs below 10%/fight. Stock more of the list or extend it.`,
+      `pearlo: ${spec.key} res is ${finalRes} after the ${spec.key}resitems top-up (< ${PEARL_RES_CAP} cap) — pearl progress runs below 10%/fight. Stock more of the list, extend it, or set potionprice to allow mall top-ups.`,
       "red",
     );
   }

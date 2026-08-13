@@ -134,6 +134,10 @@ export const args = Args.create(
         help: "Max meat to pay per mall 11-leaf clover for the Fishy refresh. 0 (default) never buys from the mall — free/owned sources only.",
         default: 0,
       }),
+      potionprice: Args.number({
+        help: "Max meat to pay per potion when a zone's resitems list runs short of inventory during the res top-up. 0 (default) never buys from the mall — inventory only.",
+        default: 0,
+      }),
     }),
 
     debug: Args.group("Debug Options", {
