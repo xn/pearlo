@@ -18,6 +18,7 @@ import { $effect, $item, PropertiesManager, get } from "libram";
 
 import { args } from "./args";
 import { damagePlan } from "./combat";
+import { canCureBeatenUp } from "./lib";
 import { canBreathUnderwater } from "./zones";
 
 export class PearloEngine extends Engine<never, Task> {
@@ -70,9 +71,12 @@ export class PearloEngine extends Engine<never, Task> {
     // (5/day), otherwise take the best option. Runs post-dress every execution so the
     // skip counter stays current. Grimoire's shouldRepeatAdv re-adventures after a
     // cleaver NC, so these don't cost pearl progress turns.
+    // Poetic Justice (1467): the +5-adventure option also inflicts Beaten Up (5 turns,
+    // −50% all stats). Take it only when an owned cure is on hand — post() cures it
+    // (handlePostCombatBeatenUp); otherwise skip, or fall back to the moxie stats.
     if (equippedAmount($item`June cleaver`) > 0) {
       manager.setChoices({
-        1467: 3, // +adv
+        1467: canCureBeatenUp() ? 3 : get("_juneCleaverSkips", 0) < 5 ? 4 : 1, // +adv when curable
         1468: get("_juneCleaverSkips", 0) < 5 ? 4 : 1,
         1469: get("_juneCleaverSkips", 0) < 5 ? 4 : 3,
         1470: 2, // teacher's pen

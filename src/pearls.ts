@@ -28,7 +28,7 @@ import {
 import { zoneVerdict } from "./economics";
 import { pickUtilityFamiliar, playerAirByEffect } from "./familiar";
 import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fishy";
-import { abortIfBeatenUp, asdonFualable, fuelUp } from "./lib";
+import { abortIfBeatenUp, asdonFualable, fuelUp, handlePostCombatBeatenUp } from "./lib";
 import { pearlMood } from "./mood";
 import { wineglassMode } from "./organs";
 import { buildPearlOutfit, familiarPlanPathFor } from "./outfit";
@@ -186,6 +186,9 @@ function turnsNeeded(spec: PearlSpec): number {
 
 function pearlTask(spec: PearlSpec): Task {
   let plan = damagePlan(spec.maxHp);
+  // Snapshot for post()'s Beaten Up attribution: a cleaver NC firing mid-chain adds
+  // its choice id to this queue (see handlePostCombatBeatenUp).
+  let cleaverQueueBefore = "";
   return {
     name: `${spec.loc}`,
     after: ["Breathe Underwater", ...spec.after],
@@ -205,6 +208,7 @@ function pearlTask(spec: PearlSpec): Task {
         (args.major.strand ? (have($effect`Fishy`) ? 1 : 2) : turnsNeeded(spec)),
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
+      cleaverQueueBefore = get("juneCleaverQueue");
       // Post-dress res verification (session 2026-08-09): switch-path builds landed at
       // 15–17 real res while the maximizer's model said 18 — 8.3%/fight instead of 10%.
       // When that happens, re-dress with the utility-familiar build, which hit the cap
@@ -256,7 +260,7 @@ function pearlTask(spec: PearlSpec): Task {
     // "1&bandersnatch=<monsterid>" is mafia's Map-the-Monsters-style encoding.
     choices: { ...(spec.choices ?? {}), 1557: `1&bandersnatch=${spec.peridotMonster.id}` },
     post: () => {
-      abortIfBeatenUp(`after a combat in ${spec.loc}`);
+      handlePostCombatBeatenUp(`after a combat in ${spec.loc}`, cleaverQueueBefore);
       const previousRate = observedProgressRate.get(spec.key);
       const progress = get(spec.progress, 0);
       const last = lastRecordedProgress.get(spec.key);

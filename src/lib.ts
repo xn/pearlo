@@ -30,11 +30,13 @@ import {
   toItem,
   toSkill,
   use,
+  useSkill,
 } from "kolmafia";
 import {
   $class,
   $effect,
   $item,
+  $items,
   $skill,
   $slot,
   AsdonMartin,
@@ -219,7 +221,7 @@ export function tryAcquiringEffect(ef: Effect, tryRegardless = false): void {
 }
 
 /**
- * Losing a combat inflicts Beaten Up (3 turns, heavy stat penalties). For pearlo that
+ * Losing a combat inflicts Beaten Up (heavy stat penalties). For pearlo that
  * always means the damage/defense plan failed — continuing would burn 2-adventure
  * underwater turns while crippled, so fail loudly instead.
  */
@@ -229,6 +231,69 @@ export function abortIfBeatenUp(context: string): void {
       `pearlo: Beaten Up ${context} — a fight was lost. Check HP, damage plan, and restores before rerunning.`,
     );
   }
+}
+
+// Owned single-use Beaten Up cures, cheapest first (SGEEA last — it cures anything,
+// don't waste one when a tiny house would do).
+const BEATEN_UP_CURES = $items`tiny house, CSA all-purpose soap, soft green echo eyedrop antidote`;
+
+function hotTubAvailable(): boolean {
+  return have($item`Clan VIP Lounge key`) && get("_hotTubSoaks") < 5;
+}
+
+function walrusCastable(): boolean {
+  return have($skill`Tongue of the Walrus`) && myMp() >= mpCost($skill`Tongue of the Walrus`);
+}
+
+/**
+ * Whether cureBeatenUp() would succeed right now. Free/owned resources only (no
+ * mall buys) — used to decide if the June cleaver's Poetic Justice +5-adventure
+ * option (which inflicts Beaten Up) is safe to take.
+ */
+export function canCureBeatenUp(): boolean {
+  return walrusCastable() || hotTubAvailable() || BEATEN_UP_CURES.some((cure) => have(cure));
+}
+
+/**
+ * Remove Beaten Up using owned/free resources only: Tongue of the Walrus, then a
+ * VIP hot tub soak (also a full heal, 5/day), then owned single-use cures. Not
+ * libram's uneffect(): that shells out to mafia's `uneffect`, which may buy a
+ * remedy — pearlo's default policy is free/owned resources only.
+ */
+export function cureBeatenUp(): boolean {
+  const beatenUp = $effect`Beaten Up`;
+  if (have(beatenUp) && walrusCastable()) useSkill($skill`Tongue of the Walrus`);
+  if (have(beatenUp) && hotTubAvailable()) cliExecute("hottub");
+  for (const cure of BEATEN_UP_CURES) {
+    if (!have(beatenUp)) break;
+    if (have(cure)) use(cure);
+  }
+  return !have(beatenUp);
+}
+
+/**
+ * Post-combat Beaten Up triage. The June cleaver's Poetic Justice NC (choice 1467,
+ * option 3) grants +5 adventures at the cost of Beaten Up (5 turns, −50% all stats)
+ * — taken deliberately (see PearloEngine.setChoices), and turn-free, so grimoire
+ * re-adventures through it and the effect surfaces in post() after a *won* fight.
+ * Attribution: 1467 can only fire while absent from mafia's juneCleaverQueue and
+ * fires into it, so absent-before/present-after identifies it exactly; a lost fight
+ * additionally leaves HP at 0, which Poetic Justice never does.
+ */
+export function handlePostCombatBeatenUp(context: string, cleaverQueueBefore: string): void {
+  if (!have($effect`Beaten Up`)) return;
+  const queueNow = get("juneCleaverQueue");
+  const poeticJusticeFired =
+    !cleaverQueueBefore.includes("1467") && queueNow.includes("1467") && myHp() > 0;
+  if (!poeticJusticeFired) abortIfBeatenUp(context);
+  if (!cureBeatenUp()) {
+    abort(
+      "pearlo: Beaten Up from the June cleaver's Poetic Justice (+5 advs) and no owned cure " +
+        "worked (Tongue of the Walrus / VIP hot tub / tiny house / CSA soap / SGEEA). " +
+        "Cure it manually before rerunning — fighting at −50% stats breaks the damage plan.",
+    );
+  }
+  print("pearlo: cured Beaten Up from the June cleaver's Poetic Justice (+5 adventures).", "blue");
 }
 
 export function isLiverCapped(): boolean {
