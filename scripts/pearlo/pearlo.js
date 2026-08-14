@@ -23460,6 +23460,10 @@ var args = Args.create("pearlo", "This is a script for farming unblemished pearl
     cloverprice: Args.number({
       help: "Max meat to pay per mall 11-leaf clover for the Fishy refresh. 0 (default) never buys from the mall — free/owned sources only.",
       default: 0
+    }),
+    potionprice: Args.number({
+      help: "Max meat to pay per potion when a zone's resitems list runs short of inventory during the res top-up. 0 (default) never buys from the mall — inventory only.",
+      default: 0
     })
   }),
   debug: Args.group("Debug Options", {
@@ -26531,13 +26535,15 @@ function coverageTurns(spec) {
 }
 
 /**
- * Chew through the zone's configured potion list (strongest first, inventory
- * only — nothing is purchased) until dressed res reaches the progress cap.
- * Runs after the skill buffs so free casts count before potions are spent.
- * Each potion is used in bulk — enough copies for the effect to outlast the
- * rest of the pearl — so short-duration potions (powders, marzipan skulls)
- * don't drop a tier on expiry boundaries mid-zone; anything that still
- * expires early is re-upped by the next pre-fight mood pass.
+ * Chew through the zone's configured potion list (strongest first) until
+ * dressed res reaches the progress cap. Inventory only by default; with
+ * resources.potionprice set, shortfalls are bought from the mall at up to
+ * that price per potion. Runs after the skill buffs so free casts count
+ * before potions are spent. Each potion is used in bulk — enough copies for
+ * the effect to outlast the rest of the pearl — so short-duration potions
+ * (powders, marzipan skulls) don't drop a tier on expiry boundaries
+ * mid-zone; anything that still expires early is re-upped by the next
+ * pre-fight mood pass.
  */
 function topUpRes(spec) {
   var resName = resModifierName(spec.key);
@@ -26549,11 +26555,15 @@ function topUpRes(spec) {
     for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
       var it = _step2.value;
       if (require$$0.numericModifier(resName) >= PEARL_RES_CAP) break;
-      if (!have$1a(it)) continue;
       var ef = require$$0.effectModifier(it, "Effect");
       if (ef !== $effect.none && have$1a(ef)) continue;
       var duration = Math.max(1, require$$0.numericModifier(it, "Effect Duration"));
-      require$$0.use(it, Math.min(require$$0.itemAmount(it), Math.ceil(need / duration)));
+      var want = Math.ceil(need / duration);
+      if (require$$0.itemAmount(it) < want && args.resources.potionprice > 0 && it.tradeable) {
+        require$$0.buy(it, want - require$$0.itemAmount(it), args.resources.potionprice);
+      }
+      if (require$$0.itemAmount(it) === 0) continue;
+      require$$0.use(it, Math.min(require$$0.itemAmount(it), want));
     }
   } catch (err) {
     _iterator2.e(err);
@@ -26563,7 +26573,7 @@ function topUpRes(spec) {
   var finalRes = require$$0.numericModifier(resName);
   if (finalRes < PEARL_RES_CAP && !resShortfallWarned.has(spec.key)) {
     resShortfallWarned.add(spec.key);
-    require$$0.print("pearlo: ".concat(spec.key, " res is ").concat(finalRes, " after the ").concat(spec.key, "resitems top-up (< ").concat(PEARL_RES_CAP, " cap) \u2014 pearl progress runs below 10%/fight. Stock more of the list or extend it."), "red");
+    require$$0.print("pearlo: ".concat(spec.key, " res is ").concat(finalRes, " after the ").concat(spec.key, "resitems top-up (< ").concat(PEARL_RES_CAP, " cap) \u2014 pearl progress runs below 10%/fight. Stock more of the list, extend it, or set potionprice to allow mall top-ups."), "red");
   }
 }
 
