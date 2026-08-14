@@ -8,3 +8,4 @@ dist/
 !.yarn/versions
 *.log
 /docs/
+/CLAUDE.md
