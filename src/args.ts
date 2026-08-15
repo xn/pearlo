@@ -19,6 +19,17 @@ export function workshedParser(value: string) {
   return item;
 }
 
+/** mombuff arg: "true"/"auto" = auto-assign, or a pearl element to reserve it for. */
+export type MomBuffMode = PearlKey | "auto";
+export function momBuffParser(value: string): MomBuffMode | ParseError {
+  const v = value.trim().toLowerCase();
+  if (v === "true" || v === "auto") return "auto";
+  if ((PEARL_KEYS as string[]).includes(v)) return v as PearlKey;
+  return new ParseError(
+    `received ${value}; expected true (auto-assign) or one of ${PEARL_KEYS.join(",")}`,
+  );
+}
+
 export const args = Args.create(
   "pearlo",
   "This is a script for farming unblemished pearls",
@@ -142,6 +153,13 @@ export const args = Args.create(
         help: "At the end of the run, socket unblemished pearls into The Eternity Codpiece until all five slots hold pearls (+1 adventure/day each; evicts non-pearl gems back to inventory). Wear the codpiece at rollover to collect the bonus. Off by default.",
         default: false,
       }),
+      mombuff: Args.custom<MomBuffMode>(
+        {
+          help: "Spend Mom Sea Monkee's free daily food (+7 zone-element res, 50 adv) when a zone can't reach the 18-res cap: true auto-assigns it to the first under-capped zone in farming order; an element name (spooky,sleaze,hot,stench,cold) reserves it for that zone. Unset (default) never visits Mom.",
+        },
+        momBuffParser,
+        "element|true",
+      ),
     }),
 
     debug: Args.group("Debug Options", {

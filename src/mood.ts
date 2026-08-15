@@ -4,6 +4,7 @@ import {
   Item,
   booleanModifier,
   buy,
+  cliExecute,
   effectModifier,
   haveEffect,
   hpCost,
@@ -169,6 +170,32 @@ function resItems(key: PearlKey): Item[] {
 
 const resShortfallWarned = new Set<PearlKey>();
 
+// Latched after an unsuccessful Mom visit (not rescued this ascension, not
+// reachable) so later zones don't retry-spam her every prep.
+let momAttemptFailed = false;
+
+/**
+ * Mom Sea Monkee's free daily food: +7 in the zone's element for 50 adventures
+ * (mafia's `mom` command handles travel, breathing gear, and _momFoodReceived).
+ * Last resort after skills and potions — only fires when the zone still can't
+ * cap, per the mombuff arg (auto = first under-capped zone claims it; an element
+ * value reserves it for that zone).
+ */
+function tryMomBuff(spec: PearlSpec): void {
+  const mode = args.resources.mombuff;
+  if (mode === undefined || momAttemptFailed) return;
+  if (mode !== "auto" && mode !== spec.key) return;
+  if (get("_momFoodReceived")) return;
+  cliExecute(`mom ${spec.key}`);
+  if (!get("_momFoodReceived")) {
+    momAttemptFailed = true;
+    print(
+      "pearlo: Mom Sea Monkee was unavailable (not rescued this ascension?) — skipping the mombuff top-up for the rest of the run.",
+      "red",
+    );
+  }
+}
+
 /**
  * Turns of effect needed to finish this pearl: remaining fights at the capped
  * 10%/fight rate, doubled without Fishy (underwater fights cost 2 turns).
@@ -210,11 +237,12 @@ function topUpRes(spec: PearlSpec): void {
     if (itemAmount(it) === 0) continue;
     use(it, Math.min(itemAmount(it), want));
   }
+  if (numericModifier(resName) < PEARL_RES_CAP) tryMomBuff(spec);
   const finalRes = numericModifier(resName);
   if (finalRes < PEARL_RES_CAP && !resShortfallWarned.has(spec.key)) {
     resShortfallWarned.add(spec.key);
     print(
-      `pearlo: ${spec.key} res is ${finalRes} after the ${spec.key}resitems top-up (< ${PEARL_RES_CAP} cap) — pearl progress runs below 10%/fight. Stock more of the list, extend it, or set potionprice to allow mall top-ups.`,
+      `pearlo: ${spec.key} res is ${finalRes} after the ${spec.key}resitems top-up (< ${PEARL_RES_CAP} cap) — pearl progress runs below 10%/fight. Stock more of the list, extend it, or set potionprice / mombuff for more sources.`,
       "red",
     );
   }
