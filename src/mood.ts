@@ -2,6 +2,7 @@ import {
   Effect,
   Element,
   Item,
+  booleanModifier,
   buy,
   effectModifier,
   haveEffect,
@@ -21,7 +22,18 @@ import {
   toSkill,
   use,
 } from "kolmafia";
-import { $effect, $effects, $elements, $familiar, $item, get, have } from "libram";
+import {
+  $effect,
+  $effects,
+  $elements,
+  $familiar,
+  $familiars,
+  $item,
+  $items,
+  get,
+  have,
+  uneffect,
+} from "libram";
 
 import { args } from "./args";
 import { tryAcquiringEffect } from "./lib";
@@ -69,6 +81,57 @@ const WEAPON_DAMAGE_EFFECTS = [
   ...$effects`Carol of the Bulls, Song of the North`,
   $effect`Frenzied, Bloody`,
 ];
+
+// Damage mitigation (garbo sea-farming parity, wiki-verified 2026-08-15): pearl-zone
+// damage is almost entirely physical (docs/sea-reference.md), so Damage Absorption
+// +80 (Ghostly Shell) and −30% physical damage taken (Shield of the Pastalord)
+// cover both combat modes.
+const DEFENSE_EFFECTS = $effects`Ghostly Shell, Shield of the Pastalord`;
+
+// Muscle +10 and 20–30 HP regen/adventure: Disco Aerobics cast with the April Shower
+// Thoughts shield (lib.ts owns the offhand swap). The regen offsets restore costs.
+const REGEN_EFFECTS = $effects`Disco over Matter`;
+
+// Effects that break pearl farming outright (garbo's shrugBadEffects, trimmed to the
+// modifiers that matter here): Adventure Randomly teleports turns out of the zone,
+// Alters Page Text can break mafia's response parsing (progress tracking), Always
+// Fumble voids the wineglass one-shot guarantee, Blind hides combat text. Computed
+// lazily from local modifier data — no server hits.
+let badEffectsCache: Effect[] | undefined;
+function badEffects(): Effect[] {
+  return (badEffectsCache ??= Effect.all().filter(
+    (ef) =>
+      booleanModifier(ef, "Adventure Randomly") ||
+      booleanModifier(ef, "Alters Page Text") ||
+      booleanModifier(ef, "Always Fumble") ||
+      booleanModifier(ef, "Blind"),
+  ));
+}
+
+// Weight-scaled resistance familiars (docs/sea-reference.md): more familiar weight is
+// more elemental res toward the 18 cap — the only case the weight potions pay off.
+const WEIGHT_RES_FAMILIARS = $familiars`Exotic Parrot, Mu`;
+// Underwater-only familiar-weight potions (garbo Coral Corral parity, wiki-verified
+// 2026-08-15): temporary teardrop tattoo → Crocodile Tear (+10 lbs, 15 adv, ganger
+// drop), sea grease → Greased-Up Familiar (+5 lbs, 40 adv, Big Brother 5 sand
+// dollars). Inventory only — free/owned default.
+const FAMILIAR_WEIGHT_POTIONS = $items`temporary teardrop tattoo, sea grease`;
+
+/** Use owned underwater famweight potions while a weight-scaled res familiar is out. */
+function topUpFamiliarWeight(spec: PearlSpec): void {
+  if (!WEIGHT_RES_FAMILIARS.includes(myFamiliar())) return;
+  const resName = resModifierName(spec.key);
+  if (numericModifier(resName) >= PEARL_RES_CAP) return;
+  const need = coverageTurns(spec);
+  for (const it of FAMILIAR_WEIGHT_POTIONS) {
+    if (numericModifier(resName) >= PEARL_RES_CAP) break;
+    if (itemAmount(it) === 0) continue;
+    const ef = effectModifier(it, "Effect");
+    if (ef !== $effect.none && have(ef)) continue;
+    const duration = Math.max(1, numericModifier(it, "Effect Duration"));
+    use(it, Math.min(itemAmount(it), Math.ceil(need / duration)));
+  }
+}
 
 /** Per-zone res top-up potions (overrides.<key>resitems), parsed and warned once. */
 const resItemCache = new Map<PearlKey, Item[]>();
@@ -160,6 +223,8 @@ function applicableBuffs(spec: PearlSpec): Effect[] {
     ),
     ...STAT_EFFECTS,
     ...HP_EFFECTS,
+    ...DEFENSE_EFFECTS,
+    ...REGEN_EFFECTS,
     ...(myFamiliar() !== $familiar.none ? FAMILIAR_WEIGHT_EFFECTS : []),
     // Wineglass combat kills spells — spell-damage songs are dead weight overdrunk;
     // weapon-damage songs take their place (and vice versa while sober).
@@ -206,6 +271,12 @@ export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
     use($item`fishy pipe`);
   }
 
+  // Shed run-breaking effects first (uneffect spends a remover on non-shruggables —
+  // worth it, these void turns or the one-shot guarantee outright).
+  for (const ef of badEffects()) {
+    if (have(ef)) uneffect(ef);
+  }
+
   const buffs = applicableBuffs(spec);
 
   // MP economy (user feedback: hovering at ~2 casts of MP against a huge pool is way
@@ -222,6 +293,7 @@ export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
 
   for (const ef of buffs) tryAcquiringEffect(ef);
 
+  topUpFamiliarWeight(spec);
   topUpRes(spec);
 
   // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight buffer.
