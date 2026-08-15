@@ -58,6 +58,12 @@ Useful options:
   Codpiece until all five slots hold pearls (+1 adventure/day each; non-pearl gems are
   evicted back to inventory, and socketed gems persist across ascensions). Off by
   default. Wear the codpiece at rollover to collect the bonus.
+- `mombuff=true|<element>` — spend Mom Sea Monkee's free daily food (+7 zone-element
+  resistance, 50 adventures) as a last resort when a zone can't reach the 18-res cap
+  after buffs and potions: `true` auto-assigns it to the first under-capped zone in
+  farming order; an element name (`spooky,sleaze,hot,stench,cold`) reserves it for
+  that zone. Unset (default) never visits Mom. Requires having rescued her this
+  ascension.
 - `halt=N` — stop when N or fewer adventures remain
 
 ## Overcapped organs
