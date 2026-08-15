@@ -112,7 +112,8 @@ export const args = Args.create(
       // alone lands well short (2026-08-10 session: res 10-15, 5-8.3%/fight).
       spookyresitems: Args.string({
         help: "Comma-separated potions to use (if in inventory) until spooky res caps in the Anemone Mine. Empty disables.",
-        default: "scroll of minor invulnerability, pec oil, gray seashell, marzipan skull",
+        default:
+          "scroll of minor invulnerability, pec oil, gray seashell, marzipan skull, spooky powder",
       }),
       sleazeresitems: Args.string({
         help: "Comma-separated potions to use (if in inventory) until sleaze res caps in The Dive Bar. Empty disables.",
