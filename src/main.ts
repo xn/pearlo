@@ -100,7 +100,7 @@ export function main(command?: string): void {
     for (const spec of selected) {
       const v = zoneVerdict(spec);
       print(
-        `  ${spec.key}: expected profit ${Math.round(v.profit)} meat — ${v.go ? "GO" : "SKIP"}`,
+        `  ${spec.key}: res ${v.res} → ${v.ratePct}%/fight — expected profit ${Math.round(v.profit)} meat — ${v.go ? "GO" : "SKIP"}`,
         v.go ? "blue" : "red",
       );
       for (const line of overrideReportLines(spec)) print(line);
