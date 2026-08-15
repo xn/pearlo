@@ -92,6 +92,12 @@ const DEFENSE_EFFECTS = $effects`Ghostly Shell, Shield of the Pastalord`;
 // Thoughts shield (lib.ts owns the offhand swap). The regen offsets restore costs.
 const REGEN_EFFECTS = $effects`Disco over Matter`;
 
+// Pressure reduction ("makes you a better diver") — claws back the initiative the
+// pearl zones' pressure penalties eat, i.e. the pufferfish-stun setup. AT song
+// (user knows the skill, 2026-08-15); with the statuseffects.txt song census this
+// is the 4th of the user's 4 song slots, so nothing gets displaced.
+const PRESSURE_EFFECTS = $effects`Donho's Bubbly Ballad`;
+
 // Effects that break pearl farming outright (garbo's shrugBadEffects, trimmed to the
 // modifiers that matter here): Adventure Randomly teleports turns out of the zone,
 // Alters Page Text can break mafia's response parsing (progress tracking), Always
@@ -225,6 +231,7 @@ function applicableBuffs(spec: PearlSpec): Effect[] {
     ...HP_EFFECTS,
     ...DEFENSE_EFFECTS,
     ...REGEN_EFFECTS,
+    ...PRESSURE_EFFECTS,
     ...(myFamiliar() !== $familiar.none ? FAMILIAR_WEIGHT_EFFECTS : []),
     // Wineglass combat kills spells — spell-damage songs are dead weight overdrunk;
     // weapon-damage songs take their place (and vice versa while sober).
