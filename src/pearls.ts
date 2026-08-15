@@ -4,17 +4,31 @@ import {
   availableAmount,
   canAdventure,
   cliExecute,
+  equip,
+  equippedItem,
   getWorkshed,
   haveEffect,
   haveEquipped,
   Item,
+  itemAmount,
   myAdventures,
   numericModifier,
   print,
   retrieveItem,
   use,
 } from "kolmafia";
-import { $effect, $familiar, $item, $location, AsdonMartin, get, have, Macro, set } from "libram";
+import {
+  $effect,
+  $familiar,
+  $item,
+  $location,
+  AsdonMartin,
+  EternityCodpiece,
+  get,
+  have,
+  Macro,
+  set,
+} from "libram";
 
 import { args } from "./args";
 import {
@@ -281,8 +295,47 @@ function pearlTask(spec: PearlSpec): Task {
   };
 }
 
+/**
+ * codpiece flag: fill The Eternity Codpiece with unblemished pearls (+1 adventure/day
+ * per pearl, wiki-verified 2026-08-15; gems persist across ascensions). Listed last so
+ * it only runs once no farming task is available — socketing is an end-of-run step.
+ * Non-pearl gems are evicted (mafia returns them to inventory); the codpiece must be
+ * worn at rollover for the bonus, which is left to the user.
+ */
+const prepCodpieceTask: Task = {
+  name: "Prep Codpiece",
+  completed: () =>
+    !args.resources.codpiece ||
+    !EternityCodpiece.have() ||
+    EternityCodpiece.currentGems().every((gem) => gem === $item`unblemished pearl`),
+  ready: () => itemAmount($item`unblemished pearl`) > 0,
+  do: () => {
+    for (const slot of EternityCodpiece.SLOTS) {
+      if (itemAmount($item`unblemished pearl`) === 0) break;
+      if (equippedItem(slot) === $item`unblemished pearl`) continue;
+      equip($item`unblemished pearl`, slot);
+      if (equippedItem(slot) !== $item`unblemished pearl`) {
+        // Direct swap over an occupied slot refused — pry the old gem out, retry.
+        equip($item.none, slot);
+        equip($item`unblemished pearl`, slot);
+      }
+      if (equippedItem(slot) === $item`unblemished pearl`) {
+        print(`pearlo: socketed an unblemished pearl into ${slot}.`);
+      } else {
+        print(`pearlo: could not socket an unblemished pearl into ${slot}.`, "red");
+      }
+    }
+  },
+  limit: { tries: 3 },
+};
+
 export function pearlTasks(selected: PearlSpec[]): Task[] {
-  return [breatheUnderwaterTask, getFishyTask(selected), ...selected.map(pearlTask)];
+  return [
+    breatheUnderwaterTask,
+    getFishyTask(selected),
+    ...selected.map(pearlTask),
+    prepCodpieceTask,
+  ];
 }
 
 export const PearlsQuest: Quest<Task> = {

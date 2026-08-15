@@ -138,6 +138,10 @@ export const args = Args.create(
         help: "Max meat to pay per potion when a zone's resitems list runs short of inventory during the res top-up. 0 (default) never buys from the mall — inventory only.",
         default: 0,
       }),
+      codpiece: Args.flag({
+        help: "At the end of the run, socket unblemished pearls into The Eternity Codpiece until all five slots hold pearls (+1 adventure/day each; evicts non-pearl gems back to inventory). Wear the codpiece at rollover to collect the bonus. Off by default.",
+        default: false,
+      }),
     }),
 
     debug: Args.group("Debug Options", {
