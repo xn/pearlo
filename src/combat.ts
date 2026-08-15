@@ -1,5 +1,6 @@
 import {
   Item,
+  canEquip,
   equippedItem,
   getPower,
   haveEquipped,
@@ -208,7 +209,12 @@ export type AttackPlan = {
  * so libram's have() saying yes is not enough.
  */
 export function wineglassAccessible(): boolean {
-  return itemAmount($item`Drunkula's wineglass`) > 0 || haveEquipped($item`Drunkula's wineglass`);
+  // canEquip too (garbo parity): a reachable glass the character can't legally equip
+  // should fail this gate up front, not die at dress time.
+  return (
+    (itemAmount($item`Drunkula's wineglass`) > 0 || haveEquipped($item`Drunkula's wineglass`)) &&
+    canEquip($item`Drunkula's wineglass`)
+  );
 }
 
 /** Attack stat needed for a guaranteed hit vs this Defense (wiki Hit_Chance). */

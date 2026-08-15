@@ -214,8 +214,11 @@ export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
   const pending = pendingCastCosts(buffs);
   const mpTrigger = Math.max(pending.mp, 5 * mpPerFight);
   const mpTarget = Math.min(myMaxmp(), Math.max(pending.mp + 5 * mpPerFight, 20 * mpPerFight));
+  // Wineglass combat can't heal or stun mid-fight, and a lost-initiative or fumble
+  // round lands unanswered hits — enter fights near-full (90%) instead of 60%.
+  const hpFloor = wineglassMode() ? 0.9 : 0.6;
   if (myMp() < mpTrigger) restoreMp(mpTarget);
-  if (myHp() <= pending.hp || myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
+  if (myHp() <= pending.hp || myHp() < hpFloor * myMaxhp()) restoreHp(myMaxhp());
 
   for (const ef of buffs) tryAcquiringEffect(ef);
 
@@ -224,5 +227,5 @@ export function pearlMood(spec: PearlSpec, mpPerFight: number): void {
   // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight buffer.
   // Explicit restores; auto-recovery is disabled by PearloEngine.
   if (myMp() < 5 * mpPerFight) restoreMp(Math.min(myMaxmp(), 20 * mpPerFight));
-  if (myHp() < 0.6 * myMaxhp()) restoreHp(myMaxhp());
+  if (myHp() < hpFloor * myMaxhp()) restoreHp(myMaxhp());
 }
