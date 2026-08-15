@@ -42,6 +42,8 @@ Useful options:
 - `voa=N` — meat value of an adventure for all profit decisions (default: your
   `valueOfAdventure` mafia preference)
 - `force` — farm zones even when the profit model expects them to lose meat
+- `strand` — permit stranding partial pearl progress: farm selected zones down to the
+  halt floor even mid-pearl (screech rundown use; pair with `force` and `halt`)
 - `overcapped` — force-equip **all** owned organ extenders (angelbone/devilbone gear)
   while running turns, keeping the extended stomach/liver/spleen caps available for
   mid-day consumption
@@ -50,6 +52,12 @@ Useful options:
   hermit clovers per day)
 - `cloverprice=N` — also buy mall 11-leaf clovers for the refresh, at most N meat each
   (default 0 = never; purchases are skipped when the remaining farming can't repay them)
+- `potionprice=N` — also buy res top-up potions from the mall when a zone's `resitems`
+  list runs short of inventory, at most N meat each (default 0 = inventory only)
+- `codpiece` — at the end of the run, socket unblemished pearls into The Eternity
+  Codpiece until all five slots hold pearls (+1 adventure/day each; non-pearl gems are
+  evicted back to inventory, and socketed gems persist across ascensions). Off by
+  default. Wear the codpiece at rollover to collect the bonus.
 - `halt=N` — stop when N or fewer adventures remain
 
 ## Overcapped organs
@@ -79,6 +87,12 @@ still apply and win their slots. Override familiars get breathing gear automatic
 the Stooper pin takes precedence over a familiar override when it's serving as your
 liver rescue. The profit model prices overridden zones as they will actually run.
 
+Each zone also has an `<element>resitems` list: potions used (from inventory,
+strongest first) until the zone's dressed resistance reaches the 18 cap — gear alone
+often lands short, especially with the `overcapped` bone set occupying slots. The
+defaults cover all five elements; set a list empty to disable it, or set
+`potionprice=N` to let the top-up buy missing potions from the mall.
+
 ## Fishy refreshes
 
 Underwater turns cost 2 adventures without Fishy and 1 with it. Beyond the free fishy
@@ -94,6 +108,12 @@ spell-based kill — it is tuned for Saucegeyser. Overdrunk farming requires Dru
 wineglass **in inventory** and a weapon that can one-shot the zone's toughest monster;
 the script verifies this and halts rather than losing fights.
 
+While the June cleaver is equipped (it's the default `drunkweapon`), its turn-free
+noncombats are skipped with the daily free skips or answered with their best option.
+Poetic Justice's +5-adventure option — which also inflicts Beaten Up — is only taken
+when an owned cure is on hand (Tongue of the Walrus, a VIP hot tub soak, or an owned
+tiny house / CSA soap / SGEEA), and the debuff is cured right after the fight chain.
+
 # Development
 
 Clone the repo, then:
@@ -106,5 +126,4 @@ yarn run watch          # rebuild on change; the symlink serves updates instantl
 ```
 
 Run `pearlo` in the KoLmafia gCLI to test. `yarn lint` / `yarn format` before
-committing. Reference documentation for the game mechanics this script relies on lives
-in `docs/` (sea zones and monsters, organ/overdrunk rules, maximizer syntax).
+committing.
