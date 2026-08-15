@@ -120,11 +120,12 @@ export const args = Args.create(
       }),
       hotresitems: Args.string({
         help: "Comma-separated potions to use (if in inventory) until hot res caps in The Marinara Trench. Empty disables.",
-        default: "scroll of minor invulnerability, pec oil, magenta seashell",
+        default: "scroll of minor invulnerability, pec oil, magenta seashell, hot powder",
       }),
       stenchresitems: Args.string({
         help: "Comma-separated potions to use (if in inventory) until stench res caps in the Madness Reef. Empty disables.",
-        default: "scroll of minor invulnerability, pec oil, green seashell, stench powder",
+        default:
+          "scroll of minor invulnerability, pec oil, green seashell, stench powder, Polysniff Perfume",
       }),
       coldresitems: Args.string({
         // Cold dresses worst (res 10), needing +8: seashell before the lone
