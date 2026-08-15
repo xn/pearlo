@@ -142,15 +142,28 @@ export function main(command?: string): void {
           `  saucegeyser floor (best gear) vs ${p.maxHp} HP: ${plan.perCast} → ${plan.casts} cast(s)/fight, ${plan.mpPerFight} MP/fight`,
         );
       }
+      // Recommended equips mirror buildPearlOutfit's overdrunk weapon logic: the
+      // drunkweapon is forced when owned and not displaced by a required totem, and
+      // 'effective' only applies when no weapon is forced. No `18 min` here — with
+      // damage weights in the expression the maximizer optimizes total score, so a
+      // min flag reports FAIL on outfits that trade res for damage even when a
+      // pure-res 18 exists. Reachability is the verdict lines' res floor above.
+      const organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
+      const totemForced = simDrunk && organEquip.includes($item`angelbone totem`);
+      const drunkweapon =
+        simDrunk && !totemForced && have(args.major.drunkweapon)
+          ? `, +equip ${args.major.drunkweapon}`
+          : "";
+      const weaponForced = totemForced || drunkweapon.length > 0;
       const combatWeights = simDrunk
-        ? ", effective, 0.2 weapon damage, 0.2 weapon damage percent"
+        ? `${weaponForced ? "" : ", effective"}, 0.2 weapon damage, 0.2 weapon damage percent`
         : "";
-      const expr = `${p.key} res ${PEARL_RES_CAP} max ${PEARL_RES_CAP} min${breathing}${wineglass}${combatWeights}`;
-      const capMet = maximize(expr, true);
+      const organEquips = organEquip.map((i) => `, +equip ${i}`).join("");
+      const expr = `${p.key} res ${PEARL_RES_CAP} max${breathing}${wineglass}${drunkweapon}${organEquips}${combatWeights}`;
       const overrideNote = outfitOverride(p.key) !== undefined ? " (ignores zone overrides)" : "";
       print(
-        `  ${PEARL_RES_CAP} res ${capMet ? "reachable" : "NOT reachable"}${wineglass ? " (wineglass in off-hand)" : ""} — recommended equips:${overrideNote}`,
-        capMet ? "blue" : "red",
+        `  recommended equips (as the run would dress)${wineglass ? " (wineglass in off-hand)" : ""}:${overrideNote}`,
+        "blue",
       );
       for (const boost of maximize(expr, 0, 0, true, true)) {
         if (boost.command.startsWith("equip")) print(`   ${boost.display}`);
