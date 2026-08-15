@@ -54,6 +54,10 @@ Useful options:
   (default 0 = never; purchases are skipped when the remaining farming can't repay them)
 - `potionprice=N` — also buy res top-up potions from the mall when a zone's `resitems`
   list runs short of inventory, at most N meat each (default 0 = inventory only)
+- `codpiece` — at the end of the run, socket unblemished pearls into The Eternity
+  Codpiece until all five slots hold pearls (+1 adventure/day each; non-pearl gems are
+  evicted back to inventory, and socketed gems persist across ascensions). Off by
+  default. Wear the codpiece at rollover to collect the bonus.
 - `halt=N` — stop when N or fewer adventures remain
 
 ## Overcapped organs
