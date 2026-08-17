@@ -151,6 +151,18 @@ export const args = Args.create(
         help: "Max meat to pay per potion when a zone's resitems list runs short of inventory during the res top-up. 0 (default) never buys from the mall — inventory only.",
         default: 0,
       }),
+      airmode: Args.string({
+        help: "How the player gets underwater breathing when no air effect is active. The 1/day consumables (ballast turtle, hyperinflated seal lung, potion of pneumaticity, tempura air) are destroyed on use, but effect air frees the gear slot for resistance; gear air is free but may cost a res progress tier. Zones whose assigned outfit already includes breathing gear never spend consumables regardless of this setting.",
+        options: [
+          ["effects", "spend the 1/day consumable cascade first, equip gear only as a fallback"],
+          ["gear", "never spend consumables; always equip breathing gear"],
+          [
+            "auto",
+            "speculate each zone's res with gear air vs effect air; spend consumables only when the freed slot buys a progress tier",
+          ],
+        ],
+        default: "effects",
+      }),
       codpiece: Args.flag({
         help: "At the end of the run, socket unblemished pearls into The Eternity Codpiece until all five slots hold pearls (+1 adventure/day each; evicts non-pearl gems back to inventory). Wear the codpiece at rollover to collect the bonus. Off by default.",
         default: false,

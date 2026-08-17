@@ -12,6 +12,7 @@ import {
   haveEquipped,
   Item,
   itemAmount,
+  maximize,
   myAdventures,
   numericModifier,
   outfitPieces,
@@ -68,6 +69,32 @@ function outfitCoversBreathing(spec: PearlSpec): boolean {
   );
 }
 
+/** Pearl-progress tier: progress/fight is 1.7% × floor(res/3), capped at 18 res (docs §2). */
+function progressTier(res: number): number {
+  return Math.floor(Math.min(res, PEARL_RES_CAP) / 3);
+}
+
+/**
+ * airmode=auto speculative gate: does effect-based air (every slot free for res) reach a
+ * higher progress tier than gear-based air (the maximizer must keep "adventure underwater"
+ * satisfied by equipment)? Both speculations run back-to-back against identical character
+ * state, so familiar/mood/leftover-gear contamination cancels out of the comparison; the
+ * mandatory equip layer (organ extenders, lanterns) is invisible to both sides equally.
+ * A false return from the gear-side maximize means its boolean air requirement is unmet —
+ * gear can't cover this zone at all, so the effect is needed regardless of tier.
+ */
+function effectAirBuysTier(spec: PearlSpec): boolean {
+  const gearOk = maximize(`${spec.key} res ${PEARL_RES_CAP} max, adventure underwater`, true);
+  const gearRes = numericModifier("Generated:_spec", resModifierName(spec.key));
+  maximize(`${spec.key} res ${PEARL_RES_CAP} max`, true);
+  const effectRes = numericModifier("Generated:_spec", resModifierName(spec.key));
+  const buys = !gearOk || progressTier(effectRes) > progressTier(gearRes);
+  print(
+    `[pearlo/airmode] ${spec.key}: gear-air res ${gearRes}${gearOk ? "" : " (air requirement unmet)"} vs effect-air res ${effectRes} → effect air ${buys ? "buys a progress tier" : "buys nothing"}`,
+  );
+  return buys;
+}
+
 function breatheUnderwaterTask(selected: PearlSpec[]): Task {
   return {
     name: "Breathe Underwater",
@@ -88,6 +115,39 @@ function breatheUnderwaterTask(selected: PearlSpec[]): Task {
         set("_subAquaEquipBreathing", true);
         printSeaworthyDebug("after Breathe Underwater do()");
         return;
+      }
+
+      // airmode: gear = never spend consumables; auto = spend them only when the
+      // speculative gate says a freed slot buys a progress tier somewhere. Either way
+      // the gear-equip path is only safe when gear exists — canBreathUnderwater()
+      // stays false otherwise and this task would loop to its limit.
+      const airmode = args.resources.airmode;
+      if (airmode !== "effects") {
+        const gearOwned = waterBreathingEquipment.some((item) => have(item) && canEquip(item));
+        if (airmode === "gear") {
+          if (!gearOwned) {
+            abort(
+              "pearlo: airmode=gear but no equippable breathing gear is owned " +
+                "(aerated diving helmet, old SCUBA tank, really, really nice swimming trunks, …) — " +
+                "acquire some or switch airmode.",
+            );
+          }
+          print("[pearlo/seaworthy] → airmode=gear: equipping breathing gear, no consumables");
+          set("_subAquaEquipBreathing", true);
+          printSeaworthyDebug("after Breathe Underwater do()");
+          return;
+        }
+        if (gearOwned && remaining.length > 0 && !remaining.some(effectAirBuysTier)) {
+          print(
+            "[pearlo/seaworthy] → airmode=auto: gear air matches effect air in every remaining zone; skipping consumables",
+          );
+          set("_subAquaEquipBreathing", true);
+          printSeaworthyDebug("after Breathe Underwater do()");
+          return;
+        }
+        print(
+          "[pearlo/seaworthy] → airmode=auto: effect air is worth a progress tier; running the consumable cascade",
+        );
       }
       const tryAcquireAndUse = (item: Item, label: string): boolean => {
         print(`[pearlo/seaworthy] → ${label}`);
