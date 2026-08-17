@@ -1,14 +1,17 @@
 import {
   Familiar,
   Item,
+  getWorkshed,
   maximize,
   myFamiliar,
   numericModifier,
   print,
   useFamiliar,
 } from "kolmafia";
-import { $effects, $element, $familiar, $items, have } from "libram";
+import { $effects, $element, $familiar, $item, $items, get, have } from "libram";
 
+import { args } from "./args";
+import { asdonFualable } from "./lib";
 import { PearlSpec, resModifierName } from "./zones";
 
 export type FamiliarPlan = {
@@ -47,6 +50,28 @@ const PLAYER_AIR_EFFECTS = $effects`Driving Waterproofly, Oxygenated Blood, Pneu
 /** Player air guaranteed by an active effect — no equipment slot involved. */
 export function playerAirByEffect(): boolean {
   return PLAYER_AIR_EFFECTS.some((ef) => have(ef));
+}
+
+/**
+ * Will the player's air be effect-based once the Breathe Underwater task has run?
+ * Startup economics executes before that task, so the current playerAirByEffect()
+ * models gear air on days the cascade grants effect air minutes later. Mirrors the
+ * cascade's availability checks (pearls.ts) minus its retrieveItem attempts — a
+ * slight understatement, i.e. conservative. airmode=auto counts as effect-capable:
+ * when its gate picks gear instead, it proved the res tiers equal, so modeling
+ * effect air introduces no tier error. Accepted optimism at the margin: when the
+ * last effect expires with no sources left, tail zones fall back to gear air.
+ */
+export function predictedPlayerAirByEffect(): boolean {
+  if (playerAirByEffect()) return true;
+  if (args.resources.airmode === "gear") return false;
+  return (
+    (have($item`ballast turtle`) && !get("_ballastTurtleUsed")) ||
+    (have($item`hyperinflated seal lung`) && !get("_hyperinflatedSealLungUsed", false)) ||
+    (!get("_pneumaticityPotionUsed", false) && have($item`pressurized potion of pneumaticity`)) ||
+    (!get("_tempuraAirUsed", false) && have($item`tempura air`)) ||
+    (getWorkshed() === $item`Asdon Martin keyfob (on ring)` && asdonFualable(37))
+  );
 }
 
 /**

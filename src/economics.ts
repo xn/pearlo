@@ -20,8 +20,8 @@ import { $effect, $familiar, $item, $skill, $stat, get, have, maxBy, sum } from 
 
 import { args, familiarOverride, outfitOverride } from "./args";
 import { damagePlan, wineglassAccessible } from "./combat";
-import { familiarBreathesFree, playerAirByEffect, resFamiliarSwitches } from "./familiar";
-import { HAGGLING_FISHY_TURNS, luckyRefreshCosts } from "./fishy";
+import { familiarBreathesFree, predictedPlayerAirByEffect, resFamiliarSwitches } from "./familiar";
+import { FISHY_PIPE_TURNS, HAGGLING_FISHY_TURNS, luckyRefreshCosts } from "./fishy";
 import {
   LiverMode,
   allOrganEquipment,
@@ -85,8 +85,6 @@ function meatPerHp(): number {
 export function progressRatePct(res: number): number {
   return Math.max(1.7, Math.min(10, 1.7 * Math.floor(res / 3)));
 }
-
-const FISHY_PIPE_TURNS = 10; // fishy pipe grants 10 turns of Fishy, 1/day (docs/sea-reference.md, wiki-verified)
 
 /** Fights coverable by Fishy sources already on hand — active turns + unused pipe. */
 function baseFishyFights(): number {
@@ -180,8 +178,11 @@ const RES_STEPS = [18, 15, 12, 9, 6, 3];
 function speculativeResFloor(spec: PearlSpec, forceEquip: Item[], familiar?: Familiar): number {
   const saved = myFamiliar();
   try {
+    // predicted, not current: this model runs at startup, before the Breathe Underwater
+    // task grants effect air — modeling gear air on a day the cascade will free the
+    // slot minutes later understated every zone's res floor.
     const equips = forceEquip.map((i) => `, +equip ${i}`).join("");
-    const playerBreathing = playerAirByEffect() ? "" : ", adventure underwater";
+    const playerBreathing = predictedPlayerAirByEffect() ? "" : ", adventure underwater";
 
     if (familiar === undefined) {
       useFamiliar($familiar.none);
@@ -195,7 +196,7 @@ function speculativeResFloor(spec: PearlSpec, forceEquip: Item[], familiar?: Fam
 
       const switches = floor < RES_STEPS[0] ? resFamiliarSwitches(spec) : [];
       if (switches.length > 0) {
-        const familiarBreathing = playerAirByEffect() ? ", underwater familiar" : ", sea";
+        const familiarBreathing = predictedPlayerAirByEffect() ? ", underwater familiar" : ", sea";
         for (const n of RES_STEPS) {
           if (
             maximize(
@@ -232,16 +233,23 @@ function speculativeResFloor(spec: PearlSpec, forceEquip: Item[], familiar?: Fam
 
 /**
  * Conservative res estimate for an outfit-override zone: forced items' own res plus
- * the player's current non-equipment res (effects, passives, current familiar).
- * ESTIMATE: free slots may add a little res in the real run (they keep whatever the
- * breathing-only maximize leaves there), and the current familiar's res may not match
- * the zone's utility familiar — deliberately conservative, never optimistic.
+ * the player's non-equipment res (effects, passives). Measured with NO familiar: the
+ * real override run picks a utility/breathing familiar (~0 res), so a res familiar
+ * active at launch (Exotic Parrot) would otherwise inflate the estimate and break the
+ * never-optimistic contract. ESTIMATE: free slots may add a little res in the real run
+ * (they keep whatever the breathing-only maximize leaves there) — conservative.
  */
 function overrideResEstimate(spec: PearlSpec, forcedItems: Item[]): number {
-  const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
-  const equippedContribution = sum(Slot.all(), (s) => numericModifier(equippedItem(s), resName));
-  const nonEquipment = Math.max(0, numericModifier(resName) - equippedContribution);
-  return nonEquipment + sum(forcedItems, (i) => numericModifier(i, resName));
+  const saved = myFamiliar();
+  try {
+    useFamiliar($familiar.none);
+    const resName = `${spec.key.charAt(0).toUpperCase()}${spec.key.slice(1)} Resistance`;
+    const equippedContribution = sum(Slot.all(), (s) => numericModifier(equippedItem(s), resName));
+    const nonEquipment = Math.max(0, numericModifier(resName) - equippedContribution);
+    return nonEquipment + sum(forcedItems, (i) => numericModifier(i, resName));
+  } finally {
+    useFamiliar(saved);
+  }
 }
 
 // ---------- per-zone economics ----------

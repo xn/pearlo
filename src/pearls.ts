@@ -44,7 +44,12 @@ import {
 } from "./combat";
 import { zoneVerdict } from "./economics";
 import { pickUtilityFamiliar, playerAirByEffect } from "./familiar";
-import { acquireLucky, luckySourceAvailable, remainingPearlFights } from "./fishy";
+import {
+  FISHY_PIPE_TURNS,
+  acquireLucky,
+  luckySourceAvailable,
+  remainingPearlFights,
+} from "./fishy";
 import { abortIfBeatenUp, asdonFualable, fuelUp, handlePostCombatBeatenUp } from "./lib";
 import { pearlMood } from "./mood";
 import { wineglassMode } from "./organs";
@@ -283,12 +288,21 @@ function turnsNeeded(spec: PearlSpec): number {
   const remaining = 100 - get(spec.progress, 0);
   const optimistic = 10; // 1.7 * floor(18/3), capped at 10 — see docs/sea-reference.md
   const rate = observedProgressRate.get(spec.key) ?? optimistic;
-  const perTurn = have($effect`Fishy`) ? 1 : 2;
-  return Math.ceil(remaining / Math.max(1.7, rate)) * perTurn;
+  const fights = Math.ceil(remaining / Math.max(1.7, rate));
+  // Fishy coverage the zone can actually count on: active turns plus the unused pipe
+  // pearlMood smokes on the first prepare. Fights beyond that cost 2 turns each —
+  // pricing the whole zone at the CURRENT Fishy state approved zones whose effect
+  // expired mid-pearl, stranding progress at rollover. Lucky! refreshes are
+  // deliberately not counted: Get Fishy preempts zones while sources remain, and
+  // counting them here would approve zones that strand when the cascade comes up dry.
+  const fishyTurns =
+    haveEffect($effect`Fishy`) +
+    (have($item`fishy pipe`) && !get("_fishyPipeUsed") ? FISHY_PIPE_TURNS : 0);
+  const covered = Math.min(fishyTurns, fights);
+  return covered + (fights - covered) * 2;
 }
 
 function pearlTask(spec: PearlSpec): Task {
-  let plan = damagePlan(spec.maxHp);
   // Snapshot for post()'s Beaten Up attribution: a cleaver NC firing mid-chain adds
   // its choice id to this queue (see handlePostCombatBeatenUp).
   let cleaverQueueBefore = "";
@@ -331,7 +345,7 @@ function pearlTask(spec: PearlSpec): Task {
           `pearlo: ${spec.loc} fallback build reaches ${numericModifier(resModifierName(spec.key))} ${spec.key} res`,
         );
       }
-      plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
+      const plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
       pearlMood(spec, plan.mpPerFight);
       if (wineglassMode()) {
         // Wineglass combat is attack-only: no stuns, no items. Policy (user): halt
@@ -377,9 +391,14 @@ function pearlTask(spec: PearlSpec): Task {
       lastRecordedProgress.set(spec.key, progress);
     },
     outfit: () => buildPearlOutfit(spec),
+    // The plan is computed inside the thunk: grimoire compiles macros AFTER dress but
+    // BEFORE prepare (engine.js execute()), so a shared closure variable served fight 1
+    // a plan priced on launch gear — optimistic launch gear skipped Entangling Noodles
+    // against fights the real outfit can't one-shot. Compile-time here is post-dress,
+    // pre-mood: at worst conservative (a spare Noodles cast before buffs land).
     combat: new CombatStrategy()
       .macro(() => buildWandererMacro(), WANDERER_MONSTERS)
-      .macro(() => buildPearlMacro(spec, plan)),
+      .macro(() => buildPearlMacro(spec, damagePlan(spec.maxHp))),
     limit: { soft: 30 },
   };
 }

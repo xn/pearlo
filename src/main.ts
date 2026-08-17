@@ -28,7 +28,7 @@ import {
   zoneVerdict,
 } from "./economics";
 import { PearloEngine } from "./engine";
-import { playerAirByEffect } from "./familiar";
+import { predictedPlayerAirByEffect } from "./familiar";
 import { luckySourceReport } from "./fishy";
 import {
   allOrganEquipment,
@@ -120,7 +120,9 @@ export function main(command?: string): void {
       );
     }
     // Per-element blocks (speculative — nothing is equipped; current familiar counts).
-    const breathing = playerAirByEffect() ? "" : ", adventure underwater";
+    // Air is the run's *predicted* state: the Breathe Underwater cascade hasn't run
+    // yet at sim time, but the real dress will happen after it has.
+    const breathing = predictedPlayerAirByEffect() ? "" : ", adventure underwater";
     // Only force the wineglass into the speculation when it is actually reachable —
     // otherwise every combination FAILs on the +equip and the res verdict is garbage.
     const wineglass = simDrunk && wineglassAccessible() ? ", +equip Drunkula's wineglass" : "";

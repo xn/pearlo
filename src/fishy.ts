@@ -36,6 +36,9 @@ import { PearlSpec } from "./zones";
 
 export const HAGGLING_FISHY_TURNS = 20;
 
+/** fishy pipe grants 10 turns of Fishy, 1/day (docs/sea-reference.md §1.2, wiki-verified). */
+export const FISHY_PIPE_TURNS = 10;
+
 const CLOVER = $item`11-leaf clover`;
 const AUG_2 = $skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`;
 const HERMIT_CLOVER_LIMIT = 3; // wiki The Hermitage: "(Limit 3 per day)", pref _cloversPurchased
