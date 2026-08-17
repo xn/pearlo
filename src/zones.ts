@@ -12,6 +12,7 @@ import {
 import {
   $effect,
   $element,
+  $item,
   $items,
   $location,
   $monster,
@@ -24,7 +25,11 @@ import {
 // Leaf module: zone data and seaworthiness state. Imports nothing project-local, so
 // args/combat/outfit/familiar/mood/pearls can all depend on it without cycles.
 
-export const waterBreathingEquipment = $items`The Crown of Ed the Undying, aerated diving helmet, crappy Mer-kin mask, Mer-kin gladiator mask, Mer-kin scholar mask, old SCUBA tank, Elf Guard SCUBA tank`;
+// The trunks' commas would split inside a comma-separated $items list — keep them singular.
+export const waterBreathingEquipment = [
+  ...$items`The Crown of Ed the Undying, aerated diving helmet, crappy Mer-kin mask, Mer-kin gladiator mask, Mer-kin scholar mask, old SCUBA tank, Elf Guard SCUBA tank, oxygenated eggnog helmet`,
+  $item`really, really nice swimming trunks`,
+];
 export const familiarWaterBreathingEquipment = $items`das boot, little bitty bathysphere`;
 
 /** Log Fishy / underwater state (call from main or when debugging seaworthy). */

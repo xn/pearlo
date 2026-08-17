@@ -3,6 +3,7 @@ import {
   abort,
   availableAmount,
   canAdventure,
+  canEquip,
   cliExecute,
   equip,
   equippedItem,
@@ -13,6 +14,7 @@ import {
   itemAmount,
   myAdventures,
   numericModifier,
+  outfitPieces,
   print,
   retrieveItem,
   use,
@@ -30,7 +32,7 @@ import {
   set,
 } from "libram";
 
-import { args } from "./args";
+import { args, outfitOverride } from "./args";
 import {
   buildPearlMacro,
   buildWandererMacro,
@@ -54,83 +56,110 @@ import {
   canBreathUnderwater,
   printSeaworthyDebug,
   resModifierName,
+  waterBreathingEquipment,
 } from "./zones";
 
-const breatheUnderwaterTask: Task = {
-  name: "Breathe Underwater",
-  completed: () => canBreathUnderwater(),
-  do: () => {
-    print('[pearlo/seaworthy] task "Breathe Underwater": picking a breathing strategy…');
-    const tryAcquireAndUse = (item: Item, label: string): boolean => {
-      print(`[pearlo/seaworthy] → ${label}`);
-      if (availableAmount(item) <= 0) retrieveItem(item);
-      if (availableAmount(item) <= 0) {
-        print(`[pearlo/seaworthy] ${label} unavailable; trying next breathing strategy`);
-        return false;
+/** True when this zone's assigned outfit already carries owned, equippable breathing gear. */
+function outfitCoversBreathing(spec: PearlSpec): boolean {
+  const name = outfitOverride(spec.key);
+  if (name === undefined) return false;
+  return outfitPieces(name).some(
+    (piece) => waterBreathingEquipment.includes(piece) && have(piece) && canEquip(piece),
+  );
+}
+
+function breatheUnderwaterTask(selected: PearlSpec[]): Task {
+  return {
+    name: "Breathe Underwater",
+    completed: () => canBreathUnderwater(),
+    do: () => {
+      print('[pearlo/seaworthy] task "Breathe Underwater": picking a breathing strategy…');
+
+      // The check runs before any zone has dressed, so gear the zone outfits will equip
+      // (really, really nice swimming trunks in an assigned outfit) isn't active yet —
+      // burning a 1/day consumable on top of it is pure waste. When EVERY remaining zone's
+      // assigned outfit carries its own air, take the equip-gear path directly. (Gear must
+      // be in waterBreathingEquipment so canBreathUnderwater() turns true afterward.)
+      const remaining = selected.filter((spec) => !get(spec.obtained));
+      if (remaining.length > 0 && remaining.every(outfitCoversBreathing)) {
+        print(
+          "[pearlo/seaworthy] → every remaining zone's assigned outfit includes breathing gear; skipping consumables",
+        );
+        set("_subAquaEquipBreathing", true);
+        printSeaworthyDebug("after Breathe Underwater do()");
+        return;
       }
-      if (!use(item)) {
-        print(`[pearlo/seaworthy] ${label} failed to use; trying next breathing strategy`);
-        return false;
+      const tryAcquireAndUse = (item: Item, label: string): boolean => {
+        print(`[pearlo/seaworthy] → ${label}`);
+        if (availableAmount(item) <= 0) retrieveItem(item);
+        if (availableAmount(item) <= 0) {
+          print(`[pearlo/seaworthy] ${label} unavailable; trying next breathing strategy`);
+          return false;
+        }
+        if (!use(item)) {
+          print(`[pearlo/seaworthy] ${label} failed to use; trying next breathing strategy`);
+          return false;
+        }
+        return true;
+      };
+
+      let strategySucceeded = false;
+
+      if (have($item`ballast turtle`) && !get("_ballastTurtleUsed")) {
+        print("[pearlo/seaworthy] → using ballast turtle");
+        strategySucceeded = use($item`ballast turtle`);
       }
-      return true;
-    };
+      if (strategySucceeded) {
+        printSeaworthyDebug("after Breathe Underwater do()");
+        return;
+      }
 
-    let strategySucceeded = false;
+      if (have($item`hyperinflated seal lung`) && !get("_hyperinflatedSealLungUsed", false)) {
+        print("[pearlo/seaworthy] → using hyperinflated seal lung");
+        strategySucceeded = use($item`hyperinflated seal lung`);
+      }
+      if (strategySucceeded) {
+        printSeaworthyDebug("after Breathe Underwater do()");
+        return;
+      }
 
-    if (have($item`ballast turtle`) && !get("_ballastTurtleUsed")) {
-      print("[pearlo/seaworthy] → using ballast turtle");
-      strategySucceeded = use($item`ballast turtle`);
-    }
-    if (strategySucceeded) {
+      if (!get("_pneumaticityPotionUsed", false)) {
+        strategySucceeded = tryAcquireAndUse(
+          $item`pressurized potion of pneumaticity`,
+          "pressurized potion of pneumaticity",
+        );
+      }
+      if (strategySucceeded) {
+        printSeaworthyDebug("after Breathe Underwater do()");
+        return;
+      }
+
+      if (!get("_tempuraAirUsed", false)) {
+        strategySucceeded = tryAcquireAndUse($item`tempura air`, "tempura air");
+      }
+      if (strategySucceeded) {
+        printSeaworthyDebug("after Breathe Underwater do()");
+        return;
+      }
+
+      if (getWorkshed() === $item`Asdon Martin keyfob (on ring)` && asdonFualable(37)) {
+        print("[pearlo/seaworthy] → Asdon Waterproofly");
+        fuelUp();
+        strategySucceeded = AsdonMartin.drive(AsdonMartin.Driving.Waterproofly);
+      }
+
+      if (!strategySucceeded) {
+        print(
+          "[pearlo/seaworthy] → no consumable/Asdon path succeeded; setting _subAquaEquipBreathing (equip breathing gear)",
+        );
+        set("_subAquaEquipBreathing", true);
+      }
+
       printSeaworthyDebug("after Breathe Underwater do()");
-      return;
-    }
-
-    if (have($item`hyperinflated seal lung`) && !get("_hyperinflatedSealLungUsed", false)) {
-      print("[pearlo/seaworthy] → using hyperinflated seal lung");
-      strategySucceeded = use($item`hyperinflated seal lung`);
-    }
-    if (strategySucceeded) {
-      printSeaworthyDebug("after Breathe Underwater do()");
-      return;
-    }
-
-    if (!get("_pneumaticityPotionUsed", false)) {
-      strategySucceeded = tryAcquireAndUse(
-        $item`pressurized potion of pneumaticity`,
-        "pressurized potion of pneumaticity",
-      );
-    }
-    if (strategySucceeded) {
-      printSeaworthyDebug("after Breathe Underwater do()");
-      return;
-    }
-
-    if (!get("_tempuraAirUsed", false)) {
-      strategySucceeded = tryAcquireAndUse($item`tempura air`, "tempura air");
-    }
-    if (strategySucceeded) {
-      printSeaworthyDebug("after Breathe Underwater do()");
-      return;
-    }
-
-    if (getWorkshed() === $item`Asdon Martin keyfob (on ring)` && asdonFualable(37)) {
-      print("[pearlo/seaworthy] → Asdon Waterproofly");
-      fuelUp();
-      strategySucceeded = AsdonMartin.drive(AsdonMartin.Driving.Waterproofly);
-    }
-
-    if (!strategySucceeded) {
-      print(
-        "[pearlo/seaworthy] → no consumable/Asdon path succeeded; setting _subAquaEquipBreathing (equip breathing gear)",
-      );
-      set("_subAquaEquipBreathing", true);
-    }
-
-    printSeaworthyDebug("after Breathe Underwater do()");
-  },
-  limit: { soft: 1000 },
-};
+    },
+    limit: { soft: 1000 },
+  };
+}
 
 /**
  * Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md): when Fishy
@@ -331,7 +360,7 @@ const prepCodpieceTask: Task = {
 
 export function pearlTasks(selected: PearlSpec[]): Task[] {
   return [
-    breatheUnderwaterTask,
+    breatheUnderwaterTask(selected),
     getFishyTask(selected),
     ...selected.map(pearlTask),
     prepCodpieceTask,
