@@ -54,6 +54,13 @@ Useful options:
   (default 0 = never; purchases are skipped when the remaining farming can't repay them)
 - `potionprice=N` — also buy res top-up potions from the mall when a zone's `resitems`
   list runs short of inventory, at most N meat each (default 0 = inventory only)
+- `airmode=effects|gear|auto` — how the player gets underwater breathing when no air
+  effect is active. `effects` (default) spends the 1/day consumables (ballast turtle,
+  hyperinflated seal lung, potion of pneumaticity, tempura air — destroyed on use)
+  before falling back to gear; `gear` never spends consumables and equips breathing
+  equipment instead; `auto` speculates each zone's resistance with gear air vs effect
+  air and spends consumables only when the freed slot buys a progress tier. Zones whose
+  assigned outfit already includes breathing gear never spend consumables regardless.
 - `codpiece` — at the end of the run, socket unblemished pearls into The Eternity
   Codpiece until all five slots hold pearls (+1 adventure/day each; non-pearl gems are
   evicted back to inventory, and socketed gems persist across ascensions). Off by
