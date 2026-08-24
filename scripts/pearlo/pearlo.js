@@ -2345,7 +2345,7 @@ var $thrall = createSingleConstant(require$$0.Thrall, require$$0.toThrall);
  */
 var $thralls = createPluralConstant(require$$0.Thrall);
 
-var _templateObject$1K, _templateObject2$1n, _templateObject3$1h, _templateObject4$19, _templateObject5$14, _templateObject6$11, _templateObject7$Y, _templateObject8$S, _templateObject9$N, _templateObject0$J, _templateObject1$H, _templateObject10$F, _templateObject11$C, _templateObject12$B, _templateObject13$z, _templateObject14$y, _templateObject15$x, _templateObject16$x, _templateObject17$v, _templateObject18$t, _templateObject19$t, _templateObject20$r, _templateObject21$p, _templateObject22$p, _templateObject23$n, _templateObject24$n, _templateObject25$n, _templateObject26$l, _templateObject27$k, _templateObject28$j, _templateObject29$j, _templateObject30$h, _templateObject31$g, _templateObject32$f, _templateObject33$f, _templateObject34$f, _templateObject35$f, _templateObject36$e, _templateObject37$e, _templateObject38$e, _templateObject39$e, _templateObject40$e, _templateObject41$d, _templateObject42$d, _templateObject43$b, _templateObject44$a, _templateObject45$a, _templateObject46$a, _templateObject47$a, _templateObject48$a, _templateObject49$7, _templateObject50$7, _templateObject51$7, _templateObject52$6, _templateObject53$6;
+var _templateObject$1K, _templateObject2$1n, _templateObject3$1i, _templateObject4$19, _templateObject5$14, _templateObject6$11, _templateObject7$Y, _templateObject8$S, _templateObject9$N, _templateObject0$J, _templateObject1$H, _templateObject10$F, _templateObject11$C, _templateObject12$B, _templateObject13$z, _templateObject14$y, _templateObject15$x, _templateObject16$w, _templateObject17$u, _templateObject18$t, _templateObject19$t, _templateObject20$r, _templateObject21$p, _templateObject22$p, _templateObject23$n, _templateObject24$n, _templateObject25$n, _templateObject26$l, _templateObject27$k, _templateObject28$j, _templateObject29$j, _templateObject30$h, _templateObject31$g, _templateObject32$f, _templateObject33$f, _templateObject34$f, _templateObject35$f, _templateObject36$e, _templateObject37$e, _templateObject38$e, _templateObject39$e, _templateObject40$e, _templateObject41$d, _templateObject42$d, _templateObject43$b, _templateObject44$a, _templateObject45$a, _templateObject46$a, _templateObject47$a, _templateObject48$a, _templateObject49$7, _templateObject50$7, _templateObject51$7, _templateObject52$6, _templateObject53$6;
 /**
  * Determines the current maximum Accordion Thief songs the player can have in their head
  *
@@ -2708,7 +2708,7 @@ var banishSource = banisher => {
     case "saber force":
       return $skill(_templateObject2$1n || (_templateObject2$1n = _taggedTemplateLiteral(["Use the Force"])));
     case "nanorhino":
-      return $skill(_templateObject3$1h || (_templateObject3$1h = _taggedTemplateLiteral(["Unleash Nanites"])));
+      return $skill(_templateObject3$1i || (_templateObject3$1i = _taggedTemplateLiteral(["Unleash Nanites"])));
     case "sea *dent":
       return $skill(_templateObject4$19 || (_templateObject4$19 = _taggedTemplateLiteral(["Sea *dent: Throw a Lightning Bolt"])));
   }
@@ -3044,7 +3044,7 @@ function damageTakenByElement(baseDamage, element) {
   return Math.max(1, Math.ceil(baseDamage - baseDamage * res / 100));
 }
 var telescopeStats = new Map([["standing around flexing their muscles and using grip exercisers", $stat(_templateObject13$z || (_templateObject13$z = _taggedTemplateLiteral(["Muscle"])))], ["sitting around playing chess and solving complicated-looking logic puzzles", $stat(_templateObject14$y || (_templateObject14$y = _taggedTemplateLiteral(["Mysticality"])))], ["all wearing sunglasses and dancing", $stat(_templateObject15$x || (_templateObject15$x = _taggedTemplateLiteral(["Moxie"])))]]);
-var telescopeElements = new Map([["people, all of whom appear to be on fire", $element(_templateObject16$x || (_templateObject16$x = _taggedTemplateLiteral(["hot"])))], ["people, surrounded by a cloud of eldritch mist", $element(_templateObject17$v || (_templateObject17$v = _taggedTemplateLiteral(["spooky"])))], ["greasy-looking people furtively skulking around", $element(_templateObject18$t || (_templateObject18$t = _taggedTemplateLiteral(["sleaze"])))], ["people, surrounded by garbage and clouds of flies", $element(_templateObject19$t || (_templateObject19$t = _taggedTemplateLiteral(["stench"])))], ["people, clustered around a group of igloos", $element(_templateObject20$r || (_templateObject20$r = _taggedTemplateLiteral(["cold"])))]]);
+var telescopeElements = new Map([["people, all of whom appear to be on fire", $element(_templateObject16$w || (_templateObject16$w = _taggedTemplateLiteral(["hot"])))], ["people, surrounded by a cloud of eldritch mist", $element(_templateObject17$u || (_templateObject17$u = _taggedTemplateLiteral(["spooky"])))], ["greasy-looking people furtively skulking around", $element(_templateObject18$t || (_templateObject18$t = _taggedTemplateLiteral(["sleaze"])))], ["people, surrounded by garbage and clouds of flies", $element(_templateObject19$t || (_templateObject19$t = _taggedTemplateLiteral(["stench"])))], ["people, clustered around a group of igloos", $element(_templateObject20$r || (_templateObject20$r = _taggedTemplateLiteral(["cold"])))]]);
 var hedgeTrap1 = new Map([["smoldering bushes on the outskirts of a hedge maze", $element(_templateObject21$p || (_templateObject21$p = _taggedTemplateLiteral(["hot"])))], ["creepy-looking black bushes on the outskirts of a hedge maze", $element(_templateObject22$p || (_templateObject22$p = _taggedTemplateLiteral(["spooky"])))], ["purplish, greasy-looking hedges", $element(_templateObject23$n || (_templateObject23$n = _taggedTemplateLiteral(["sleaze"])))], ["nasty-looking, dripping green bushes on the outskirts of a hedge maze", $element(_templateObject24$n || (_templateObject24$n = _taggedTemplateLiteral(["stench"])))], ["frost-rimed bushes on the outskirts of a hedge maze", $element(_templateObject25$n || (_templateObject25$n = _taggedTemplateLiteral(["cold"])))]]);
 var hedgeTrap2 = new Map([["smoke rising from deeper within the maze", $element(_templateObject26$l || (_templateObject26$l = _taggedTemplateLiteral(["hot"])))], ["a miasma of eldritch vapors rising from deeper within the maze", $element(_templateObject27$k || (_templateObject27$k = _taggedTemplateLiteral(["spooky"])))], ["a greasy purple cloud hanging over the center of the maze", $element(_templateObject28$j || (_templateObject28$j = _taggedTemplateLiteral(["sleaze"])))], ["a cloud of green gas hovering over the maze", $element(_templateObject29$j || (_templateObject29$j = _taggedTemplateLiteral(["stench"])))], ["wintry mists rising from deeper within the maze", $element(_templateObject30$h || (_templateObject30$h = _taggedTemplateLiteral(["cold"])))]]);
 var hedgeTrap3 = new Map([["with lava slowly oozing out of it", $element(_templateObject31$g || (_templateObject31$g = _taggedTemplateLiteral(["hot"])))], ["surrounded by creepy black mist", $element(_templateObject32$f || (_templateObject32$f = _taggedTemplateLiteral(["spooky"])))], ["that occasionally vomits out a greasy ball of hair", $element(_templateObject33$f || (_templateObject33$f = _taggedTemplateLiteral(["sleaze"])))], ["disgorging a really surprising amount of sewage", $element(_templateObject34$f || (_templateObject34$f = _taggedTemplateLiteral(["stench"])))], ["occasionally disgorging a bunch of ice cubes", $element(_templateObject35$f || (_templateObject35$f = _taggedTemplateLiteral(["cold"])))]]);
@@ -4579,7 +4579,7 @@ var StrictMacro = /*#__PURE__*/function (_Macro2) {
   }]);
 }(Macro);
 
-var _templateObject$1J, _templateObject2$1m, _templateObject3$1g, _templateObject4$18, _templateObject5$13, _templateObject6$10, _templateObject7$X, _templateObject8$R, _templateObject9$M, _templateObject0$I, _templateObject1$G, _templateObject10$E, _templateObject11$B, _templateObject12$A, _templateObject13$y, _templateObject14$x, _templateObject15$w, _templateObject16$w, _templateObject17$u, _templateObject18$s, _templateObject19$s, _templateObject20$q, _templateObject21$o, _templateObject22$o, _templateObject23$m, _templateObject24$m, _templateObject25$m, _templateObject26$k, _templateObject27$j, _templateObject28$i, _templateObject29$i, _templateObject30$g, _templateObject31$f, _templateObject32$e, _templateObject33$e, _templateObject34$e, _templateObject35$e, _templateObject36$d, _templateObject37$d, _templateObject38$d, _templateObject39$d, _templateObject40$d, _templateObject41$c, _templateObject42$c, _templateObject43$a, _templateObject44$9, _templateObject45$9, _templateObject46$9, _templateObject47$9, _templateObject48$9;
+var _templateObject$1J, _templateObject2$1m, _templateObject3$1h, _templateObject4$18, _templateObject5$13, _templateObject6$10, _templateObject7$X, _templateObject8$R, _templateObject9$M, _templateObject0$I, _templateObject1$G, _templateObject10$E, _templateObject11$B, _templateObject12$A, _templateObject13$y, _templateObject14$x, _templateObject15$w, _templateObject16$v, _templateObject17$t, _templateObject18$s, _templateObject19$s, _templateObject20$q, _templateObject21$o, _templateObject22$o, _templateObject23$m, _templateObject24$m, _templateObject25$m, _templateObject26$k, _templateObject27$j, _templateObject28$i, _templateObject29$i, _templateObject30$g, _templateObject31$f, _templateObject32$e, _templateObject33$e, _templateObject34$e, _templateObject35$e, _templateObject36$d, _templateObject37$d, _templateObject38$d, _templateObject39$d, _templateObject40$d, _templateObject41$c, _templateObject42$c, _templateObject43$a, _templateObject44$9, _templateObject45$9, _templateObject46$9, _templateObject47$9, _templateObject48$9;
 function toMaximizerName(_ref) {
   var name = _ref.name,
     id = _ref.id;
@@ -4639,7 +4639,7 @@ var modeableCommands$1 = ["backupcamera", "umbrella", "snowsuit", "edpiece", "re
 var modeableItems = {
   backupcamera: $item(_templateObject$1J || (_templateObject$1J = _taggedTemplateLiteral(["backup camera"]))),
   umbrella: $item(_templateObject2$1m || (_templateObject2$1m = _taggedTemplateLiteral(["unbreakable umbrella"]))),
-  snowsuit: $item(_templateObject3$1g || (_templateObject3$1g = _taggedTemplateLiteral(["Snow Suit"]))),
+  snowsuit: $item(_templateObject3$1h || (_templateObject3$1h = _taggedTemplateLiteral(["Snow Suit"]))),
   edpiece: $item(_templateObject4$18 || (_templateObject4$18 = _taggedTemplateLiteral(["The Crown of Ed the Undying"]))),
   retrocape: $item(_templateObject5$13 || (_templateObject5$13 = _taggedTemplateLiteral(["unwrapped knock-off retro superhero cape"]))),
   parka: $item(_templateObject6$10 || (_templateObject6$10 = _taggedTemplateLiteral(["Jurassic Parka"]))),
@@ -4874,7 +4874,7 @@ function applyCached(entry, options) {
   }
   applyModes(_objectSpread2(_objectSpread2({}, entry.modes), options.modes));
 }
-var slotStructure = [$slots(_templateObject16$w || (_templateObject16$w = _taggedTemplateLiteral(["hat"]))), $slots(_templateObject17$u || (_templateObject17$u = _taggedTemplateLiteral(["back"]))), $slots(_templateObject18$s || (_templateObject18$s = _taggedTemplateLiteral(["shirt"]))), $slots(_templateObject19$s || (_templateObject19$s = _taggedTemplateLiteral(["weapon, off-hand"]))), $slots(_templateObject20$q || (_templateObject20$q = _taggedTemplateLiteral(["pants"]))), $slots(_templateObject21$o || (_templateObject21$o = _taggedTemplateLiteral(["acc1, acc2, acc3"]))), $slots(_templateObject22$o || (_templateObject22$o = _taggedTemplateLiteral(["familiar"])))];
+var slotStructure = [$slots(_templateObject16$v || (_templateObject16$v = _taggedTemplateLiteral(["hat"]))), $slots(_templateObject17$t || (_templateObject17$t = _taggedTemplateLiteral(["back"]))), $slots(_templateObject18$s || (_templateObject18$s = _taggedTemplateLiteral(["shirt"]))), $slots(_templateObject19$s || (_templateObject19$s = _taggedTemplateLiteral(["weapon, off-hand"]))), $slots(_templateObject20$q || (_templateObject20$q = _taggedTemplateLiteral(["pants"]))), $slots(_templateObject21$o || (_templateObject21$o = _taggedTemplateLiteral(["acc1, acc2, acc3"]))), $slots(_templateObject22$o || (_templateObject22$o = _taggedTemplateLiteral(["familiar"])))];
 /**
  * Verifies that a CacheEntry was applied successfully.
  *
@@ -5366,7 +5366,7 @@ function actionSourcesAvailable(actions) {
   return sum(actions.filter(action => filterAction(action, constraints ?? {})), action => action.potential());
 }
 
-var _templateObject$1I, _templateObject2$1l, _templateObject3$1f, _templateObject4$17, _templateObject5$12, _templateObject6$$, _templateObject7$W, _templateObject8$Q, _templateObject9$L, _templateObject0$H, _templateObject1$F, _templateObject10$D, _templateObject11$A, _templateObject12$z, _templateObject13$x, _templateObject14$w, _templateObject15$v, _templateObject16$v;
+var _templateObject$1I, _templateObject2$1l, _templateObject3$1g, _templateObject4$17, _templateObject5$12, _templateObject6$$, _templateObject7$W, _templateObject8$Q, _templateObject9$L, _templateObject0$H, _templateObject1$F, _templateObject10$D, _templateObject11$A, _templateObject12$z, _templateObject13$x, _templateObject14$w, _templateObject15$v, _templateObject16$u;
 var PriceAge;
 (function (PriceAge) {
   PriceAge[PriceAge["HISTORICAL"] = 0] = "HISTORICAL";
@@ -5385,7 +5385,7 @@ function installed$4() {
 function have$19() {
   return installed$4() || have$1a($item(_templateObject2$1l || (_templateObject2$1l = _taggedTemplateLiteral(["Asdon Martin keyfob (on ring)"]))));
 }
-var fuelSkiplist = $items(_templateObject3$1f || (_templateObject3$1f = _taggedTemplateLiteral(["cup of \"tea\", thermos of \"whiskey\", Lucky Lindy, Bee's Knees, Sockdollager, Ish Kabibble, Hot Socks, Phonus Balonus, Flivver, Sloppy Jalopy, glass of \"milk\""])));
+var fuelSkiplist = $items(_templateObject3$1g || (_templateObject3$1g = _taggedTemplateLiteral(["cup of \"tea\", thermos of \"whiskey\", Lucky Lindy, Bee's Knees, Sockdollager, Ish Kabibble, Hot Socks, Phonus Balonus, Flivver, Sloppy Jalopy, glass of \"milk\""])));
 /**
  * Internal function used to determine whether a historical price is recent enough
  *
@@ -5572,7 +5572,7 @@ var Driving = {
   Intimidatingly: $effect(_templateObject13$x || (_templateObject13$x = _taggedTemplateLiteral(["Driving Intimidatingly"]))),
   Quickly: $effect(_templateObject14$w || (_templateObject14$w = _taggedTemplateLiteral(["Driving Quickly"]))),
   Observantly: $effect(_templateObject15$v || (_templateObject15$v = _taggedTemplateLiteral(["Driving Observantly"]))),
-  Waterproofly: $effect(_templateObject16$v || (_templateObject16$v = _taggedTemplateLiteral(["Driving Waterproofly"])))
+  Waterproofly: $effect(_templateObject16$u || (_templateObject16$u = _taggedTemplateLiteral(["Driving Waterproofly"])))
 };
 /**
  * Attempt to drive with a particular style for a particular number of turns.
@@ -5608,7 +5608,7 @@ var AsdonMartin = /*#__PURE__*/Object.freeze({
   isFuelItem: isFuelItem
 });
 
-var _templateObject$1H, _templateObject2$1k, _templateObject3$1e, _templateObject4$16, _templateObject5$11, _templateObject6$_, _templateObject7$V, _templateObject8$P, _templateObject9$K, _templateObject0$G, _templateObject1$E, _templateObject10$C, _templateObject11$z, _templateObject12$y, _templateObject13$w, _templateObject14$v, _templateObject15$u, _templateObject16$u, _templateObject17$t, _templateObject18$r, _templateObject19$r, _templateObject20$p, _templateObject21$n, _templateObject22$n, _templateObject23$l, _templateObject24$l, _templateObject25$l, _templateObject26$j, _templateObject27$i, _templateObject28$h, _templateObject29$h, _templateObject30$f, _templateObject31$e, _templateObject32$d, _templateObject33$d, _templateObject34$d, _templateObject35$d, _templateObject36$c, _templateObject37$c, _templateObject38$c, _templateObject39$c, _templateObject40$c, _templateObject41$b, _templateObject42$b;
+var _templateObject$1H, _templateObject2$1k, _templateObject3$1f, _templateObject4$16, _templateObject5$11, _templateObject6$_, _templateObject7$V, _templateObject8$P, _templateObject9$K, _templateObject0$G, _templateObject1$E, _templateObject10$C, _templateObject11$z, _templateObject12$y, _templateObject13$w, _templateObject14$v, _templateObject15$u, _templateObject16$t, _templateObject17$s, _templateObject18$r, _templateObject19$r, _templateObject20$p, _templateObject21$n, _templateObject22$n, _templateObject23$l, _templateObject24$l, _templateObject25$l, _templateObject26$j, _templateObject27$i, _templateObject28$h, _templateObject29$h, _templateObject30$f, _templateObject31$e, _templateObject32$d, _templateObject33$d, _templateObject34$d, _templateObject35$d, _templateObject36$c, _templateObject37$c, _templateObject38$c, _templateObject39$c, _templateObject40$c, _templateObject41$b, _templateObject42$b;
 // Value of _lastCombatStarted the last time we updated scrapbook charges.
 var scrapbookChargesLastUpdated = get$2("_lastCombatStarted");
 // Free unlimited source every 30 turns.
@@ -5625,7 +5625,7 @@ var asdonMartinSource = new ActionSource($skill(_templateObject$1H || (_template
 });
 var banishSources = [
 // Free limited sources
-new ActionSource($skill(_templateObject3$1e || (_templateObject3$1e = _taggedTemplateLiteral(["Snokebomb"]))), () => have$1a($skill(_templateObject4$16 || (_templateObject4$16 = _taggedTemplateLiteral(["Snokebomb"])))) ? 3 - get$2("_snokebombUsed") : 0, Macro.skill($skill(_templateObject5$11 || (_templateObject5$11 = _taggedTemplateLiteral(["Snokebomb"])))), {
+new ActionSource($skill(_templateObject3$1f || (_templateObject3$1f = _taggedTemplateLiteral(["Snokebomb"]))), () => have$1a($skill(_templateObject4$16 || (_templateObject4$16 = _taggedTemplateLiteral(["Snokebomb"])))) ? 3 - get$2("_snokebombUsed") : 0, Macro.skill($skill(_templateObject5$11 || (_templateObject5$11 = _taggedTemplateLiteral(["Snokebomb"])))), {
   preparation: () => require$$0.restoreMp(50)
 }), new ActionSource($skill(_templateObject6$_ || (_templateObject6$_ = _taggedTemplateLiteral(["Emotionally Chipped"]))), () => have$1a($skill(_templateObject7$V || (_templateObject7$V = _taggedTemplateLiteral(["Emotionally Chipped"])))) ? 3 - get$2("_feelHatredUsed") : 0, Macro.skill($skill(_templateObject8$P || (_templateObject8$P = _taggedTemplateLiteral(["Feel Hatred"]))))), new ActionSource($item(_templateObject9$K || (_templateObject9$K = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"]))), () => have$1a($item(_templateObject0$G || (_templateObject0$G = _taggedTemplateLiteral(["Kremlin's Greatest Briefcase"])))) ? 3 - get$2("_kgbTranquilizerDartUses") : 0, Macro.skill($skill(_templateObject1$E || (_templateObject1$E = _taggedTemplateLiteral(["KGB tranquilizer dart"])))), {
   equipmentRequirements: () => new Requirement([], {
@@ -5635,7 +5635,7 @@ new ActionSource($skill(_templateObject3$1e || (_templateObject3$1e = _taggedTem
   equipmentRequirements: () => new Requirement([], {
     forceEquip: $items(_templateObject14$v || (_templateObject14$v = _taggedTemplateLiteral(["latte lovers member's mug"])))
   })
-}), new ActionSource($item(_templateObject15$u || (_templateObject15$u = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"]))), () => have$1a($item(_templateObject16$u || (_templateObject16$u = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))) ? 3 - get$2("_reflexHammerUsed") : 0, Macro.skill($skill(_templateObject17$t || (_templateObject17$t = _taggedTemplateLiteral(["Reflex Hammer"])))), {
+}), new ActionSource($item(_templateObject15$u || (_templateObject15$u = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"]))), () => have$1a($item(_templateObject16$t || (_templateObject16$t = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))) ? 3 - get$2("_reflexHammerUsed") : 0, Macro.skill($skill(_templateObject17$s || (_templateObject17$s = _taggedTemplateLiteral(["Reflex Hammer"])))), {
   equipmentRequirements: () => new Requirement([], {
     forceEquip: $items(_templateObject18$r || (_templateObject18$r = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))
   })
@@ -5708,10 +5708,10 @@ function ensureBanish(constraints) {
   return source;
 }
 
-var _templateObject$1G, _templateObject2$1j, _templateObject3$1d, _templateObject4$15, _templateObject5$10, _templateObject6$Z, _templateObject7$U, _templateObject8$O, _templateObject9$J, _templateObject0$F, _templateObject1$D, _templateObject10$B, _templateObject11$y, _templateObject12$x, _templateObject13$v, _templateObject14$u, _templateObject15$t, _templateObject16$t, _templateObject17$s, _templateObject18$q, _templateObject19$q, _templateObject20$o, _templateObject21$m, _templateObject22$m, _templateObject23$k, _templateObject24$k, _templateObject25$k, _templateObject26$i, _templateObject27$h, _templateObject28$g, _templateObject29$g, _templateObject30$e, _templateObject31$d, _templateObject32$c, _templateObject33$c, _templateObject34$c, _templateObject35$c, _templateObject36$b, _templateObject37$b, _templateObject38$b, _templateObject39$b, _templateObject40$b, _templateObject41$a, _templateObject42$a, _templateObject43$9;
+var _templateObject$1G, _templateObject2$1j, _templateObject3$1e, _templateObject4$15, _templateObject5$10, _templateObject6$Z, _templateObject7$U, _templateObject8$O, _templateObject9$J, _templateObject0$F, _templateObject1$D, _templateObject10$B, _templateObject11$y, _templateObject12$x, _templateObject13$v, _templateObject14$u, _templateObject15$t, _templateObject16$s, _templateObject17$r, _templateObject18$q, _templateObject19$q, _templateObject20$o, _templateObject21$m, _templateObject22$m, _templateObject23$k, _templateObject24$k, _templateObject25$k, _templateObject26$i, _templateObject27$h, _templateObject28$g, _templateObject29$g, _templateObject30$e, _templateObject31$d, _templateObject32$c, _templateObject33$c, _templateObject34$c, _templateObject35$c, _templateObject36$b, _templateObject37$b, _templateObject38$b, _templateObject39$b, _templateObject40$b, _templateObject41$a, _templateObject42$a, _templateObject43$9;
 var freeKillSources = [
 // Free limited sources
-new ActionSource($skill(_templateObject$1G || (_templateObject$1G = _taggedTemplateLiteral(["Gingerbread Mob Hit"]))), () => !get$2("_gingerbreadMobHitUsed") && have$1a($skill(_templateObject2$1j || (_templateObject2$1j = _taggedTemplateLiteral(["Gingerbread Mob Hit"])))) ? 1 : 0, Macro.skill($skill(_templateObject3$1d || (_templateObject3$1d = _taggedTemplateLiteral(["Gingerbread Mob Hit"])))), {
+new ActionSource($skill(_templateObject$1G || (_templateObject$1G = _taggedTemplateLiteral(["Gingerbread Mob Hit"]))), () => !get$2("_gingerbreadMobHitUsed") && have$1a($skill(_templateObject2$1j || (_templateObject2$1j = _taggedTemplateLiteral(["Gingerbread Mob Hit"])))) ? 1 : 0, Macro.skill($skill(_templateObject3$1e || (_templateObject3$1e = _taggedTemplateLiteral(["Gingerbread Mob Hit"])))), {
   preparation: () => require$$0.restoreMp(30)
 }), new ActionSource($skill(_templateObject4$15 || (_templateObject4$15 = _taggedTemplateLiteral(["Shattering Punch"]))), () => have$1a($skill(_templateObject5$10 || (_templateObject5$10 = _taggedTemplateLiteral(["Shattering Punch"])))) ? 3 - get$2("_shatteringPunchUsed") : 0, Macro.skill($skill(_templateObject6$Z || (_templateObject6$Z = _taggedTemplateLiteral(["Shattering Punch"])))), {
   preparation: () => require$$0.restoreMp(30)
@@ -5721,9 +5721,9 @@ new ActionSource($skill(_templateObject$1G || (_templateObject$1G = _taggedTempl
   })
 }), new ActionSource($item(_templateObject13$v || (_templateObject13$v = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"]))), () => have$1a($item(_templateObject14$u || (_templateObject14$u = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))) ? 3 - get$2("_chestXRayUsed") : 0, Macro.skill($skill(_templateObject15$t || (_templateObject15$t = _taggedTemplateLiteral(["Chest X-Ray"])))), {
   equipmentRequirements: () => new Requirement([], {
-    forceEquip: $items(_templateObject16$t || (_templateObject16$t = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))
+    forceEquip: $items(_templateObject16$s || (_templateObject16$s = _taggedTemplateLiteral(["Lil' Doctor\u2122 bag"])))
   })
-}), new ActionSource($skill(_templateObject17$s || (_templateObject17$s = _taggedTemplateLiteral(["Asdon Martin: Missile Launcher"]))), () => !get$2("_missileLauncherUsed") && installed$4() ? 1 : 0, Macro.skill($skill(_templateObject18$q || (_templateObject18$q = _taggedTemplateLiteral(["Asdon Martin: Missile Launcher"])))), {
+}), new ActionSource($skill(_templateObject17$r || (_templateObject17$r = _taggedTemplateLiteral(["Asdon Martin: Missile Launcher"]))), () => !get$2("_missileLauncherUsed") && installed$4() ? 1 : 0, Macro.skill($skill(_templateObject18$q || (_templateObject18$q = _taggedTemplateLiteral(["Asdon Martin: Missile Launcher"])))), {
   preparation: () => fillTo(100)
 }),
 // Heavy Rains
@@ -5778,7 +5778,7 @@ function ensureFreeKill(constraints) {
   return source;
 }
 
-var _templateObject$1F, _templateObject2$1i, _templateObject3$1c;
+var _templateObject$1F, _templateObject2$1i, _templateObject3$1d;
 var familiar$8 = $familiar(_templateObject$1F || (_templateObject$1F = _taggedTemplateLiteral(["Frumious Bandersnatch"])));
 /**
  * Determines whether the player has the Frumious Bandersnatch in their
@@ -5832,7 +5832,7 @@ function couldRunaway$1() {
   return have$18() && getRemainingRunaways$1(considerWeightAdjustment) > 0;
 }
 var odeSkill = $skill(_templateObject2$1i || (_templateObject2$1i = _taggedTemplateLiteral(["The Ode to Booze"])));
-var odeEffect = $effect(_templateObject3$1c || (_templateObject3$1c = _taggedTemplateLiteral(["Ode to Booze"])));
+var odeEffect = $effect(_templateObject3$1d || (_templateObject3$1d = _taggedTemplateLiteral(["Ode to Booze"])));
 /**
  * Determine whether the player can use their Bandersnatch to get a
  * free run right now
@@ -5959,14 +5959,14 @@ var StompingBoots = /*#__PURE__*/Object.freeze({
   prepareRunaway: prepareRunaway
 });
 
-var _templateObject$1D, _templateObject2$1h, _templateObject3$1b, _templateObject4$14, _templateObject5$$, _templateObject6$Y, _templateObject7$T, _templateObject8$N, _templateObject9$I, _templateObject0$E, _templateObject1$C, _templateObject10$A, _templateObject11$x, _templateObject12$w, _templateObject13$u, _templateObject14$t, _templateObject15$s, _templateObject16$s, _templateObject17$r, _templateObject18$p, _templateObject19$p, _templateObject20$n, _templateObject21$l, _templateObject22$l;
+var _templateObject$1D, _templateObject2$1h, _templateObject3$1c, _templateObject4$14, _templateObject5$$, _templateObject6$Y, _templateObject7$T, _templateObject8$N, _templateObject9$I, _templateObject0$E, _templateObject1$C, _templateObject10$A, _templateObject11$x, _templateObject12$w, _templateObject13$u, _templateObject14$t, _templateObject15$s, _templateObject16$r, _templateObject17$q, _templateObject18$p, _templateObject19$p, _templateObject20$n, _templateObject21$l, _templateObject22$l;
 var everythingLooksGreen = function everythingLooksGreen() {
   var otherClause = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : () => true;
   return () => otherClause() && !have$1a($effect(_templateObject$1D || (_templateObject$1D = _taggedTemplateLiteral(["Everything Looks Green"])))) ? 1 : 0;
 };
 var freeRunSources = [
 // Free unlimited source
-new ActionSource($item(_templateObject2$1h || (_templateObject2$1h = _taggedTemplateLiteral(["spring shoes"]))), everythingLooksGreen(() => have$1a($item(_templateObject3$1b || (_templateObject3$1b = _taggedTemplateLiteral(["spring shoes"]))))), Macro.skill($skill(_templateObject4$14 || (_templateObject4$14 = _taggedTemplateLiteral(["Spring Away"])))), {
+new ActionSource($item(_templateObject2$1h || (_templateObject2$1h = _taggedTemplateLiteral(["spring shoes"]))), everythingLooksGreen(() => have$1a($item(_templateObject3$1c || (_templateObject3$1c = _taggedTemplateLiteral(["spring shoes"]))))), Macro.skill($skill(_templateObject4$14 || (_templateObject4$14 = _taggedTemplateLiteral(["Spring Away"])))), {
   equipmentRequirements: () => new Requirement([], {
     forceEquip: $items(_templateObject5$$ || (_templateObject5$$ = _taggedTemplateLiteral(["spring shoes"])))
   })
@@ -5988,9 +5988,9 @@ new ActionSource($familiar(_templateObject6$Y || (_templateObject6$Y = _taggedTe
   })
 }), new ActionSource($item(_templateObject14$t || (_templateObject14$t = _taggedTemplateLiteral(["Greatest American Pants"]))), () => have$1a($item(_templateObject15$s || (_templateObject15$s = _taggedTemplateLiteral(["Greatest American Pants"])))) ? Math.max(0, 3 - get$2("_navelRunaways")) : 0, Macro.step("runaway"), {
   equipmentRequirements: () => new Requirement([], {
-    forceEquip: $items(_templateObject16$s || (_templateObject16$s = _taggedTemplateLiteral(["Greatest American Pants"])))
+    forceEquip: $items(_templateObject16$r || (_templateObject16$r = _taggedTemplateLiteral(["Greatest American Pants"])))
   })
-}), new ActionSource($item(_templateObject17$r || (_templateObject17$r = _taggedTemplateLiteral(["peppermint parasol"]))), () => Math.max(0, 3 - get$2("_navelRunaways")), Macro.item($item(_templateObject18$p || (_templateObject18$p = _taggedTemplateLiteral(["peppermint parasol"])))), {
+}), new ActionSource($item(_templateObject17$q || (_templateObject17$q = _taggedTemplateLiteral(["peppermint parasol"]))), () => Math.max(0, 3 - get$2("_navelRunaways")), Macro.item($item(_templateObject18$p || (_templateObject18$p = _taggedTemplateLiteral(["peppermint parasol"])))), {
   preparation: () => require$$0.retrieveItem($item(_templateObject19$p || (_templateObject19$p = _taggedTemplateLiteral(["peppermint parasol"])))),
   cost: () => ActionSource.defaultPriceFunction($item(_templateObject20$n || (_templateObject20$n = _taggedTemplateLiteral(["peppermint parasol"])))) / 10 // Breaks after 10 successful runaways.
 })].concat(_toConsumableArray($items(_templateObject21$l || (_templateObject21$l = _taggedTemplateLiteral(["green smoke bomb, tattered scrap of paper, GOTO, T.U.R.D.S. Key"]))).map(item => new ActionSource(item, everythingLooksGreen(), Macro.item(item), {
@@ -6086,11 +6086,11 @@ var CommaChameleon = /*#__PURE__*/Object.freeze({
   transform: transform
 });
 
-var _templateObject$1B, _templateObject2$1g, _templateObject3$1a, _templateObject4$13, _templateObject5$_, _templateObject6$X, _templateObject7$S, _templateObject8$M, _templateObject9$H, _templateObject0$D, _templateObject1$B;
+var _templateObject$1B, _templateObject2$1g, _templateObject3$1b, _templateObject4$13, _templateObject5$_, _templateObject6$X, _templateObject7$S, _templateObject8$M, _templateObject9$H, _templateObject0$D, _templateObject1$B;
 var stickers = {
   unicorn: $item(_templateObject$1B || (_templateObject$1B = _taggedTemplateLiteral(["scratch 'n' sniff unicorn sticker"]))),
   apple: $item(_templateObject2$1g || (_templateObject2$1g = _taggedTemplateLiteral(["scratch 'n' sniff apple sticker"]))),
-  UPC: $item(_templateObject3$1a || (_templateObject3$1a = _taggedTemplateLiteral(["scratch 'n' sniff UPC sticker"]))),
+  UPC: $item(_templateObject3$1b || (_templateObject3$1b = _taggedTemplateLiteral(["scratch 'n' sniff UPC sticker"]))),
   wrestler: $item(_templateObject4$13 || (_templateObject4$13 = _taggedTemplateLiteral(["scratch 'n' sniff wrestler sticker"]))),
   dragon: $item(_templateObject5$_ || (_templateObject5$_ = _taggedTemplateLiteral(["scratch 'n' sniff dragon sticker"]))),
   rockband: $item(_templateObject6$X || (_templateObject6$X = _taggedTemplateLiteral(["scratch 'n' sniff rock band sticker"])))
@@ -6236,14 +6236,14 @@ var SpookyPutty = /*#__PURE__*/Object.freeze({
   useSpookyPuttySheet: useSpookyPuttySheet
 });
 
-var _templateObject$1z, _templateObject2$1f, _templateObject3$19, _templateObject4$12, _templateObject5$Z, _templateObject6$W, _templateObject7$R, _templateObject8$L, _templateObject9$G, _templateObject0$C, _templateObject1$A, _templateObject10$z, _templateObject11$w, _templateObject12$v, _templateObject13$t, _templateObject14$s, _templateObject15$r, _templateObject16$r, _templateObject17$q, _templateObject18$o, _templateObject19$o, _templateObject20$m, _templateObject21$k, _templateObject22$k, _templateObject23$j, _templateObject24$j, _templateObject25$j, _templateObject26$h, _templateObject27$g, _templateObject28$f, _templateObject29$f, _templateObject30$d, _templateObject31$c, _templateObject32$b, _templateObject33$b, _templateObject34$b, _templateObject35$b, _templateObject36$a, _templateObject37$a, _templateObject38$a, _templateObject39$a, _templateObject40$a, _templateObject41$9, _templateObject42$9, _templateObject43$8, _templateObject44$8, _templateObject45$8, _templateObject46$8, _templateObject47$8, _templateObject48$8, _templateObject49$6, _templateObject50$6, _templateObject51$6, _templateObject52$5, _templateObject53$5, _templateObject54$5, _templateObject55$5, _templateObject56$5, _templateObject57$5, _templateObject58$5, _templateObject59$5, _templateObject60$5, _templateObject61$5, _templateObject62$5, _templateObject63$5, _templateObject64$5, _templateObject65$5, _templateObject66$5, _templateObject67$5, _templateObject68$5, _templateObject69$5, _templateObject70$5, _templateObject71$4, _templateObject72$3, _templateObject73$3, _templateObject74$2, _templateObject75$2, _templateObject76$2, _templateObject77$2, _templateObject78$2, _templateObject79$2, _templateObject80$2, _templateObject81$1, _templateObject82$1, _templateObject83$1, _templateObject84, _templateObject85, _templateObject86, _templateObject87, _templateObject88, _templateObject89, _templateObject90, _templateObject91, _templateObject92, _templateObject93, _templateObject94, _templateObject95, _templateObject96, _templateObject97, _templateObject98, _templateObject99;
+var _templateObject$1z, _templateObject2$1f, _templateObject3$1a, _templateObject4$12, _templateObject5$Z, _templateObject6$W, _templateObject7$R, _templateObject8$L, _templateObject9$G, _templateObject0$C, _templateObject1$A, _templateObject10$z, _templateObject11$w, _templateObject12$v, _templateObject13$t, _templateObject14$s, _templateObject15$r, _templateObject16$q, _templateObject17$p, _templateObject18$o, _templateObject19$o, _templateObject20$m, _templateObject21$k, _templateObject22$k, _templateObject23$j, _templateObject24$j, _templateObject25$j, _templateObject26$h, _templateObject27$g, _templateObject28$f, _templateObject29$f, _templateObject30$d, _templateObject31$c, _templateObject32$b, _templateObject33$b, _templateObject34$b, _templateObject35$b, _templateObject36$a, _templateObject37$a, _templateObject38$a, _templateObject39$a, _templateObject40$a, _templateObject41$9, _templateObject42$9, _templateObject43$8, _templateObject44$8, _templateObject45$8, _templateObject46$8, _templateObject47$8, _templateObject48$8, _templateObject49$6, _templateObject50$6, _templateObject51$6, _templateObject52$5, _templateObject53$5, _templateObject54$5, _templateObject55$5, _templateObject56$5, _templateObject57$5, _templateObject58$5, _templateObject59$5, _templateObject60$5, _templateObject61$5, _templateObject62$5, _templateObject63$5, _templateObject64$5, _templateObject65$5, _templateObject66$5, _templateObject67$5, _templateObject68$5, _templateObject69$5, _templateObject70$5, _templateObject71$4, _templateObject72$3, _templateObject73$3, _templateObject74$2, _templateObject75$2, _templateObject76$2, _templateObject77$2, _templateObject78$2, _templateObject79$2, _templateObject80$2, _templateObject81$1, _templateObject82$1, _templateObject83$1, _templateObject84, _templateObject85, _templateObject86, _templateObject87, _templateObject88, _templateObject89, _templateObject90, _templateObject91, _templateObject92, _templateObject93, _templateObject94, _templateObject95, _templateObject96, _templateObject97, _templateObject98, _templateObject99;
 var ridingFamiliars = [{
   familiar: $familiar(_templateObject$1z || (_templateObject$1z = _taggedTemplateLiteral(["Puck Man"]))),
   drops: $items(_templateObject2$1f || (_templateObject2$1f = _taggedTemplateLiteral(["yellow pixel"]))),
   probability: 0.25,
   dropPredicate: () => get$2("_yellowPixelDropsCrown") < 25
 }, {
-  familiar: $familiar(_templateObject3$19 || (_templateObject3$19 = _taggedTemplateLiteral(["Ms. Puck Man"]))),
+  familiar: $familiar(_templateObject3$1a || (_templateObject3$1a = _taggedTemplateLiteral(["Ms. Puck Man"]))),
   drops: $items(_templateObject4$12 || (_templateObject4$12 = _taggedTemplateLiteral(["yellow pixel"]))),
   probability: 0.25,
   dropPredicate: () => get$2("_yellowPixelDropsCrown") < 25
@@ -6281,10 +6281,10 @@ var ridingFamiliars = [{
   probability: 1 / 4.5
 }, {
   familiar: $familiar(_templateObject15$r || (_templateObject15$r = _taggedTemplateLiteral(["Li'l Xenomorph"]))),
-  drops: $items(_templateObject16$r || (_templateObject16$r = _taggedTemplateLiteral(["lunar isotope"]))),
+  drops: $items(_templateObject16$q || (_templateObject16$q = _taggedTemplateLiteral(["lunar isotope"]))),
   probability: 0.05
 }, {
-  familiar: $familiar(_templateObject17$q || (_templateObject17$q = _taggedTemplateLiteral(["Pottery Barn Owl"]))),
+  familiar: $familiar(_templateObject17$p || (_templateObject17$p = _taggedTemplateLiteral(["Pottery Barn Owl"]))),
   drops: $items(_templateObject18$o || (_templateObject18$o = _taggedTemplateLiteral(["volcanic ash"]))),
   probability: 0.1
 }, {
@@ -6613,7 +6613,7 @@ var CrownOfThrones = /*#__PURE__*/Object.freeze({
   valueRider: valueRider
 });
 
-var _templateObject$1y, _templateObject2$1e, _templateObject3$18, _templateObject4$11, _templateObject5$Y;
+var _templateObject$1y, _templateObject2$1e, _templateObject3$19, _templateObject4$11, _templateObject5$Y;
 var firstTeaPartyEffect = $effect(_templateObject$1y || (_templateObject$1y = _taggedTemplateLiteral(["Assaulted with Pepper"])));
 var lastTeaPartyEffect = $effect(_templateObject2$1e || (_templateObject2$1e = _taggedTemplateLiteral(["Oleaginous Soles"])));
 /**
@@ -6624,7 +6624,7 @@ var lastTeaPartyEffect = $effect(_templateObject2$1e || (_templateObject2$1e = _
  * @returns If this item is a valid hat for The Mad Tea Party
  */
 function validTeaPartyHat(item, characters) {
-  if (require$$0.toSlot(item) !== $slot(_templateObject3$18 || (_templateObject3$18 = _taggedTemplateLiteral(["hat"]))) || !require$$0.canEquip(item)) {
+  if (require$$0.toSlot(item) !== $slot(_templateObject3$19 || (_templateObject3$19 = _taggedTemplateLiteral(["hat"]))) || !require$$0.canEquip(item)) {
     return false;
   } else if (characters <= 5) {
     return item.nameLength <= 5;
@@ -6823,7 +6823,7 @@ var RainDoh = /*#__PURE__*/Object.freeze({
   useRainDohBlackBox: useRainDohBlackBox
 });
 
-var _templateObject$1v, _templateObject2$1d, _templateObject3$17, _templateObject4$10, _templateObject5$X, _templateObject6$V;
+var _templateObject$1v, _templateObject2$1d, _templateObject3$18, _templateObject4$10, _templateObject5$X, _templateObject6$V;
 /**
  * @returns Whether the player has a Reagnimated Gnome in their terrarium
  */
@@ -6832,7 +6832,7 @@ function have$11() {
 }
 var bodyParts = {
   ears: $item(_templateObject2$1d || (_templateObject2$1d = _taggedTemplateLiteral(["gnomish swimmer's ears"]))),
-  lung: $item(_templateObject3$17 || (_templateObject3$17 = _taggedTemplateLiteral(["gnomish coal miner's lung"]))),
+  lung: $item(_templateObject3$18 || (_templateObject3$18 = _taggedTemplateLiteral(["gnomish coal miner's lung"]))),
   elbow: $item(_templateObject4$10 || (_templateObject4$10 = _taggedTemplateLiteral(["gnomish tennis elbow"]))),
   kgnee: $item(_templateObject5$X || (_templateObject5$X = _taggedTemplateLiteral(["gnomish housemaid's kgnee"]))),
   foot: $item(_templateObject6$V || (_templateObject6$V = _taggedTemplateLiteral(["gnomish athlete's foot"])))
@@ -7314,7 +7314,7 @@ var Florist = /*#__PURE__*/Object.freeze({
   isFull: isFull
 });
 
-var _templateObject$1u, _templateObject2$1c, _templateObject3$16, _templateObject4$$, _templateObject5$W, _templateObject6$U, _templateObject7$Q, _templateObject8$K;
+var _templateObject$1u, _templateObject2$1c, _templateObject3$17, _templateObject4$$, _templateObject5$W, _templateObject6$U, _templateObject7$Q, _templateObject8$K;
 var familiar$4 = $familiar(_templateObject$1u || (_templateObject$1u = _taggedTemplateLiteral(["Angry Jung Man"])));
 /**
  * @returns Whether we `have` the Jung Man
@@ -7343,7 +7343,7 @@ var PLACES = {
 };
 var JAR_ITEMS = {
   [Jar.SUSPICIOUS_GUY]: $item(_templateObject2$1c || (_templateObject2$1c = _taggedTemplateLiteral(["jar of psychoses (The Suspicious-Looking Guy)"]))),
-  [Jar.GOURD_CAPTAIN]: $item(_templateObject3$16 || (_templateObject3$16 = _taggedTemplateLiteral(["jar of psychoses (The Captain of the Gourd)"]))),
+  [Jar.GOURD_CAPTAIN]: $item(_templateObject3$17 || (_templateObject3$17 = _taggedTemplateLiteral(["jar of psychoses (The Captain of the Gourd)"]))),
   [Jar.CRACKPOT_MYSTIC]: $item(_templateObject4$$ || (_templateObject4$$ = _taggedTemplateLiteral(["jar of psychoses (The Crackpot Mystic)"]))),
   [Jar.OLD_MAN]: $item(_templateObject5$W || (_templateObject5$W = _taggedTemplateLiteral(["jar of psychoses (The Old Man)"]))),
   [Jar.PRETENTIOUS_ARTIST]: $item(_templateObject6$U || (_templateObject6$U = _taggedTemplateLiteral(["jar of psychoses (The Pretentious Artist)"]))),
@@ -7387,7 +7387,7 @@ var JungMan = /*#__PURE__*/Object.freeze({
   makeJar: makeJar
 });
 
-var _templateObject$1t, _templateObject2$1b, _templateObject3$15, _templateObject4$_, _templateObject5$V, _templateObject6$T, _templateObject7$P, _templateObject8$J, _templateObject9$F, _templateObject0$B, _templateObject1$z;
+var _templateObject$1t, _templateObject2$1b, _templateObject3$16, _templateObject4$_, _templateObject5$V, _templateObject6$T, _templateObject7$P, _templateObject8$J, _templateObject9$F, _templateObject0$B, _templateObject1$z;
 var ConspiracyQuest = /*#__PURE__*/function () {
   function ConspiracyQuest(prop, reward, complete, location, requirements) {
     _classCallCheck(this, ConspiracyQuest);
@@ -7431,7 +7431,7 @@ var ConspiracyQuest = /*#__PURE__*/function () {
     }
   }]);
 }();
-var QUESTS = [new ConspiracyQuest("questESpClipper", 20, 1, $location(_templateObject$1t || (_templateObject$1t = _taggedTemplateLiteral(["The Mansion of Dr. Weirdeaux"])))), new ConspiracyQuest("questESpEVE", 30, 1, $location(_templateObject2$1b || (_templateObject2$1b = _taggedTemplateLiteral(["The Secret Government Laboratory"])))), new ConspiracyQuest("questESpFakeMedium", 30, 1, $location(_templateObject3$15 || (_templateObject3$15 = _taggedTemplateLiteral(["The Secret Government Laboratory"])))), new ConspiracyQuest("questESpGore", 20, 2, $location(_templateObject4$_ || (_templateObject4$_ = _taggedTemplateLiteral(["The Secret Government Laboratory"]))), new Requirement(["Meat Drop"], {
+var QUESTS = [new ConspiracyQuest("questESpClipper", 20, 1, $location(_templateObject$1t || (_templateObject$1t = _taggedTemplateLiteral(["The Mansion of Dr. Weirdeaux"])))), new ConspiracyQuest("questESpEVE", 30, 1, $location(_templateObject2$1b || (_templateObject2$1b = _taggedTemplateLiteral(["The Secret Government Laboratory"])))), new ConspiracyQuest("questESpFakeMedium", 30, 1, $location(_templateObject3$16 || (_templateObject3$16 = _taggedTemplateLiteral(["The Secret Government Laboratory"])))), new ConspiracyQuest("questESpGore", 20, 2, $location(_templateObject4$_ || (_templateObject4$_ = _taggedTemplateLiteral(["The Secret Government Laboratory"]))), new Requirement(["Meat Drop"], {
   forceEquip: [$item(_templateObject5$V || (_templateObject5$V = _taggedTemplateLiteral(["gore bucket"])))]
 })), new ConspiracyQuest("questESpJunglePun", 20, 2, $location(_templateObject6$T || (_templateObject6$T = _taggedTemplateLiteral(["The Deep Dark Jungle"]))), new Requirement(["Mysticality"], {
   forceEquip: [$item(_templateObject7$P || (_templateObject7$P = _taggedTemplateLiteral(["encrypted micro-cassette recorder"])))]
@@ -7534,7 +7534,7 @@ var ConspiracyIsland = /*#__PURE__*/Object.freeze({
   turnInQuest: turnInQuest$1
 });
 
-var _templateObject$1s, _templateObject2$1a, _templateObject3$14, _templateObject4$Z;
+var _templateObject$1s, _templateObject2$1a, _templateObject3$15, _templateObject4$Z;
 /**
  * @returns Whether we `have` the Crimbo Shrub in our terrarium
  */
@@ -7607,7 +7607,7 @@ function decorate(topper, lights, garland, gifts) {
   if (!have$_()) return false;
   if (get$2("_shrubDecorated")) return isDecoratedWith(topper, lights, garland, gifts);
   if (!have$1a($item(_templateObject2$1a || (_templateObject2$1a = _taggedTemplateLiteral(["box of old Crimbo decorations"]))))) {
-    require$$0.useFamiliar($familiar(_templateObject3$14 || (_templateObject3$14 = _taggedTemplateLiteral(["Crimbo Shrub"]))));
+    require$$0.useFamiliar($familiar(_templateObject3$15 || (_templateObject3$15 = _taggedTemplateLiteral(["Crimbo Shrub"]))));
   }
   directlyUse($item(_templateObject4$Z || (_templateObject4$Z = _taggedTemplateLiteral(["box of old Crimbo decorations"]))));
   require$$0.visitUrl("choice.php?whichchoice=999&pwd=&option=1&topper=".concat(Toppers[topper], "&lights=").concat(Lights[lights], "&garland=").concat(Garland[garland], "&gift=").concat(Gifts[gifts]));
@@ -7620,7 +7620,7 @@ var CrimboShrub = /*#__PURE__*/Object.freeze({
   have: have$_
 });
 
-var _templateObject$1r, _templateObject2$19, _templateObject3$13, _templateObject4$Y, _templateObject5$U, _templateObject6$S, _templateObject7$O, _templateObject8$I, _templateObject9$E, _templateObject0$A, _templateObject1$y, _templateObject10$y, _templateObject11$v, _templateObject12$u, _templateObject13$s, _templateObject14$r, _templateObject15$q, _templateObject16$q, _templateObject17$p, _templateObject18$n, _templateObject19$n, _templateObject20$l, _templateObject21$j, _templateObject22$j, _templateObject23$i, _templateObject24$i, _templateObject25$i, _templateObject26$g, _templateObject27$f, _templateObject28$e, _templateObject29$e, _templateObject30$c, _templateObject31$b, _templateObject32$a, _templateObject33$a, _templateObject34$a, _templateObject35$a, _templateObject36$9, _templateObject37$9, _templateObject38$9, _templateObject39$9, _templateObject40$9, _templateObject41$8, _templateObject42$8, _templateObject43$7, _templateObject44$7, _templateObject45$7, _templateObject46$7, _templateObject47$7, _templateObject48$7, _templateObject49$5, _templateObject50$5, _templateObject51$5, _templateObject52$4, _templateObject53$4, _templateObject54$4, _templateObject55$4, _templateObject56$4, _templateObject57$4, _templateObject58$4, _templateObject59$4, _templateObject60$4, _templateObject61$4, _templateObject62$4, _templateObject63$4, _templateObject64$4, _templateObject65$4, _templateObject66$4, _templateObject67$4, _templateObject68$4, _templateObject69$4, _templateObject70$4, _templateObject71$3, _templateObject72$2, _templateObject73$2, _templateObject74$1, _templateObject75$1, _templateObject76$1, _templateObject77$1, _templateObject78$1, _templateObject79$1, _templateObject80$1, _templateObject81, _templateObject82, _templateObject83;
+var _templateObject$1r, _templateObject2$19, _templateObject3$14, _templateObject4$Y, _templateObject5$U, _templateObject6$S, _templateObject7$O, _templateObject8$I, _templateObject9$E, _templateObject0$A, _templateObject1$y, _templateObject10$y, _templateObject11$v, _templateObject12$u, _templateObject13$s, _templateObject14$r, _templateObject15$q, _templateObject16$p, _templateObject17$o, _templateObject18$n, _templateObject19$n, _templateObject20$l, _templateObject21$j, _templateObject22$j, _templateObject23$i, _templateObject24$i, _templateObject25$i, _templateObject26$g, _templateObject27$f, _templateObject28$e, _templateObject29$e, _templateObject30$c, _templateObject31$b, _templateObject32$a, _templateObject33$a, _templateObject34$a, _templateObject35$a, _templateObject36$9, _templateObject37$9, _templateObject38$9, _templateObject39$9, _templateObject40$9, _templateObject41$8, _templateObject42$8, _templateObject43$7, _templateObject44$7, _templateObject45$7, _templateObject46$7, _templateObject47$7, _templateObject48$7, _templateObject49$5, _templateObject50$5, _templateObject51$5, _templateObject52$4, _templateObject53$4, _templateObject54$4, _templateObject55$4, _templateObject56$4, _templateObject57$4, _templateObject58$4, _templateObject59$4, _templateObject60$4, _templateObject61$4, _templateObject62$4, _templateObject63$4, _templateObject64$4, _templateObject65$4, _templateObject66$4, _templateObject67$4, _templateObject68$4, _templateObject69$4, _templateObject70$4, _templateObject71$3, _templateObject72$2, _templateObject73$2, _templateObject74$1, _templateObject75$1, _templateObject76$1, _templateObject77$1, _templateObject78$1, _templateObject79$1, _templateObject80$1, _templateObject81, _templateObject82, _templateObject83;
 var lab = $item(_templateObject$1r || (_templateObject$1r = _taggedTemplateLiteral(["Little Geneticist DNA-Splicing Lab"])));
 /**
  * @returns Whether or not you `have` DNA lab or it's installed
@@ -7634,7 +7634,7 @@ function have$Z() {
 function installed$3() {
   return require$$0.getWorkshed() === lab;
 }
-var phylaEffects = new Map([[$phylum(_templateObject2$19 || (_templateObject2$19 = _taggedTemplateLiteral(["beast"]))), $effect(_templateObject3$13 || (_templateObject3$13 = _taggedTemplateLiteral(["Human-Beast Hybrid"])))], [$phylum(_templateObject4$Y || (_templateObject4$Y = _taggedTemplateLiteral(["bug"]))), $effect(_templateObject5$U || (_templateObject5$U = _taggedTemplateLiteral(["Human-Insect Hybrid"])))], [$phylum(_templateObject6$S || (_templateObject6$S = _taggedTemplateLiteral(["constellation"]))), $effect(_templateObject7$O || (_templateObject7$O = _taggedTemplateLiteral(["Human-Constellation Hybrid"])))], [$phylum(_templateObject8$I || (_templateObject8$I = _taggedTemplateLiteral(["construct"]))), $effect(_templateObject9$E || (_templateObject9$E = _taggedTemplateLiteral(["Human-Machine Hybrid"])))], [$phylum(_templateObject0$A || (_templateObject0$A = _taggedTemplateLiteral(["demon"]))), $effect(_templateObject1$y || (_templateObject1$y = _taggedTemplateLiteral(["Human-Demon Hybrid"])))], [$phylum(_templateObject10$y || (_templateObject10$y = _taggedTemplateLiteral(["dude"]))), $effect(_templateObject11$v || (_templateObject11$v = _taggedTemplateLiteral(["Human-Human Hybrid"])))], [$phylum(_templateObject12$u || (_templateObject12$u = _taggedTemplateLiteral(["elemental"]))), $effect(_templateObject13$s || (_templateObject13$s = _taggedTemplateLiteral(["Human-Elemental Hybrid"])))], [$phylum(_templateObject14$r || (_templateObject14$r = _taggedTemplateLiteral(["elf"]))), $effect(_templateObject15$q || (_templateObject15$q = _taggedTemplateLiteral(["Human-Elf Hybrid"])))], [$phylum(_templateObject16$q || (_templateObject16$q = _taggedTemplateLiteral(["fish"]))), $effect(_templateObject17$p || (_templateObject17$p = _taggedTemplateLiteral(["Human-Fish Hybrid"])))], [$phylum(_templateObject18$n || (_templateObject18$n = _taggedTemplateLiteral(["goblin"]))), $effect(_templateObject19$n || (_templateObject19$n = _taggedTemplateLiteral(["Human-Goblin Hybrid"])))], [$phylum(_templateObject20$l || (_templateObject20$l = _taggedTemplateLiteral(["hippy"]))), $effect(_templateObject21$j || (_templateObject21$j = _taggedTemplateLiteral(["Human-Hobo Hybrid"])))], [$phylum(_templateObject22$j || (_templateObject22$j = _taggedTemplateLiteral(["horror"]))), $effect(_templateObject23$i || (_templateObject23$i = _taggedTemplateLiteral(["Human-Horror Hybrid"])))], [$phylum(_templateObject24$i || (_templateObject24$i = _taggedTemplateLiteral(["humanoid"]))), $effect(_templateObject25$i || (_templateObject25$i = _taggedTemplateLiteral(["Human-Humanoid Hybrid"])))], [$phylum(_templateObject26$g || (_templateObject26$g = _taggedTemplateLiteral(["mer-kin"]))), $effect(_templateObject27$f || (_templateObject27$f = _taggedTemplateLiteral(["Human-Mer-kin Hybrid"])))], [$phylum(_templateObject28$e || (_templateObject28$e = _taggedTemplateLiteral(["orc"]))), $effect(_templateObject29$e || (_templateObject29$e = _taggedTemplateLiteral(["Human-Orc Hybrid"])))], [$phylum(_templateObject30$c || (_templateObject30$c = _taggedTemplateLiteral(["penguin"]))), $effect(_templateObject31$b || (_templateObject31$b = _taggedTemplateLiteral(["Human-Penguin Hybrid"])))], [$phylum(_templateObject32$a || (_templateObject32$a = _taggedTemplateLiteral(["pirate"]))), $effect(_templateObject33$a || (_templateObject33$a = _taggedTemplateLiteral(["Human-Pirate Hybrid"])))], [$phylum(_templateObject34$a || (_templateObject34$a = _taggedTemplateLiteral(["plant"]))), $effect(_templateObject35$a || (_templateObject35$a = _taggedTemplateLiteral(["Human-Plant Hybrid"])))], [$phylum(_templateObject36$9 || (_templateObject36$9 = _taggedTemplateLiteral(["slime"]))), $effect(_templateObject37$9 || (_templateObject37$9 = _taggedTemplateLiteral(["Human-Slime Hybrid"])))], [$phylum(_templateObject38$9 || (_templateObject38$9 = _taggedTemplateLiteral(["undead"]))), $effect(_templateObject39$9 || (_templateObject39$9 = _taggedTemplateLiteral(["Human-Undead Hybrid"])))], [$phylum(_templateObject40$9 || (_templateObject40$9 = _taggedTemplateLiteral(["weird"]))), $effect(_templateObject41$8 || (_templateObject41$8 = _taggedTemplateLiteral(["Human-Weird Thing Hybrid"])))]]);
+var phylaEffects = new Map([[$phylum(_templateObject2$19 || (_templateObject2$19 = _taggedTemplateLiteral(["beast"]))), $effect(_templateObject3$14 || (_templateObject3$14 = _taggedTemplateLiteral(["Human-Beast Hybrid"])))], [$phylum(_templateObject4$Y || (_templateObject4$Y = _taggedTemplateLiteral(["bug"]))), $effect(_templateObject5$U || (_templateObject5$U = _taggedTemplateLiteral(["Human-Insect Hybrid"])))], [$phylum(_templateObject6$S || (_templateObject6$S = _taggedTemplateLiteral(["constellation"]))), $effect(_templateObject7$O || (_templateObject7$O = _taggedTemplateLiteral(["Human-Constellation Hybrid"])))], [$phylum(_templateObject8$I || (_templateObject8$I = _taggedTemplateLiteral(["construct"]))), $effect(_templateObject9$E || (_templateObject9$E = _taggedTemplateLiteral(["Human-Machine Hybrid"])))], [$phylum(_templateObject0$A || (_templateObject0$A = _taggedTemplateLiteral(["demon"]))), $effect(_templateObject1$y || (_templateObject1$y = _taggedTemplateLiteral(["Human-Demon Hybrid"])))], [$phylum(_templateObject10$y || (_templateObject10$y = _taggedTemplateLiteral(["dude"]))), $effect(_templateObject11$v || (_templateObject11$v = _taggedTemplateLiteral(["Human-Human Hybrid"])))], [$phylum(_templateObject12$u || (_templateObject12$u = _taggedTemplateLiteral(["elemental"]))), $effect(_templateObject13$s || (_templateObject13$s = _taggedTemplateLiteral(["Human-Elemental Hybrid"])))], [$phylum(_templateObject14$r || (_templateObject14$r = _taggedTemplateLiteral(["elf"]))), $effect(_templateObject15$q || (_templateObject15$q = _taggedTemplateLiteral(["Human-Elf Hybrid"])))], [$phylum(_templateObject16$p || (_templateObject16$p = _taggedTemplateLiteral(["fish"]))), $effect(_templateObject17$o || (_templateObject17$o = _taggedTemplateLiteral(["Human-Fish Hybrid"])))], [$phylum(_templateObject18$n || (_templateObject18$n = _taggedTemplateLiteral(["goblin"]))), $effect(_templateObject19$n || (_templateObject19$n = _taggedTemplateLiteral(["Human-Goblin Hybrid"])))], [$phylum(_templateObject20$l || (_templateObject20$l = _taggedTemplateLiteral(["hippy"]))), $effect(_templateObject21$j || (_templateObject21$j = _taggedTemplateLiteral(["Human-Hobo Hybrid"])))], [$phylum(_templateObject22$j || (_templateObject22$j = _taggedTemplateLiteral(["horror"]))), $effect(_templateObject23$i || (_templateObject23$i = _taggedTemplateLiteral(["Human-Horror Hybrid"])))], [$phylum(_templateObject24$i || (_templateObject24$i = _taggedTemplateLiteral(["humanoid"]))), $effect(_templateObject25$i || (_templateObject25$i = _taggedTemplateLiteral(["Human-Humanoid Hybrid"])))], [$phylum(_templateObject26$g || (_templateObject26$g = _taggedTemplateLiteral(["mer-kin"]))), $effect(_templateObject27$f || (_templateObject27$f = _taggedTemplateLiteral(["Human-Mer-kin Hybrid"])))], [$phylum(_templateObject28$e || (_templateObject28$e = _taggedTemplateLiteral(["orc"]))), $effect(_templateObject29$e || (_templateObject29$e = _taggedTemplateLiteral(["Human-Orc Hybrid"])))], [$phylum(_templateObject30$c || (_templateObject30$c = _taggedTemplateLiteral(["penguin"]))), $effect(_templateObject31$b || (_templateObject31$b = _taggedTemplateLiteral(["Human-Penguin Hybrid"])))], [$phylum(_templateObject32$a || (_templateObject32$a = _taggedTemplateLiteral(["pirate"]))), $effect(_templateObject33$a || (_templateObject33$a = _taggedTemplateLiteral(["Human-Pirate Hybrid"])))], [$phylum(_templateObject34$a || (_templateObject34$a = _taggedTemplateLiteral(["plant"]))), $effect(_templateObject35$a || (_templateObject35$a = _taggedTemplateLiteral(["Human-Plant Hybrid"])))], [$phylum(_templateObject36$9 || (_templateObject36$9 = _taggedTemplateLiteral(["slime"]))), $effect(_templateObject37$9 || (_templateObject37$9 = _taggedTemplateLiteral(["Human-Slime Hybrid"])))], [$phylum(_templateObject38$9 || (_templateObject38$9 = _taggedTemplateLiteral(["undead"]))), $effect(_templateObject39$9 || (_templateObject39$9 = _taggedTemplateLiteral(["Human-Undead Hybrid"])))], [$phylum(_templateObject40$9 || (_templateObject40$9 = _taggedTemplateLiteral(["weird"]))), $effect(_templateObject41$8 || (_templateObject41$8 = _taggedTemplateLiteral(["Human-Weird Thing Hybrid"])))]]);
 var phylaTonics = new Map([[$phylum(_templateObject42$8 || (_templateObject42$8 = _taggedTemplateLiteral(["beast"]))), $item(_templateObject43$7 || (_templateObject43$7 = _taggedTemplateLiteral(["Gene Tonic: Beast"])))], [$phylum(_templateObject44$7 || (_templateObject44$7 = _taggedTemplateLiteral(["bug"]))), $item(_templateObject45$7 || (_templateObject45$7 = _taggedTemplateLiteral(["Gene Tonic: Insect"])))], [$phylum(_templateObject46$7 || (_templateObject46$7 = _taggedTemplateLiteral(["constellation"]))), $item(_templateObject47$7 || (_templateObject47$7 = _taggedTemplateLiteral(["Gene Tonic: Constellation"])))], [$phylum(_templateObject48$7 || (_templateObject48$7 = _taggedTemplateLiteral(["construct"]))), $item(_templateObject49$5 || (_templateObject49$5 = _taggedTemplateLiteral(["Gene Tonic: Construct"])))], [$phylum(_templateObject50$5 || (_templateObject50$5 = _taggedTemplateLiteral(["demon"]))), $item(_templateObject51$5 || (_templateObject51$5 = _taggedTemplateLiteral(["Gene Tonic: Demon"])))], [$phylum(_templateObject52$4 || (_templateObject52$4 = _taggedTemplateLiteral(["dude"]))), $item(_templateObject53$4 || (_templateObject53$4 = _taggedTemplateLiteral(["Gene Tonic: Humanoid"])))], [$phylum(_templateObject54$4 || (_templateObject54$4 = _taggedTemplateLiteral(["elemental"]))), $item(_templateObject55$4 || (_templateObject55$4 = _taggedTemplateLiteral(["Gene Tonic: Elemental"])))], [$phylum(_templateObject56$4 || (_templateObject56$4 = _taggedTemplateLiteral(["elf"]))), $item(_templateObject57$4 || (_templateObject57$4 = _taggedTemplateLiteral(["Gene Tonic: Elf"])))], [$phylum(_templateObject58$4 || (_templateObject58$4 = _taggedTemplateLiteral(["fish"]))), $item(_templateObject59$4 || (_templateObject59$4 = _taggedTemplateLiteral(["Gene Tonic: Fish"])))], [$phylum(_templateObject60$4 || (_templateObject60$4 = _taggedTemplateLiteral(["goblin"]))), $item(_templateObject61$4 || (_templateObject61$4 = _taggedTemplateLiteral(["Gene Tonic: Goblin"])))], [$phylum(_templateObject62$4 || (_templateObject62$4 = _taggedTemplateLiteral(["hippy"]))), $item(_templateObject63$4 || (_templateObject63$4 = _taggedTemplateLiteral(["Gene Tonic: Hobo"])))], [$phylum(_templateObject64$4 || (_templateObject64$4 = _taggedTemplateLiteral(["horror"]))), $item(_templateObject65$4 || (_templateObject65$4 = _taggedTemplateLiteral(["Gene Tonic: Horror"])))], [$phylum(_templateObject66$4 || (_templateObject66$4 = _taggedTemplateLiteral(["humanoid"]))), $item(_templateObject67$4 || (_templateObject67$4 = _taggedTemplateLiteral(["Gene Tonic: Humanoid"])))], [$phylum(_templateObject68$4 || (_templateObject68$4 = _taggedTemplateLiteral(["mer-kin"]))), $item(_templateObject69$4 || (_templateObject69$4 = _taggedTemplateLiteral(["Gene Tonic: Mer-kin"])))], [$phylum(_templateObject70$4 || (_templateObject70$4 = _taggedTemplateLiteral(["orc"]))), $item(_templateObject71$3 || (_templateObject71$3 = _taggedTemplateLiteral(["Gene Tonic: Orc"])))], [$phylum(_templateObject72$2 || (_templateObject72$2 = _taggedTemplateLiteral(["penguin"]))), $item(_templateObject73$2 || (_templateObject73$2 = _taggedTemplateLiteral(["Gene Tonic: Penguin"])))], [$phylum(_templateObject74$1 || (_templateObject74$1 = _taggedTemplateLiteral(["pirate"]))), $item(_templateObject75$1 || (_templateObject75$1 = _taggedTemplateLiteral(["Gene Tonic: Pirate"])))], [$phylum(_templateObject76$1 || (_templateObject76$1 = _taggedTemplateLiteral(["plant"]))), $item(_templateObject77$1 || (_templateObject77$1 = _taggedTemplateLiteral(["Gene Tonic: Plant"])))], [$phylum(_templateObject78$1 || (_templateObject78$1 = _taggedTemplateLiteral(["slime"]))), $item(_templateObject79$1 || (_templateObject79$1 = _taggedTemplateLiteral(["Gene Tonic: Slime"])))], [$phylum(_templateObject80$1 || (_templateObject80$1 = _taggedTemplateLiteral(["undead"]))), $item(_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["Gene Tonic: Undead"])))], [$phylum(_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["weird"]))), $item(_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["Gene Tonic: Weird"])))]]);
 var tonicEffects = Array.from(phylaEffects.values());
 /**
@@ -7745,7 +7745,7 @@ var DNALab = /*#__PURE__*/Object.freeze({
   tonicsLeft: tonicsLeft
 });
 
-var _templateObject$1q, _templateObject2$18, _templateObject3$12, _templateObject4$X;
+var _templateObject$1q, _templateObject2$18, _templateObject3$13, _templateObject4$X;
 /**
  * @returns Whether the Winter Garden is our currently installed garden
  */
@@ -7768,7 +7768,7 @@ function isUnfinishedIceSculptureUsed() {
  * @returns Whether we're able to use an unfinished ice sculpture in combat right now
  */
 function couldUseUnfinishedIceSculpture() {
-  return have$1a($item(_templateObject3$12 || (_templateObject3$12 = _taggedTemplateLiteral(["unfinished ice sculpture"])))) && !have$1a($item(_templateObject4$X || (_templateObject4$X = _taggedTemplateLiteral(["ice sculpture"]))));
+  return have$1a($item(_templateObject3$13 || (_templateObject3$13 = _taggedTemplateLiteral(["unfinished ice sculpture"])))) && !have$1a($item(_templateObject4$X || (_templateObject4$X = _taggedTemplateLiteral(["ice sculpture"]))));
 }
 /**
  * @returns Our current ice sculpture monster; `null` if none
@@ -7983,7 +7983,7 @@ var DeckOfEveryCard = /*#__PURE__*/Object.freeze({
   have: have$V
 });
 
-var _templateObject$1n, _templateObject2$17, _templateObject3$11, _templateObject4$W, _templateObject5$T, _templateObject6$R, _templateObject7$N, _templateObject8$H, _templateObject9$D, _templateObject0$z, _templateObject1$x, _templateObject10$x, _templateObject11$u, _templateObject12$t, _templateObject13$r, _templateObject14$q, _templateObject15$p, _templateObject16$p, _templateObject17$o, _templateObject18$m, _templateObject19$m, _templateObject20$k, _templateObject21$i, _templateObject22$i, _templateObject23$h, _templateObject24$h, _templateObject25$h;
+var _templateObject$1n, _templateObject2$17, _templateObject3$12, _templateObject4$W, _templateObject5$T, _templateObject6$R, _templateObject7$N, _templateObject8$H, _templateObject9$D, _templateObject0$z, _templateObject1$x, _templateObject10$x, _templateObject11$u, _templateObject12$t, _templateObject13$r, _templateObject14$q, _templateObject15$p, _templateObject16$o, _templateObject17$n, _templateObject18$m, _templateObject19$m, _templateObject20$k, _templateObject21$i, _templateObject22$i, _templateObject23$h, _templateObject24$h, _templateObject25$h;
 /**
  * @returns Whether you permanently own Dinseylandfill
  */
@@ -8043,7 +8043,7 @@ var QuestData = /*#__PURE__*/function () {
 }();
 var kioskUrl = "place.php?whichplace=airport_stench&action=airport3_kiosk";
 var maintUrl = "place.php?whichplace=airport_stench&action=airport3_tunnels";
-var quests = [new QuestData("lube", 1, "Track Maintenance", "Super Luber", "questEStSuperLuber", "", 0, false, $item(_templateObject$1n || (_templateObject$1n = _taggedTemplateLiteral(["lube-shoes"]))), $location(_templateObject2$17 || (_templateObject2$17 = _taggedTemplateLiteral(["Barf Mountain"])))), new QuestData("fuel", 0, "Electrical Maintenance", "Give Me Fuel", "questEStGiveMeFuel", "", 0, false, $item(_templateObject3$11 || (_templateObject3$11 = _taggedTemplateLiteral(["none"]))), $location(_templateObject4$W || (_templateObject4$W = _taggedTemplateLiteral(["The Toxic Teacups"])))), new QuestData("sexism", 2, "Sexism Reduction", "Social Justice Adventurer I", "questEStSocialJusticeI", "dinseySocialJusticeIProgress", 15, true, $item(_templateObject5$T || (_templateObject5$T = _taggedTemplateLiteral(["none"]))), $location(_templateObject6$R || (_templateObject6$R = _taggedTemplateLiteral(["Pirates of the Garbage Barges"])))), new QuestData("racism", 3, "Racism Reduction", "Social Justice Adventurer II", "questEStSocialJusticeII", "dinseySocialJusticeIIProgress", 15, true, $item(_templateObject7$N || (_templateObject7$N = _taggedTemplateLiteral(["none"]))), $location(_templateObject8$H || (_templateObject8$H = _taggedTemplateLiteral(["Uncle Gator's Country Fun-Time Liquid Waste Sluice"])))), new QuestData("fun", 4, "Compulsory Fun", "Whistling Zippity-Doo-Dah", "questEStZippityDooDah", "dinseyFunProgress", 15, true, $item(_templateObject9$D || (_templateObject9$D = _taggedTemplateLiteral(["Dinsey mascot mask"]))), $location(_templateObject0$z || (_templateObject0$z = _taggedTemplateLiteral(["The Toxic Teacups"])))), new QuestData("trash", 6, "Waterway Debris Removal", "Teach a Man to Fish Trash", "questEStFishTrash", "dinseyFilthLevel", 0, true, $item(_templateObject1$x || (_templateObject1$x = _taggedTemplateLiteral(["trash net"]))), $location(_templateObject10$x || (_templateObject10$x = _taggedTemplateLiteral(["Pirates of the Garbage Barges"])))), new QuestData("bear", 5, "Bear Removal", "Nasty, Nasty Bears", "questEStNastyBears", "dinseyNastyBearsDefeated", 8, false, $item(_templateObject11$u || (_templateObject11$u = _taggedTemplateLiteral(["none"]))), $location(_templateObject12$t || (_templateObject12$t = _taggedTemplateLiteral(["Uncle Gator's Country Fun-Time Liquid Waste Sluice"])))), new QuestData("food", 7, "Guest Sustenance Assurance", "Will Work With Food", "questEStWorkWithFood", "dinseyTouristsFed", 30, false, $item(_templateObject13$r || (_templateObject13$r = _taggedTemplateLiteral(["none"]))), $location(_templateObject14$q || (_templateObject14$q = _taggedTemplateLiteral(["Barf Mountain"]))))];
+var quests = [new QuestData("lube", 1, "Track Maintenance", "Super Luber", "questEStSuperLuber", "", 0, false, $item(_templateObject$1n || (_templateObject$1n = _taggedTemplateLiteral(["lube-shoes"]))), $location(_templateObject2$17 || (_templateObject2$17 = _taggedTemplateLiteral(["Barf Mountain"])))), new QuestData("fuel", 0, "Electrical Maintenance", "Give Me Fuel", "questEStGiveMeFuel", "", 0, false, $item(_templateObject3$12 || (_templateObject3$12 = _taggedTemplateLiteral(["none"]))), $location(_templateObject4$W || (_templateObject4$W = _taggedTemplateLiteral(["The Toxic Teacups"])))), new QuestData("sexism", 2, "Sexism Reduction", "Social Justice Adventurer I", "questEStSocialJusticeI", "dinseySocialJusticeIProgress", 15, true, $item(_templateObject5$T || (_templateObject5$T = _taggedTemplateLiteral(["none"]))), $location(_templateObject6$R || (_templateObject6$R = _taggedTemplateLiteral(["Pirates of the Garbage Barges"])))), new QuestData("racism", 3, "Racism Reduction", "Social Justice Adventurer II", "questEStSocialJusticeII", "dinseySocialJusticeIIProgress", 15, true, $item(_templateObject7$N || (_templateObject7$N = _taggedTemplateLiteral(["none"]))), $location(_templateObject8$H || (_templateObject8$H = _taggedTemplateLiteral(["Uncle Gator's Country Fun-Time Liquid Waste Sluice"])))), new QuestData("fun", 4, "Compulsory Fun", "Whistling Zippity-Doo-Dah", "questEStZippityDooDah", "dinseyFunProgress", 15, true, $item(_templateObject9$D || (_templateObject9$D = _taggedTemplateLiteral(["Dinsey mascot mask"]))), $location(_templateObject0$z || (_templateObject0$z = _taggedTemplateLiteral(["The Toxic Teacups"])))), new QuestData("trash", 6, "Waterway Debris Removal", "Teach a Man to Fish Trash", "questEStFishTrash", "dinseyFilthLevel", 0, true, $item(_templateObject1$x || (_templateObject1$x = _taggedTemplateLiteral(["trash net"]))), $location(_templateObject10$x || (_templateObject10$x = _taggedTemplateLiteral(["Pirates of the Garbage Barges"])))), new QuestData("bear", 5, "Bear Removal", "Nasty, Nasty Bears", "questEStNastyBears", "dinseyNastyBearsDefeated", 8, false, $item(_templateObject11$u || (_templateObject11$u = _taggedTemplateLiteral(["none"]))), $location(_templateObject12$t || (_templateObject12$t = _taggedTemplateLiteral(["Uncle Gator's Country Fun-Time Liquid Waste Sluice"])))), new QuestData("food", 7, "Guest Sustenance Assurance", "Will Work With Food", "questEStWorkWithFood", "dinseyTouristsFed", 30, false, $item(_templateObject13$r || (_templateObject13$r = _taggedTemplateLiteral(["none"]))), $location(_templateObject14$q || (_templateObject14$q = _taggedTemplateLiteral(["Barf Mountain"]))))];
 /**
  * Disposes of a Bag of park garbage in the Maintenance Tunnels for daily funfunds
  *
@@ -8065,7 +8065,7 @@ function disposeGarbage() {
 function hasQuest() {
   return quests.some(q => q.currentQuest());
 }
-var BLANK_QUEST = new QuestData("", -1, "", "", "", "", -1, false, $item(_templateObject16$p || (_templateObject16$p = _taggedTemplateLiteral(["none"]))), $location(_templateObject17$o || (_templateObject17$o = _taggedTemplateLiteral(["none"]))));
+var BLANK_QUEST = new QuestData("", -1, "", "", "", "", -1, false, $item(_templateObject16$o || (_templateObject16$o = _taggedTemplateLiteral(["none"]))), $location(_templateObject17$n || (_templateObject17$n = _taggedTemplateLiteral(["none"]))));
 /**
  * @returns The QuestData for your current active quest
  */
@@ -8196,11 +8196,11 @@ var Dinseylandfill = /*#__PURE__*/Object.freeze({
   turnInQuest: turnInQuest
 });
 
-var _templateObject$1m, _templateObject2$16, _templateObject3$10, _templateObject4$V, _templateObject5$S, _templateObject6$Q, _templateObject7$M, _templateObject8$G, _templateObject9$C, _templateObject0$y;
+var _templateObject$1m, _templateObject2$16, _templateObject3$11, _templateObject4$V, _templateObject5$S, _templateObject6$Q, _templateObject7$M, _templateObject8$G, _templateObject9$C, _templateObject0$y;
 var Mayo = {
   nex: $item(_templateObject$1m || (_templateObject$1m = _taggedTemplateLiteral(["Mayonex"]))),
   diol: $item(_templateObject2$16 || (_templateObject2$16 = _taggedTemplateLiteral(["Mayodiol"]))),
-  zapine: $item(_templateObject3$10 || (_templateObject3$10 = _taggedTemplateLiteral(["Mayozapine"]))),
+  zapine: $item(_templateObject3$11 || (_templateObject3$11 = _taggedTemplateLiteral(["Mayozapine"]))),
   flex: $item(_templateObject4$V || (_templateObject4$V = _taggedTemplateLiteral(["Mayoflex"])))
 };
 /**
@@ -8249,7 +8249,7 @@ var MayoClinic = /*#__PURE__*/Object.freeze({
   setMayoMinder: setMayoMinder
 });
 
-var _templateObject$1l, _templateObject2$15, _templateObject3$$, _templateObject4$U, _templateObject5$R, _templateObject6$P, _templateObject7$L, _templateObject8$F, _templateObject9$B;
+var _templateObject$1l, _templateObject2$15, _templateObject3$10, _templateObject4$U, _templateObject5$R, _templateObject6$P, _templateObject7$L, _templateObject8$F, _templateObject9$B;
 /**
  * @returns Whether or not you can currently access Gingerbread City
  */
@@ -8281,7 +8281,7 @@ var LOCATIONS = Object.freeze($locations(_templateObject$1l || (_templateObject$
 function availableLocations$1() {
   return LOCATIONS.filter(l => require$$0.canAdventure(l));
 }
-var NOONS = new Map([[$location(_templateObject2$15 || (_templateObject2$15 = _taggedTemplateLiteral(["Gingerbread Train Station"]))), 1204], [$location(_templateObject3$$ || (_templateObject3$$ = _taggedTemplateLiteral(["Gingerbread Civic Center"]))), 1202], [$location(_templateObject4$U || (_templateObject4$U = _taggedTemplateLiteral(["Gingerbread Industrial Zone"]))), 1206], [$location(_templateObject5$R || (_templateObject5$R = _taggedTemplateLiteral(["Gingerbread Upscale Retail District"]))), 1208]]);
+var NOONS = new Map([[$location(_templateObject2$15 || (_templateObject2$15 = _taggedTemplateLiteral(["Gingerbread Train Station"]))), 1204], [$location(_templateObject3$10 || (_templateObject3$10 = _taggedTemplateLiteral(["Gingerbread Civic Center"]))), 1202], [$location(_templateObject4$U || (_templateObject4$U = _taggedTemplateLiteral(["Gingerbread Industrial Zone"]))), 1206], [$location(_templateObject5$R || (_templateObject5$R = _taggedTemplateLiteral(["Gingerbread Upscale Retail District"]))), 1208]]);
 var MIDNIGHTS = new Map([[$location(_templateObject6$P || (_templateObject6$P = _taggedTemplateLiteral(["Gingerbread Train Station"]))), 1205], [$location(_templateObject7$L || (_templateObject7$L = _taggedTemplateLiteral(["Gingerbread Civic Center"]))), 1203], [$location(_templateObject8$F || (_templateObject8$F = _taggedTemplateLiteral(["Gingerbread Industrial Zone"]))), 1207], [$location(_templateObject9$B || (_templateObject9$B = _taggedTemplateLiteral(["Gingerbread Upscale Retail District"]))), 1209]]);
 /**
  * @param location The location in question
@@ -8322,7 +8322,7 @@ var GingerBread = /*#__PURE__*/Object.freeze({
   minutesToNoon: minutesToNoon
 });
 
-var _templateObject$1k, _templateObject2$14, _templateObject3$_, _templateObject4$T, _templateObject5$Q, _templateObject6$O, _templateObject7$K, _templateObject8$E, _templateObject9$A, _templateObject0$x, _templateObject1$w, _templateObject10$w, _templateObject11$t, _templateObject12$s, _templateObject13$q, _templateObject14$p, _templateObject15$o, _templateObject16$o, _templateObject17$n, _templateObject18$l, _templateObject19$l, _templateObject20$j, _templateObject21$h, _templateObject22$h, _templateObject23$g, _templateObject24$g, _templateObject25$g;
+var _templateObject$1k, _templateObject2$14, _templateObject3$$, _templateObject4$T, _templateObject5$Q, _templateObject6$O, _templateObject7$K, _templateObject8$E, _templateObject9$A, _templateObject0$x, _templateObject1$w, _templateObject10$w, _templateObject11$t, _templateObject12$s, _templateObject13$q, _templateObject14$p, _templateObject15$o, _templateObject16$n, _templateObject17$m, _templateObject18$l, _templateObject19$l, _templateObject20$j, _templateObject21$h, _templateObject22$h, _templateObject23$g, _templateObject24$g, _templateObject25$g;
 var item$d = $item(_templateObject$1k || (_templateObject$1k = _taggedTemplateLiteral(["Source terminal"])));
 /**
  * @returns Is the terminal currently installed & available in our campground?
@@ -8342,7 +8342,7 @@ function have$S() {
  */
 var Buffs = {
   Items: $effect(_templateObject2$14 || (_templateObject2$14 = _taggedTemplateLiteral(["items.enh"]))),
-  Meat: $effect(_templateObject3$_ || (_templateObject3$_ = _taggedTemplateLiteral(["meat.enh"]))),
+  Meat: $effect(_templateObject3$$ || (_templateObject3$$ = _taggedTemplateLiteral(["meat.enh"]))),
   Init: $effect(_templateObject4$T || (_templateObject4$T = _taggedTemplateLiteral(["init.enh"]))),
   Critical: $effect(_templateObject5$Q || (_templateObject5$Q = _taggedTemplateLiteral(["critical.enh"]))),
   Damage: $effect(_templateObject6$O || (_templateObject6$O = _taggedTemplateLiteral(["damage.enh"]))),
@@ -8448,7 +8448,7 @@ function isCurrentSkill(skills) {
 /**
  * Items that can be generated by the Source Terminal
  */
-var Items = new Map([[$item(_templateObject16$o || (_templateObject16$o = _taggedTemplateLiteral(["browser cookie"]))), "food.ext"], [$item(_templateObject17$n || (_templateObject17$n = _taggedTemplateLiteral(["hacked gibson"]))), "booze.ext"], [$item(_templateObject18$l || (_templateObject18$l = _taggedTemplateLiteral(["Source shades"]))), "goggles.ext"], [$item(_templateObject19$l || (_templateObject19$l = _taggedTemplateLiteral(["Source terminal GRAM chip"]))), "gram.ext"], [$item(_templateObject20$j || (_templateObject20$j = _taggedTemplateLiteral(["Source terminal PRAM chip"]))), "pram.ext"], [$item(_templateObject21$h || (_templateObject21$h = _taggedTemplateLiteral(["Source terminal SPAM chip"]))), "spam.ext"], [$item(_templateObject22$h || (_templateObject22$h = _taggedTemplateLiteral(["Source terminal CRAM chip"]))), "cram.ext"], [$item(_templateObject23$g || (_templateObject23$g = _taggedTemplateLiteral(["Source terminal DRAM chip"]))), "dram.ext"], [$item(_templateObject24$g || (_templateObject24$g = _taggedTemplateLiteral(["Source terminal TRAM chip"]))), "tram.ext"], [$item(_templateObject25$g || (_templateObject25$g = _taggedTemplateLiteral(["software bug"]))), "familiar.ext"]]);
+var Items = new Map([[$item(_templateObject16$n || (_templateObject16$n = _taggedTemplateLiteral(["browser cookie"]))), "food.ext"], [$item(_templateObject17$m || (_templateObject17$m = _taggedTemplateLiteral(["hacked gibson"]))), "booze.ext"], [$item(_templateObject18$l || (_templateObject18$l = _taggedTemplateLiteral(["Source shades"]))), "goggles.ext"], [$item(_templateObject19$l || (_templateObject19$l = _taggedTemplateLiteral(["Source terminal GRAM chip"]))), "gram.ext"], [$item(_templateObject20$j || (_templateObject20$j = _taggedTemplateLiteral(["Source terminal PRAM chip"]))), "pram.ext"], [$item(_templateObject21$h || (_templateObject21$h = _taggedTemplateLiteral(["Source terminal SPAM chip"]))), "spam.ext"], [$item(_templateObject22$h || (_templateObject22$h = _taggedTemplateLiteral(["Source terminal CRAM chip"]))), "cram.ext"], [$item(_templateObject23$g || (_templateObject23$g = _taggedTemplateLiteral(["Source terminal DRAM chip"]))), "dram.ext"], [$item(_templateObject24$g || (_templateObject24$g = _taggedTemplateLiteral(["Source terminal TRAM chip"]))), "tram.ext"], [$item(_templateObject25$g || (_templateObject25$g = _taggedTemplateLiteral(["software bug"]))), "familiar.ext"]]);
 /**
  * Collect an item from the Source Terminal (up to three times a day)
  *
@@ -8731,7 +8731,7 @@ var MummingTrunk = /*#__PURE__*/Object.freeze({
   currentCostumes: currentCostumes
 });
 
-var _templateObject$1i, _templateObject2$13, _templateObject3$Z, _templateObject4$S, _templateObject5$P, _templateObject6$N, _templateObject7$J, _templateObject8$D, _templateObject9$z, _templateObject0$w, _templateObject1$v, _templateObject10$v, _templateObject11$s, _templateObject12$r, _templateObject13$p, _templateObject14$o, _templateObject15$n, _templateObject16$n, _templateObject17$m, _templateObject18$k, _templateObject19$k, _templateObject20$i, _templateObject21$g, _templateObject22$g, _templateObject23$f, _templateObject24$f, _templateObject25$f, _templateObject26$f;
+var _templateObject$1i, _templateObject2$13, _templateObject3$_, _templateObject4$S, _templateObject5$P, _templateObject6$N, _templateObject7$J, _templateObject8$D, _templateObject9$z, _templateObject0$w, _templateObject1$v, _templateObject10$v, _templateObject11$s, _templateObject12$r, _templateObject13$p, _templateObject14$o, _templateObject15$n, _templateObject16$m, _templateObject17$l, _templateObject18$k, _templateObject19$k, _templateObject20$i, _templateObject21$g, _templateObject22$g, _templateObject23$f, _templateObject24$f, _templateObject25$f, _templateObject26$f;
 var pantogram = $item(_templateObject$1i || (_templateObject$1i = _taggedTemplateLiteral(["portable pantogram"])));
 var pants = $item(_templateObject2$13 || (_templateObject2$13 = _taggedTemplateLiteral(["pantogram pants"])));
 /**
@@ -8761,7 +8761,7 @@ var Element = {
 var LeftSacrifice = {
   ["Maximum HP: 40"]: [-1, 0],
   ["Maximum MP: 20"]: [-2, 0],
-  ["HP Regen Max: 10"]: [$item(_templateObject3$Z || (_templateObject3$Z = _taggedTemplateLiteral(["red pixel potion"]))), 1],
+  ["HP Regen Max: 10"]: [$item(_templateObject3$_ || (_templateObject3$_ = _taggedTemplateLiteral(["red pixel potion"]))), 1],
   ["HP Regen Max: 15"]: [$item(_templateObject4$S || (_templateObject4$S = _taggedTemplateLiteral(["royal jelly"]))), 1],
   ["HP Regen Max: 20"]: [$item(_templateObject5$P || (_templateObject5$P = _taggedTemplateLiteral(["scented massage oil"]))), 1],
   ["MP Regen Max: 10"]: [$item(_templateObject6$N || (_templateObject6$N = _taggedTemplateLiteral(["Cherry Cloaca Cola"]))), 1],
@@ -8789,7 +8789,7 @@ var MiddleSacrifice = {
   ["Fishing Skill: 5"]: [$item(_templateObject13$p || (_templateObject13$p = _taggedTemplateLiteral(["wriggling worm"]))), 1],
   ["Pool Skill: 5"]: [$item(_templateObject14$o || (_templateObject14$o = _taggedTemplateLiteral(["8-ball"]))), 15],
   ["Avatar: Purple"]: [$item(_templateObject15$n || (_templateObject15$n = _taggedTemplateLiteral(["moxie weed"]))), 99],
-  ["Drops Items: true"]: [$item(_templateObject16$n || (_templateObject16$n = _taggedTemplateLiteral(["ten-leaf clover"]))), 1]
+  ["Drops Items: true"]: [$item(_templateObject16$m || (_templateObject16$m = _taggedTemplateLiteral(["ten-leaf clover"]))), 1]
 };
 /**
  * Internal function used for `makePants`
@@ -8803,7 +8803,7 @@ function getMiddleSacPair(mod) {
 var RightSacrifice = {
   ["Weapon Damage: 20"]: [-1, 0],
   ["Spell Damage Percent: 20"]: [-2, 0],
-  ["Meat Drop: 30"]: [$item(_templateObject17$m || (_templateObject17$m = _taggedTemplateLiteral(["taco shell"]))), 1],
+  ["Meat Drop: 30"]: [$item(_templateObject17$l || (_templateObject17$l = _taggedTemplateLiteral(["taco shell"]))), 1],
   ["Meat Drop: 60"]: [$item(_templateObject18$k || (_templateObject18$k = _taggedTemplateLiteral(["porquoise"]))), 1],
   ["Item Drop: 15"]: [$item(_templateObject19$k || (_templateObject19$k = _taggedTemplateLiteral(["fairy gravy boat"]))), 1],
   ["Item Drop: 30"]: [$item(_templateObject20$i || (_templateObject20$i = _taggedTemplateLiteral(["tiny dancer"]))), 1],
@@ -8928,7 +8928,7 @@ var Pantogram = /*#__PURE__*/Object.freeze({
   makePantsFromObject: makePantsFromObject
 });
 
-var _templateObject$1h, _templateObject2$12, _templateObject3$Y, _templateObject4$R, _templateObject5$O, _templateObject6$M, _templateObject7$I, _templateObject8$C, _templateObject9$y, _templateObject0$v, _templateObject1$u, _templateObject10$u, _templateObject11$r, _templateObject12$q, _templateObject13$o, _templateObject14$n, _templateObject15$m, _templateObject16$m, _templateObject17$l, _templateObject18$j, _templateObject19$j, _templateObject20$h, _templateObject21$f, _templateObject22$f, _templateObject23$e, _templateObject24$e, _templateObject25$e, _templateObject26$e, _templateObject27$e, _templateObject28$d, _templateObject29$d, _templateObject30$b, _templateObject31$a, _templateObject32$9, _templateObject33$9, _templateObject34$9, _templateObject35$9;
+var _templateObject$1h, _templateObject2$12, _templateObject3$Z, _templateObject4$R, _templateObject5$O, _templateObject6$M, _templateObject7$I, _templateObject8$C, _templateObject9$y, _templateObject0$v, _templateObject1$u, _templateObject10$u, _templateObject11$r, _templateObject12$q, _templateObject13$o, _templateObject14$n, _templateObject15$m, _templateObject16$l, _templateObject17$k, _templateObject18$j, _templateObject19$j, _templateObject20$h, _templateObject21$f, _templateObject22$f, _templateObject23$e, _templateObject24$e, _templateObject25$e, _templateObject26$e, _templateObject27$e, _templateObject28$d, _templateObject29$d, _templateObject30$b, _templateObject31$a, _templateObject32$9, _templateObject33$9, _templateObject34$9, _templateObject35$9;
 /**
  * The Robortender itself
  */
@@ -8939,9 +8939,9 @@ var familiar$3 = $familiar(_templateObject$1h || (_templateObject$1h = _taggedTe
 function have$O() {
   return require$$0.haveFamiliar(familiar$3);
 }
-var phylumDrops = new Map([[$phylum(_templateObject2$12 || (_templateObject2$12 = _taggedTemplateLiteral(["Bug"]))), $item(_templateObject3$Y || (_templateObject3$Y = _taggedTemplateLiteral(["pickled grasshopper"])))],
+var phylumDrops = new Map([[$phylum(_templateObject2$12 || (_templateObject2$12 = _taggedTemplateLiteral(["Bug"]))), $item(_templateObject3$Z || (_templateObject3$Z = _taggedTemplateLiteral(["pickled grasshopper"])))],
 // bottle of anís
-[$phylum(_templateObject4$R || (_templateObject4$R = _taggedTemplateLiteral(["Constellation"]))), require$$0.Item.get(9348)], [$phylum(_templateObject5$O || (_templateObject5$O = _taggedTemplateLiteral(["Demon"]))), $item(_templateObject6$M || (_templateObject6$M = _taggedTemplateLiteral(["bottle of novelty hot sauce"])))], [$phylum(_templateObject7$I || (_templateObject7$I = _taggedTemplateLiteral(["Elemental"]))), $item(_templateObject8$C || (_templateObject8$C = _taggedTemplateLiteral(["elemental sugarcube"])))], [$phylum(_templateObject9$y || (_templateObject9$y = _taggedTemplateLiteral(["Elf"]))), $item(_templateObject0$v || (_templateObject0$v = _taggedTemplateLiteral(["peppermint sprig"])))], [$phylum(_templateObject1$u || (_templateObject1$u = _taggedTemplateLiteral(["Fish"]))), $item(_templateObject10$u || (_templateObject10$u = _taggedTemplateLiteral(["bottle of clam juice"])))], [$phylum(_templateObject11$r || (_templateObject11$r = _taggedTemplateLiteral(["Goblin"]))), $item(_templateObject12$q || (_templateObject12$q = _taggedTemplateLiteral(["cocktail mushroom"])))], [$phylum(_templateObject13$o || (_templateObject13$o = _taggedTemplateLiteral(["Hippy"]))), $item(_templateObject14$n || (_templateObject14$n = _taggedTemplateLiteral(["shot of granola liqueur"])))], [$phylum(_templateObject15$m || (_templateObject15$m = _taggedTemplateLiteral(["Hobo"]))), $item(_templateObject16$m || (_templateObject16$m = _taggedTemplateLiteral(["can of cherry-flavored sterno"])))], [$phylum(_templateObject17$l || (_templateObject17$l = _taggedTemplateLiteral(["Horror"]))), $item(_templateObject18$j || (_templateObject18$j = _taggedTemplateLiteral(["lump of black ichor"])))], [$phylum(_templateObject19$j || (_templateObject19$j = _taggedTemplateLiteral(["Humanoid"]))), $item(_templateObject20$h || (_templateObject20$h = _taggedTemplateLiteral(["bottle of gregnadigne"])))],
+[$phylum(_templateObject4$R || (_templateObject4$R = _taggedTemplateLiteral(["Constellation"]))), require$$0.Item.get(9348)], [$phylum(_templateObject5$O || (_templateObject5$O = _taggedTemplateLiteral(["Demon"]))), $item(_templateObject6$M || (_templateObject6$M = _taggedTemplateLiteral(["bottle of novelty hot sauce"])))], [$phylum(_templateObject7$I || (_templateObject7$I = _taggedTemplateLiteral(["Elemental"]))), $item(_templateObject8$C || (_templateObject8$C = _taggedTemplateLiteral(["elemental sugarcube"])))], [$phylum(_templateObject9$y || (_templateObject9$y = _taggedTemplateLiteral(["Elf"]))), $item(_templateObject0$v || (_templateObject0$v = _taggedTemplateLiteral(["peppermint sprig"])))], [$phylum(_templateObject1$u || (_templateObject1$u = _taggedTemplateLiteral(["Fish"]))), $item(_templateObject10$u || (_templateObject10$u = _taggedTemplateLiteral(["bottle of clam juice"])))], [$phylum(_templateObject11$r || (_templateObject11$r = _taggedTemplateLiteral(["Goblin"]))), $item(_templateObject12$q || (_templateObject12$q = _taggedTemplateLiteral(["cocktail mushroom"])))], [$phylum(_templateObject13$o || (_templateObject13$o = _taggedTemplateLiteral(["Hippy"]))), $item(_templateObject14$n || (_templateObject14$n = _taggedTemplateLiteral(["shot of granola liqueur"])))], [$phylum(_templateObject15$m || (_templateObject15$m = _taggedTemplateLiteral(["Hobo"]))), $item(_templateObject16$l || (_templateObject16$l = _taggedTemplateLiteral(["can of cherry-flavored sterno"])))], [$phylum(_templateObject17$k || (_templateObject17$k = _taggedTemplateLiteral(["Horror"]))), $item(_templateObject18$j || (_templateObject18$j = _taggedTemplateLiteral(["lump of black ichor"])))], [$phylum(_templateObject19$j || (_templateObject19$j = _taggedTemplateLiteral(["Humanoid"]))), $item(_templateObject20$h || (_templateObject20$h = _taggedTemplateLiteral(["bottle of gregnadigne"])))],
 // bottle of Crème de Fugu
 [$phylum(_templateObject21$f || (_templateObject21$f = _taggedTemplateLiteral(["Mer-kin"]))), require$$0.Item.get(9358)], [$phylum(_templateObject22$f || (_templateObject22$f = _taggedTemplateLiteral(["Orc"]))), $item(_templateObject23$e || (_templateObject23$e = _taggedTemplateLiteral(["baby oil shooter"])))], [$phylum(_templateObject24$e || (_templateObject24$e = _taggedTemplateLiteral(["Penguin"]))), $item(_templateObject25$e || (_templateObject25$e = _taggedTemplateLiteral(["fish head"])))], [$phylum(_templateObject26$e || (_templateObject26$e = _taggedTemplateLiteral(["Pirate"]))), $item(_templateObject27$e || (_templateObject27$e = _taggedTemplateLiteral(["limepatch"])))], [$phylum(_templateObject28$d || (_templateObject28$d = _taggedTemplateLiteral(["Plant"]))), $item(_templateObject29$d || (_templateObject29$d = _taggedTemplateLiteral(["pile of dirt"])))], [$phylum(_templateObject30$b || (_templateObject30$b = _taggedTemplateLiteral(["Slime"]))), $item(_templateObject31$a || (_templateObject31$a = _taggedTemplateLiteral(["slime shooter"])))], [$phylum(_templateObject32$9 || (_templateObject32$9 = _taggedTemplateLiteral(["Weird"]))), $item(_templateObject33$9 || (_templateObject33$9 = _taggedTemplateLiteral(["imaginary lemon"])))]]);
 /**
@@ -9003,7 +9003,7 @@ var Robortender = /*#__PURE__*/Object.freeze({
   minorDrinks: minorDrinks
 });
 
-var _templateObject$1g, _templateObject2$11, _templateObject3$X, _templateObject4$Q, _templateObject5$N;
+var _templateObject$1g, _templateObject2$11, _templateObject3$Y, _templateObject4$Q, _templateObject5$N;
 /**
  * @returns Whether you have permanent Spacegate Access
  */
@@ -9091,7 +9091,7 @@ function hazardEquipment(hazards) {
   var hazardEquipment = {
     "toxic atmosphere": $item(_templateObject$1g || (_templateObject$1g = _taggedTemplateLiteral(["filter helmet"]))),
     "high gravity": $item(_templateObject2$11 || (_templateObject2$11 = _taggedTemplateLiteral(["exo-servo leg braces"]))),
-    irradiated: $item(_templateObject3$X || (_templateObject3$X = _taggedTemplateLiteral(["rad cloak"]))),
+    irradiated: $item(_templateObject3$Y || (_templateObject3$Y = _taggedTemplateLiteral(["rad cloak"]))),
     "magnetic storms": $item(_templateObject4$Q || (_templateObject4$Q = _taggedTemplateLiteral(["gate transceiver"]))),
     "high winds": $item(_templateObject5$N || (_templateObject5$N = _taggedTemplateLiteral(["high-friction boots"])))
   };
@@ -9533,7 +9533,7 @@ var counter = /*#__PURE__*/Object.freeze({
   set: set$1
 });
 
-var _templateObject$1e, _templateObject2$$, _templateObject3$W, _templateObject4$P, _templateObject5$M, _templateObject6$L, _templateObject7$H, _templateObject8$B, _templateObject9$x, _templateObject0$u, _templateObject1$t, _templateObject10$t, _templateObject11$q, _templateObject12$p, _templateObject13$n, _templateObject14$m, _templateObject15$l, _templateObject16$l, _templateObject17$k, _templateObject18$i, _templateObject19$i, _templateObject20$g, _templateObject21$e, _templateObject22$e, _templateObject23$d, _templateObject24$d, _templateObject25$d, _templateObject26$d, _templateObject27$d, _templateObject28$c, _templateObject29$c, _templateObject30$a, _templateObject31$9, _templateObject32$8, _templateObject33$8, _templateObject34$8, _templateObject35$8, _templateObject36$8, _templateObject37$8, _templateObject38$8, _templateObject39$8, _templateObject40$8, _templateObject41$7, _templateObject42$7, _templateObject43$6, _templateObject44$6, _templateObject45$6, _templateObject46$6, _templateObject47$6, _templateObject48$6, _templateObject49$4, _templateObject50$4, _templateObject51$4;
+var _templateObject$1e, _templateObject2$$, _templateObject3$X, _templateObject4$P, _templateObject5$M, _templateObject6$L, _templateObject7$H, _templateObject8$B, _templateObject9$x, _templateObject0$u, _templateObject1$t, _templateObject10$t, _templateObject11$q, _templateObject12$p, _templateObject13$n, _templateObject14$m, _templateObject15$l, _templateObject16$k, _templateObject17$j, _templateObject18$i, _templateObject19$i, _templateObject20$g, _templateObject21$e, _templateObject22$e, _templateObject23$d, _templateObject24$d, _templateObject25$d, _templateObject26$d, _templateObject27$d, _templateObject28$c, _templateObject29$c, _templateObject30$a, _templateObject31$9, _templateObject32$8, _templateObject33$8, _templateObject34$8, _templateObject35$8, _templateObject36$8, _templateObject37$8, _templateObject38$8, _templateObject39$8, _templateObject40$8, _templateObject41$7, _templateObject42$7, _templateObject43$6, _templateObject44$6, _templateObject45$6, _templateObject46$6, _templateObject47$6, _templateObject48$6, _templateObject49$4, _templateObject50$4, _templateObject51$4;
 /**
  * @returns Whether we `have` the latte lovers member's mug
  */
@@ -9563,7 +9563,7 @@ var INGREDIENTS = {
     modifier: {
       "Weapon Damage": 25
     },
-    location: $location(_templateObject3$W || (_templateObject3$W = _taggedTemplateLiteral(["The Middle Chamber"])))
+    location: $location(_templateObject3$X || (_templateObject3$X = _taggedTemplateLiteral(["The Middle Chamber"])))
   },
   basil: {
     modifier: {
@@ -9657,13 +9657,13 @@ var INGREDIENTS = {
     modifier: {
       Initiative: 25
     },
-    location: $location(_templateObject16$l || (_templateObject16$l = _taggedTemplateLiteral(["Cola Wars Battlefield (Dyspepsi Uniform)"])))
+    location: $location(_templateObject16$k || (_templateObject16$k = _taggedTemplateLiteral(["Cola Wars Battlefield (Dyspepsi Uniform)"])))
   },
   filth: {
     modifier: {
       "Damage Reduction": 20
     },
-    location: $location(_templateObject17$k || (_templateObject17$k = _taggedTemplateLiteral(["The Feeding Chamber"])))
+    location: $location(_templateObject17$j || (_templateObject17$j = _taggedTemplateLiteral(["The Feeding Chamber"])))
   },
   grass: {
     modifier: {
@@ -10018,7 +10018,7 @@ var SongBoom = /*#__PURE__*/Object.freeze({
   songChangesLeft: songChangesLeft
 });
 
-var _templateObject$1c, _templateObject2$_, _templateObject3$V, _templateObject4$O, _templateObject5$L, _templateObject6$K, _templateObject7$G, _templateObject8$A, _templateObject9$w, _templateObject0$t, _templateObject1$s, _templateObject10$s, _templateObject11$p, _templateObject12$o, _templateObject13$m, _templateObject14$l, _templateObject15$k, _templateObject16$k, _templateObject17$j, _templateObject18$h, _templateObject19$h;
+var _templateObject$1c, _templateObject2$_, _templateObject3$W, _templateObject4$O, _templateObject5$L, _templateObject6$K, _templateObject7$G, _templateObject8$A, _templateObject9$w, _templateObject0$t, _templateObject1$s, _templateObject10$s, _templateObject11$p, _templateObject12$o, _templateObject13$m, _templateObject14$l, _templateObject15$k, _templateObject16$j, _templateObject17$i, _templateObject18$h, _templateObject19$h;
 /**
  * Determines whether we `have` the beach comb
  *
@@ -10035,7 +10035,7 @@ function have$I() {
 function available$3() {
   return have$I() || have$1a(require$$0.Item.get("driftwood beach comb"));
 }
-var headBuffs = [$effect(_templateObject$1c || (_templateObject$1c = _taggedTemplateLiteral(["Hot-Headed"]))), $effect(_templateObject2$_ || (_templateObject2$_ = _taggedTemplateLiteral(["Cold as Nice"]))), $effect(_templateObject3$V || (_templateObject3$V = _taggedTemplateLiteral(["A Brush with Grossness"]))), $effect(_templateObject4$O || (_templateObject4$O = _taggedTemplateLiteral(["Does It Have a Skull In There??"]))), $effect(_templateObject5$L || (_templateObject5$L = _taggedTemplateLiteral(["Oiled, Slick"]))), $effect(_templateObject6$K || (_templateObject6$K = _taggedTemplateLiteral(["Lack of Body-Building"]))), $effect(_templateObject7$G || (_templateObject7$G = _taggedTemplateLiteral(["We're All Made of Starfish"]))), $effect(_templateObject8$A || (_templateObject8$A = _taggedTemplateLiteral(["Pomp & Circumsands"]))), $effect(_templateObject9$w || (_templateObject9$w = _taggedTemplateLiteral(["Resting Beach Face"]))), $effect(_templateObject0$t || (_templateObject0$t = _taggedTemplateLiteral(["Do I Know You From Somewhere?"]))), $effect(_templateObject1$s || (_templateObject1$s = _taggedTemplateLiteral(["You Learned Something Maybe!"])))];
+var headBuffs = [$effect(_templateObject$1c || (_templateObject$1c = _taggedTemplateLiteral(["Hot-Headed"]))), $effect(_templateObject2$_ || (_templateObject2$_ = _taggedTemplateLiteral(["Cold as Nice"]))), $effect(_templateObject3$W || (_templateObject3$W = _taggedTemplateLiteral(["A Brush with Grossness"]))), $effect(_templateObject4$O || (_templateObject4$O = _taggedTemplateLiteral(["Does It Have a Skull In There??"]))), $effect(_templateObject5$L || (_templateObject5$L = _taggedTemplateLiteral(["Oiled, Slick"]))), $effect(_templateObject6$K || (_templateObject6$K = _taggedTemplateLiteral(["Lack of Body-Building"]))), $effect(_templateObject7$G || (_templateObject7$G = _taggedTemplateLiteral(["We're All Made of Starfish"]))), $effect(_templateObject8$A || (_templateObject8$A = _taggedTemplateLiteral(["Pomp & Circumsands"]))), $effect(_templateObject9$w || (_templateObject9$w = _taggedTemplateLiteral(["Resting Beach Face"]))), $effect(_templateObject0$t || (_templateObject0$t = _taggedTemplateLiteral(["Do I Know You From Somewhere?"]))), $effect(_templateObject1$s || (_templateObject1$s = _taggedTemplateLiteral(["You Learned Something Maybe!"])))];
 var head = {
   HOT: $effect(_templateObject10$s || (_templateObject10$s = _taggedTemplateLiteral(["Hot-Headed"]))),
   COLD: $effect(_templateObject11$p || (_templateObject11$p = _taggedTemplateLiteral(["Cold as Nice"]))),
@@ -10043,8 +10043,8 @@ var head = {
   SPOOKY: $effect(_templateObject13$m || (_templateObject13$m = _taggedTemplateLiteral(["Does It Have a Skull In There??"]))),
   SLEAZE: $effect(_templateObject14$l || (_templateObject14$l = _taggedTemplateLiteral(["Oiled, Slick"]))),
   MUSCLE: $effect(_templateObject15$k || (_templateObject15$k = _taggedTemplateLiteral(["Lack of Body-Building"]))),
-  MYSTICALITY: $effect(_templateObject16$k || (_templateObject16$k = _taggedTemplateLiteral(["We're All Made of Starfish"]))),
-  INITIATIVE: $effect(_templateObject17$j || (_templateObject17$j = _taggedTemplateLiteral(["Resting Beach Face"]))),
+  MYSTICALITY: $effect(_templateObject16$j || (_templateObject16$j = _taggedTemplateLiteral(["We're All Made of Starfish"]))),
+  INITIATIVE: $effect(_templateObject17$i || (_templateObject17$i = _taggedTemplateLiteral(["Resting Beach Face"]))),
   FAMILIAR: $effect(_templateObject18$h || (_templateObject18$h = _taggedTemplateLiteral(["Do I Know You From Somewhere?"]))),
   EXPERIENCE: $effect(_templateObject19$h || (_templateObject19$h = _taggedTemplateLiteral(["You Learned Something Maybe!"])))
 };
@@ -10216,7 +10216,7 @@ var CampAway = /*#__PURE__*/Object.freeze({
   have: have$H
 });
 
-var _templateObject$1a, _templateObject2$Z, _templateObject3$U;
+var _templateObject$1a, _templateObject2$Z, _templateObject3$V;
 var familiar$2 = $familiar(_templateObject$1a || (_templateObject$1a = _taggedTemplateLiteral(["Pocket Professor"])));
 /**
  * @returns Whether you `have` the Pocket Professor
@@ -10255,7 +10255,7 @@ function lecturesDelivered() {
  */
 function currentlyAvailableLectures() {
   var weight = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : totalFamiliarWeight(familiar$2);
-  var includeChip = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : require$$0.haveEquipped($item(_templateObject3$U || (_templateObject3$U = _taggedTemplateLiteral(["Pocket Professor memory chip"]))));
+  var includeChip = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : require$$0.haveEquipped($item(_templateObject3$V || (_templateObject3$V = _taggedTemplateLiteral(["Pocket Professor memory chip"]))));
   return totalAvailableLectures(weight, includeChip) - lecturesDelivered();
 }
 
@@ -10331,7 +10331,7 @@ var Snapper = /*#__PURE__*/Object.freeze({
   trackPhylum: trackPhylum
 });
 
-var _templateObject$19, _templateObject2$Y, _templateObject3$T;
+var _templateObject$19, _templateObject2$Y, _templateObject3$U;
 var passive = $skill(_templateObject$19 || (_templateObject$19 = _taggedTemplateLiteral(["Comprehensive Cartography"])));
 /**
  * Determines whether you `have` the skill Comprehensive Cartography
@@ -10375,7 +10375,7 @@ function mapMonster(location, monster) {
  * @returns The number of monsters you can map today
  */
 function availableMaps() {
-  return have$E() ? $skill(_templateObject3$T || (_templateObject3$T = _taggedTemplateLiteral(["Map the Monsters"]))).dailylimit : 0;
+  return have$E() ? $skill(_templateObject3$U || (_templateObject3$U = _taggedTemplateLiteral(["Map the Monsters"]))).dailylimit : 0;
 }
 /**
  * @returns Whether or not `Map the Monsters` is currently active
@@ -10392,7 +10392,7 @@ var Cartography = /*#__PURE__*/Object.freeze({
   mapMonster: mapMonster
 });
 
-var _templateObject$18, _templateObject2$X, _templateObject3$S, _templateObject4$N, _templateObject5$K, _templateObject6$J, _templateObject7$F, _templateObject8$z, _templateObject9$v, _templateObject0$s, _templateObject1$r, _templateObject10$r, _templateObject11$o;
+var _templateObject$18, _templateObject2$X, _templateObject3$T, _templateObject4$N, _templateObject5$K, _templateObject6$J, _templateObject7$F, _templateObject8$z, _templateObject9$v, _templateObject0$s, _templateObject1$r, _templateObject10$r, _templateObject11$o;
 var item$a = $item(_templateObject$18 || (_templateObject$18 = _taggedTemplateLiteral(["Guzzlr tablet"])));
 /**
  * Determines whether you `have` Guzzlr
@@ -10595,7 +10595,7 @@ function haveBooze() {
   switch (booze) {
     case null:
       return false;
-    case $item(_templateObject3$S || (_templateObject3$S = _taggedTemplateLiteral(["Guzzlr cocktail set"]))):
+    case $item(_templateObject3$T || (_templateObject3$T = _taggedTemplateLiteral(["Guzzlr cocktail set"]))):
       return havePlatinumBooze();
     default:
       return require$$0.itemAmount(booze) > 0;
@@ -10687,7 +10687,7 @@ var Guzzlr = /*#__PURE__*/Object.freeze({
   turnsLeftOnQuest: turnsLeftOnQuest
 });
 
-var _templateObject$17, _templateObject2$W, _templateObject3$R, _templateObject4$M, _templateObject5$J, _templateObject6$I, _templateObject7$E;
+var _templateObject$17, _templateObject2$W, _templateObject3$S, _templateObject4$M, _templateObject5$J, _templateObject6$I, _templateObject7$E;
 var item$9 = $item(_templateObject$17 || (_templateObject$17 = _taggedTemplateLiteral(["unwrapped knock-off retro superhero cape"])));
 /**
  * Determines whether you have() the Retro Cape.
@@ -10764,7 +10764,7 @@ function getModifier() {
   var mode = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : currentMode();
   return _objectSpread2(_objectSpread2({}, Heroes[hero]), modeMap.get([hero, mode]) ?? {});
 }
-var skills$2 = new Map([[$skill(_templateObject2$W || (_templateObject2$W = _taggedTemplateLiteral(["Smooch of the Daywalker"]))), ["vampire", "kiss"]], [$skill(_templateObject3$R || (_templateObject3$R = _taggedTemplateLiteral(["Slay the Dead"]))), ["vampire", "kill"]], [$skill(_templateObject4$M || (_templateObject4$M = _taggedTemplateLiteral(["Unleash the Devil's Kiss"]))), ["heck", "kiss"]], [$skill(_templateObject5$J || (_templateObject5$J = _taggedTemplateLiteral(["Deploy Robo-Handcuffs"]))), ["robot", "hold"]], [$skill(_templateObject6$I || (_templateObject6$I = _taggedTemplateLiteral(["Blow a Robo-Kiss"]))), ["robot", "kiss"]], [$skill(_templateObject7$E || (_templateObject7$E = _taggedTemplateLiteral(["Precision Shot"]))), ["robot", "kill"]]]);
+var skills$2 = new Map([[$skill(_templateObject2$W || (_templateObject2$W = _taggedTemplateLiteral(["Smooch of the Daywalker"]))), ["vampire", "kiss"]], [$skill(_templateObject3$S || (_templateObject3$S = _taggedTemplateLiteral(["Slay the Dead"]))), ["vampire", "kill"]], [$skill(_templateObject4$M || (_templateObject4$M = _taggedTemplateLiteral(["Unleash the Devil's Kiss"]))), ["heck", "kiss"]], [$skill(_templateObject5$J || (_templateObject5$J = _taggedTemplateLiteral(["Deploy Robo-Handcuffs"]))), ["robot", "hold"]], [$skill(_templateObject6$I || (_templateObject6$I = _taggedTemplateLiteral(["Blow a Robo-Kiss"]))), ["robot", "kiss"]], [$skill(_templateObject7$E || (_templateObject7$E = _taggedTemplateLiteral(["Precision Shot"]))), ["robot", "kill"]]]);
 /**
  * Tunes the Retro Cape to allow it to grant a particular skill.
  *
@@ -10919,7 +10919,7 @@ var DaylightShavings = /*#__PURE__*/Object.freeze({
   nextBuff: nextBuff
 });
 
-var _templateObject$15, _templateObject2$U, _templateObject3$Q, _templateObject4$L, _templateObject5$I, _templateObject6$H, _templateObject7$D, _templateObject8$y, _templateObject9$u;
+var _templateObject$15, _templateObject2$U, _templateObject3$R, _templateObject4$L, _templateObject5$I, _templateObject6$H, _templateObject7$D, _templateObject8$y, _templateObject9$u;
 var item$8 = require$$0.Item.get("autumn-aton");
 /**
  * Is the autumn-aton currently in your inventory, available to deploy?
@@ -11057,7 +11057,7 @@ var UNIQUES = {
     },
     high: {
       index: 6,
-      item: $item(_templateObject3$Q || (_templateObject3$Q = _taggedTemplateLiteral(["autumn leaf pendant"])))
+      item: $item(_templateObject3$R || (_templateObject3$R = _taggedTemplateLiteral(["autumn leaf pendant"])))
     }
   },
   indoor: {
@@ -11238,13 +11238,13 @@ var CombatLoversLocket = /*#__PURE__*/Object.freeze({
   unlockedLocketMonsters: unlockedLocketMonsters
 });
 
-var _templateObject$13, _templateObject2$T, _templateObject3$P, _templateObject4$K, _templateObject5$H, _templateObject6$G, _templateObject7$C, _templateObject8$x, _templateObject9$t;
+var _templateObject$13, _templateObject2$T, _templateObject3$Q, _templateObject4$K, _templateObject5$H, _templateObject6$G, _templateObject7$C, _templateObject8$x, _templateObject9$t;
 /** designer sweatpants */
 var item$7 = $item(_templateObject$13 || (_templateObject$13 = _taggedTemplateLiteral(["designer sweatpants"])));
 /** designer sweatpants sweat skills */
 var skills$1 = {
   SweatFlick: $skill(_templateObject2$T || (_templateObject2$T = _taggedTemplateLiteral(["Sweat Flick"]))),
-  SweatSpray: $skill(_templateObject3$P || (_templateObject3$P = _taggedTemplateLiteral(["Sweat Spray"]))),
+  SweatSpray: $skill(_templateObject3$Q || (_templateObject3$Q = _taggedTemplateLiteral(["Sweat Spray"]))),
   SweatFlood: $skill(_templateObject4$K || (_templateObject4$K = _taggedTemplateLiteral(["Sweat Flood"]))),
   SipSomeSweat: $skill(_templateObject5$H || (_templateObject5$H = _taggedTemplateLiteral(["Sip Some Sweat"]))),
   SweatSip: $skill(_templateObject6$G || (_templateObject6$G = _taggedTemplateLiteral(["Sweat Sip"]))),
@@ -11336,7 +11336,7 @@ var DesignerSweatpants = /*#__PURE__*/Object.freeze({
   useSkill: useSkill
 });
 
-var _templateObject$12, _templateObject2$S, _templateObject3$O, _templateObject4$J;
+var _templateObject$12, _templateObject2$S, _templateObject3$P, _templateObject4$J;
 var goose = $familiar(_templateObject$12 || (_templateObject$12 = _taggedTemplateLiteral(["Grey Goose"])));
 /**
  * Determines whether you `have` the Grey Goose
@@ -11352,7 +11352,7 @@ function have$w() {
  * @returns Your current expected Grey Goose experience, paying attention to potential experience from the Shorter-Order Cook
  */
 function currentExperience() {
-  var postAscensionBaseExperience = have$1a($familiar(_templateObject2$S || (_templateObject2$S = _taggedTemplateLiteral(["Shorter-Order Cook"])))) && !get$2("gooseReprocessed") ? 81 + (have$1a($item(_templateObject3$O || (_templateObject3$O = _taggedTemplateLiteral(["blue plate"])))) ? 19 : 0) : 0;
+  var postAscensionBaseExperience = have$1a($familiar(_templateObject2$S || (_templateObject2$S = _taggedTemplateLiteral(["Shorter-Order Cook"])))) && !get$2("gooseReprocessed") ? 81 + (have$1a($item(_templateObject3$P || (_templateObject3$P = _taggedTemplateLiteral(["blue plate"])))) ? 19 : 0) : 0;
   return goose.experience || postAscensionBaseExperience;
 }
 /**
@@ -11885,9 +11885,9 @@ var AugustScepter = /*#__PURE__*/Object.freeze({
   todaysSkill: todaysSkill
 });
 
-var _templateObject$_, _templateObject2$Q, _templateObject3$N, _templateObject4$I, _templateObject5$G, _templateObject6$F, _templateObject7$B, _templateObject8$w, _templateObject9$s, _templateObject0$r, _templateObject1$q, _templateObject10$q, _templateObject11$n, _templateObject12$n, _templateObject13$l, _templateObject14$k, _templateObject15$j, _templateObject16$j;
+var _templateObject$_, _templateObject2$Q, _templateObject3$O, _templateObject4$I, _templateObject5$G, _templateObject6$F, _templateObject7$B, _templateObject8$w, _templateObject9$s, _templateObject0$r, _templateObject1$q, _templateObject10$q, _templateObject11$n, _templateObject12$n, _templateObject13$l, _templateObject14$k, _templateObject15$j, _templateObject16$i;
 var item$5 = $item(_templateObject$_ || (_templateObject$_ = _taggedTemplateLiteral(["A Guide to Burning Leaves"])));
-var burnFor = new Map([[$monster(_templateObject2$Q || (_templateObject2$Q = _taggedTemplateLiteral(["flaming leaflet"]))), 11], [$item(_templateObject3$N || (_templateObject3$N = _taggedTemplateLiteral(["autumnic bomb"]))), 37], [$item(_templateObject4$I || (_templateObject4$I = _taggedTemplateLiteral(["impromptu torch"]))), 42], [$item(_templateObject5$G || (_templateObject5$G = _taggedTemplateLiteral(["flaming fig leaf"]))), 43], [$item(_templateObject6$F || (_templateObject6$F = _taggedTemplateLiteral(["smoldering drape"]))), 44], [$item(_templateObject7$B || (_templateObject7$B = _taggedTemplateLiteral(["distilled resin"]))), 50], [$item(_templateObject8$w || (_templateObject8$w = _taggedTemplateLiteral(["autumnal aegis"]))), 66], [$item(_templateObject9$s || (_templateObject9$s = _taggedTemplateLiteral(["lit leaf lasso"]))), 69], [$item(_templateObject0$r || (_templateObject0$r = _taggedTemplateLiteral(["forest canopy bed"]))), 74], [$item(_templateObject1$q || (_templateObject1$q = _taggedTemplateLiteral(["autumnic balm"]))), 99], [$monster(_templateObject10$q || (_templateObject10$q = _taggedTemplateLiteral(["flaming monstera"]))), 111], [$item(_templateObject11$n || (_templateObject11$n = _taggedTemplateLiteral(["day shortener"]))), 222], [$monster(_templateObject12$n || (_templateObject12$n = _taggedTemplateLiteral(["leaviathan"]))), 666], [$item(_templateObject13$l || (_templateObject13$l = _taggedTemplateLiteral(["coping juice"]))), 1111], [$item(_templateObject14$k || (_templateObject14$k = _taggedTemplateLiteral(["smoldering leafcutter ant egg"]))), 6666], [$item(_templateObject15$j || (_templateObject15$j = _taggedTemplateLiteral(["super-heated leaf"]))), 11111]]);
+var burnFor = new Map([[$monster(_templateObject2$Q || (_templateObject2$Q = _taggedTemplateLiteral(["flaming leaflet"]))), 11], [$item(_templateObject3$O || (_templateObject3$O = _taggedTemplateLiteral(["autumnic bomb"]))), 37], [$item(_templateObject4$I || (_templateObject4$I = _taggedTemplateLiteral(["impromptu torch"]))), 42], [$item(_templateObject5$G || (_templateObject5$G = _taggedTemplateLiteral(["flaming fig leaf"]))), 43], [$item(_templateObject6$F || (_templateObject6$F = _taggedTemplateLiteral(["smoldering drape"]))), 44], [$item(_templateObject7$B || (_templateObject7$B = _taggedTemplateLiteral(["distilled resin"]))), 50], [$item(_templateObject8$w || (_templateObject8$w = _taggedTemplateLiteral(["autumnal aegis"]))), 66], [$item(_templateObject9$s || (_templateObject9$s = _taggedTemplateLiteral(["lit leaf lasso"]))), 69], [$item(_templateObject0$r || (_templateObject0$r = _taggedTemplateLiteral(["forest canopy bed"]))), 74], [$item(_templateObject1$q || (_templateObject1$q = _taggedTemplateLiteral(["autumnic balm"]))), 99], [$monster(_templateObject10$q || (_templateObject10$q = _taggedTemplateLiteral(["flaming monstera"]))), 111], [$item(_templateObject11$n || (_templateObject11$n = _taggedTemplateLiteral(["day shortener"]))), 222], [$monster(_templateObject12$n || (_templateObject12$n = _taggedTemplateLiteral(["leaviathan"]))), 666], [$item(_templateObject13$l || (_templateObject13$l = _taggedTemplateLiteral(["coping juice"]))), 1111], [$item(_templateObject14$k || (_templateObject14$k = _taggedTemplateLiteral(["smoldering leafcutter ant egg"]))), 6666], [$item(_templateObject15$j || (_templateObject15$j = _taggedTemplateLiteral(["super-heated leaf"]))), 11111]]);
 /**
  * @returns Whether or not we currently `have` the GuidetoBurningLeaves
  */
@@ -11898,7 +11898,7 @@ function have$r() {
  * @returns The number of leaves we have remaining
  */
 function numberOfLeaves() {
-  return require$$0.itemAmount($item(_templateObject16$j || (_templateObject16$j = _taggedTemplateLiteral(["inflammable leaf"]))));
+  return require$$0.itemAmount($item(_templateObject16$i || (_templateObject16$i = _taggedTemplateLiteral(["inflammable leaf"]))));
 }
 /**
  * @returns Whether or not we can do the requested burn
@@ -11950,7 +11950,7 @@ var BurningLeaves = /*#__PURE__*/Object.freeze({
   numberOfLeaves: numberOfLeaves
 });
 
-var _templateObject$Z, _templateObject2$P, _templateObject3$M, _templateObject4$H, _templateObject5$F, _templateObject6$E, _templateObject7$A;
+var _templateObject$Z, _templateObject2$P, _templateObject3$N, _templateObject4$H, _templateObject5$F, _templateObject6$E, _templateObject7$A;
 var cincho = $item(_templateObject$Z || (_templateObject$Z = _taggedTemplateLiteral(["Cincho de Mayo"])));
 /**
  * @returns Whether you `have` the Cincho de Mayo
@@ -11981,7 +11981,7 @@ function totalAvailableCinch() {
 }
 var skills = {
   SaltAndLime: $skill(_templateObject2$P || (_templateObject2$P = _taggedTemplateLiteral(["Cincho: Dispense Salt and Lime"]))),
-  PartySoundtrack: $skill(_templateObject3$M || (_templateObject3$M = _taggedTemplateLiteral(["Cincho: Party Soundtrack"]))),
+  PartySoundtrack: $skill(_templateObject3$N || (_templateObject3$N = _taggedTemplateLiteral(["Cincho: Party Soundtrack"]))),
   FiestaExit: $skill(_templateObject4$H || (_templateObject4$H = _taggedTemplateLiteral(["Cincho: Fiesta Exit"]))),
   ProjectilePiñata: $skill(_templateObject5$F || (_templateObject5$F = _taggedTemplateLiteral(["Cincho: Projectile Pi\xF1ata"]))),
   PartyFoul: $skill(_templateObject6$E || (_templateObject6$E = _taggedTemplateLiteral(["Cincho: Party Foul"]))),
@@ -11997,7 +11997,7 @@ var CinchoDeMayo = /*#__PURE__*/Object.freeze({
   totalAvailableCinch: totalAvailableCinch
 });
 
-var _templateObject$Y, _templateObject2$O, _templateObject3$L, _templateObject4$G, _templateObject5$E, _templateObject6$D, _templateObject7$z, _templateObject8$v, _templateObject9$r, _templateObject0$q, _templateObject1$p, _templateObject10$p, _templateObject11$m, _templateObject12$m;
+var _templateObject$Y, _templateObject2$O, _templateObject3$M, _templateObject4$G, _templateObject5$E, _templateObject6$D, _templateObject7$z, _templateObject8$v, _templateObject9$r, _templateObject0$q, _templateObject1$p, _templateObject10$p, _templateObject11$m, _templateObject12$m;
 var item$4 = $item(_templateObject$Y || (_templateObject$Y = _taggedTemplateLiteral(["closed-circuit pay phone"])));
 /**
  * @returns Whether we currently have the closed-circuit pay phone
@@ -12022,7 +12022,7 @@ function rufusTarget() {
 }
 var INGRESS_RIFTS = {
   desertbeach: $location(_templateObject2$O || (_templateObject2$O = _taggedTemplateLiteral(["Shadow Rift (Desert Beach)"]))),
-  forestvillage: $location(_templateObject3$L || (_templateObject3$L = _taggedTemplateLiteral(["Shadow Rift (Forest Village)"]))),
+  forestvillage: $location(_templateObject3$M || (_templateObject3$M = _taggedTemplateLiteral(["Shadow Rift (Forest Village)"]))),
   mclargehuge: $location(_templateObject4$G || (_templateObject4$G = _taggedTemplateLiteral(["Shadow Rift (Mt. McLargeHuge)"]))),
   beanstalk: $location(_templateObject5$E || (_templateObject5$E = _taggedTemplateLiteral(["Shadow Rift (Somewhere Over the Beanstalk)"]))),
   manor3: $location(_templateObject6$D || (_templateObject6$D = _taggedTemplateLiteral(["Shadow Rift (Spookyraven Manor Third Floor)"]))),
@@ -12386,7 +12386,7 @@ var AprilingBandHelmet = /*#__PURE__*/Object.freeze({
   play: play
 });
 
-var _templateObject$V, _templateObject2$N, _templateObject3$K, _templateObject4$F;
+var _templateObject$V, _templateObject2$N, _templateObject3$L, _templateObject4$F;
 var familiar = $familiar(_templateObject$V || (_templateObject$V = _taggedTemplateLiteral(["Chest Mimic"])));
 /**
  * @returns Whether you `have` the Chest Mimic familiar.
@@ -12465,7 +12465,7 @@ function receive(monster) {
  * @returns Whether we successfully differentiated our egg
  */
 function differentiate(monster) {
-  var page = directlyUse($item(_templateObject3$K || (_templateObject3$K = _taggedTemplateLiteral(["mimic egg"]))));
+  var page = directlyUse($item(_templateObject3$L || (_templateObject3$L = _taggedTemplateLiteral(["mimic egg"]))));
   var monsters = getMonsters(1, page);
   if (!monsters.includes(monster)) {
     require$$0.visitUrl("main.php");
@@ -12507,7 +12507,7 @@ var ChestMimic = /*#__PURE__*/Object.freeze({
   receive: receive
 });
 
-var _templateObject$U, _templateObject2$M, _templateObject3$J, _templateObject4$E, _templateObject5$D, _templateObject6$C, _templateObject7$y, _templateObject8$u, _templateObject9$q, _templateObject0$p, _templateObject1$o, _templateObject10$o;
+var _templateObject$U, _templateObject2$M, _templateObject3$K, _templateObject4$E, _templateObject5$D, _templateObject6$C, _templateObject7$y, _templateObject8$u, _templateObject9$q, _templateObject0$p, _templateObject1$o, _templateObject10$o;
 var RINGS = Object.freeze([["yam1", "sword", "eye", "chair", "fur", "vessel"], ["lightning", "bottle", "meat", "wood", "yam2"], ["yam3", "wall", "cheese", "eyepatch"], ["explosion", "clock", "yam4"]]);
 /**
  * @returns Whether you `have` the Mayam calendar
@@ -12571,7 +12571,7 @@ function submit() {
 }
 var RESONANCES = Object.freeze({
   "eye yam2 eyepatch yam4": $item(_templateObject2$M || (_templateObject2$M = _taggedTemplateLiteral(["Mayam spinach"]))),
-  "vessel yam2 cheese explosion": $item(_templateObject3$J || (_templateObject3$J = _taggedTemplateLiteral(["stuffed yam stinkbomb"]))),
+  "vessel yam2 cheese explosion": $item(_templateObject3$K || (_templateObject3$K = _taggedTemplateLiteral(["stuffed yam stinkbomb"]))),
   "yam1 meat cheese yam4": $item(_templateObject4$E || (_templateObject4$E = _taggedTemplateLiteral(["yam and swiss"]))),
   "sword yam2 eyepatch explosion": $item(_templateObject5$D || (_templateObject5$D = _taggedTemplateLiteral(["yam cannon"]))),
   "fur lightning eyepatch yam4": $item(_templateObject6$C || (_templateObject6$C = _taggedTemplateLiteral(["tiny yam cannon"]))),
@@ -12636,7 +12636,7 @@ var MayamCalendar = /*#__PURE__*/Object.freeze({
   toCombinationString: toCombinationString
 });
 
-var _templateObject$T, _templateObject2$L, _templateObject3$I;
+var _templateObject$T, _templateObject2$L, _templateObject3$J;
 var item$2 = $item(_templateObject$T || (_templateObject$T = _taggedTemplateLiteral(["tearaway pants"])));
 /**
  * @returns Whether you `have` the tearaway pants
@@ -12673,7 +12673,7 @@ function unlockGuild() {
   if (!have$k()) return false;
   try {
     require$$0.cliExecute("checkpoint");
-    require$$0.equip($slot(_templateObject3$I || (_templateObject3$I = _taggedTemplateLiteral(["pants"]))), item$2);
+    require$$0.equip($slot(_templateObject3$J || (_templateObject3$J = _taggedTemplateLiteral(["pants"]))), item$2);
     require$$0.visitUrl("guild.php?place=challenge");
   } finally {
     require$$0.cliExecute("outfit checkpoint");
@@ -12689,7 +12689,7 @@ var TearawayPants = /*#__PURE__*/Object.freeze({
   unlockGuild: unlockGuild
 });
 
-var _templateObject$S, _templateObject2$K, _templateObject3$H, _templateObject4$D, _templateObject5$C, _templateObject6$B;
+var _templateObject$S, _templateObject2$K, _templateObject3$I, _templateObject4$D, _templateObject5$C, _templateObject6$B;
 /**
  * @returns Whether you `have` the Bat Wings
  */
@@ -12706,7 +12706,7 @@ function swoopsRemaining() {
  * @returns The number of times you can rest upside down today
  */
 function restUpsideDownRemaining() {
-  return have$j() ? $skill(_templateObject3$H || (_templateObject3$H = _taggedTemplateLiteral(["Rest upside down"]))).dailylimit : 0;
+  return have$j() ? $skill(_templateObject3$I || (_templateObject3$I = _taggedTemplateLiteral(["Rest upside down"]))).dailylimit : 0;
 }
 /**
  * @returns The number of times you can summon a cauldron of bats today
@@ -12805,7 +12805,7 @@ var EverfullDarts = /*#__PURE__*/Object.freeze({
   perksMaxed: perksMaxed
 });
 
-var _templateObject$Q, _templateObject2$J, _templateObject3$G, _templateObject4$C, _templateObject5$B, _templateObject6$A, _templateObject7$x, _templateObject8$t, _templateObject9$p, _templateObject0$o, _templateObject1$n, _templateObject10$n, _templateObject11$l, _templateObject12$l, _templateObject13$k, _templateObject14$j, _templateObject15$i, _templateObject16$i, _templateObject17$i;
+var _templateObject$Q, _templateObject2$J, _templateObject3$H, _templateObject4$C, _templateObject5$B, _templateObject6$A, _templateObject7$x, _templateObject8$t, _templateObject9$p, _templateObject0$o, _templateObject1$n, _templateObject10$n, _templateObject11$l, _templateObject12$l, _templateObject13$k, _templateObject14$j, _templateObject15$i, _templateObject16$h, _templateObject17$h;
 var item = $item(_templateObject$Q || (_templateObject$Q = _taggedTemplateLiteral(["TakerSpace letter of Marque"])));
 /**
  * Determines whether the TakerSpace letter of Marque is your current workshed
@@ -12824,7 +12824,7 @@ function have$h() {
   return installed() || have$1a(item);
 }
 var RESOURCES = ["Spice", "Rum", "Anchor", "Mast", "Silk", "Gold"];
-var RECIPES = new Map([[$item(_templateObject2$J || (_templateObject2$J = _taggedTemplateLiteral(["deft pirate hook"]))), [0, 0, 1, 1, 0, 1]], [$item(_templateObject3$G || (_templateObject3$G = _taggedTemplateLiteral(["iron tricorn hat"]))), [0, 0, 2, 1, 0, 0]], [$item(_templateObject4$C || (_templateObject4$C = _taggedTemplateLiteral(["jolly roger flag"]))), [0, 1, 0, 1, 1, 0]], [$item(_templateObject5$B || (_templateObject5$B = _taggedTemplateLiteral(["sleeping profane parrot"]))), [15, 3, 0, 0, 2, 1]], [$item(_templateObject6$A || (_templateObject6$A = _taggedTemplateLiteral(["pirrrate's currrse"]))), [2, 2, 0, 0, 0, 0]], [$item(_templateObject7$x || (_templateObject7$x = _taggedTemplateLiteral(["tankard of spiced rum"]))), [1, 2, 0, 0, 0, 0]], [$item(_templateObject8$t || (_templateObject8$t = _taggedTemplateLiteral(["tankard of spiced Goldschlepper"]))), [0, 2, 0, 0, 0, 1]], [$item(_templateObject9$p || (_templateObject9$p = _taggedTemplateLiteral(["packaged luxury garment"]))), [0, 0, 0, 0, 3, 2]], [$item(_templateObject0$o || (_templateObject0$o = _taggedTemplateLiteral(["harpoon"]))), [0, 0, 0, 2, 0, 0]], [$item(_templateObject1$n || (_templateObject1$n = _taggedTemplateLiteral(["chili powder cutlass"]))), [5, 0, 1, 0, 0, 0]], [$item(_templateObject10$n || (_templateObject10$n = _taggedTemplateLiteral(["cursed Aztec tamale"]))), [2, 0, 0, 0, 0, 0]], [$item(_templateObject11$l || (_templateObject11$l = _taggedTemplateLiteral(["jolly roger tattoo kit"]))), [0, 6, 1, 1, 0, 6]], [$item(_templateObject12$l || (_templateObject12$l = _taggedTemplateLiteral(["golden pet rock"]))), [0, 0, 0, 0, 0, 7]], [$item(_templateObject13$k || (_templateObject13$k = _taggedTemplateLiteral(["groggles"]))), [0, 6, 0, 0, 0, 0]], [$item(_templateObject14$j || (_templateObject14$j = _taggedTemplateLiteral(["pirate dinghy"]))), [0, 0, 1, 1, 1, 0]], [$item(_templateObject15$i || (_templateObject15$i = _taggedTemplateLiteral(["anchor bomb"]))), [0, 1, 3, 1, 0, 1]], [$item(_templateObject16$i || (_templateObject16$i = _taggedTemplateLiteral(["silky pirate drawers"]))), [0, 0, 0, 0, 2, 0]], [$item(_templateObject17$i || (_templateObject17$i = _taggedTemplateLiteral(["spices"]))), [1, 0, 0, 0, 0, 0]]]);
+var RECIPES = new Map([[$item(_templateObject2$J || (_templateObject2$J = _taggedTemplateLiteral(["deft pirate hook"]))), [0, 0, 1, 1, 0, 1]], [$item(_templateObject3$H || (_templateObject3$H = _taggedTemplateLiteral(["iron tricorn hat"]))), [0, 0, 2, 1, 0, 0]], [$item(_templateObject4$C || (_templateObject4$C = _taggedTemplateLiteral(["jolly roger flag"]))), [0, 1, 0, 1, 1, 0]], [$item(_templateObject5$B || (_templateObject5$B = _taggedTemplateLiteral(["sleeping profane parrot"]))), [15, 3, 0, 0, 2, 1]], [$item(_templateObject6$A || (_templateObject6$A = _taggedTemplateLiteral(["pirrrate's currrse"]))), [2, 2, 0, 0, 0, 0]], [$item(_templateObject7$x || (_templateObject7$x = _taggedTemplateLiteral(["tankard of spiced rum"]))), [1, 2, 0, 0, 0, 0]], [$item(_templateObject8$t || (_templateObject8$t = _taggedTemplateLiteral(["tankard of spiced Goldschlepper"]))), [0, 2, 0, 0, 0, 1]], [$item(_templateObject9$p || (_templateObject9$p = _taggedTemplateLiteral(["packaged luxury garment"]))), [0, 0, 0, 0, 3, 2]], [$item(_templateObject0$o || (_templateObject0$o = _taggedTemplateLiteral(["harpoon"]))), [0, 0, 0, 2, 0, 0]], [$item(_templateObject1$n || (_templateObject1$n = _taggedTemplateLiteral(["chili powder cutlass"]))), [5, 0, 1, 0, 0, 0]], [$item(_templateObject10$n || (_templateObject10$n = _taggedTemplateLiteral(["cursed Aztec tamale"]))), [2, 0, 0, 0, 0, 0]], [$item(_templateObject11$l || (_templateObject11$l = _taggedTemplateLiteral(["jolly roger tattoo kit"]))), [0, 6, 1, 1, 0, 6]], [$item(_templateObject12$l || (_templateObject12$l = _taggedTemplateLiteral(["golden pet rock"]))), [0, 0, 0, 0, 0, 7]], [$item(_templateObject13$k || (_templateObject13$k = _taggedTemplateLiteral(["groggles"]))), [0, 6, 0, 0, 0, 0]], [$item(_templateObject14$j || (_templateObject14$j = _taggedTemplateLiteral(["pirate dinghy"]))), [0, 0, 1, 1, 1, 0]], [$item(_templateObject15$i || (_templateObject15$i = _taggedTemplateLiteral(["anchor bomb"]))), [0, 1, 3, 1, 0, 1]], [$item(_templateObject16$h || (_templateObject16$h = _taggedTemplateLiteral(["silky pirate drawers"]))), [0, 0, 0, 0, 2, 0]], [$item(_templateObject17$h || (_templateObject17$h = _taggedTemplateLiteral(["spices"]))), [1, 0, 0, 0, 0, 0]]]);
 /**
  * @returns A copy of our map of all recipes
  */
@@ -12918,7 +12918,7 @@ var TakerSpace = /*#__PURE__*/Object.freeze({
   recipeFor: recipeFor
 });
 
-var _templateObject$P, _templateObject2$I, _templateObject3$F;
+var _templateObject$P, _templateObject2$I, _templateObject3$G;
 /**
  * @returns Whether or not you have the crepe paper parachute cape
  */
@@ -12943,7 +12943,7 @@ function availableMonsters() {
  */
 function fight(target) {
   if (!have$g()) return false;
-  if (have$1a($effect(_templateObject3$F || (_templateObject3$F = _taggedTemplateLiteral(["Everything looks Beige"]))))) return false;
+  if (have$1a($effect(_templateObject3$G || (_templateObject3$G = _taggedTemplateLiteral(["Everything looks Beige"]))))) return false;
   var monsters = checkMonsters(visitParachute());
   var monster = undelay(target, monsters);
   if (!monsters.includes(monster)) return false;
@@ -13011,7 +13011,7 @@ var ToyCupidBow = /*#__PURE__*/Object.freeze({
   turnsLeft: turnsLeft
 });
 
-var _templateObject$N, _templateObject2$H, _templateObject3$E, _templateObject4$B, _templateObject5$A, _templateObject6$z, _templateObject7$w, _templateObject8$s, _templateObject9$o, _templateObject0$n, _templateObject1$m, _templateObject10$m, _templateObject11$k, _templateObject12$k, _templateObject13$j, _templateObject14$i, _templateObject15$h, _templateObject16$h, _templateObject17$h, _templateObject18$g, _templateObject19$g, _templateObject20$f, _templateObject21$d, _templateObject22$d, _templateObject23$c, _templateObject24$c, _templateObject25$c, _templateObject26$c, _templateObject27$c, _templateObject28$b, _templateObject29$b, _templateObject30$9, _templateObject31$8, _templateObject32$7, _templateObject33$7, _templateObject34$7, _templateObject35$7, _templateObject36$7, _templateObject37$7, _templateObject38$7, _templateObject39$7, _templateObject40$7, _templateObject41$6, _templateObject42$6;
+var _templateObject$N, _templateObject2$H, _templateObject3$F, _templateObject4$B, _templateObject5$A, _templateObject6$z, _templateObject7$w, _templateObject8$s, _templateObject9$o, _templateObject0$n, _templateObject1$m, _templateObject10$m, _templateObject11$k, _templateObject12$k, _templateObject13$j, _templateObject14$i, _templateObject15$h, _templateObject16$g, _templateObject17$g, _templateObject18$g, _templateObject19$g, _templateObject20$f, _templateObject21$d, _templateObject22$d, _templateObject23$c, _templateObject24$c, _templateObject25$c, _templateObject26$c, _templateObject27$c, _templateObject28$b, _templateObject29$b, _templateObject30$9, _templateObject31$8, _templateObject32$7, _templateObject33$7, _templateObject34$7, _templateObject35$7, _templateObject36$7, _templateObject37$7, _templateObject38$7, _templateObject39$7, _templateObject40$7, _templateObject41$6, _templateObject42$6;
 /**
  * @returns Whether you `have` the Leprecondo
  */
@@ -13025,7 +13025,7 @@ var Furniture = Object.freeze({
     booze: $items(_templateObject2$H || (_templateObject2$H = _taggedTemplateLiteral(["beer bomb, bloody beer, ice-cold fotie, ice-cold Sir Schlitz, ice-cold Willer, overpriced \"imported\" beer, plain old beer"])))
   },
   "beer pong table": {
-    booze: $items(_templateObject3$E || (_templateObject3$E = _taggedTemplateLiteral(["beer bomb, bloody beer, ice-cold fotie, ice-cold Sir Schlitz, ice-cold Willer, overpriced \"imported\" beer, plain old beer"]))),
+    booze: $items(_templateObject3$F || (_templateObject3$F = _taggedTemplateLiteral(["beer bomb, bloody beer, ice-cold fotie, ice-cold Sir Schlitz, ice-cold Willer, overpriced \"imported\" beer, plain old beer"]))),
     exercise: $item(_templateObject4$B || (_templateObject4$B = _taggedTemplateLiteral(["table tennis ball"])))
   },
   "boxes of old comic books": {
@@ -13088,11 +13088,11 @@ var Furniture = Object.freeze({
     food: $items(_templateObject15$h || (_templateObject15$h = _taggedTemplateLiteral(["cherry, cranberries, grapefruit, grapes, kiwi, kumquat, lemon, lime, orange, papaya, raspberry, strawberry, tangerine"])))
   },
   "fully-stocked wet bar": {
-    booze: $items(_templateObject16$h || (_templateObject16$h = _taggedTemplateLiteral(["Divine sidecar, prussian cathouse sidecar, tangarita sidecar"])))
+    booze: $items(_templateObject16$g || (_templateObject16$g = _taggedTemplateLiteral(["Divine sidecar, prussian cathouse sidecar, tangarita sidecar"])))
   },
   "gigantic chess set": {
     exercise: {
-      effect: $effect(_templateObject17$h || (_templateObject17$h = _taggedTemplateLiteral(["Work Out Smarter, Not Harder"]))),
+      effect: $effect(_templateObject17$g || (_templateObject17$g = _taggedTemplateLiteral(["Work Out Smarter, Not Harder"]))),
       duration: 10
     },
     "mental stimulation": {
@@ -13322,7 +13322,7 @@ var Raffle = /*#__PURE__*/Object.freeze({
   getRafflePrizes: getRafflePrizes
 });
 
-var _templateObject$M, _templateObject2$G, _templateObject3$D, _templateObject4$A, _templateObject5$z, _templateObject6$y, _templateObject7$v, _templateObject8$r;
+var _templateObject$M, _templateObject2$G, _templateObject3$E, _templateObject4$A, _templateObject5$z, _templateObject6$y, _templateObject7$v, _templateObject8$r;
 /**
  * @returns Whether or not you have Cyber Realm
  */
@@ -13336,7 +13336,7 @@ function available() {
   return realmAvailable("cyber");
 }
 var ZONE_3_ITEMS_ARRAY = [$item(_templateObject$M || (_templateObject$M = _taggedTemplateLiteral(["dedigitizer schematic: virtual cybertattoo"]))), // Index 0 → Day 1
-$item(_templateObject2$G || (_templateObject2$G = _taggedTemplateLiteral(["dedigitizer schematic: SLEEP(5) rom chip"]))), $item(_templateObject3$D || (_templateObject3$D = _taggedTemplateLiteral(["dedigitizer schematic: insignificant bit"]))), $item(_templateObject4$A || (_templateObject4$A = _taggedTemplateLiteral(["dedigitizer schematic: OVERCLOCK(10) rom chip"]))), $item(_templateObject5$z || (_templateObject5$z = _taggedTemplateLiteral(["dedigitizer schematic: hashing vise"]))), $item(_templateObject6$y || (_templateObject6$y = _taggedTemplateLiteral(["dedigitizer schematic: geofencing rapier"]))), $item(_templateObject7$v || (_templateObject7$v = _taggedTemplateLiteral(["dedigitizer schematic: STATS+++ rom chip"]))), $item(_templateObject8$r || (_templateObject8$r = _taggedTemplateLiteral(["dedigitizer schematic: geofencing shield"])))];
+$item(_templateObject2$G || (_templateObject2$G = _taggedTemplateLiteral(["dedigitizer schematic: SLEEP(5) rom chip"]))), $item(_templateObject3$E || (_templateObject3$E = _taggedTemplateLiteral(["dedigitizer schematic: insignificant bit"]))), $item(_templateObject4$A || (_templateObject4$A = _taggedTemplateLiteral(["dedigitizer schematic: OVERCLOCK(10) rom chip"]))), $item(_templateObject5$z || (_templateObject5$z = _taggedTemplateLiteral(["dedigitizer schematic: hashing vise"]))), $item(_templateObject6$y || (_templateObject6$y = _taggedTemplateLiteral(["dedigitizer schematic: geofencing rapier"]))), $item(_templateObject7$v || (_templateObject7$v = _taggedTemplateLiteral(["dedigitizer schematic: STATS+++ rom chip"]))), $item(_templateObject8$r || (_templateObject8$r = _taggedTemplateLiteral(["dedigitizer schematic: geofencing shield"])))];
 /**
  * @returns The Zone 3 Item we expect to find today, based on KOL Calendar
  */
@@ -13424,7 +13424,7 @@ var PeridotOfPeril = /*#__PURE__*/Object.freeze({
   zonesToday: zonesToday
 });
 
-var _templateObject$K, _templateObject2$F, _templateObject3$C, _templateObject4$z, _templateObject5$y, _templateObject6$x, _templateObject7$u, _templateObject8$q, _templateObject9$n, _templateObject0$m, _templateObject1$l, _templateObject10$l, _templateObject11$j, _templateObject12$j, _templateObject13$i, _templateObject14$h, _templateObject15$g, _templateObject16$g, _templateObject17$g, _templateObject18$f, _templateObject19$f, _templateObject20$e, _templateObject21$c, _templateObject22$c, _templateObject23$b, _templateObject24$b, _templateObject25$b, _templateObject26$b, _templateObject27$b, _templateObject28$a, _templateObject29$a;
+var _templateObject$K, _templateObject2$F, _templateObject3$D, _templateObject4$z, _templateObject5$y, _templateObject6$x, _templateObject7$u, _templateObject8$q, _templateObject9$n, _templateObject0$m, _templateObject1$l, _templateObject10$l, _templateObject11$j, _templateObject12$j, _templateObject13$i, _templateObject14$h, _templateObject15$g, _templateObject16$f, _templateObject17$f, _templateObject18$f, _templateObject19$f, _templateObject20$e, _templateObject21$c, _templateObject22$c, _templateObject23$b, _templateObject24$b, _templateObject25$b, _templateObject26$b, _templateObject27$b, _templateObject28$a, _templateObject29$a;
 var beret = $item(_templateObject$K || (_templateObject$K = _taggedTemplateLiteral(["prismatic beret"])));
 var valueEffect = (effect, duration, valuer) => typeof valuer === "function" ? valuer(effect, duration) : Array.isArray(valuer) ? Number(valuer.includes(effect)) * duration : sum(Object.entries(valuer), _ref => {
   var _ref2 = _slicedToArray(_ref, 2),
@@ -13441,7 +13441,7 @@ function have$b() {
 function getEffectivePower(item) {
   var hammerTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : have$1a($effect(_templateObject2$F || (_templateObject2$F = _taggedTemplateLiteral(["Hammertime"]))));
   switch (require$$0.toSlot(item)) {
-    case $slot(_templateObject3$C || (_templateObject3$C = _taggedTemplateLiteral(["hat"]))):
+    case $slot(_templateObject3$D || (_templateObject3$D = _taggedTemplateLiteral(["hat"]))):
       return require$$0.getPower(item) * (1 + (have$1a($skill(_templateObject4$z || (_templateObject4$z = _taggedTemplateLiteral(["Tao of the Terrapin"])))) ? 1 : 0));
     case $slot(_templateObject5$y || (_templateObject5$y = _taggedTemplateLiteral(["shirt"]))):
       return require$$0.getPower(item);
@@ -13571,7 +13571,7 @@ function findOutfit(power, buyItems) {
     hat,
     pants,
     shirt,
-    hammerTime: have$1a($effect(_templateObject16$g || (_templateObject16$g = _taggedTemplateLiteral(["Hammertime"]))))
+    hammerTime: have$1a($effect(_templateObject16$f || (_templateObject16$f = _taggedTemplateLiteral(["Hammertime"]))))
   }) === power ? {
     hat,
     pants,
@@ -13614,7 +13614,7 @@ function buskAt(power) {
   if (initialUses >= 5) return false;
   var outfit = findOutfit(power, buyItems);
   if (!outfit) return false;
-  var initialEquips = $slots(_templateObject17$g || (_templateObject17$g = _taggedTemplateLiteral(["hat, shirt, pants"]))).map(slot => require$$0.equippedItem(slot));
+  var initialEquips = $slots(_templateObject17$f || (_templateObject17$f = _taggedTemplateLiteral(["hat, shirt, pants"]))).map(slot => require$$0.equippedItem(slot));
   var initialFamiliar = require$$0.myFamiliar();
   var initialFamequip = require$$0.equippedItem($slot(_templateObject18$f || (_templateObject18$f = _taggedTemplateLiteral(["familiar"]))));
   var hat = outfit.hat,
@@ -13671,7 +13671,7 @@ var PrismaticBeret = /*#__PURE__*/Object.freeze({
   have: have$b
 });
 
-var _templateObject$J, _templateObject2$E, _templateObject3$B, _templateObject4$y, _templateObject5$x, _templateObject6$w, _templateObject7$t, _templateObject8$p, _templateObject9$m, _templateObject0$l, _templateObject1$k, _templateObject10$k, _templateObject11$i, _templateObject12$i, _templateObject13$h, _templateObject14$g, _templateObject15$f, _templateObject16$f, _templateObject17$f, _templateObject18$e, _templateObject19$e, _templateObject20$d, _templateObject21$b, _templateObject22$b, _templateObject23$a, _templateObject24$a, _templateObject25$a, _templateObject26$a, _templateObject27$a;
+var _templateObject$J, _templateObject2$E, _templateObject3$C, _templateObject4$y, _templateObject5$x, _templateObject6$w, _templateObject7$t, _templateObject8$p, _templateObject9$m, _templateObject0$l, _templateObject1$k, _templateObject10$k, _templateObject11$i, _templateObject12$i, _templateObject13$h, _templateObject14$g, _templateObject15$f, _templateObject16$e, _templateObject17$e, _templateObject18$e, _templateObject19$e, _templateObject20$d, _templateObject21$b, _templateObject22$b, _templateObject23$a, _templateObject24$a, _templateObject25$a, _templateObject26$a, _templateObject27$a;
 /**
  * @returns Whether or not you have the blood cubic zirconia.
  */
@@ -13697,7 +13697,7 @@ function skillCost(skill) {
     return [11, 23, 37][_position] * 10 ** (_cycle + 5);
   }
 }
-var COSTS = new Map([[$skill(_templateObject2$E || (_templateObject2$E = _taggedTemplateLiteral(["BCZ: Blood Geyser"]))), $stat(_templateObject3$B || (_templateObject3$B = _taggedTemplateLiteral(["SubMuscle"])))], [$skill(_templateObject4$y || (_templateObject4$y = _taggedTemplateLiteral(["BCZ: Refracted Gaze"]))), $stat(_templateObject5$x || (_templateObject5$x = _taggedTemplateLiteral(["SubMysticality"])))], [$skill(_templateObject6$w || (_templateObject6$w = _taggedTemplateLiteral(["BCZ: Sweat Bullets"]))), $stat(_templateObject7$t || (_templateObject7$t = _taggedTemplateLiteral(["SubMoxie"])))], [$skill(_templateObject8$p || (_templateObject8$p = _taggedTemplateLiteral(["BCZ: Blood Bath"]))), $stat(_templateObject9$m || (_templateObject9$m = _taggedTemplateLiteral(["SubMuscle"])))], [$skill(_templateObject0$l || (_templateObject0$l = _taggedTemplateLiteral(["BCZ: Craft a Pheromone Cocktail"]))), $stat(_templateObject1$k || (_templateObject1$k = _taggedTemplateLiteral(["SubMoxie"])))], [$skill(_templateObject10$k || (_templateObject10$k = _taggedTemplateLiteral(["BCZ: Create Blood Thinner"]))), $stat(_templateObject11$i || (_templateObject11$i = _taggedTemplateLiteral(["SubMuscle"])))], [$skill(_templateObject12$i || (_templateObject12$i = _taggedTemplateLiteral(["BCZ: Dial it up to 11"]))), $stat(_templateObject13$h || (_templateObject13$h = _taggedTemplateLiteral(["SubMysticality"])))], [$skill(_templateObject14$g || (_templateObject14$g = _taggedTemplateLiteral(["BCZ: Prepare Spinal Tapas"]))), $stat(_templateObject15$f || (_templateObject15$f = _taggedTemplateLiteral(["SubMysticality"])))], [$skill(_templateObject16$f || (_templateObject16$f = _taggedTemplateLiteral(["BCZ: Sweat Equity"]))), $stat(_templateObject17$f || (_templateObject17$f = _taggedTemplateLiteral(["SubMoxie"])))]]);
+var COSTS = new Map([[$skill(_templateObject2$E || (_templateObject2$E = _taggedTemplateLiteral(["BCZ: Blood Geyser"]))), $stat(_templateObject3$C || (_templateObject3$C = _taggedTemplateLiteral(["SubMuscle"])))], [$skill(_templateObject4$y || (_templateObject4$y = _taggedTemplateLiteral(["BCZ: Refracted Gaze"]))), $stat(_templateObject5$x || (_templateObject5$x = _taggedTemplateLiteral(["SubMysticality"])))], [$skill(_templateObject6$w || (_templateObject6$w = _taggedTemplateLiteral(["BCZ: Sweat Bullets"]))), $stat(_templateObject7$t || (_templateObject7$t = _taggedTemplateLiteral(["SubMoxie"])))], [$skill(_templateObject8$p || (_templateObject8$p = _taggedTemplateLiteral(["BCZ: Blood Bath"]))), $stat(_templateObject9$m || (_templateObject9$m = _taggedTemplateLiteral(["SubMuscle"])))], [$skill(_templateObject0$l || (_templateObject0$l = _taggedTemplateLiteral(["BCZ: Craft a Pheromone Cocktail"]))), $stat(_templateObject1$k || (_templateObject1$k = _taggedTemplateLiteral(["SubMoxie"])))], [$skill(_templateObject10$k || (_templateObject10$k = _taggedTemplateLiteral(["BCZ: Create Blood Thinner"]))), $stat(_templateObject11$i || (_templateObject11$i = _taggedTemplateLiteral(["SubMuscle"])))], [$skill(_templateObject12$i || (_templateObject12$i = _taggedTemplateLiteral(["BCZ: Dial it up to 11"]))), $stat(_templateObject13$h || (_templateObject13$h = _taggedTemplateLiteral(["SubMysticality"])))], [$skill(_templateObject14$g || (_templateObject14$g = _taggedTemplateLiteral(["BCZ: Prepare Spinal Tapas"]))), $stat(_templateObject15$f || (_templateObject15$f = _taggedTemplateLiteral(["SubMysticality"])))], [$skill(_templateObject16$e || (_templateObject16$e = _taggedTemplateLiteral(["BCZ: Sweat Equity"]))), $stat(_templateObject17$e || (_templateObject17$e = _taggedTemplateLiteral(["SubMoxie"])))]]);
 var PREFS = new Map([[$skill(_templateObject18$e || (_templateObject18$e = _taggedTemplateLiteral(["BCZ: Blood Geyser"]))), "_bczBloodGeyserCasts"], [$skill(_templateObject19$e || (_templateObject19$e = _taggedTemplateLiteral(["BCZ: Refracted Gaze"]))), "_bczRefractedGazeCasts"], [$skill(_templateObject20$d || (_templateObject20$d = _taggedTemplateLiteral(["BCZ: Sweat Bullets"]))), "_bczSweatBulletsCasts"], [$skill(_templateObject21$b || (_templateObject21$b = _taggedTemplateLiteral(["BCZ: Blood Bath"]))), "_bczBloodBathCasts"], [$skill(_templateObject22$b || (_templateObject22$b = _taggedTemplateLiteral(["BCZ: Dial it up to 11"]))), "_bczDialitupCasts"], [$skill(_templateObject23$a || (_templateObject23$a = _taggedTemplateLiteral(["BCZ: Sweat Equity"]))), "_bczSweatEquityCasts"], [$skill(_templateObject24$a || (_templateObject24$a = _taggedTemplateLiteral(["BCZ: Create Blood Thinner"]))), "_bczBloodThinnerCasts"], [$skill(_templateObject25$a || (_templateObject25$a = _taggedTemplateLiteral(["BCZ: Prepare Spinal Tapas"]))), "_bczSpinalTapasCasts"], [$skill(_templateObject26$a || (_templateObject26$a = _taggedTemplateLiteral(["BCZ: Craft a Pheromone Cocktail"]))), "_bczPheromoneCocktailCasts"]]);
 /**
  * @param skill The BCZ skill to check.
@@ -13782,8 +13782,8 @@ var BloodCubicZirconia = /*#__PURE__*/Object.freeze({
   timesCast: timesCast
 });
 
-var _templateObject$I, _templateObject2$D, _templateObject3$A, _templateObject4$x, _templateObject5$w, _templateObject6$v, _templateObject7$s, _templateObject8$o, _templateObject9$l, _templateObject0$k, _templateObject1$j, _templateObject10$j, _templateObject11$h, _templateObject12$h, _templateObject13$g, _templateObject14$f;
-var BONE_PHYLA = new Map([[$phylum(_templateObject$I || (_templateObject$I = _taggedTemplateLiteral(["beast"]))), 0.3], [$phylum(_templateObject2$D || (_templateObject2$D = _taggedTemplateLiteral(["bug"]))), 0.05], [$phylum(_templateObject3$A || (_templateObject3$A = _taggedTemplateLiteral(["construct"]))), 0.1], [$phylum(_templateObject4$x || (_templateObject4$x = _taggedTemplateLiteral(["demon"]))), 0.4], [$phylum(_templateObject5$w || (_templateObject5$w = _taggedTemplateLiteral(["elf"]))), 0.5], [$phylum(_templateObject6$v || (_templateObject6$v = _taggedTemplateLiteral(["fish"]))), 0.15], [$phylum(_templateObject7$s || (_templateObject7$s = _taggedTemplateLiteral(["goblin"]))), 0.4], [$phylum(_templateObject8$o || (_templateObject8$o = _taggedTemplateLiteral(["hobo"]))), 0.5], [$phylum(_templateObject9$l || (_templateObject9$l = _taggedTemplateLiteral(["humanoid"]))), 0.4], [$phylum(_templateObject0$k || (_templateObject0$k = _taggedTemplateLiteral(["orc"]))), 0.7], [$phylum(_templateObject1$j || (_templateObject1$j = _taggedTemplateLiteral(["penguin"]))), 0.2], [$phylum(_templateObject10$j || (_templateObject10$j = _taggedTemplateLiteral(["pirate"]))), 0.7], [$phylum(_templateObject11$h || (_templateObject11$h = _taggedTemplateLiteral(["dude"]))), 0.5], [$phylum(_templateObject12$h || (_templateObject12$h = _taggedTemplateLiteral(["undead"]))), 0.3], [$phylum(_templateObject13$g || (_templateObject13$g = _taggedTemplateLiteral(["weird"]))), 0.2]]);
+var _templateObject$I, _templateObject2$D, _templateObject3$B, _templateObject4$x, _templateObject5$w, _templateObject6$v, _templateObject7$s, _templateObject8$o, _templateObject9$l, _templateObject0$k, _templateObject1$j, _templateObject10$j, _templateObject11$h, _templateObject12$h, _templateObject13$g, _templateObject14$f;
+var BONE_PHYLA = new Map([[$phylum(_templateObject$I || (_templateObject$I = _taggedTemplateLiteral(["beast"]))), 0.3], [$phylum(_templateObject2$D || (_templateObject2$D = _taggedTemplateLiteral(["bug"]))), 0.05], [$phylum(_templateObject3$B || (_templateObject3$B = _taggedTemplateLiteral(["construct"]))), 0.1], [$phylum(_templateObject4$x || (_templateObject4$x = _taggedTemplateLiteral(["demon"]))), 0.4], [$phylum(_templateObject5$w || (_templateObject5$w = _taggedTemplateLiteral(["elf"]))), 0.5], [$phylum(_templateObject6$v || (_templateObject6$v = _taggedTemplateLiteral(["fish"]))), 0.15], [$phylum(_templateObject7$s || (_templateObject7$s = _taggedTemplateLiteral(["goblin"]))), 0.4], [$phylum(_templateObject8$o || (_templateObject8$o = _taggedTemplateLiteral(["hobo"]))), 0.5], [$phylum(_templateObject9$l || (_templateObject9$l = _taggedTemplateLiteral(["humanoid"]))), 0.4], [$phylum(_templateObject0$k || (_templateObject0$k = _taggedTemplateLiteral(["orc"]))), 0.7], [$phylum(_templateObject1$j || (_templateObject1$j = _taggedTemplateLiteral(["penguin"]))), 0.2], [$phylum(_templateObject10$j || (_templateObject10$j = _taggedTemplateLiteral(["pirate"]))), 0.7], [$phylum(_templateObject11$h || (_templateObject11$h = _taggedTemplateLiteral(["dude"]))), 0.5], [$phylum(_templateObject12$h || (_templateObject12$h = _taggedTemplateLiteral(["undead"]))), 0.3], [$phylum(_templateObject13$g || (_templateObject13$g = _taggedTemplateLiteral(["weird"]))), 0.2]]);
 /**
  * @returns Whether or not you have the Skeleton of Crimbo Past.
  */
@@ -13823,7 +13823,7 @@ var SkeletonOfCrimboPast = /*#__PURE__*/Object.freeze({
   have: have$9
 });
 
-var _templateObject$H, _templateObject2$C, _templateObject3$z, _templateObject4$w;
+var _templateObject$H, _templateObject2$C, _templateObject3$A, _templateObject4$w;
 /**
  * @returns Whether you `have` the Legendary Seal-Clubbing Club
  */
@@ -13840,7 +13840,7 @@ function clubAcrossBattlefieldAvailable() {
  * @returns The number of casts of Club 'Em Into Next Week available to you right now.
  */
 function clubIntoNextWeekAvailable() {
-  return have$8() ? $skill(_templateObject3$z || (_templateObject3$z = _taggedTemplateLiteral(["Club 'Em Into Next Week"]))).dailylimit : 0;
+  return have$8() ? $skill(_templateObject3$A || (_templateObject3$A = _taggedTemplateLiteral(["Club 'Em Into Next Week"]))).dailylimit : 0;
 }
 /**
  * @returns The monster you currently have copied with Club 'Em Into Next Week.
@@ -13938,10 +13938,10 @@ function couldUseSpookyPuttySheet() {
 }
 var SpookyPuttySheet = new Copier(() => couldUseSpookyPuttySheet(), () => prepareSpookyPuttySheet(), () => couldUseSpookyPuttySheet(), () => getSpookyPuttySheetMonster(), () => useSpookyPuttySheet());
 
-var _templateObject$F, _templateObject2$A, _templateObject3$y, _templateObject4$v, _templateObject5$v, _templateObject6$u, _templateObject7$r;
+var _templateObject$F, _templateObject2$A, _templateObject3$z, _templateObject4$v, _templateObject5$v, _templateObject6$u, _templateObject7$r;
 var summonSkill$6 = $skill(_templateObject$F || (_templateObject$F = _taggedTemplateLiteral(["Summon Candy Heart"])));
 var libramChance$2 = 1.0 / 6;
-var libramExpected$3 = new Map([[$item(_templateObject2$A || (_templateObject2$A = _taggedTemplateLiteral(["green candy heart"]))), libramChance$2], [$item(_templateObject3$y || (_templateObject3$y = _taggedTemplateLiteral(["lavender candy heart"]))), libramChance$2], [$item(_templateObject4$v || (_templateObject4$v = _taggedTemplateLiteral(["orange candy heart"]))), libramChance$2], [$item(_templateObject5$v || (_templateObject5$v = _taggedTemplateLiteral(["pink candy heart"]))), libramChance$2], [$item(_templateObject6$u || (_templateObject6$u = _taggedTemplateLiteral(["white candy heart"]))), libramChance$2], [$item(_templateObject7$r || (_templateObject7$r = _taggedTemplateLiteral(["yellow candy heart"]))), libramChance$2]]);
+var libramExpected$3 = new Map([[$item(_templateObject2$A || (_templateObject2$A = _taggedTemplateLiteral(["green candy heart"]))), libramChance$2], [$item(_templateObject3$z || (_templateObject3$z = _taggedTemplateLiteral(["lavender candy heart"]))), libramChance$2], [$item(_templateObject4$v || (_templateObject4$v = _taggedTemplateLiteral(["orange candy heart"]))), libramChance$2], [$item(_templateObject5$v || (_templateObject5$v = _taggedTemplateLiteral(["pink candy heart"]))), libramChance$2], [$item(_templateObject6$u || (_templateObject6$u = _taggedTemplateLiteral(["white candy heart"]))), libramChance$2], [$item(_templateObject7$r || (_templateObject7$r = _taggedTemplateLiteral(["yellow candy heart"]))), libramChance$2]]);
 /**
  * @returns true if the player can Summon Candy Heart
  */
@@ -13955,7 +13955,7 @@ function expected$6() {
   return libramExpected$3;
 }
 
-var _templateObject$E, _templateObject2$z, _templateObject3$x, _templateObject4$u, _templateObject5$u, _templateObject6$t, _templateObject7$q;
+var _templateObject$E, _templateObject2$z, _templateObject3$y, _templateObject4$u, _templateObject5$u, _templateObject6$t, _templateObject7$q;
 var summonSkill$5 = $skill(_templateObject$E || (_templateObject$E = _taggedTemplateLiteral(["Summon Party Favor"])));
 /**
  * @returns true if the player can Summon Party Favors
@@ -13971,13 +13971,13 @@ function expected$5() {
   var totalRareChance = 1.0 / 2 ** (rareSummons + 1);
   var commonChance = (1.0 - totalRareChance) / 3;
   var rareChance = totalRareChance / 3;
-  return new Map([[$item(_templateObject2$z || (_templateObject2$z = _taggedTemplateLiteral(["divine blowout"]))), commonChance], [$item(_templateObject3$x || (_templateObject3$x = _taggedTemplateLiteral(["divine can of silly string"]))), commonChance], [$item(_templateObject4$u || (_templateObject4$u = _taggedTemplateLiteral(["divine noisemaker"]))), commonChance], [$item(_templateObject5$u || (_templateObject5$u = _taggedTemplateLiteral(["divine champagne flute"]))), rareChance], [$item(_templateObject6$t || (_templateObject6$t = _taggedTemplateLiteral(["divine champagne popper"]))), rareChance], [$item(_templateObject7$q || (_templateObject7$q = _taggedTemplateLiteral(["divine cracker"]))), rareChance]]);
+  return new Map([[$item(_templateObject2$z || (_templateObject2$z = _taggedTemplateLiteral(["divine blowout"]))), commonChance], [$item(_templateObject3$y || (_templateObject3$y = _taggedTemplateLiteral(["divine can of silly string"]))), commonChance], [$item(_templateObject4$u || (_templateObject4$u = _taggedTemplateLiteral(["divine noisemaker"]))), commonChance], [$item(_templateObject5$u || (_templateObject5$u = _taggedTemplateLiteral(["divine champagne flute"]))), rareChance], [$item(_templateObject6$t || (_templateObject6$t = _taggedTemplateLiteral(["divine champagne popper"]))), rareChance], [$item(_templateObject7$q || (_templateObject7$q = _taggedTemplateLiteral(["divine cracker"]))), rareChance]]);
 }
 
-var _templateObject$D, _templateObject2$y, _templateObject3$w, _templateObject4$t, _templateObject5$t, _templateObject6$s, _templateObject7$p;
+var _templateObject$D, _templateObject2$y, _templateObject3$x, _templateObject4$t, _templateObject5$t, _templateObject6$s, _templateObject7$p;
 var summonSkill$4 = $skill(_templateObject$D || (_templateObject$D = _taggedTemplateLiteral(["Summon Love Song"])));
 var libramChance$1 = 1.0 / 6;
-var libramExpected$2 = new Map([[$item(_templateObject2$y || (_templateObject2$y = _taggedTemplateLiteral(["love song of disturbing obsession"]))), libramChance$1], [$item(_templateObject3$w || (_templateObject3$w = _taggedTemplateLiteral(["love song of icy revenge"]))), libramChance$1], [$item(_templateObject4$t || (_templateObject4$t = _taggedTemplateLiteral(["love song of naughty innuendo"]))), libramChance$1], [$item(_templateObject5$t || (_templateObject5$t = _taggedTemplateLiteral(["love song of smoldering passion"]))), libramChance$1], [$item(_templateObject6$s || (_templateObject6$s = _taggedTemplateLiteral(["love song of sugary cuteness"]))), libramChance$1], [$item(_templateObject7$p || (_templateObject7$p = _taggedTemplateLiteral(["love song of vague ambiguity"]))), libramChance$1]]);
+var libramExpected$2 = new Map([[$item(_templateObject2$y || (_templateObject2$y = _taggedTemplateLiteral(["love song of disturbing obsession"]))), libramChance$1], [$item(_templateObject3$x || (_templateObject3$x = _taggedTemplateLiteral(["love song of icy revenge"]))), libramChance$1], [$item(_templateObject4$t || (_templateObject4$t = _taggedTemplateLiteral(["love song of naughty innuendo"]))), libramChance$1], [$item(_templateObject5$t || (_templateObject5$t = _taggedTemplateLiteral(["love song of smoldering passion"]))), libramChance$1], [$item(_templateObject6$s || (_templateObject6$s = _taggedTemplateLiteral(["love song of sugary cuteness"]))), libramChance$1], [$item(_templateObject7$p || (_templateObject7$p = _taggedTemplateLiteral(["love song of vague ambiguity"]))), libramChance$1]]);
 /**
  * @returns true if the player can Summon Love Song
  */
@@ -13991,7 +13991,7 @@ function expected$4() {
   return libramExpected$2;
 }
 
-var _templateObject$C, _templateObject2$x, _templateObject3$v;
+var _templateObject$C, _templateObject2$x, _templateObject3$w;
 var summonSkill$3 = $skill(_templateObject$C || (_templateObject$C = _taggedTemplateLiteral(["Summon BRICKOs"])));
 /**
  * @returns true if the player can Summon BRICKOs
@@ -14005,13 +14005,13 @@ function have$3() {
 function expected$3() {
   var eyeSummons = get$2("_brickoEyeSummons");
   var eyeChance = eyeSummons === 3 ? 0.0 : eyeSummons === 0 ? 0.5 : 1.0 / 3.0;
-  return new Map([[$item(_templateObject2$x || (_templateObject2$x = _taggedTemplateLiteral(["BRICKO eye brick"]))), eyeChance], [$item(_templateObject3$v || (_templateObject3$v = _taggedTemplateLiteral(["BRICKO brick"]))), 3.0 - eyeChance]]);
+  return new Map([[$item(_templateObject2$x || (_templateObject2$x = _taggedTemplateLiteral(["BRICKO eye brick"]))), eyeChance], [$item(_templateObject3$w || (_templateObject3$w = _taggedTemplateLiteral(["BRICKO brick"]))), 3.0 - eyeChance]]);
 }
 
-var _templateObject$B, _templateObject2$w, _templateObject3$u, _templateObject4$s, _templateObject5$s, _templateObject6$r, _templateObject7$o;
+var _templateObject$B, _templateObject2$w, _templateObject3$v, _templateObject4$s, _templateObject5$s, _templateObject6$r, _templateObject7$o;
 var summonSkill$2 = $skill(_templateObject$B || (_templateObject$B = _taggedTemplateLiteral(["Summon Dice"])));
 var libramChance = 1.0 / 6;
-var libramExpected$1 = new Map([[$item(_templateObject2$w || (_templateObject2$w = _taggedTemplateLiteral(["d4"]))), libramChance], [$item(_templateObject3$u || (_templateObject3$u = _taggedTemplateLiteral(["d6"]))), libramChance], [$item(_templateObject4$s || (_templateObject4$s = _taggedTemplateLiteral(["d8"]))), libramChance], [$item(_templateObject5$s || (_templateObject5$s = _taggedTemplateLiteral(["d10"]))), libramChance], [$item(_templateObject6$r || (_templateObject6$r = _taggedTemplateLiteral(["d12"]))), libramChance], [$item(_templateObject7$o || (_templateObject7$o = _taggedTemplateLiteral(["d20"]))), libramChance]]);
+var libramExpected$1 = new Map([[$item(_templateObject2$w || (_templateObject2$w = _taggedTemplateLiteral(["d4"]))), libramChance], [$item(_templateObject3$v || (_templateObject3$v = _taggedTemplateLiteral(["d6"]))), libramChance], [$item(_templateObject4$s || (_templateObject4$s = _taggedTemplateLiteral(["d8"]))), libramChance], [$item(_templateObject5$s || (_templateObject5$s = _taggedTemplateLiteral(["d10"]))), libramChance], [$item(_templateObject6$r || (_templateObject6$r = _taggedTemplateLiteral(["d12"]))), libramChance], [$item(_templateObject7$o || (_templateObject7$o = _taggedTemplateLiteral(["d20"]))), libramChance]]);
 /**
  * @returns true if the player can Summon Dice
  */
@@ -14025,11 +14025,11 @@ function expected$2() {
   return libramExpected$1;
 }
 
-var _templateObject$A, _templateObject2$v, _templateObject3$t, _templateObject4$r, _templateObject5$r, _templateObject6$q, _templateObject7$n, _templateObject8$n, _templateObject9$k, _templateObject0$j;
+var _templateObject$A, _templateObject2$v, _templateObject3$u, _templateObject4$r, _templateObject5$r, _templateObject6$q, _templateObject7$n, _templateObject8$n, _templateObject9$k, _templateObject0$j;
 var summonSkill$1 = $skill(_templateObject$A || (_templateObject$A = _taggedTemplateLiteral(["Summon Resolutions"])));
 var commonChance = 0.98 / 6;
 var rareChance = 0.02 / 3;
-var libramExpected = new Map([[$item(_templateObject2$v || (_templateObject2$v = _taggedTemplateLiteral(["resolution: be feistier"]))), commonChance], [$item(_templateObject3$t || (_templateObject3$t = _taggedTemplateLiteral(["resolution: be happier"]))), commonChance], [$item(_templateObject4$r || (_templateObject4$r = _taggedTemplateLiteral(["resolution: be sexier"]))), commonChance], [$item(_templateObject5$r || (_templateObject5$r = _taggedTemplateLiteral(["resolution: be smarter"]))), commonChance], [$item(_templateObject6$q || (_templateObject6$q = _taggedTemplateLiteral(["resolution: be stronger"]))), commonChance], [$item(_templateObject7$n || (_templateObject7$n = _taggedTemplateLiteral(["resolution: be wealthier"]))), commonChance], [$item(_templateObject8$n || (_templateObject8$n = _taggedTemplateLiteral(["resolution: be kinder"]))), rareChance], [$item(_templateObject9$k || (_templateObject9$k = _taggedTemplateLiteral(["resolution: be luckier"]))), rareChance], [$item(_templateObject0$j || (_templateObject0$j = _taggedTemplateLiteral(["resolution: be more adventurous"]))), rareChance]]);
+var libramExpected = new Map([[$item(_templateObject2$v || (_templateObject2$v = _taggedTemplateLiteral(["resolution: be feistier"]))), commonChance], [$item(_templateObject3$u || (_templateObject3$u = _taggedTemplateLiteral(["resolution: be happier"]))), commonChance], [$item(_templateObject4$r || (_templateObject4$r = _taggedTemplateLiteral(["resolution: be sexier"]))), commonChance], [$item(_templateObject5$r || (_templateObject5$r = _taggedTemplateLiteral(["resolution: be smarter"]))), commonChance], [$item(_templateObject6$q || (_templateObject6$q = _taggedTemplateLiteral(["resolution: be stronger"]))), commonChance], [$item(_templateObject7$n || (_templateObject7$n = _taggedTemplateLiteral(["resolution: be wealthier"]))), commonChance], [$item(_templateObject8$n || (_templateObject8$n = _taggedTemplateLiteral(["resolution: be kinder"]))), rareChance], [$item(_templateObject9$k || (_templateObject9$k = _taggedTemplateLiteral(["resolution: be luckier"]))), rareChance], [$item(_templateObject0$j || (_templateObject0$j = _taggedTemplateLiteral(["resolution: be more adventurous"]))), rareChance]]);
 /**
  * @returns Whether the player can Summon Resolutions
  */
@@ -14043,7 +14043,7 @@ function expected$1() {
   return libramExpected;
 }
 
-var _templateObject$z, _templateObject2$u, _templateObject3$s, _templateObject4$q, _templateObject5$q, _templateObject6$p, _templateObject7$m, _templateObject8$m;
+var _templateObject$z, _templateObject2$u, _templateObject3$t, _templateObject4$q, _templateObject5$q, _templateObject6$p, _templateObject7$m, _templateObject8$m;
 var summonSkill = $skill(_templateObject$z || (_templateObject$z = _taggedTemplateLiteral(["Summon Taffy"])));
 /**
  * @returns true if the player can Summon Taffy
@@ -14062,10 +14062,10 @@ function expected() {
   var commonChance = (1.0 - totalRareChance) / 4;
   var rareChance = onlyYellow ? 0.0 : totalRareChance / (3 - get$2("_taffyYellowSummons"));
   var yellowChance = yellowSummons === 1 ? 0.0 : onlyYellow ? totalRareChance : rareChance;
-  return new Map([[$item(_templateObject2$u || (_templateObject2$u = _taggedTemplateLiteral(["pulled blue taffy"]))), commonChance], [$item(_templateObject3$s || (_templateObject3$s = _taggedTemplateLiteral(["pulled orange taffy"]))), commonChance], [$item(_templateObject4$q || (_templateObject4$q = _taggedTemplateLiteral(["pulled violet taffy"]))), commonChance], [$item(_templateObject5$q || (_templateObject5$q = _taggedTemplateLiteral(["pulled red taffy"]))), commonChance], [$item(_templateObject6$p || (_templateObject6$p = _taggedTemplateLiteral(["pulled indigo taffy"]))), rareChance], [$item(_templateObject7$m || (_templateObject7$m = _taggedTemplateLiteral(["pulled green taffy"]))), rareChance], [$item(_templateObject8$m || (_templateObject8$m = _taggedTemplateLiteral(["pulled yellow taffy"]))), yellowChance]]);
+  return new Map([[$item(_templateObject2$u || (_templateObject2$u = _taggedTemplateLiteral(["pulled blue taffy"]))), commonChance], [$item(_templateObject3$t || (_templateObject3$t = _taggedTemplateLiteral(["pulled orange taffy"]))), commonChance], [$item(_templateObject4$q || (_templateObject4$q = _taggedTemplateLiteral(["pulled violet taffy"]))), commonChance], [$item(_templateObject5$q || (_templateObject5$q = _taggedTemplateLiteral(["pulled red taffy"]))), commonChance], [$item(_templateObject6$p || (_templateObject6$p = _taggedTemplateLiteral(["pulled indigo taffy"]))), rareChance], [$item(_templateObject7$m || (_templateObject7$m = _taggedTemplateLiteral(["pulled green taffy"]))), rareChance], [$item(_templateObject8$m || (_templateObject8$m = _taggedTemplateLiteral(["pulled yellow taffy"]))), yellowChance]]);
 }
 
-var _templateObject$y, _templateObject2$t, _templateObject3$r, _templateObject4$p, _templateObject5$p, _templateObject6$o, _templateObject7$l, _templateObject8$l, _templateObject9$j, _templateObject0$i, _templateObject1$i, _templateObject10$i, _templateObject11$g, _templateObject12$g;
+var _templateObject$y, _templateObject2$t, _templateObject3$s, _templateObject4$p, _templateObject5$p, _templateObject6$o, _templateObject7$l, _templateObject8$l, _templateObject9$j, _templateObject0$i, _templateObject1$i, _templateObject10$i, _templateObject11$g, _templateObject12$g;
 /**
  *
  * @param summonSkill The libram summoning skill
@@ -14077,7 +14077,7 @@ function expectedLibramSummon(summonSkill) {
       return expected$6();
     case $skill(_templateObject2$t || (_templateObject2$t = _taggedTemplateLiteral(["Summon Party Favor"]))):
       return expected$5();
-    case $skill(_templateObject3$r || (_templateObject3$r = _taggedTemplateLiteral(["Summon Love Song"]))):
+    case $skill(_templateObject3$s || (_templateObject3$s = _taggedTemplateLiteral(["Summon Love Song"]))):
       return expected$4();
     case $skill(_templateObject4$p || (_templateObject4$p = _taggedTemplateLiteral(["Summon BRICKOs"]))):
       return expected$3();
@@ -14139,7 +14139,7 @@ function bestLibramToCast() {
   })[0];
 }
 
-var _templateObject$x, _templateObject2$s, _templateObject3$q, _templateObject4$o, _templateObject5$o, _templateObject6$n, _templateObject7$k, _templateObject8$k, _templateObject9$i;
+var _templateObject$x, _templateObject2$s, _templateObject3$r, _templateObject4$o, _templateObject5$o, _templateObject6$n, _templateObject7$k, _templateObject8$k, _templateObject9$i;
 var Lifestyle;
 (function (Lifestyle) {
   Lifestyle[Lifestyle["casual"] = 1] = "casual";
@@ -14227,7 +14227,7 @@ function inputToMoonId(moon, playerClass) {
         return 0;
       case $stat(_templateObject2$s || (_templateObject2$s = _taggedTemplateLiteral(["Mysticality"]))):
         return 1;
-      case $stat(_templateObject3$q || (_templateObject3$q = _taggedTemplateLiteral(["Moxie"]))):
+      case $stat(_templateObject3$r || (_templateObject3$r = _taggedTemplateLiteral(["Moxie"]))):
         return 2;
       default:
         throw new AscendError("unknown prime stat for ".concat(playerClass));
@@ -17839,7 +17839,7 @@ var Clan = /*#__PURE__*/function () {
   }]);
 }();
 
-var _templateObject$w, _templateObject2$r, _templateObject3$p, _templateObject4$n, _templateObject5$n, _templateObject6$m, _templateObject7$j, _templateObject8$j;
+var _templateObject$w, _templateObject2$r, _templateObject3$q, _templateObject4$n, _templateObject5$n, _templateObject6$m, _templateObject7$j, _templateObject8$j;
 /**
  * Cast Rain Man and fight the target monster
  * @param target the monster to fight
@@ -17863,7 +17863,7 @@ function canRainMan(target) {
   if (require$$0.monsterFactoidsAvailable(target, false) > 0) {
     return true;
   }
-  var page = withChoice(970, 2, () => require$$0.visitUrl("runskillz.php?pwd&action=Skillz&whichskill=".concat($skill(_templateObject3$p || (_templateObject3$p = _taggedTemplateLiteral(["Rain Man"]))).id, "&quantity=1")));
+  var page = withChoice(970, 2, () => require$$0.visitUrl("runskillz.php?pwd&action=Skillz&whichskill=".concat($skill(_templateObject3$q || (_templateObject3$q = _taggedTemplateLiteral(["Rain Man"]))).id, "&quantity=1")));
   return page.indexOf("<option value=".concat(target.id, ">")) > 0;
 }
 var RAIN_MONSTER_WINDOW_BEGIN = "Rain Monster window begin";
@@ -17903,8 +17903,8 @@ var HeavyRains = /*#__PURE__*/Object.freeze({
   wanderers: wanderers
 });
 
-var _templateObject$v, _templateObject2$q, _templateObject3$o, _templateObject4$m, _templateObject5$m, _templateObject6$l, _CommunityService, _templateObject7$i, _templateObject8$i, _templateObject9$h, _templateObject0$h, _templateObject1$h, _templateObject10$h, _templateObject11$f, _templateObject12$f, _templateObject13$f, _templateObject14$e, _templateObject15$e, _templateObject16$e, _templateObject17$e, _templateObject18$d, _templateObject19$d, _templateObject20$c, _templateObject21$a, _templateObject22$a, _templateObject23$9, _templateObject24$9, _templateObject25$9, _templateObject26$9, _templateObject27$9, _templateObject28$9, _templateObject29$9;
-var thralls = new Map([[$stat(_templateObject$v || (_templateObject$v = _taggedTemplateLiteral(["muscle"]))), $thrall(_templateObject2$q || (_templateObject2$q = _taggedTemplateLiteral(["Elbow Macaroni"])))], [$stat(_templateObject3$o || (_templateObject3$o = _taggedTemplateLiteral(["moxie"]))), $thrall(_templateObject4$m || (_templateObject4$m = _taggedTemplateLiteral(["Penne Dreadful"])))]]);
+var _templateObject$v, _templateObject2$q, _templateObject3$p, _templateObject4$m, _templateObject5$m, _templateObject6$l, _CommunityService, _templateObject7$i, _templateObject8$i, _templateObject9$h, _templateObject0$h, _templateObject1$h, _templateObject10$h, _templateObject11$f, _templateObject12$f, _templateObject13$f, _templateObject14$e, _templateObject15$e, _templateObject16$d, _templateObject17$d, _templateObject18$d, _templateObject19$d, _templateObject20$c, _templateObject21$a, _templateObject22$a, _templateObject23$9, _templateObject24$9, _templateObject25$9, _templateObject26$9, _templateObject27$9, _templateObject28$9, _templateObject29$9;
+var thralls = new Map([[$stat(_templateObject$v || (_templateObject$v = _taggedTemplateLiteral(["muscle"]))), $thrall(_templateObject2$q || (_templateObject2$q = _taggedTemplateLiteral(["Elbow Macaroni"])))], [$stat(_templateObject3$p || (_templateObject3$p = _taggedTemplateLiteral(["moxie"]))), $thrall(_templateObject4$m || (_templateObject4$m = _taggedTemplateLiteral(["Penne Dreadful"])))]]);
 var statCommunityServicePredictor = stat => {
   return () => 60 - Math.floor(1 / 30 * (require$$0.myBuffedstat(stat) - require$$0.myBasestat(thralls.get(stat) === require$$0.myThrall() && !have$1a($effect(_templateObject5$m || (_templateObject5$m = _taggedTemplateLiteral(["Expert Oiliness"])))) ? $stat(_templateObject6$l || (_templateObject6$l = _taggedTemplateLiteral(["mysticality"]))) : stat)));
 };
@@ -18201,7 +18201,7 @@ _defineProperty(CommunityService, "WeaponDamage", new _CommunityService(6, "Weap
   var offhandPower = require$$0.toSlot(require$$0.equippedItem($slot(_templateObject10$h || (_templateObject10$h = _taggedTemplateLiteral(["off-hand"]))))) === $slot(_templateObject11$f || (_templateObject11$f = _taggedTemplateLiteral(["weapon"]))) ? require$$0.getPower(require$$0.equippedItem($slot(_templateObject12$f || (_templateObject12$f = _taggedTemplateLiteral(["off-hand"]))))) : 0;
   var familiarPower = require$$0.toSlot(require$$0.equippedItem($slot(_templateObject13$f || (_templateObject13$f = _taggedTemplateLiteral(["familiar"]))))) === $slot(_templateObject14$e || (_templateObject14$e = _taggedTemplateLiteral(["weapon"]))) ? require$$0.getPower(require$$0.equippedItem($slot(_templateObject15$e || (_templateObject15$e = _taggedTemplateLiteral(["familiar"]))))) : 0;
   // mafia does not currently count swagger
-  var multiplier = have$1a($effect(_templateObject16$e || (_templateObject16$e = _taggedTemplateLiteral(["Bow-Legged Swagger"])))) ? 2 : 1;
+  var multiplier = have$1a($effect(_templateObject16$d || (_templateObject16$d = _taggedTemplateLiteral(["Bow-Legged Swagger"])))) ? 2 : 1;
   // We add 0.001 because the floor function sometimes introduces weird rounding errors
   for (var _len3 = arguments.length, effects = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
     effects[_key3] = arguments[_key3];
@@ -18209,7 +18209,7 @@ _defineProperty(CommunityService, "WeaponDamage", new _CommunityService(6, "Weap
   return 60 - Math.floor(multiplier * (hypotheticalModifier.apply(void 0, ["Weapon Damage"].concat(effects)) - 0.15 * (weaponPower + offhandPower + familiarPower)) / 50 + 0.001) - Math.floor(multiplier * hypotheticalModifier.apply(void 0, ["Weapon Damage Percent"].concat(effects)) / 50 + 0.001);
 }, new Requirement(["Weapon Damage", "Weapon Damage Percent"], {})));
 _defineProperty(CommunityService, "SpellDamage", new _CommunityService(7, "Spell Damage", "Make Sausage", function () {
-  var dragonfishDamage = require$$0.myFamiliar() === $familiar(_templateObject17$e || (_templateObject17$e = _taggedTemplateLiteral(["Magic Dragonfish"]))) ? require$$0.numericModifier($familiar(_templateObject18$d || (_templateObject18$d = _taggedTemplateLiteral(["Magic Dragonfish"]))), "Spell Damage Percent", totalFamiliarWeight(), $item.none) : 0;
+  var dragonfishDamage = require$$0.myFamiliar() === $familiar(_templateObject17$d || (_templateObject17$d = _taggedTemplateLiteral(["Magic Dragonfish"]))) ? require$$0.numericModifier($familiar(_templateObject18$d || (_templateObject18$d = _taggedTemplateLiteral(["Magic Dragonfish"]))), "Spell Damage Percent", totalFamiliarWeight(), $item.none) : 0;
   // We add 0.001 because the floor function sometimes introduces weird rounding errors
   for (var _len4 = arguments.length, effects = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
     effects[_key4] = arguments[_key4];
@@ -18455,7 +18455,7 @@ function bestSolution(memoizationTable, values, currentIndex, remainingCapacity)
   return result;
 }
 
-var _templateObject$t, _templateObject2$p, _templateObject3$n, _templateObject4$l, _templateObject5$l, _templateObject6$k, _templateObject7$h, _templateObject8$h, _templateObject9$g, _templateObject0$g, _templateObject1$g, _templateObject10$g, _templateObject11$e, _templateObject12$e, _templateObject13$e, _templateObject14$d, _templateObject15$d, _templateObject16$d, _templateObject17$d, _templateObject18$c, _templateObject19$c, _templateObject20$b, _templateObject21$9, _templateObject22$9, _templateObject23$8, _templateObject24$8, _templateObject25$8, _templateObject26$8, _templateObject27$8, _templateObject28$8, _templateObject29$8, _templateObject30$8, _templateObject31$7, _templateObject32$6, _templateObject33$6, _templateObject34$6, _templateObject35$6, _templateObject36$6, _templateObject37$6, _templateObject38$6, _templateObject39$6, _templateObject40$6, _templateObject41$5, _templateObject42$5, _templateObject43$5, _templateObject44$5, _templateObject45$5, _templateObject46$5, _templateObject47$5, _templateObject48$5, _templateObject49$3, _templateObject50$3, _templateObject51$3, _templateObject52$3, _templateObject53$3, _templateObject54$3, _templateObject55$3, _templateObject56$3, _templateObject57$3, _templateObject58$3, _templateObject59$3, _templateObject60$3, _templateObject61$3, _templateObject62$3, _templateObject63$3, _templateObject64$3, _templateObject65$3, _templateObject66$3, _templateObject67$3, _templateObject68$3, _templateObject69$3, _templateObject70$3;
+var _templateObject$t, _templateObject2$p, _templateObject3$o, _templateObject4$l, _templateObject5$l, _templateObject6$k, _templateObject7$h, _templateObject8$h, _templateObject9$g, _templateObject0$g, _templateObject1$g, _templateObject10$g, _templateObject11$e, _templateObject12$e, _templateObject13$e, _templateObject14$d, _templateObject15$d, _templateObject16$c, _templateObject17$c, _templateObject18$c, _templateObject19$c, _templateObject20$b, _templateObject21$9, _templateObject22$9, _templateObject23$8, _templateObject24$8, _templateObject25$8, _templateObject26$8, _templateObject27$8, _templateObject28$8, _templateObject29$8, _templateObject30$8, _templateObject31$7, _templateObject32$6, _templateObject33$6, _templateObject34$6, _templateObject35$6, _templateObject36$6, _templateObject37$6, _templateObject38$6, _templateObject39$6, _templateObject40$6, _templateObject41$5, _templateObject42$5, _templateObject43$5, _templateObject44$5, _templateObject45$5, _templateObject46$5, _templateObject47$5, _templateObject48$5, _templateObject49$3, _templateObject50$3, _templateObject51$3, _templateObject52$3, _templateObject53$3, _templateObject54$3, _templateObject55$3, _templateObject56$3, _templateObject57$3, _templateObject58$3, _templateObject59$3, _templateObject60$3, _templateObject61$3, _templateObject62$3, _templateObject63$3, _templateObject64$3, _templateObject65$3, _templateObject66$3, _templateObject67$3, _templateObject68$3, _templateObject69$3, _templateObject70$3;
 function isMonday() {
   // Checking Tuesday's ruby is a hack to see if it's Monday in Arizona.
   return get$1("Muscle Percent", $item(_templateObject$t || (_templateObject$t = _taggedTemplateLiteral(["Tuesday's ruby"])))) > 0;
@@ -18600,7 +18600,7 @@ var MenuItem = /*#__PURE__*/function () {
   }], [{
     key: "defaultOptions",
     value: function defaultOptions() {
-      return new Map([[$item(_templateObject3$n || (_templateObject3$n = _taggedTemplateLiteral(["distention pill"]))), {
+      return new Map([[$item(_templateObject3$o || (_templateObject3$o = _taggedTemplateLiteral(["distention pill"]))), {
         organ: "food",
         maximum: !have$1a($item(_templateObject4$l || (_templateObject4$l = _taggedTemplateLiteral(["distention pill"])))) || get$2("_distentionPillUsed") ? 0 : 1,
         size: -1
@@ -18636,9 +18636,9 @@ var MenuItem = /*#__PURE__*/function () {
         maximum: get$2("calzoneOfLegendEaten") ? 0 : 1
       }], [$item(_templateObject15$d || (_templateObject15$d = _taggedTemplateLiteral(["Deep Dish of Legend"]))), {
         maximum: get$2("deepDishOfLegendEaten") ? 0 : 1
-      }], [$item(_templateObject16$d || (_templateObject16$d = _taggedTemplateLiteral(["Pizza of Legend"]))), {
+      }], [$item(_templateObject16$c || (_templateObject16$c = _taggedTemplateLiteral(["Pizza of Legend"]))), {
         maximum: get$2("pizzaOfLegendEaten") ? 0 : 1
-      }], [$item(_templateObject17$d || (_templateObject17$d = _taggedTemplateLiteral(["jar of fermented pickle juice"]))), {
+      }], [$item(_templateObject17$c || (_templateObject17$c = _taggedTemplateLiteral(["jar of fermented pickle juice"]))), {
         maximum: get$2("_pickleJuiceDrunk") ? 0 : 1
       }], [$item(_templateObject18$c || (_templateObject18$c = _taggedTemplateLiteral(["extra-greasy slider"]))), {
         maximum: get$2("_extraGreasySliderEaten") ? 0 : 1
@@ -19129,7 +19129,7 @@ var Diet = /*#__PURE__*/function () {
   }]);
 }();
 
-var _templateObject$s, _templateObject2$o, _templateObject3$m;
+var _templateObject$s, _templateObject2$o, _templateObject3$n;
 var Dungeon = /*#__PURE__*/function () {
   /**
    * Creates dungeon object for managing clan dungeons
@@ -19258,9 +19258,9 @@ var Dungeon = /*#__PURE__*/function () {
 }();
 var Dreadsylvania = new Dungeon("Dreadsylvania", $items(_templateObject$s || (_templateObject$s = _taggedTemplateLiteral(["Great Wolf's headband, Great Wolf's right paw, Great Wolf's left paw, Great Wolf's lice, Great Wolf's rocket launcher, Great Wolf's beastly trousers, Drapes-You-Regally, Warms-Your-Tush, Covers-Your-Head, Protects-Your-Junk, Quiets-Your-Steps, Helps-You-Sleep, Mayor Ghost's khakis, Mayor Ghost's cloak, Mayor Ghost's toupee, Mayor Ghost's scissors, Mayor Ghost's sash, Mayor Ghost's gavel, zombie mariachi hat, zombie accordion, zombie mariachi pants, HOA regulation book, HOA zombie eyes, HOA citation pad, Unkillable Skeleton's skullcap, Unkillable Skeleton's shinguards, Unkillable Skeleton's breastplate, Unkillable Skeleton's shield, Unkillable Skeleton's sawsword, Unkillable Skeleton's restless leg, skull capacitor, Thunkula's drinking cap, Drunkula's silky pants, Drunkula's cape, Drunkula's ring of haze, Drunkula's wineglass, Drunkula's bell, bottle of Bloodweiser, bottle of Bloodweiser, bottle of Bloodweiser, bottle of Bloodweiser, electric Kool-Aid, electric Kool-Aid, electric Kool-Aid, electric Kool-Aid, ghost pepper, ghost pepper, ghost pepper, ghost pepper, Gets-You-Drunk, Gets-You-Drunk, Gets-You-Drunk, Gets-You-Drunk, wriggling severed nose, wriggling severed nose, wriggling severed nose, wriggling severed nose, Hunger\u2122 Sauce, Hunger\u2122 Sauce, Hunger\u2122 Sauce, Hunger\u2122 Sauce"]))), "translatemap", "foldmap", 1000000, "dvmap.gif", "foldmap.gif");
 var Hobopolis = new Dungeon("Hobopolis", $items(_templateObject2$o || (_templateObject2$o = _taggedTemplateLiteral(["Ol' Scratch's ash can, Ol' Scratch's ol' britches, Ol' Scratch's stovepipe hat, Ol' Scratch's infernal pitchfork, Ol' Scratch's manacles, Ol' Scratch's stove door, Frosty's carrot, Frosty's nailbat, Frosty's old silk hat, Frosty's arm, Frosty's iceball, Frosty's snowball sack, Oscus's dumpster waders, Oscus's pelt, Wand of Oscus, Oscus's flypaper pants, Oscus's garbage can lid, Oscus's neverending soda, Zombo's grievous greaves, Zombo's shield, Zombo's skullcap, Zombo's empty eye, Zombo's shoulder blade, Zombo's skull ring, Chester's bag of candy, Chester's cutoffs, Chester's moustache, Chester's Aquarius medallion, Chester's muscle shirt, Chester's sunglasses, Hodgman's bow tie, Hodgman's porkpie hat, Hodgman's lobsterskin pants, Hodgman's almanac, Hodgman's lucky sock, Hodgman's metal detector, Hodgman's varcolac paw, Hodgman's harmonica, Hodgman's garbage sticker, Hodgman's cane, Hodgman's whackin' stick, Hodgman's disgusting technicolor overcoat, Hodgman's imaginary hamster"]))), "cleansewer", "floodsewer", 1000000, "opengrate.gif", "sewergrate.gif");
-var SlimeTube = new Dungeon("The Slime Tube", $items(_templateObject3$m || (_templateObject3$m = _taggedTemplateLiteral(["slime-soaked brain, slime-soaked hypophysis, slime-soaked sweat gland, squirming Slime larva, caustic slime nodule, caustic slime nodule, hardened slime belt, hardened slime hat, hardened slime pants"]))), "cleanspot", "sealtube", 250000, "slimehole.gif", "greasespot.gif");
+var SlimeTube = new Dungeon("The Slime Tube", $items(_templateObject3$n || (_templateObject3$n = _taggedTemplateLiteral(["slime-soaked brain, slime-soaked hypophysis, slime-soaked sweat gland, squirming Slime larva, caustic slime nodule, caustic slime nodule, hardened slime belt, hardened slime hat, hardened slime pants"]))), "cleanspot", "sealtube", 250000, "slimehole.gif", "greasespot.gif");
 
-var _templateObject$r, _templateObject2$n, _templateObject3$l, _templateObject4$k, _templateObject5$k, _templateObject6$j, _templateObject7$g, _templateObject8$g;
+var _templateObject$r, _templateObject2$n, _templateObject3$m, _templateObject4$k, _templateObject5$k, _templateObject6$j, _templateObject7$g, _templateObject8$g;
 /**
  * Mines in the Kingdom of Loathing
  */
@@ -19309,7 +19309,7 @@ function caveInCost(mine) {
     case Mine.ITZNOTYERZITZ:
     case Mine.GUMMI:
     case Mine.CRIMBONIUM:
-      return require$$0.myBuffedstat($stat(_templateObject3$l || (_templateObject3$l = _taggedTemplateLiteral(["muscle"])))) * 1.5;
+      return require$$0.myBuffedstat($stat(_templateObject3$m || (_templateObject3$m = _taggedTemplateLiteral(["muscle"])))) * 1.5;
     case Mine.KNOB:
       return require$$0.myBuffedstat($stat(_templateObject4$k || (_templateObject4$k = _taggedTemplateLiteral(["muscle"])))) * 0.5;
     case Mine.ANEMONE:
@@ -19442,9 +19442,9 @@ var mining = /*#__PURE__*/Object.freeze({
   visit: visit
 });
 
-var _templateObject$q, _templateObject2$m, _templateObject3$k, _templateObject4$j, _templateObject5$j, _templateObject6$i, _templateObject7$f, _templateObject8$f, _templateObject9$f, _templateObject0$f, _templateObject1$f, _templateObject10$f, _templateObject11$d, _templateObject12$d, _templateObject13$d, _templateObject14$c, _templateObject15$c, _templateObject16$c, _templateObject17$c, _templateObject18$b, _templateObject19$b, _templateObject20$a, _templateObject21$8, _templateObject22$8, _templateObject23$7, _templateObject24$7, _templateObject25$7, _templateObject26$7, _OscusSoda, _templateObject27$7, _templateObject28$7, _MagicalSausages, _templateObject29$7, _templateObject30$7, _templateObject31$6, _templateObject32$5, _templateObject33$5, _templateObject34$5, _templateObject35$5, _templateObject36$5, _templateObject37$5, _templateObject38$5, _templateObject39$5, _templateObject40$5, _templateObject41$4, _templateObject42$4, _templateObject43$4, _templateObject44$4, _templateObject45$4, _templateObject46$4, _templateObject47$4, _templateObject48$4;
-var aprilShieldEffects = new Map([[$skill(_templateObject$q || (_templateObject$q = _taggedTemplateLiteral(["Empathy of the Newt"]))), $effect(_templateObject2$m || (_templateObject2$m = _taggedTemplateLiteral(["Thoughtful Empathy"])))], [$skill(_templateObject3$k || (_templateObject3$k = _taggedTemplateLiteral(["Sauce Contemplation"]))), $effect(_templateObject4$j || (_templateObject4$j = _taggedTemplateLiteral(["Lubricating Sauce"])))], [$skill(_templateObject5$j || (_templateObject5$j = _taggedTemplateLiteral(["Manicotti Meditation"]))), $effect(_templateObject6$i || (_templateObject6$i = _taggedTemplateLiteral(["Tubes of Universal Meat"])))], [$skill(_templateObject7$f || (_templateObject7$f = _taggedTemplateLiteral(["Seal Clubbing Frenzy"]))), $effect(_templateObject8$f || (_templateObject8$f = _taggedTemplateLiteral(["Slippery as a Seal"])))], [$skill(_templateObject9$f || (_templateObject9$f = _taggedTemplateLiteral(["Patience of the Tortoise"]))), $effect(_templateObject0$f || (_templateObject0$f = _taggedTemplateLiteral(["Strength of the Tortoise"])))], [$skill(_templateObject1$f || (_templateObject1$f = _taggedTemplateLiteral(["Disco Aerobics"]))), $effect(_templateObject10$f || (_templateObject10$f = _taggedTemplateLiteral(["Disco over Matter"])))], [$skill(_templateObject11$d || (_templateObject11$d = _taggedTemplateLiteral(["Moxie of the Mariachi"]))), $effect(_templateObject12$d || (_templateObject12$d = _taggedTemplateLiteral(["Mariachi Moisture"])))]]);
-var pastaWandEffects = new Map([[$skill(_templateObject13$d || (_templateObject13$d = _taggedTemplateLiteral(["Bind Vampieroghi"]))), $effect(_templateObject14$c || (_templateObject14$c = _taggedTemplateLiteral(["Legendary Bloody Potato Bits"])))], [$skill(_templateObject15$c || (_templateObject15$c = _taggedTemplateLiteral(["Bind Vermincelli"]))), $effect(_templateObject16$c || (_templateObject16$c = _taggedTemplateLiteral(["Legendary Slinking Noodle Glob"])))], [$skill(_templateObject17$c || (_templateObject17$c = _taggedTemplateLiteral(["Bind Angel Hair Wisp"]))), $effect(_templateObject18$b || (_templateObject18$b = _taggedTemplateLiteral(["Legendary Whispering Strands"])))], [$skill(_templateObject19$b || (_templateObject19$b = _taggedTemplateLiteral(["Bind Undead Elbow Macaroni"]))), $effect(_templateObject20$a || (_templateObject20$a = _taggedTemplateLiteral(["Legendary Macaroni Coating"])))], [$skill(_templateObject21$8 || (_templateObject21$8 = _taggedTemplateLiteral(["Bind Penne Dreadful"]))), $effect(_templateObject22$8 || (_templateObject22$8 = _taggedTemplateLiteral(["Legendary Penne Fedora"])))], [$skill(_templateObject23$7 || (_templateObject23$7 = _taggedTemplateLiteral(["Bind Lasagmbie"]))), $effect(_templateObject24$7 || (_templateObject24$7 = _taggedTemplateLiteral(["Legendary Pasta Eyeball"])))], [$skill(_templateObject25$7 || (_templateObject25$7 = _taggedTemplateLiteral(["Bind Spice Ghost"]))), $effect(_templateObject26$7 || (_templateObject26$7 = _taggedTemplateLiteral(["Legendary Spice Haze"])))]]);
+var _templateObject$q, _templateObject2$m, _templateObject3$l, _templateObject4$j, _templateObject5$j, _templateObject6$i, _templateObject7$f, _templateObject8$f, _templateObject9$f, _templateObject0$f, _templateObject1$f, _templateObject10$f, _templateObject11$d, _templateObject12$d, _templateObject13$d, _templateObject14$c, _templateObject15$c, _templateObject16$b, _templateObject17$b, _templateObject18$b, _templateObject19$b, _templateObject20$a, _templateObject21$8, _templateObject22$8, _templateObject23$7, _templateObject24$7, _templateObject25$7, _templateObject26$7, _OscusSoda, _templateObject27$7, _templateObject28$7, _MagicalSausages, _templateObject29$7, _templateObject30$7, _templateObject31$6, _templateObject32$5, _templateObject33$5, _templateObject34$5, _templateObject35$5, _templateObject36$5, _templateObject37$5, _templateObject38$5, _templateObject39$5, _templateObject40$5, _templateObject41$4, _templateObject42$4, _templateObject43$4, _templateObject44$4, _templateObject45$4, _templateObject46$4, _templateObject47$4, _templateObject48$4;
+var aprilShieldEffects = new Map([[$skill(_templateObject$q || (_templateObject$q = _taggedTemplateLiteral(["Empathy of the Newt"]))), $effect(_templateObject2$m || (_templateObject2$m = _taggedTemplateLiteral(["Thoughtful Empathy"])))], [$skill(_templateObject3$l || (_templateObject3$l = _taggedTemplateLiteral(["Sauce Contemplation"]))), $effect(_templateObject4$j || (_templateObject4$j = _taggedTemplateLiteral(["Lubricating Sauce"])))], [$skill(_templateObject5$j || (_templateObject5$j = _taggedTemplateLiteral(["Manicotti Meditation"]))), $effect(_templateObject6$i || (_templateObject6$i = _taggedTemplateLiteral(["Tubes of Universal Meat"])))], [$skill(_templateObject7$f || (_templateObject7$f = _taggedTemplateLiteral(["Seal Clubbing Frenzy"]))), $effect(_templateObject8$f || (_templateObject8$f = _taggedTemplateLiteral(["Slippery as a Seal"])))], [$skill(_templateObject9$f || (_templateObject9$f = _taggedTemplateLiteral(["Patience of the Tortoise"]))), $effect(_templateObject0$f || (_templateObject0$f = _taggedTemplateLiteral(["Strength of the Tortoise"])))], [$skill(_templateObject1$f || (_templateObject1$f = _taggedTemplateLiteral(["Disco Aerobics"]))), $effect(_templateObject10$f || (_templateObject10$f = _taggedTemplateLiteral(["Disco over Matter"])))], [$skill(_templateObject11$d || (_templateObject11$d = _taggedTemplateLiteral(["Moxie of the Mariachi"]))), $effect(_templateObject12$d || (_templateObject12$d = _taggedTemplateLiteral(["Mariachi Moisture"])))]]);
+var pastaWandEffects = new Map([[$skill(_templateObject13$d || (_templateObject13$d = _taggedTemplateLiteral(["Bind Vampieroghi"]))), $effect(_templateObject14$c || (_templateObject14$c = _taggedTemplateLiteral(["Legendary Bloody Potato Bits"])))], [$skill(_templateObject15$c || (_templateObject15$c = _taggedTemplateLiteral(["Bind Vermincelli"]))), $effect(_templateObject16$b || (_templateObject16$b = _taggedTemplateLiteral(["Legendary Slinking Noodle Glob"])))], [$skill(_templateObject17$b || (_templateObject17$b = _taggedTemplateLiteral(["Bind Angel Hair Wisp"]))), $effect(_templateObject18$b || (_templateObject18$b = _taggedTemplateLiteral(["Legendary Whispering Strands"])))], [$skill(_templateObject19$b || (_templateObject19$b = _taggedTemplateLiteral(["Bind Undead Elbow Macaroni"]))), $effect(_templateObject20$a || (_templateObject20$a = _taggedTemplateLiteral(["Legendary Macaroni Coating"])))], [$skill(_templateObject21$8 || (_templateObject21$8 = _taggedTemplateLiteral(["Bind Penne Dreadful"]))), $effect(_templateObject22$8 || (_templateObject22$8 = _taggedTemplateLiteral(["Legendary Penne Fedora"])))], [$skill(_templateObject23$7 || (_templateObject23$7 = _taggedTemplateLiteral(["Bind Lasagmbie"]))), $effect(_templateObject24$7 || (_templateObject24$7 = _taggedTemplateLiteral(["Legendary Pasta Eyeball"])))], [$skill(_templateObject25$7 || (_templateObject25$7 = _taggedTemplateLiteral(["Bind Spice Ghost"]))), $effect(_templateObject26$7 || (_templateObject26$7 = _taggedTemplateLiteral(["Legendary Spice Haze"])))]]);
 var MpSource = /*#__PURE__*/function () {
   function MpSource() {
     _classCallCheck(this, MpSource);
@@ -20508,7 +20508,7 @@ var console = /*#__PURE__*/Object.freeze({
   warn: warn
 });
 
-var _templateObject$p, _templateObject2$l, _templateObject3$j, _templateObject4$i, _templateObject5$i, _templateObject6$h, _templateObject7$e, _templateObject8$e, _templateObject9$e, _templateObject0$e, _templateObject1$e, _templateObject10$e, _templateObject11$c, _templateObject12$c, _templateObject13$c, _templateObject14$b, _templateObject15$b, _templateObject16$b, _templateObject17$b, _templateObject18$a, _templateObject19$a, _templateObject20$9, _templateObject21$7, _templateObject22$7, _templateObject23$6, _templateObject24$6, _templateObject25$6, _templateObject26$6, _templateObject27$6, _templateObject28$6, _templateObject29$6, _templateObject30$6, _templateObject31$5;
+var _templateObject$p, _templateObject2$l, _templateObject3$k, _templateObject4$i, _templateObject5$i, _templateObject6$h, _templateObject7$e, _templateObject8$e, _templateObject9$e, _templateObject0$e, _templateObject1$e, _templateObject10$e, _templateObject11$c, _templateObject12$c, _templateObject13$c, _templateObject14$b, _templateObject15$b, _templateObject16$a, _templateObject17$a, _templateObject18$a, _templateObject19$a, _templateObject20$9, _templateObject21$7, _templateObject22$7, _templateObject23$6, _templateObject24$6, _templateObject25$6, _templateObject26$6, _templateObject27$6, _templateObject28$6, _templateObject29$6, _templateObject30$6, _templateObject31$5;
 /**
  * Return a mapping of the session items, mapping foldable items to a single of their forms
  *
@@ -20519,7 +20519,7 @@ function mySessionItemsWrapper() {
   var sessionOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
   var manyToOne = (primary, mapped) => mapped.map(target => [target, primary]);
   var foldable = item => manyToOne(item, getFoldGroup(item));
-  var itemMappings = new Map([].concat(_toConsumableArray(foldable($item(_templateObject$p || (_templateObject$p = _taggedTemplateLiteral(["liar's pants"]))))), _toConsumableArray(foldable($item(_templateObject2$l || (_templateObject2$l = _taggedTemplateLiteral(["ice pick"]))))), _toConsumableArray(manyToOne($item(_templateObject3$j || (_templateObject3$j = _taggedTemplateLiteral(["Spooky Putty sheet"]))), [$item(_templateObject4$i || (_templateObject4$i = _taggedTemplateLiteral(["Spooky Putty monster"])))].concat(_toConsumableArray(getFoldGroup($item(_templateObject5$i || (_templateObject5$i = _taggedTemplateLiteral(["Spooky Putty sheet"])))))))), _toConsumableArray(foldable($item(_templateObject6$h || (_templateObject6$h = _taggedTemplateLiteral(["stinky cheese sword"]))))), _toConsumableArray(foldable($item(_templateObject7$e || (_templateObject7$e = _taggedTemplateLiteral(["naughty paper shuriken"]))))), _toConsumableArray(foldable($item(_templateObject8$e || (_templateObject8$e = _taggedTemplateLiteral(["Loathing Legion knife"]))))), _toConsumableArray(foldable($item(_templateObject9$e || (_templateObject9$e = _taggedTemplateLiteral(["deceased crimbo tree"]))))), _toConsumableArray(foldable($item(_templateObject0$e || (_templateObject0$e = _taggedTemplateLiteral(["makeshift turban"]))))), _toConsumableArray(foldable($item(_templateObject1$e || (_templateObject1$e = _taggedTemplateLiteral(["turtle wax shield"]))))), _toConsumableArray(foldable($item(_templateObject10$e || (_templateObject10$e = _taggedTemplateLiteral(["metallic foil bow"]))))), _toConsumableArray(foldable($item(_templateObject11$c || (_templateObject11$c = _taggedTemplateLiteral(["ironic moustache"]))))), _toConsumableArray(foldable($item(_templateObject12$c || (_templateObject12$c = _taggedTemplateLiteral(["bugged balaclava"]))))), _toConsumableArray(foldable($item(_templateObject13$c || (_templateObject13$c = _taggedTemplateLiteral(["toggle switch (Bartend)"]))))), _toConsumableArray(foldable($item(_templateObject14$b || (_templateObject14$b = _taggedTemplateLiteral(["mushroom cap"]))))), _toConsumableArray(manyToOne($item(_templateObject15$b || (_templateObject15$b = _taggedTemplateLiteral(["can of Rain-Doh"]))), $items(_templateObject16$b || (_templateObject16$b = _taggedTemplateLiteral(["empty Rain-Doh can"]))))), _toConsumableArray(manyToOne($item(_templateObject17$b || (_templateObject17$b = _taggedTemplateLiteral(["meteorite fragment"]))), $items(_templateObject18$a || (_templateObject18$a = _taggedTemplateLiteral(["meteorite earring, meteorite necklace, meteorite ring"]))))), _toConsumableArray(manyToOne($item(_templateObject19$a || (_templateObject19$a = _taggedTemplateLiteral(["Sneaky Pete's leather jacket"]))), $items(_templateObject20$9 || (_templateObject20$9 = _taggedTemplateLiteral(["Sneaky Pete's leather jacket (collar popped)"]))))), _toConsumableArray(manyToOne($item(_templateObject21$7 || (_templateObject21$7 = _taggedTemplateLiteral(["Boris's Helm"]))), $items(_templateObject22$7 || (_templateObject22$7 = _taggedTemplateLiteral(["Boris's Helm (askew)"]))))), _toConsumableArray(manyToOne($item(_templateObject23$6 || (_templateObject23$6 = _taggedTemplateLiteral(["Jarlsberg's pan"]))), $items(_templateObject24$6 || (_templateObject24$6 = _taggedTemplateLiteral(["Jarlsberg's pan (Cosmic portal mode)"]))))), _toConsumableArray(manyToOne($item(_templateObject25$6 || (_templateObject25$6 = _taggedTemplateLiteral(["tiny plastic sword"]))), $items(_templateObject26$6 || (_templateObject26$6 = _taggedTemplateLiteral(["grogtini, bodyslam, dirty martini, vesper, cherry bomb, sangria del diablo"]))))), _toConsumableArray(manyToOne($item(_templateObject27$6 || (_templateObject27$6 = _taggedTemplateLiteral(["earthenware muffin tin"]))), $items(_templateObject28$6 || (_templateObject28$6 = _taggedTemplateLiteral(["blueberry muffin, bran muffin, chocolate chip muffin"]))))), _toConsumableArray(manyToOne($item(_templateObject29$6 || (_templateObject29$6 = _taggedTemplateLiteral(["ChibiBuddy\u2122 (on)"]))), $items(_templateObject30$6 || (_templateObject30$6 = _taggedTemplateLiteral(["ChibiBuddy\u2122 (off)"])))))));
+  var itemMappings = new Map([].concat(_toConsumableArray(foldable($item(_templateObject$p || (_templateObject$p = _taggedTemplateLiteral(["liar's pants"]))))), _toConsumableArray(foldable($item(_templateObject2$l || (_templateObject2$l = _taggedTemplateLiteral(["ice pick"]))))), _toConsumableArray(manyToOne($item(_templateObject3$k || (_templateObject3$k = _taggedTemplateLiteral(["Spooky Putty sheet"]))), [$item(_templateObject4$i || (_templateObject4$i = _taggedTemplateLiteral(["Spooky Putty monster"])))].concat(_toConsumableArray(getFoldGroup($item(_templateObject5$i || (_templateObject5$i = _taggedTemplateLiteral(["Spooky Putty sheet"])))))))), _toConsumableArray(foldable($item(_templateObject6$h || (_templateObject6$h = _taggedTemplateLiteral(["stinky cheese sword"]))))), _toConsumableArray(foldable($item(_templateObject7$e || (_templateObject7$e = _taggedTemplateLiteral(["naughty paper shuriken"]))))), _toConsumableArray(foldable($item(_templateObject8$e || (_templateObject8$e = _taggedTemplateLiteral(["Loathing Legion knife"]))))), _toConsumableArray(foldable($item(_templateObject9$e || (_templateObject9$e = _taggedTemplateLiteral(["deceased crimbo tree"]))))), _toConsumableArray(foldable($item(_templateObject0$e || (_templateObject0$e = _taggedTemplateLiteral(["makeshift turban"]))))), _toConsumableArray(foldable($item(_templateObject1$e || (_templateObject1$e = _taggedTemplateLiteral(["turtle wax shield"]))))), _toConsumableArray(foldable($item(_templateObject10$e || (_templateObject10$e = _taggedTemplateLiteral(["metallic foil bow"]))))), _toConsumableArray(foldable($item(_templateObject11$c || (_templateObject11$c = _taggedTemplateLiteral(["ironic moustache"]))))), _toConsumableArray(foldable($item(_templateObject12$c || (_templateObject12$c = _taggedTemplateLiteral(["bugged balaclava"]))))), _toConsumableArray(foldable($item(_templateObject13$c || (_templateObject13$c = _taggedTemplateLiteral(["toggle switch (Bartend)"]))))), _toConsumableArray(foldable($item(_templateObject14$b || (_templateObject14$b = _taggedTemplateLiteral(["mushroom cap"]))))), _toConsumableArray(manyToOne($item(_templateObject15$b || (_templateObject15$b = _taggedTemplateLiteral(["can of Rain-Doh"]))), $items(_templateObject16$a || (_templateObject16$a = _taggedTemplateLiteral(["empty Rain-Doh can"]))))), _toConsumableArray(manyToOne($item(_templateObject17$a || (_templateObject17$a = _taggedTemplateLiteral(["meteorite fragment"]))), $items(_templateObject18$a || (_templateObject18$a = _taggedTemplateLiteral(["meteorite earring, meteorite necklace, meteorite ring"]))))), _toConsumableArray(manyToOne($item(_templateObject19$a || (_templateObject19$a = _taggedTemplateLiteral(["Sneaky Pete's leather jacket"]))), $items(_templateObject20$9 || (_templateObject20$9 = _taggedTemplateLiteral(["Sneaky Pete's leather jacket (collar popped)"]))))), _toConsumableArray(manyToOne($item(_templateObject21$7 || (_templateObject21$7 = _taggedTemplateLiteral(["Boris's Helm"]))), $items(_templateObject22$7 || (_templateObject22$7 = _taggedTemplateLiteral(["Boris's Helm (askew)"]))))), _toConsumableArray(manyToOne($item(_templateObject23$6 || (_templateObject23$6 = _taggedTemplateLiteral(["Jarlsberg's pan"]))), $items(_templateObject24$6 || (_templateObject24$6 = _taggedTemplateLiteral(["Jarlsberg's pan (Cosmic portal mode)"]))))), _toConsumableArray(manyToOne($item(_templateObject25$6 || (_templateObject25$6 = _taggedTemplateLiteral(["tiny plastic sword"]))), $items(_templateObject26$6 || (_templateObject26$6 = _taggedTemplateLiteral(["grogtini, bodyslam, dirty martini, vesper, cherry bomb, sangria del diablo"]))))), _toConsumableArray(manyToOne($item(_templateObject27$6 || (_templateObject27$6 = _taggedTemplateLiteral(["earthenware muffin tin"]))), $items(_templateObject28$6 || (_templateObject28$6 = _taggedTemplateLiteral(["blueberry muffin, bran muffin, chocolate chip muffin"]))))), _toConsumableArray(manyToOne($item(_templateObject29$6 || (_templateObject29$6 = _taggedTemplateLiteral(["ChibiBuddy\u2122 (on)"]))), $items(_templateObject30$6 || (_templateObject30$6 = _taggedTemplateLiteral(["ChibiBuddy\u2122 (off)"])))))));
   var inventory = new Map();
   var invLocations = sessionOnly ? [require$$0.mySessionItems] : [require$$0.mySessionItems, require$$0.getCloset, require$$0.getDisplay, require$$0.getStorage];
   if (!sessionOnly) {
@@ -21671,7 +21671,7 @@ var CombatResources = /*#__PURE__*/function () {
   }]);
 }();
 
-var _templateObject$o, _templateObject2$k, _templateObject3$i, _templateObject4$h, _templateObject5$h, _templateObject6$g, _templateObject7$d, _templateObject8$d, _templateObject9$d, _templateObject0$d, _templateObject1$d, _templateObject10$d, _templateObject11$b, _templateObject12$b, _templateObject13$b, _templateObject14$a, _templateObject15$a, _templateObject16$a, _templateObject17$a, _templateObject18$9, _templateObject19$9, _templateObject20$8, _templateObject21$6, _templateObject22$6, _templateObject23$5, _templateObject24$5, _templateObject25$5, _templateObject26$5, _templateObject27$5, _templateObject28$5, _templateObject29$5, _templateObject30$5, _templateObject31$4, _templateObject32$4, _templateObject33$4, _templateObject34$4, _templateObject35$4, _templateObject36$4, _templateObject37$4, _templateObject38$4, _templateObject39$4, _templateObject40$4, _templateObject41$3, _templateObject42$3, _templateObject43$3, _templateObject44$3, _templateObject45$3, _templateObject46$3, _templateObject47$3, _templateObject48$3, _templateObject49$2, _templateObject50$2, _templateObject51$2, _templateObject52$2, _templateObject53$2, _templateObject54$2, _templateObject55$2, _templateObject56$2, _templateObject57$2, _templateObject58$2, _templateObject59$2, _templateObject60$2, _templateObject61$2, _templateObject62$2, _templateObject63$2, _templateObject64$2, _templateObject65$2, _templateObject66$2, _templateObject67$2, _templateObject68$2, _templateObject69$2, _templateObject70$2, _templateObject71$2, _templateObject72$1, _templateObject73$1, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80;
+var _templateObject$o, _templateObject2$k, _templateObject3$j, _templateObject4$h, _templateObject5$h, _templateObject6$g, _templateObject7$d, _templateObject8$d, _templateObject9$d, _templateObject0$d, _templateObject1$d, _templateObject10$d, _templateObject11$b, _templateObject12$b, _templateObject13$b, _templateObject14$a, _templateObject15$a, _templateObject16$9, _templateObject17$9, _templateObject18$9, _templateObject19$9, _templateObject20$8, _templateObject21$6, _templateObject22$6, _templateObject23$5, _templateObject24$5, _templateObject25$5, _templateObject26$5, _templateObject27$5, _templateObject28$5, _templateObject29$5, _templateObject30$5, _templateObject31$4, _templateObject32$4, _templateObject33$4, _templateObject34$4, _templateObject35$4, _templateObject36$4, _templateObject37$4, _templateObject38$4, _templateObject39$4, _templateObject40$4, _templateObject41$3, _templateObject42$3, _templateObject43$3, _templateObject44$3, _templateObject45$3, _templateObject46$3, _templateObject47$3, _templateObject48$3, _templateObject49$2, _templateObject50$2, _templateObject51$2, _templateObject52$2, _templateObject53$2, _templateObject54$2, _templateObject55$2, _templateObject56$2, _templateObject57$2, _templateObject58$2, _templateObject59$2, _templateObject60$2, _templateObject61$2, _templateObject62$2, _templateObject63$2, _templateObject64$2, _templateObject65$2, _templateObject66$2, _templateObject67$2, _templateObject68$2, _templateObject69$2, _templateObject70$2, _templateObject71$2, _templateObject72$1, _templateObject73$1, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80;
 var FORCE_REFRESH_REQUIREMENT = new Requirement([], {
   forceUpdate: true
 });
@@ -21738,7 +21738,7 @@ var Outfit = /*#__PURE__*/function () {
       if (this.equips.has(require$$0.toSlot(item))) return false;
       switch (require$$0.toSlot(item)) {
         case $slot(_templateObject2$k || (_templateObject2$k = _taggedTemplateLiteral(["off-hand"]))):
-          if (this.equips.has($slot(_templateObject3$i || (_templateObject3$i = _taggedTemplateLiteral(["weapon"])))) && weaponHands(this.equips.get($slot(_templateObject4$h || (_templateObject4$h = _taggedTemplateLiteral(["weapon"]))))) !== 1) {
+          if (this.equips.has($slot(_templateObject3$j || (_templateObject3$j = _taggedTemplateLiteral(["weapon"])))) && weaponHands(this.equips.get($slot(_templateObject4$h || (_templateObject4$h = _taggedTemplateLiteral(["weapon"]))))) !== 1) {
             return false;
           }
           break;
@@ -21782,8 +21782,8 @@ var Outfit = /*#__PURE__*/function () {
       if (!have$1a($skill(_templateObject15$a || (_templateObject15$a = _taggedTemplateLiteral(["Double-Fisted Skull Smashing"]))))) return false;
       if (weaponHands(item) !== 1) return false;
       if (!require$$0.canEquip(item)) return false;
-      if (!weaponsCompatible(this.equips.get($slot(_templateObject16$a || (_templateObject16$a = _taggedTemplateLiteral(["weapon"])))), item)) return false;
-      this.equips.set($slot(_templateObject17$a || (_templateObject17$a = _taggedTemplateLiteral(["off-hand"]))), item);
+      if (!weaponsCompatible(this.equips.get($slot(_templateObject16$9 || (_templateObject16$9 = _taggedTemplateLiteral(["weapon"])))), item)) return false;
+      this.equips.set($slot(_templateObject17$9 || (_templateObject17$9 = _taggedTemplateLiteral(["off-hand"]))), item);
       return true;
     }
   }, {
@@ -23199,14 +23199,14 @@ function step(questName) {
   }
 }
 
-var _templateObject$m, _templateObject2$j, _templateObject3$h, _templateObject4$g, _templateObject5$g, _templateObject6$f, _templateObject7$c, _templateObject8$c, _templateObject9$c, _templateObject0$c, _templateObject1$c, _templateObject10$c, _templateObject11$a, _templateObject12$a, _templateObject13$a, _templateObject14$9, _templateObject15$9, _templateObject16$9, _templateObject17$9, _templateObject18$8, _templateObject19$8;
+var _templateObject$m, _templateObject2$j, _templateObject3$i, _templateObject4$g, _templateObject5$g, _templateObject6$f, _templateObject7$c, _templateObject8$c, _templateObject9$c, _templateObject0$c, _templateObject1$c, _templateObject10$c, _templateObject11$a, _templateObject12$a, _templateObject13$a, _templateObject14$9, _templateObject15$9, _templateObject16$8, _templateObject17$8, _templateObject18$8, _templateObject19$8;
 
 // Leaf module: zone data and seaworthiness state. Imports nothing project-local, so
 // args/combat/outfit/familiar/mood/pearls can all depend on it without cycles.
 
 // The trunks' commas would split inside a comma-separated $items list — keep them singular.
 var waterBreathingEquipment = [].concat(_toConsumableArray($items(_templateObject$m || (_templateObject$m = _taggedTemplateLiteral(["The Crown of Ed the Undying, aerated diving helmet, crappy Mer-kin mask, Mer-kin gladiator mask, Mer-kin scholar mask, old SCUBA tank, Elf Guard SCUBA tank, oxygenated eggnog helmet"])))), [$item(_templateObject2$j || (_templateObject2$j = _taggedTemplateLiteral(["really, really nice swimming trunks"])))]);
-var familiarWaterBreathingEquipment = $items(_templateObject3$h || (_templateObject3$h = _taggedTemplateLiteral(["das boot, little bitty bathysphere"])));
+var familiarWaterBreathingEquipment = $items(_templateObject3$i || (_templateObject3$i = _taggedTemplateLiteral(["das boot, little bitty bathysphere"])));
 
 /** Log Fishy / underwater state (call from main or when debugging seaworthy). */
 function printSeaworthyDebug(where) {
@@ -23229,9 +23229,16 @@ var PEARL_RES_CAP = 18;
 /**
  * Resistance to chase beyond the cap. The buffs are cast before the maximizer runs, so
  * without headroom it stops at exactly 18 and a lapsing buff (Feel Peaceful is 3/day)
- * drops a progress tier. Covers that lapse for roughly one slot of item drop.
+ * drops a progress tier. Three points absorbs a +2 buff lapsing without falling below.
  */
 var PEARL_RES_HEADROOM = 3;
+
+/**
+ * How hard the outfit chases resistance relative to its tiebreakers. A regen accessory
+ * (Peridot of Peril, 12-15 HP and MP) scores ~1.35 under the 0.05 regen weights, so the
+ * margin has to stay wide enough that it cannot outbid a single resistance point.
+ */
+var PEARL_RES_WEIGHT = 3;
 
 /** Pearl progress per fight at a given resistance: 1.7% per 3 res, floored, capped at 10%. */
 function progressRatePct(res) {
@@ -23337,13 +23344,13 @@ var PEARLS = [{
   // 0 initiative — we always win init, so the parka stagger lands before its
   // poison-on-hit can. The dragonfish's The Colors... (−5 all res) threatens pearl
   // progress and the pufferfish jabs its spine even on a miss (§3.3).
-  peridotMonster: $monster(_templateObject16$9 || (_templateObject16$9 = _taggedTemplateLiteral(["jamfish"])))
+  peridotMonster: $monster(_templateObject16$8 || (_templateObject16$8 = _taggedTemplateLiteral(["jamfish"])))
 }, {
   key: "cold",
   maxDef: 360,
   maxAtk: 425,
   maxHp: 800,
-  loc: $location(_templateObject17$9 || (_templateObject17$9 = _taggedTemplateLiteral(["The Briniest Deepests"]))),
+  loc: $location(_templateObject17$8 || (_templateObject17$8 = _taggedTemplateLiteral(["The Briniest Deepests"]))),
   element: $element(_templateObject18$8 || (_templateObject18$8 = _taggedTemplateLiteral(["cold"]))),
   after: [],
   modifier: "cold res",
@@ -23355,8 +23362,8 @@ var PEARLS = [{
   peridotMonster: $monster(_templateObject19$8 || (_templateObject19$8 = _taggedTemplateLiteral(["decent white shark"])))
 }];
 
-var _templateObject$l, _templateObject2$i, _templateObject3$g, _templateObject4$f, _templateObject5$f, _templateObject6$e;
-[$item(_templateObject$l || (_templateObject$l = _taggedTemplateLiteral(["none"]))), $item(_templateObject2$i || (_templateObject2$i = _taggedTemplateLiteral(["model train set"]))), $item(_templateObject3$g || (_templateObject3$g = _taggedTemplateLiteral(["cold medicine cabinet"]))), $item(_templateObject4$f || (_templateObject4$f = _taggedTemplateLiteral(["Asdon Martin keyfob (on ring)"]))), $item(_templateObject5$f || (_templateObject5$f = _taggedTemplateLiteral(["TakerSpace letter of Marque"])))];
+var _templateObject$l, _templateObject2$i, _templateObject3$h, _templateObject4$f, _templateObject5$f, _templateObject6$e;
+[$item(_templateObject$l || (_templateObject$l = _taggedTemplateLiteral(["none"]))), $item(_templateObject2$i || (_templateObject2$i = _taggedTemplateLiteral(["model train set"]))), $item(_templateObject3$h || (_templateObject3$h = _taggedTemplateLiteral(["cold medicine cabinet"]))), $item(_templateObject4$f || (_templateObject4$f = _taggedTemplateLiteral(["Asdon Martin keyfob (on ring)"]))), $item(_templateObject5$f || (_templateObject5$f = _taggedTemplateLiteral(["TakerSpace letter of Marque"])))];
 
 /** mombuff arg: "true"/"auto" = auto-assign, or a pearl element to reserve it for. */
 
@@ -23629,7 +23636,7 @@ function outfitOverride(key) {
   return value !== undefined && value.length > 0 ? value : undefined;
 }
 
-var _templateObject$k, _templateObject2$h, _templateObject3$f, _templateObject4$e, _templateObject5$e, _templateObject6$d, _templateObject7$b, _templateObject8$b, _templateObject9$b, _templateObject0$b, _templateObject1$b, _templateObject10$b;
+var _templateObject$k, _templateObject2$h, _templateObject3$g, _templateObject4$e, _templateObject5$e, _templateObject6$d, _templateObject7$b, _templateObject8$b, _templateObject9$b, _templateObject0$b, _templateObject1$b, _templateObject10$b;
 
 /**
  * Liver play mode (spec: "chosen configuration is the single source of truth").
@@ -23645,7 +23652,7 @@ var _templateObject$k, _templateObject2$h, _templateObject3$f, _templateObject4$
 // monster stats, docs/sea-reference.md §6) and no shirt cost (corset competes with the
 // Jurassic Parka).
 var STOMACH_EXTENDERS = [$item(_templateObject$k || (_templateObject$k = _taggedTemplateLiteral(["angelbone chopsticks"]))), $item(_templateObject2$h || (_templateObject2$h = _taggedTemplateLiteral(["devilbone corset"])))];
-var LIVER_EXTENDERS = [$item(_templateObject3$f || (_templateObject3$f = _taggedTemplateLiteral(["angelbone dice"]))), $item(_templateObject4$e || (_templateObject4$e = _taggedTemplateLiteral(["devilbone rosary"])))];
+var LIVER_EXTENDERS = [$item(_templateObject3$g || (_templateObject3$g = _taggedTemplateLiteral(["angelbone dice"]))), $item(_templateObject4$e || (_templateObject4$e = _taggedTemplateLiteral(["devilbone rosary"])))];
 // totem = 1-handed weapon, greaves = pants. Sober spell combat leaves the weapon slot
 // cheap (totem first); wineglass combat needs it for the drunkweapon (greaves first,
 // totem only as a required last resort — best-effort attack combat, user decision).
@@ -23769,7 +23776,7 @@ function organStatusReport() {
   return lines;
 }
 
-var _templateObject$j, _templateObject2$g, _templateObject3$e, _templateObject4$d, _templateObject5$d, _templateObject6$c, _templateObject7$a, _templateObject8$a, _templateObject9$a, _templateObject0$a, _templateObject1$a, _templateObject10$a, _templateObject11$9, _templateObject12$9, _templateObject13$9, _templateObject14$8, _templateObject15$8, _templateObject16$8, _templateObject17$8, _templateObject18$7, _templateObject19$7, _templateObject20$7, _templateObject21$5, _templateObject22$5, _templateObject23$4, _templateObject24$4, _templateObject25$4, _templateObject26$4, _templateObject27$4, _templateObject28$4, _templateObject29$4, _templateObject30$4;
+var _templateObject$j, _templateObject2$g, _templateObject3$f, _templateObject4$d, _templateObject5$d, _templateObject6$c, _templateObject7$a, _templateObject8$a, _templateObject9$a, _templateObject0$a, _templateObject1$a, _templateObject10$a, _templateObject11$9, _templateObject12$9, _templateObject13$9, _templateObject14$8, _templateObject15$8, _templateObject16$7, _templateObject17$7, _templateObject18$7, _templateObject19$7, _templateObject20$7, _templateObject21$5, _templateObject22$5, _templateObject23$4, _templateObject24$4, _templateObject25$4, _templateObject26$4, _templateObject27$4, _templateObject28$4, _templateObject29$4, _templateObject30$4;
 var ZONE_MAX_HP = 800; // ganger, giant squid — highest HP in any pearl zone
 
 // Lantern gear across ALL slots (user insight: a lantern ≈ an extra cast folded into
@@ -23790,7 +23797,7 @@ var LANTERN_GEAR = [{
   components: 2,
   slot: "off-hand"
 }, {
-  item: $item(_templateObject3$e || (_templateObject3$e = _taggedTemplateLiteral(["petrified wood wizard's pouch"]))),
+  item: $item(_templateObject3$f || (_templateObject3$f = _taggedTemplateLiteral(["petrified wood wizard's pouch"]))),
   components: 2,
   slot: "accessory"
 }, {
@@ -23832,6 +23839,10 @@ function equippedLanternComponents() {
 }
 
 /** Upper bound on lantern components if we equip everything we own (planning pass). */
+/** Owned and wearable: the one-shot requirement and the selection must agree. */
+function usableLantern(item) {
+  return have$1a(item) && require$$0.canEquip(item);
+}
 function ownedLanternProspect() {
   var n = 0;
   var _iterator2 = _createForOfIteratorHelper(LANTERN_GEAR),
@@ -23839,7 +23850,7 @@ function ownedLanternProspect() {
   try {
     for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
       var gear = _step2.value;
-      if (have$1a(gear.item)) n += gear.components;
+      if (usableLantern(gear.item)) n += gear.components;
     }
   } catch (err) {
     _iterator2.e(err);
@@ -23870,7 +23881,7 @@ function selectLanternGear(needed) {
     for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
       var gear = _step3.value;
       if (remaining <= 0) break;
-      if (!have$1a(gear.item)) continue;
+      if (!usableLantern(gear.item)) continue;
       if (gear.slot === "off-hand") {
         if (offhandsUsed === 0) {
           equip.push(gear.item);
@@ -23972,8 +23983,8 @@ function buildWandererMacro() {
   if (wineglassMode()) {
     return new Macro().attack().repeat();
   }
-  var macro = new Macro().trySkill($skill(_templateObject16$8 || (_templateObject16$8 = _taggedTemplateLiteral(["Micrometeorite"]))));
-  if (have$1a($skill(_templateObject17$8 || (_templateObject17$8 = _taggedTemplateLiteral(["Ambidextrous Funkslinging"]))))) {
+  var macro = new Macro().trySkill($skill(_templateObject16$7 || (_templateObject16$7 = _taggedTemplateLiteral(["Micrometeorite"]))));
+  if (have$1a($skill(_templateObject17$7 || (_templateObject17$7 = _taggedTemplateLiteral(["Ambidextrous Funkslinging"]))))) {
     macro.tryFunkslingItem($item(_templateObject18$7 || (_templateObject18$7 = _taggedTemplateLiteral(["train whistle"]))), $item(_templateObject19$7 || (_templateObject19$7 = _taggedTemplateLiteral(["HOA citation pad"]))));
   } else {
     macro.tryItem($item(_templateObject20$7 || (_templateObject20$7 = _taggedTemplateLiteral(["train whistle"])))).tryItem($item(_templateObject21$5 || (_templateObject21$5 = _taggedTemplateLiteral(["HOA citation pad"]))));
@@ -24033,7 +24044,7 @@ var value = {};
 
 var require$$2 = /*@__PURE__*/getAugmentedNamespace(dist$1);
 
-var _templateObject$i, _templateObject2$f, _templateObject3$d, _templateObject4$c, _templateObject5$c, _templateObject6$b, _templateObject7$9, _templateObject8$9, _templateObject9$9, _templateObject0$9, _templateObject1$9, _templateObject10$9, _templateObject11$8, _templateObject12$8, _templateObject13$8, _templateObject14$7, _templateObject15$7, _templateObject16$7, _templateObject17$7, _templateObject18$6, _templateObject19$6, _templateObject20$6, _templateObject21$4, _templateObject22$4, _templateObject23$3, _templateObject24$3, _templateObject25$3, _templateObject26$3, _templateObject27$3, _templateObject28$3, _templateObject29$3, _templateObject30$3, _templateObject31$3, _templateObject32$3, _templateObject33$3, _templateObject34$3, _templateObject35$3, _templateObject36$3, _templateObject37$3, _templateObject38$3, _templateObject39$3, _templateObject40$3, _templateObject41$2, _templateObject42$2, _templateObject43$2, _templateObject44$2, _templateObject45$2, _templateObject46$2, _templateObject47$2, _templateObject48$2, _templateObject49$1, _templateObject50$1, _templateObject51$1, _templateObject52$1, _templateObject53$1, _templateObject54$1, _templateObject55$1, _templateObject56$1, _templateObject57$1, _templateObject58$1, _templateObject59$1, _templateObject60$1, _templateObject61$1, _templateObject62$1, _templateObject63$1, _templateObject64$1, _templateObject65$1, _templateObject66$1, _templateObject67$1, _templateObject68$1, _templateObject69$1, _templateObject70$1, _templateObject71$1, _templateObject72, _templateObject73;
+var _templateObject$i, _templateObject2$f, _templateObject3$e, _templateObject4$c, _templateObject5$c, _templateObject6$b, _templateObject7$9, _templateObject8$9, _templateObject9$9, _templateObject0$9, _templateObject1$9, _templateObject10$9, _templateObject11$8, _templateObject12$8, _templateObject13$8, _templateObject14$7, _templateObject15$7, _templateObject16$6, _templateObject17$6, _templateObject18$6, _templateObject19$6, _templateObject20$6, _templateObject21$4, _templateObject22$4, _templateObject23$3, _templateObject24$3, _templateObject25$3, _templateObject26$3, _templateObject27$3, _templateObject28$3, _templateObject29$3, _templateObject30$3, _templateObject31$3, _templateObject32$3, _templateObject33$3, _templateObject34$3, _templateObject35$3, _templateObject36$3, _templateObject37$3, _templateObject38$3, _templateObject39$3, _templateObject40$3, _templateObject41$2, _templateObject42$2, _templateObject43$2, _templateObject44$2, _templateObject45$2, _templateObject46$2, _templateObject47$2, _templateObject48$2, _templateObject49$1, _templateObject50$1, _templateObject51$1, _templateObject52$1, _templateObject53$1, _templateObject54$1, _templateObject55$1, _templateObject56$1, _templateObject57$1, _templateObject58$1, _templateObject59$1, _templateObject60$1, _templateObject61$1, _templateObject62$1, _templateObject63$1, _templateObject64$1, _templateObject65$1, _templateObject66$1, _templateObject67$1, _templateObject68$1, _templateObject69$1, _templateObject70$1, _templateObject71$1, _templateObject72, _templateObject73;
 var hasRequiredValue;
 function requireValue() {
   if (hasRequiredValue) return value;
@@ -24054,7 +24065,7 @@ function requireValue() {
         val = _ref2[1];
       return [item, () => (0, libram_1.undelay)(val)];
     }) : [];
-    var specialValueLookup = new Map([[(0, libram_1.$item)(_templateObject$i || (_templateObject$i = _taggedTemplateLiteral(["Freddy Kruegerand"]))), currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject2$f || (_templateObject2$f = _taggedTemplateLiteral(["bottle of Bloodweiser, electric Kool-Aid, Dreadsylvanian skeleton key"])))))], [(0, libram_1.$item)(_templateObject3$d || (_templateObject3$d = _taggedTemplateLiteral(["Beach Buck"]))), currency((0, libram_1.$item)(_templateObject4$c || (_templateObject4$c = _taggedTemplateLiteral(["one-day ticket to Spring Break Beach"]))))], [(0, libram_1.$item)(_templateObject5$c || (_templateObject5$c = _taggedTemplateLiteral(["Coinspiracy"]))), currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject6$b || (_templateObject6$b = _taggedTemplateLiteral(["Merc Core deployment orders, karma shawarma"])))))], [(0, libram_1.$item)(_templateObject7$9 || (_templateObject7$9 = _taggedTemplateLiteral(["FunFunds\u2122"]))), currency((0, libram_1.$item)(_templateObject8$9 || (_templateObject8$9 = _taggedTemplateLiteral(["one-day ticket to Dinseylandfill"]))))], [(0, libram_1.$item)(_templateObject9$9 || (_templateObject9$9 = _taggedTemplateLiteral(["Volcoino"]))), currency((0, libram_1.$item)(_templateObject0$9 || (_templateObject0$9 = _taggedTemplateLiteral(["one-day ticket to That 70s Volcano"]))))], [(0, libram_1.$item)(_templateObject1$9 || (_templateObject1$9 = _taggedTemplateLiteral(["Wal-Mart gift certificate"]))), currency((0, libram_1.$item)(_templateObject10$9 || (_templateObject10$9 = _taggedTemplateLiteral(["one-day ticket to The Glaciest"]))))], [(0, libram_1.$item)(_templateObject11$8 || (_templateObject11$8 = _taggedTemplateLiteral(["cop dollar"]))), currency((0, libram_1.$item)(_templateObject12$8 || (_templateObject12$8 = _taggedTemplateLiteral(["shoe gum"]))))], [(0, libram_1.$item)(_templateObject13$8 || (_templateObject13$8 = _taggedTemplateLiteral(["Rubee\u2122"]))), currency((0, libram_1.$item)(_templateObject14$7 || (_templateObject14$7 = _taggedTemplateLiteral(["FantasyRealm guest pass"]))))], [(0, libram_1.$item)(_templateObject15$7 || (_templateObject15$7 = _taggedTemplateLiteral(["Guzzlrbuck"]))), currency((0, libram_1.$item)(_templateObject16$7 || (_templateObject16$7 = _taggedTemplateLiteral(["Never Don't Stop Not Striving"]))))]].concat(_toConsumableArray(complexCandy()), [[(0, libram_1.$item)(_templateObject17$7 || (_templateObject17$7 = _taggedTemplateLiteral(["Merc Core deployment orders"]))), () => value((0, libram_1.$item)(_templateObject18$6 || (_templateObject18$6 = _taggedTemplateLiteral(["one-day ticket to Conspiracy Island"]))))], [(0, libram_1.$item)(_templateObject19$6 || (_templateObject19$6 = _taggedTemplateLiteral(["free-range mushroom"]))), () => 3 * Math.max(value((0, libram_1.$item)(_templateObject20$6 || (_templateObject20$6 = _taggedTemplateLiteral(["mushroom tea"])))) - value((0, libram_1.$item)(_templateObject21$4 || (_templateObject21$4 = _taggedTemplateLiteral(["soda water"])))), value((0, libram_1.$item)(_templateObject22$4 || (_templateObject22$4 = _taggedTemplateLiteral(["mushroom whiskey"])))) - value((0, libram_1.$item)(_templateObject23$3 || (_templateObject23$3 = _taggedTemplateLiteral(["fermenting powder"])))), value((0, libram_1.$item)(_templateObject24$3 || (_templateObject24$3 = _taggedTemplateLiteral(["mushroom filet"])))))], [(0, libram_1.$item)(_templateObject25$3 || (_templateObject25$3 = _taggedTemplateLiteral(["little firkin"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject26$3 || (_templateObject26$3 = _taggedTemplateLiteral(["martini, screwdriver, strawberry daiquiri, margarita, vodka martini, tequila sunrise, bottle of Amontillado, barrel-aged martini, barrel gun"])))))], [(0, libram_1.$item)(_templateObject27$3 || (_templateObject27$3 = _taggedTemplateLiteral(["normal barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject28$3 || (_templateObject28$3 = _taggedTemplateLiteral(["a little sump'm sump'm, pink pony, rockin' wagon, roll in the hay, slip 'n' slide, slap and tickle"])))))], [(0, libram_1.$item)(_templateObject29$3 || (_templateObject29$3 = _taggedTemplateLiteral(["big tun"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject30$3 || (_templateObject30$3 = _taggedTemplateLiteral(["gibson, gin and tonic, mimosette, tequila sunset, vodka and tonic, zmobie"])))))], [(0, libram_1.$item)(_templateObject31$3 || (_templateObject31$3 = _taggedTemplateLiteral(["weathered barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject32$3 || (_templateObject32$3 = _taggedTemplateLiteral(["bean burrito, enchanted bean burrito, jumping bean burrito"])))))], [(0, libram_1.$item)(_templateObject33$3 || (_templateObject33$3 = _taggedTemplateLiteral(["dusty barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject34$3 || (_templateObject34$3 = _taggedTemplateLiteral(["spicy bean burrito, spicy enchanted bean burrito, spicy jumping bean burrito"])))))], [(0, libram_1.$item)(_templateObject35$3 || (_templateObject35$3 = _taggedTemplateLiteral(["disintegrating barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject36$3 || (_templateObject36$3 = _taggedTemplateLiteral(["insanely spicy bean burrito, insanely spicy enchanted bean burrito, insanely spicy jumping bean burrito"])))))], [(0, libram_1.$item)(_templateObject37$3 || (_templateObject37$3 = _taggedTemplateLiteral(["moist barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject38$3 || (_templateObject38$3 = _taggedTemplateLiteral(["cast, concentrated magicalness pill, enchanted barbell, giant moxie weed, Mountain Stream soda"])))))], [(0, libram_1.$item)(_templateObject39$3 || (_templateObject39$3 = _taggedTemplateLiteral(["rotting barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject40$3 || (_templateObject40$3 = _taggedTemplateLiteral(["Doc Galaktik's Ailment Ointment, extra-strength strongness elixir, jug-o-magicalness, Marquis de Poivre soda, suntan lotion of moxiousness"])))))], [(0, libram_1.$item)(_templateObject41$2 || (_templateObject41$2 = _taggedTemplateLiteral(["mouldering barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject42$2 || (_templateObject42$2 = _taggedTemplateLiteral(["creepy ginger ale, haunted battery, scroll of drastic healing, synthetic marrow, the funk"])))))], [(0, libram_1.$item)(_templateObject43$2 || (_templateObject43$2 = _taggedTemplateLiteral(["barnacled barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject44$2 || (_templateObject44$2 = _taggedTemplateLiteral(["Alewife\u2122 Ale, bazookafish bubble gum, beefy fish meat, eel battery, glistening fish meat, ink bladder, pufferfish spine, shark cartilage, slick fish meat, slug of rum, slug of shochu, slug of vodka, temporary teardrop tattoo"])))))], [(0, libram_1.$item)(_templateObject45$2 || (_templateObject45$2 = _taggedTemplateLiteral(["psychoanalytic jar"]))), () =>
+    var specialValueLookup = new Map([[(0, libram_1.$item)(_templateObject$i || (_templateObject$i = _taggedTemplateLiteral(["Freddy Kruegerand"]))), currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject2$f || (_templateObject2$f = _taggedTemplateLiteral(["bottle of Bloodweiser, electric Kool-Aid, Dreadsylvanian skeleton key"])))))], [(0, libram_1.$item)(_templateObject3$e || (_templateObject3$e = _taggedTemplateLiteral(["Beach Buck"]))), currency((0, libram_1.$item)(_templateObject4$c || (_templateObject4$c = _taggedTemplateLiteral(["one-day ticket to Spring Break Beach"]))))], [(0, libram_1.$item)(_templateObject5$c || (_templateObject5$c = _taggedTemplateLiteral(["Coinspiracy"]))), currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject6$b || (_templateObject6$b = _taggedTemplateLiteral(["Merc Core deployment orders, karma shawarma"])))))], [(0, libram_1.$item)(_templateObject7$9 || (_templateObject7$9 = _taggedTemplateLiteral(["FunFunds\u2122"]))), currency((0, libram_1.$item)(_templateObject8$9 || (_templateObject8$9 = _taggedTemplateLiteral(["one-day ticket to Dinseylandfill"]))))], [(0, libram_1.$item)(_templateObject9$9 || (_templateObject9$9 = _taggedTemplateLiteral(["Volcoino"]))), currency((0, libram_1.$item)(_templateObject0$9 || (_templateObject0$9 = _taggedTemplateLiteral(["one-day ticket to That 70s Volcano"]))))], [(0, libram_1.$item)(_templateObject1$9 || (_templateObject1$9 = _taggedTemplateLiteral(["Wal-Mart gift certificate"]))), currency((0, libram_1.$item)(_templateObject10$9 || (_templateObject10$9 = _taggedTemplateLiteral(["one-day ticket to The Glaciest"]))))], [(0, libram_1.$item)(_templateObject11$8 || (_templateObject11$8 = _taggedTemplateLiteral(["cop dollar"]))), currency((0, libram_1.$item)(_templateObject12$8 || (_templateObject12$8 = _taggedTemplateLiteral(["shoe gum"]))))], [(0, libram_1.$item)(_templateObject13$8 || (_templateObject13$8 = _taggedTemplateLiteral(["Rubee\u2122"]))), currency((0, libram_1.$item)(_templateObject14$7 || (_templateObject14$7 = _taggedTemplateLiteral(["FantasyRealm guest pass"]))))], [(0, libram_1.$item)(_templateObject15$7 || (_templateObject15$7 = _taggedTemplateLiteral(["Guzzlrbuck"]))), currency((0, libram_1.$item)(_templateObject16$6 || (_templateObject16$6 = _taggedTemplateLiteral(["Never Don't Stop Not Striving"]))))]].concat(_toConsumableArray(complexCandy()), [[(0, libram_1.$item)(_templateObject17$6 || (_templateObject17$6 = _taggedTemplateLiteral(["Merc Core deployment orders"]))), () => value((0, libram_1.$item)(_templateObject18$6 || (_templateObject18$6 = _taggedTemplateLiteral(["one-day ticket to Conspiracy Island"]))))], [(0, libram_1.$item)(_templateObject19$6 || (_templateObject19$6 = _taggedTemplateLiteral(["free-range mushroom"]))), () => 3 * Math.max(value((0, libram_1.$item)(_templateObject20$6 || (_templateObject20$6 = _taggedTemplateLiteral(["mushroom tea"])))) - value((0, libram_1.$item)(_templateObject21$4 || (_templateObject21$4 = _taggedTemplateLiteral(["soda water"])))), value((0, libram_1.$item)(_templateObject22$4 || (_templateObject22$4 = _taggedTemplateLiteral(["mushroom whiskey"])))) - value((0, libram_1.$item)(_templateObject23$3 || (_templateObject23$3 = _taggedTemplateLiteral(["fermenting powder"])))), value((0, libram_1.$item)(_templateObject24$3 || (_templateObject24$3 = _taggedTemplateLiteral(["mushroom filet"])))))], [(0, libram_1.$item)(_templateObject25$3 || (_templateObject25$3 = _taggedTemplateLiteral(["little firkin"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject26$3 || (_templateObject26$3 = _taggedTemplateLiteral(["martini, screwdriver, strawberry daiquiri, margarita, vodka martini, tequila sunrise, bottle of Amontillado, barrel-aged martini, barrel gun"])))))], [(0, libram_1.$item)(_templateObject27$3 || (_templateObject27$3 = _taggedTemplateLiteral(["normal barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject28$3 || (_templateObject28$3 = _taggedTemplateLiteral(["a little sump'm sump'm, pink pony, rockin' wagon, roll in the hay, slip 'n' slide, slap and tickle"])))))], [(0, libram_1.$item)(_templateObject29$3 || (_templateObject29$3 = _taggedTemplateLiteral(["big tun"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject30$3 || (_templateObject30$3 = _taggedTemplateLiteral(["gibson, gin and tonic, mimosette, tequila sunset, vodka and tonic, zmobie"])))))], [(0, libram_1.$item)(_templateObject31$3 || (_templateObject31$3 = _taggedTemplateLiteral(["weathered barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject32$3 || (_templateObject32$3 = _taggedTemplateLiteral(["bean burrito, enchanted bean burrito, jumping bean burrito"])))))], [(0, libram_1.$item)(_templateObject33$3 || (_templateObject33$3 = _taggedTemplateLiteral(["dusty barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject34$3 || (_templateObject34$3 = _taggedTemplateLiteral(["spicy bean burrito, spicy enchanted bean burrito, spicy jumping bean burrito"])))))], [(0, libram_1.$item)(_templateObject35$3 || (_templateObject35$3 = _taggedTemplateLiteral(["disintegrating barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject36$3 || (_templateObject36$3 = _taggedTemplateLiteral(["insanely spicy bean burrito, insanely spicy enchanted bean burrito, insanely spicy jumping bean burrito"])))))], [(0, libram_1.$item)(_templateObject37$3 || (_templateObject37$3 = _taggedTemplateLiteral(["moist barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject38$3 || (_templateObject38$3 = _taggedTemplateLiteral(["cast, concentrated magicalness pill, enchanted barbell, giant moxie weed, Mountain Stream soda"])))))], [(0, libram_1.$item)(_templateObject39$3 || (_templateObject39$3 = _taggedTemplateLiteral(["rotting barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject40$3 || (_templateObject40$3 = _taggedTemplateLiteral(["Doc Galaktik's Ailment Ointment, extra-strength strongness elixir, jug-o-magicalness, Marquis de Poivre soda, suntan lotion of moxiousness"])))))], [(0, libram_1.$item)(_templateObject41$2 || (_templateObject41$2 = _taggedTemplateLiteral(["mouldering barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject42$2 || (_templateObject42$2 = _taggedTemplateLiteral(["creepy ginger ale, haunted battery, scroll of drastic healing, synthetic marrow, the funk"])))))], [(0, libram_1.$item)(_templateObject43$2 || (_templateObject43$2 = _taggedTemplateLiteral(["barnacled barrel"]))), () => averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject44$2 || (_templateObject44$2 = _taggedTemplateLiteral(["Alewife\u2122 Ale, bazookafish bubble gum, beefy fish meat, eel battery, glistening fish meat, ink bladder, pufferfish spine, shark cartilage, slick fish meat, slug of rum, slug of shochu, slug of vodka, temporary teardrop tattoo"])))))], [(0, libram_1.$item)(_templateObject45$2 || (_templateObject45$2 = _taggedTemplateLiteral(["psychoanalytic jar"]))), () =>
     // Exclude jick because he's rate-limited
     Math.max.apply(Math, _toConsumableArray((0, libram_1.$items)(_templateObject46$2 || (_templateObject46$2 = _taggedTemplateLiteral(["jar of psychoses (The Meatsmith), jar of psychoses (The Captain of the Gourd), jar of psychoses (The Crackpot Mystic), jar of psychoses (The Pretentious Artist), jar of psychoses (The Old Man), jar of psychoses (The Suspicious-Looking Guy)"]))).map(jar => value(jar))))], [(0, libram_1.$item)(_templateObject47$2 || (_templateObject47$2 = _taggedTemplateLiteral(["warbear whosit"]))), () => (0.35 * averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject48$2 || (_templateObject48$2 = _taggedTemplateLiteral(["warbear auto-anvil, warbear chemistry lab, warbear high-efficiency still, warbear induction oven, warbear jackhammer drill press, warbear LP-ROM burner, warbear energy bracers, warbear exhaust manifold, warbear exo-arm, warbear foil hat, warbear laser beacon, warbear oil pan"]))))) + 0.65 * averageValue.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject49$1 || (_templateObject49$1 = _taggedTemplateLiteral(["warbear metalworking primer, warbear beeping telegram, warbear gyrocopter, warbear procedural hilarity drone, warbear robo-camouflage unit, warbear sequential gaiety distribution system"])))))) / 100]], _toConsumableArray((0, libram_1.$items)(_templateObject50$1 || (_templateObject50$1 = _taggedTemplateLiteral(["worthless gewgaw, worthless knick-knack, worthless trinket"]))).map(i => [i, currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject51$1 || (_templateObject51$1 = _taggedTemplateLiteral(["seal tooth, chisel, petrified noodles, jaba\xF1ero pepper, banjo strings, hot buttered roll, wooden figurine, ketchup, catsup, volleyball"])))).concat(_toConsumableArray((0, kolmafia_1.myClass)() === (0, libram_1.$class)(_templateObject52$1 || (_templateObject52$1 = _taggedTemplateLiteral(["Seal Clubber"]))) ? (0, libram_1.$items)(_templateObject53$1 || (_templateObject53$1 = _taggedTemplateLiteral(["figurine of an ancient seal"]))) : [])))])), [[(0, libram_1.$item)(_templateObject54$1 || (_templateObject54$1 = _taggedTemplateLiteral(["Boris's key"]))), () => value((0, libram_1.$item)(_templateObject55$1 || (_templateObject55$1 = _taggedTemplateLiteral(["Boris's key lime"])))) - value((0, libram_1.$item)(_templateObject56$1 || (_templateObject56$1 = _taggedTemplateLiteral(["lime"]))))], [(0, libram_1.$item)(_templateObject57$1 || (_templateObject57$1 = _taggedTemplateLiteral(["Jarlsberg's key"]))), () => value((0, libram_1.$item)(_templateObject58$1 || (_templateObject58$1 = _taggedTemplateLiteral(["Jarlsberg's key lime"])))) - value((0, libram_1.$item)(_templateObject59$1 || (_templateObject59$1 = _taggedTemplateLiteral(["lime"]))))], [(0, libram_1.$item)(_templateObject60$1 || (_templateObject60$1 = _taggedTemplateLiteral(["Sneaky Pete's key"]))), () => value((0, libram_1.$item)(_templateObject61$1 || (_templateObject61$1 = _taggedTemplateLiteral(["Sneaky Pete's key lime"])))) - value((0, libram_1.$item)(_templateObject62$1 || (_templateObject62$1 = _taggedTemplateLiteral(["lime"]))))], [(0, libram_1.$item)(_templateObject63$1 || (_templateObject63$1 = _taggedTemplateLiteral(["fat loot token"]))), currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject64$1 || (_templateObject64$1 = _taggedTemplateLiteral(["Boris's key, Jarlsberg's key, Sneaky Pete's key, Boris's ring, Jarlsberg's earring, Sneaky Pete's breath spray, potato sprout, sewing kit, Spellbook: Singer's Faithful Ocelot, Spellbook: Drescher's Annoying Noise, Spellbook: Walberg's Dim Bulb, dried gelatinous cube"])))))], [(0, libram_1.$item)(_templateObject65$1 || (_templateObject65$1 = _taggedTemplateLiteral(["inflammable leaf"]))), inflammableLeafCurrency()], [(0, libram_1.$item)(_templateObject66$1 || (_templateObject66$1 = _taggedTemplateLiteral(["envelope full of Meat"]))), () => 50_000], [(0, libram_1.$item)(_templateObject67$1 || (_templateObject67$1 = _taggedTemplateLiteral(["crystalline cheer"]))), currency.apply(void 0, _toConsumableArray((0, libram_1.$items)(_templateObject68$1 || (_templateObject68$1 = _taggedTemplateLiteral(["stale cheer wine, stale Cheer-E-Os, Cheer-Up soda, cheer-o-gram, cheerful antler hat, cheerful Crimbo sweater, cheerful pajama pants"])))))], [(0, libram_1.$item)(_templateObject69$1 || (_templateObject69$1 = _taggedTemplateLiteral(["knucklebone"]))), () => value((0, libram_1.$item)(_templateObject70$1 || (_templateObject70$1 = _taggedTemplateLiteral(["tiny plastic sword"])))) / 2927]], _toConsumableArray(kolmafia_1.Familiar.all().map(f => (0, kolmafia_1.familiarEquipment)(f)).filter(i => i !== libram_1.$item.none && i.tradeable && i.discardable).map(i => [i, () => Math.min(saleValue(i, false), value((0, libram_1.$item)(_templateObject71$1 || (_templateObject71$1 = _taggedTemplateLiteral(["box of Familiar Jacks"])))))])), _toConsumableArray(inputValues)));
     var exclusions = new Set([// For tradeable items which can be "consumed" infinitely
@@ -24157,7 +24168,7 @@ var guzzlr = {};
 
 var lib$1 = {};
 
-var _templateObject$h, _templateObject2$e, _templateObject3$c, _templateObject4$b, _templateObject5$b, _templateObject6$a, _templateObject7$8, _templateObject8$8, _templateObject9$8, _templateObject0$8, _templateObject1$8, _templateObject10$8, _templateObject11$7, _templateObject12$7, _templateObject13$7, _templateObject14$6, _templateObject15$6, _templateObject16$6, _templateObject17$6, _templateObject18$5, _templateObject19$5, _templateObject20$5, _templateObject21$3, _templateObject22$3, _templateObject23$2, _templateObject24$2, _templateObject25$2, _templateObject26$2, _templateObject27$2, _templateObject28$2, _templateObject29$2, _templateObject30$2, _templateObject31$2, _templateObject32$2, _templateObject33$2, _templateObject34$2, _templateObject35$2, _templateObject36$2, _templateObject37$2, _templateObject38$2, _templateObject39$2, _templateObject40$2, _templateObject41$1, _templateObject42$1, _templateObject43$1, _templateObject44$1, _templateObject45$1, _templateObject46$1, _templateObject47$1, _templateObject48$1;
+var _templateObject$h, _templateObject2$e, _templateObject3$d, _templateObject4$b, _templateObject5$b, _templateObject6$a, _templateObject7$8, _templateObject8$8, _templateObject9$8, _templateObject0$8, _templateObject1$8, _templateObject10$8, _templateObject11$7, _templateObject12$7, _templateObject13$7, _templateObject14$6, _templateObject15$6, _templateObject16$5, _templateObject17$5, _templateObject18$5, _templateObject19$5, _templateObject20$5, _templateObject21$3, _templateObject22$3, _templateObject23$2, _templateObject24$2, _templateObject25$2, _templateObject26$2, _templateObject27$2, _templateObject28$2, _templateObject29$2, _templateObject30$2, _templateObject31$2, _templateObject32$2, _templateObject33$2, _templateObject34$2, _templateObject35$2, _templateObject36$2, _templateObject37$2, _templateObject38$2, _templateObject39$2, _templateObject40$2, _templateObject41$1, _templateObject42$1, _templateObject43$1, _templateObject44$1, _templateObject45$1, _templateObject46$1, _templateObject47$1, _templateObject48$1;
 var hasRequiredLib$1;
 function requireLib$1() {
   if (hasRequiredLib$1) return lib$1;
@@ -24194,7 +24205,7 @@ function requireLib$1() {
       noInv: false
     }, {
       zone: "Wormwood",
-      available: () => (0, libram_1.have)((0, libram_1.$effect)(_templateObject3$c || (_templateObject3$c = _taggedTemplateLiteral(["Absinthe-Minded"])))),
+      available: () => (0, libram_1.have)((0, libram_1.$effect)(_templateObject3$d || (_templateObject3$d = _taggedTemplateLiteral(["Absinthe-Minded"])))),
       unlocker: (0, libram_1.$item)(_templateObject4$b || (_templateObject4$b = _taggedTemplateLiteral(["tiny bottle of absinthe"]))),
       noInv: false
     }, {
@@ -24244,7 +24255,7 @@ function requireLib$1() {
       }
       if (!goingPostalSafe() || !(0, libram_1.have)((0, libram_1.$item)(_templateObject13$7 || (_templateObject13$7 = _taggedTemplateLiteral(["Hey Deze map"])))) && !(0, libram_1.have)((0, libram_1.$item)(_templateObject14$6 || (_templateObject14$6 = _taggedTemplateLiteral(["Hey Deze nuts"])))) && !(0, libram_1.haveInCampground)((0, libram_1.$item)(_templateObject15$6 || (_templateObject15$6 = _taggedTemplateLiteral(["pagoda plans"])))) // Quest not tracked, but these three checks work
       ) {
-        skiplist.push((0, libram_1.$location)(_templateObject16$6 || (_templateObject16$6 = _taggedTemplateLiteral(["Pandamonium Slums"]))));
+        skiplist.push((0, libram_1.$location)(_templateObject16$5 || (_templateObject16$5 = _taggedTemplateLiteral(["Pandamonium Slums"]))));
       }
       var canUnlock = includeUnlockable && exports.UnlockableZones.some(z => loc.zone === z.zone && (z.available() || !z.noInv));
       return !underwater(loc) && !skiplist.includes(loc) && ((0, kolmafia_1.canAdventure)(loc) || canUnlock);
@@ -24256,7 +24267,7 @@ function requireLib$1() {
       if ((0, kolmafia_1.buy)(1, unlockableZone.unlocker, value) === 0) return false;
       return (0, kolmafia_1.use)(unlockableZone.unlocker);
     }
-    var backupSkiplist = (0, libram_1.$locations)(_templateObject17$6 || (_templateObject17$6 = _taggedTemplateLiteral(["The Mansion of Dr. Weirdeaux, Professor Jacking's Huge-A-Ma-Tron, Your Mushroom Garden"])));
+    var backupSkiplist = (0, libram_1.$locations)(_templateObject17$5 || (_templateObject17$5 = _taggedTemplateLiteral(["The Mansion of Dr. Weirdeaux, Professor Jacking's Huge-A-Ma-Tron, Your Mushroom Garden"])));
     // These are locations where all non-combats have skips or lead to a combat.
     var backupSafelist = (0, libram_1.$locations)(_templateObject18$5 || (_templateObject18$5 = _taggedTemplateLiteral(["The Haunted Gallery, The Haunted Ballroom, The Haunted Library, The Penultimate Fantasy Airship, Cobb's Knob Barracks, The Castle in the Clouds in the Sky (Basement), The Castle in the Clouds in the Sky (Ground Floor), The Castle in the Clouds in the Sky (Top Floor), The Haiku Dungeon, Twin Peak, A Mob of Zeppelin Protesters, The Upper Chamber, The Orcish Frat House"])));
     // These are locations where all non-combats are skippable
@@ -24583,7 +24594,7 @@ function requireGuzzlr() {
 
 var lovebugs = {};
 
-var _templateObject$f, _templateObject2$d, _templateObject3$b, _templateObject4$a, _templateObject5$a, _templateObject6$9;
+var _templateObject$f, _templateObject2$d, _templateObject3$c, _templateObject4$a, _templateObject5$a, _templateObject6$9;
 var hasRequiredLovebugs;
 function requireLovebugs() {
   if (hasRequiredLovebugs) return lovebugs;
@@ -24602,7 +24613,7 @@ function requireLovebugs() {
     currency: (0, libram_1.$item)(_templateObject2$d || (_templateObject2$d = _taggedTemplateLiteral(["Wal-Mart gift certificate"])))
   }, {
     element: "sleaze",
-    location: (0, libram_1.$location)(_templateObject3$b || (_templateObject3$b = _taggedTemplateLiteral(["The Fun-Guy Mansion"]))),
+    location: (0, libram_1.$location)(_templateObject3$c || (_templateObject3$c = _taggedTemplateLiteral(["The Fun-Guy Mansion"]))),
     currency: (0, libram_1.$item)(_templateObject4$a || (_templateObject4$a = _taggedTemplateLiteral(["Beach Buck"])))
   }, {
     element: "spooky",
@@ -24671,7 +24682,7 @@ function requireItemdrop() {
 
 var eightbit = {};
 
-var _templateObject$d, _templateObject2$c, _templateObject3$a, _templateObject4$9, _templateObject5$9, _templateObject6$8;
+var _templateObject$d, _templateObject2$c, _templateObject3$b, _templateObject4$9, _templateObject5$9, _templateObject6$8;
 var hasRequiredEightbit;
 function requireEightbit() {
   if (hasRequiredEightbit) return eightbit;
@@ -24692,7 +24703,7 @@ function requireEightbit() {
     var locationColor = {
       black: (0, libram_1.$location)(_templateObject$d || (_templateObject$d = _taggedTemplateLiteral(["Vanya's Castle"]))),
       blue: (0, libram_1.$location)(_templateObject2$c || (_templateObject2$c = _taggedTemplateLiteral(["Megalo-City"]))),
-      green: (0, libram_1.$location)(_templateObject3$a || (_templateObject3$a = _taggedTemplateLiteral(["Hero's Field"]))),
+      green: (0, libram_1.$location)(_templateObject3$b || (_templateObject3$b = _taggedTemplateLiteral(["Hero's Field"]))),
       red: (0, libram_1.$location)(_templateObject4$9 || (_templateObject4$9 = _taggedTemplateLiteral(["The Fungus Plains"])))
     };
     function value(color, options) {
@@ -24711,7 +24722,7 @@ function requireEightbit() {
 
 var gingerbreadcity = {};
 
-var _templateObject$c, _templateObject2$b, _templateObject3$9;
+var _templateObject$c, _templateObject2$b, _templateObject3$a;
 var hasRequiredGingerbreadcity;
 function requireGingerbreadcity() {
   if (hasRequiredGingerbreadcity) return gingerbreadcity;
@@ -24728,7 +24739,7 @@ function requireGingerbreadcity() {
       var turnsUntilNextNC = libram_1.GingerBread.minutesToNoon() > 0 ? libram_1.GingerBread.minutesToNoon() : libram_1.GingerBread.minutesToMidnight();
       return [new lib_1.WandererTarget("Gingerbread Minutes", (0, libram_1.$location)(_templateObject2$b || (_templateObject2$b = _taggedTemplateLiteral(["Gingerbread Civic Center"]))),
       // 50 value is arbitrary until we have proper valuation of our options from Midnight and Noons NCs
-      (0, lib_1.wandererTurnsAvailableToday)(options, (0, libram_1.$location)(_templateObject3$9 || (_templateObject3$9 = _taggedTemplateLiteral(["Gingerbread Civic Center"]))), false) > turnsUntilNextNC ? 50 : 0)];
+      (0, lib_1.wandererTurnsAvailableToday)(options, (0, libram_1.$location)(_templateObject3$a || (_templateObject3$a = _taggedTemplateLiteral(["Gingerbread Civic Center"]))), false) > turnsUntilNextNC ? 50 : 0)];
     }
     return [];
   }
@@ -24817,7 +24828,7 @@ function requireBofa() {
   return bofa;
 }
 
-var _templateObject$a, _templateObject2$a, _templateObject3$8, _templateObject4$8, _templateObject5$8, _templateObject6$7, _templateObject7$7, _templateObject8$7, _templateObject9$7, _templateObject0$7, _templateObject1$7, _templateObject10$7, _templateObject11$6, _templateObject12$6, _templateObject13$6, _templateObject14$5, _templateObject15$5, _templateObject16$5, _templateObject17$5, _templateObject18$4, _templateObject19$4, _templateObject20$4, _templateObject21$2, _templateObject22$2, _templateObject23$1, _templateObject24$1, _templateObject25$1, _templateObject26$1, _templateObject27$1, _templateObject28$1, _templateObject29$1, _templateObject30$1, _templateObject31$1, _templateObject32$1, _templateObject33$1, _templateObject34$1, _templateObject35$1, _templateObject36$1, _templateObject37$1, _templateObject38$1, _templateObject39$1, _templateObject40$1;
+var _templateObject$a, _templateObject2$a, _templateObject3$9, _templateObject4$8, _templateObject5$8, _templateObject6$7, _templateObject7$7, _templateObject8$7, _templateObject9$7, _templateObject0$7, _templateObject1$7, _templateObject10$7, _templateObject11$6, _templateObject12$6, _templateObject13$6, _templateObject14$5, _templateObject15$5, _templateObject16$4, _templateObject17$4, _templateObject18$4, _templateObject19$4, _templateObject20$4, _templateObject21$2, _templateObject22$2, _templateObject23$1, _templateObject24$1, _templateObject25$1, _templateObject26$1, _templateObject27$1, _templateObject28$1, _templateObject29$1, _templateObject30$1, _templateObject31$1, _templateObject32$1, _templateObject33$1, _templateObject34$1, _templateObject35$1, _templateObject36$1, _templateObject37$1, _templateObject38$1, _templateObject39$1, _templateObject40$1;
 var hasRequiredWanderer;
 function requireWanderer() {
   if (hasRequiredWanderer) return wanderer;
@@ -24956,7 +24967,7 @@ function requireWanderer() {
       return {
         location: candidate.location,
         peridotMonster: candidate.peridotMonster,
-        familiar: candidate.targets.find(t => t.name.includes("Cookbookbat")) ? (0, libram_1.$familiar)(_templateObject2$a || (_templateObject2$a = _taggedTemplateLiteral(["Cookbookbat"]))) : (0, libram_1.$familiar)(_templateObject3$8 || (_templateObject3$8 = _taggedTemplateLiteral(["none"])))
+        familiar: candidate.targets.find(t => t.name.includes("Cookbookbat")) ? (0, libram_1.$familiar)(_templateObject2$a || (_templateObject2$a = _taggedTemplateLiteral(["Cookbookbat"]))) : (0, libram_1.$familiar)(_templateObject3$9 || (_templateObject3$9 = _taggedTemplateLiteral(["none"])))
       };
     }
   }
@@ -25003,9 +25014,9 @@ function requireWanderer() {
         858: 2
       }], [(0, libram_1.$location)(_templateObject15$5 || (_templateObject15$5 = _taggedTemplateLiteral(["A-Boo Peak"]))), {
         1430: 2
-      }], [(0, libram_1.$location)(_templateObject16$5 || (_templateObject16$5 = _taggedTemplateLiteral(["Sloppy Seconds Diner"]))), {
+      }], [(0, libram_1.$location)(_templateObject16$4 || (_templateObject16$4 = _taggedTemplateLiteral(["Sloppy Seconds Diner"]))), {
         919: 6
-      }], [(0, libram_1.$location)(_templateObject17$5 || (_templateObject17$5 = _taggedTemplateLiteral(["VYKEA"]))), {
+      }], [(0, libram_1.$location)(_templateObject17$4 || (_templateObject17$4 = _taggedTemplateLiteral(["VYKEA"]))), {
         1115: 6
       }], [(0, libram_1.$location)(_templateObject18$4 || (_templateObject18$4 = _taggedTemplateLiteral(["The Ice Hotel"]))), (options, valueOfTurn) => {
         var valueOfCertificates = (0, libram_1.get)("_iceHotelRoomsRaided") ? 0 : options.itemValue((0, libram_1.$item)(_templateObject19$4 || (_templateObject19$4 = _taggedTemplateLiteral(["Wal-Mart gift certificate"])))) * 3;
@@ -25181,7 +25192,7 @@ function requireLib() {
   return lib;
 }
 
-var _templateObject$9, _templateObject2$9, _templateObject3$7, _templateObject4$7, _templateObject5$7;
+var _templateObject$9, _templateObject2$9, _templateObject3$8, _templateObject4$7, _templateObject5$7;
 var hasRequiredAutumnaton;
 function requireAutumnaton() {
   if (hasRequiredAutumnaton) return autumnaton;
@@ -25232,7 +25243,7 @@ function requireAutumnaton() {
     }, {
       key: "averageValue",
       value: function averageValue(location, acuityOverride, slotOverride) {
-        if (location === (0, libram_1.$location)(_templateObject3$7 || (_templateObject3$7 = _taggedTemplateLiteral(["Shadow Rift"])))) {
+        if (location === (0, libram_1.$location)(_templateObject3$8 || (_templateObject3$8 = _taggedTemplateLiteral(["Shadow Rift"])))) {
           (0, kolmafia_1.setLocation)((0, libram_1.$location)(_templateObject4$7 || (_templateObject4$7 = _taggedTemplateLiteral(["Shadow Rift"]))));
         } // FIXME This bypasses a mafia bug where ingress is not updated
         var monsters = (0, lib_2.availableMonsters)(location);
@@ -25490,7 +25501,7 @@ function requireDist() {
 
 var distExports = requireDist();
 
-var _templateObject$8, _templateObject2$8, _templateObject3$6, _templateObject4$6, _templateObject5$6, _templateObject6$6, _templateObject7$6, _templateObject8$6, _templateObject9$6, _templateObject0$6, _templateObject1$6, _templateObject10$6, _templateObject11$5, _templateObject12$5, _templateObject13$5, _templateObject14$4, _templateObject15$4, _templateObject16$4, _templateObject17$4, _templateObject18$3, _templateObject19$3, _templateObject20$3, _templateObject21$1, _templateObject22$1, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71;
+var _templateObject$8, _templateObject2$8, _templateObject3$7, _templateObject4$6, _templateObject5$6, _templateObject6$6, _templateObject7$6, _templateObject8$6, _templateObject9$6, _templateObject0$6, _templateObject1$6, _templateObject10$6, _templateObject11$5, _templateObject12$5, _templateObject13$5, _templateObject14$4, _templateObject15$4, _templateObject16$3, _templateObject17$3, _templateObject18$3, _templateObject19$3, _templateObject20$3, _templateObject21$1, _templateObject22$1, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71;
 
 /**
  * Return true if we can possibly fuel the asdon to the required amount.
@@ -25501,7 +25512,7 @@ function asdonFualable(amount) {
   if (amount <= require$$0.getFuel()) return true;
 
   // Use wad of dough with the bugbear outfit
-  if (have$1a($item(_templateObject2$8 || (_templateObject2$8 = _taggedTemplateLiteral(["bugbear bungguard"])))) && have$1a($item(_templateObject3$6 || (_templateObject3$6 = _taggedTemplateLiteral(["bugbear beanie"]))))) {
+  if (have$1a($item(_templateObject2$8 || (_templateObject2$8 = _taggedTemplateLiteral(["bugbear bungguard"])))) && have$1a($item(_templateObject3$7 || (_templateObject3$7 = _taggedTemplateLiteral(["bugbear beanie"]))))) {
     return require$$0.myMeat() >= (amount - require$$0.getFuel()) * 24 + 1000; // Save 1k meat as buffer
   }
 
@@ -25533,7 +25544,7 @@ function restorerItemSettings() {
     mpAutoRecoveryItems: Array.from(new Set([].concat(_toConsumableArray(strip(get$2("mpAutoRecoveryItems"))), ["doc galaktik's invigorating tonic"]))).join(";")
   };
 }
-var improvedShowerSkills = new Map([[$effect(_templateObject1$6 || (_templateObject1$6 = _taggedTemplateLiteral(["Slippery as a Seal"]))), $skill(_templateObject10$6 || (_templateObject10$6 = _taggedTemplateLiteral(["Seal Clubbing Frenzy"])))], [$effect(_templateObject11$5 || (_templateObject11$5 = _taggedTemplateLiteral(["Strength of the Tortoise"]))), $skill(_templateObject12$5 || (_templateObject12$5 = _taggedTemplateLiteral(["Patience of the Tortoise"])))], [$effect(_templateObject13$5 || (_templateObject13$5 = _taggedTemplateLiteral(["Thoughtful Empathy"]))), $skill(_templateObject14$4 || (_templateObject14$4 = _taggedTemplateLiteral(["Empathy of the Newt"])))], [$effect(_templateObject15$4 || (_templateObject15$4 = _taggedTemplateLiteral(["Tubes of Universal Meat"]))), $skill(_templateObject16$4 || (_templateObject16$4 = _taggedTemplateLiteral(["Manicotti Meditation"])))], [$effect(_templateObject17$4 || (_templateObject17$4 = _taggedTemplateLiteral(["Leash of Linguini"]))), $skill(_templateObject18$3 || (_templateObject18$3 = _taggedTemplateLiteral(["Leash of Linguini"])))], [$effect(_templateObject19$3 || (_templateObject19$3 = _taggedTemplateLiteral(["Lubricating Sauce"]))), $skill(_templateObject20$3 || (_templateObject20$3 = _taggedTemplateLiteral(["Sauce Contemplation"])))], [$effect(_templateObject21$1 || (_templateObject21$1 = _taggedTemplateLiteral(["Simmering"]))), $skill(_templateObject22$1 || (_templateObject22$1 = _taggedTemplateLiteral(["Simmer"])))], [$effect(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Disco over Matter"]))), $skill(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Disco Aerobics"])))], [$effect(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Mariachi Moisture"]))), $skill(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["Moxie of the Mariachi"])))]]);
+var improvedShowerSkills = new Map([[$effect(_templateObject1$6 || (_templateObject1$6 = _taggedTemplateLiteral(["Slippery as a Seal"]))), $skill(_templateObject10$6 || (_templateObject10$6 = _taggedTemplateLiteral(["Seal Clubbing Frenzy"])))], [$effect(_templateObject11$5 || (_templateObject11$5 = _taggedTemplateLiteral(["Strength of the Tortoise"]))), $skill(_templateObject12$5 || (_templateObject12$5 = _taggedTemplateLiteral(["Patience of the Tortoise"])))], [$effect(_templateObject13$5 || (_templateObject13$5 = _taggedTemplateLiteral(["Thoughtful Empathy"]))), $skill(_templateObject14$4 || (_templateObject14$4 = _taggedTemplateLiteral(["Empathy of the Newt"])))], [$effect(_templateObject15$4 || (_templateObject15$4 = _taggedTemplateLiteral(["Tubes of Universal Meat"]))), $skill(_templateObject16$3 || (_templateObject16$3 = _taggedTemplateLiteral(["Manicotti Meditation"])))], [$effect(_templateObject17$3 || (_templateObject17$3 = _taggedTemplateLiteral(["Leash of Linguini"]))), $skill(_templateObject18$3 || (_templateObject18$3 = _taggedTemplateLiteral(["Leash of Linguini"])))], [$effect(_templateObject19$3 || (_templateObject19$3 = _taggedTemplateLiteral(["Lubricating Sauce"]))), $skill(_templateObject20$3 || (_templateObject20$3 = _taggedTemplateLiteral(["Sauce Contemplation"])))], [$effect(_templateObject21$1 || (_templateObject21$1 = _taggedTemplateLiteral(["Simmering"]))), $skill(_templateObject22$1 || (_templateObject22$1 = _taggedTemplateLiteral(["Simmer"])))], [$effect(_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["Disco over Matter"]))), $skill(_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["Disco Aerobics"])))], [$effect(_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["Mariachi Moisture"]))), $skill(_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["Moxie of the Mariachi"])))]]);
 // Casts whose "cast N Skill ^ Effect" default only yields the effect with this item
 // equipped. mafia equips it itself but would mall-buy a missing one, so canAcquireEffect
 // gates on ownership; tryAcquiringEffect's shower-shield handler does its own swap.
@@ -25722,7 +25733,7 @@ function handlePostCombatBeatenUp(context, cleaverQueueBefore) {
   require$$0.print("pearlo: cured Beaten Up from the June cleaver's Poetic Justice (+5 adventures).", "blue");
 }
 
-var _templateObject$7, _templateObject2$7, _templateObject3$5, _templateObject4$5, _templateObject5$5, _templateObject6$5, _templateObject7$5, _templateObject8$5, _templateObject9$5, _templateObject0$5, _templateObject1$5, _templateObject10$5, _templateObject11$4, _templateObject12$4, _templateObject13$4, _templateObject14$3, _templateObject15$3, _templateObject16$3, _templateObject17$3, _templateObject18$2, _templateObject19$2, _templateObject20$2;
+var _templateObject$7, _templateObject2$7, _templateObject3$6, _templateObject4$5, _templateObject5$5, _templateObject6$5, _templateObject7$5, _templateObject8$5, _templateObject9$5, _templateObject0$5, _templateObject1$5, _templateObject10$5, _templateObject11$4, _templateObject12$4, _templateObject13$4, _templateObject14$3, _templateObject15$3, _templateObject16$2, _templateObject17$2, _templateObject18$2, _templateObject19$2, _templateObject20$2;
 // Familiar breathing that leaves the famequip slot free (docs/sea-reference.md §5).
 var FAMILIAR_AIR_EFFECTS = $effects(_templateObject$7 || (_templateObject$7 = _taggedTemplateLiteral(["Driving Waterproofly, Wet Willied"])));
 function familiarBreathesFree() {
@@ -25736,7 +25747,7 @@ var BREATHING_FAMEQUIP = $items(_templateObject2$7 || (_templateObject2$7 = _tag
 // Space Jellyfish: 100% start-of-combat delevel + Trench/eel utilities.
 // Barrrnacle / Emo Squid: start-of-combat delevelers.
 // (Magic Dragonfish's spell% was evaluated and ruled out — not impactful enough; user 2026-08-07.)
-var UTILITY_BREATHERS = [$familiar(_templateObject3$5 || (_templateObject3$5 = _taggedTemplateLiteral(["Space Jellyfish"]))), $familiar(_templateObject4$5 || (_templateObject4$5 = _taggedTemplateLiteral(["Barrrnacle"]))), $familiar(_templateObject5$5 || (_templateObject5$5 = _taggedTemplateLiteral(["Emo Squid"])))];
+var UTILITY_BREATHERS = [$familiar(_templateObject3$6 || (_templateObject3$6 = _taggedTemplateLiteral(["Space Jellyfish"]))), $familiar(_templateObject4$5 || (_templateObject4$5 = _taggedTemplateLiteral(["Barrrnacle"]))), $familiar(_templateObject5$5 || (_templateObject5$5 = _taggedTemplateLiteral(["Emo Squid"])))];
 
 // Cooler Yeti (famid 324): +1 Cold Resistance per 11 lbs, item drops, start-of-combat
 // delevel (wiki Data:Cooler Yeti, fetched 2026-08-07). Newer than our typings — resolve
@@ -25789,12 +25800,12 @@ function resFamiliarSwitches(spec) {
  */
 function pickUtilityFamiliar(secondLantern) {
   if (familiarBreathesFree()) {
-    for (var _i = 0, _arr = [$familiar(_templateObject15$3 || (_templateObject15$3 = _taggedTemplateLiteral(["Left-Hand Man"]))), $familiar(_templateObject16$3 || (_templateObject16$3 = _taggedTemplateLiteral(["Disembodied Hand"])))]; _i < _arr.length; _i++) {
+    for (var _i = 0, _arr = [$familiar(_templateObject15$3 || (_templateObject15$3 = _taggedTemplateLiteral(["Left-Hand Man"]))), $familiar(_templateObject16$2 || (_templateObject16$2 = _taggedTemplateLiteral(["Disembodied Hand"])))]; _i < _arr.length; _i++) {
       var hand = _arr[_i];
       if (!have$1a(hand)) continue;
       // Left-Hand Man takes the second lantern when we have one; otherwise leave the
       // slot open for the maximizer to fill.
-      var holds = hand === $familiar(_templateObject17$3 || (_templateObject17$3 = _taggedTemplateLiteral(["Left-Hand Man"]))) ? secondLantern : undefined;
+      var holds = hand === $familiar(_templateObject17$2 || (_templateObject17$2 = _taggedTemplateLiteral(["Left-Hand Man"]))) ? secondLantern : undefined;
       return {
         familiar: hand,
         famequip: holds
@@ -25828,7 +25839,7 @@ function pickUtilityFamiliar(secondLantern) {
   return {};
 }
 
-var _templateObject$6, _templateObject2$6, _templateObject3$4, _templateObject4$4, _templateObject5$4, _templateObject6$4, _templateObject7$4, _templateObject8$4, _templateObject9$4, _templateObject0$4, _templateObject1$4, _templateObject10$4, _templateObject11$3, _templateObject12$3, _templateObject13$3;
+var _templateObject$6, _templateObject2$6, _templateObject3$5, _templateObject4$4, _templateObject5$4, _templateObject6$4, _templateObject7$4, _templateObject8$4, _templateObject9$4, _templateObject0$4, _templateObject1$4, _templateObject10$4, _templateObject11$3, _templateObject12$3, _templateObject13$3;
 // Lucky!-based Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md).
 // The Haggling — The Brinier Deepers' lucky noncombat (wiki-verified 2026-08-08) —
 // grants 20 turns of Fishy. Lucky! is an intrinsic, consumed by the next lucky-capable
@@ -25842,7 +25853,7 @@ var FISHY_PIPE_TURNS = 10;
 var CLOVER = $item(_templateObject$6 || (_templateObject$6 = _taggedTemplateLiteral(["11-leaf clover"])));
 var AUG_2 = $skill(_templateObject2$6 || (_templateObject2$6 = _taggedTemplateLiteral(["Aug. 2nd: Find an Eleven-Leaf Clover Day"])));
 var HERMIT_CLOVER_LIMIT = 3; // wiki The Hermitage: "(Limit 3 per day)", pref _cloversPurchased
-var SAXOPHONE = $item(_templateObject3$4 || (_templateObject3$4 = _taggedTemplateLiteral(["Apriling band saxophone"]))); // 3 plays/day, each grants Lucky!
+var SAXOPHONE = $item(_templateObject3$5 || (_templateObject3$5 = _taggedTemplateLiteral(["Apriling band saxophone"]))); // 3 plays/day, each grants Lucky!
 var HEARTSTONE = $item(_templateObject4$4 || (_templateObject4$4 = _taggedTemplateLiteral(["Heartstone"])));
 var HEARTSTONE_LUCK = $skill(_templateObject5$4 || (_templateObject5$4 = _taggedTemplateLiteral(["Heartstone: %luck"]))); // 1/day, needs Heartstone equipped
 
@@ -25861,14 +25872,16 @@ function hermitCloverCost() {
   return require$$0.npcPrice($item(_templateObject6$4 || (_templateObject6$4 = _taggedTemplateLiteral(["chewing gum on a string"]))));
 }
 /**
- * Would a mall clover pay for itself? Priced on the same terms costZone uses for a
- * refresh: the trip itself costs a turn, and the block's last turn carries the next
- * trip, so a refresh covers at most HAGGLING_FISHY_TURNS - 1 fights and nets one fewer
- * turn than it covers.
+ * Turns a Lucky! refresh nets: it covers at most HAGGLING_FISHY_TURNS - 1 fights (the
+ * block's last turn carries the next trip) and the trip itself costs one.
  */
+function refreshNetTurns(remainingFights) {
+  return Math.max(0, Math.min(HAGGLING_FISHY_TURNS - 1, remainingFights) - 1);
+}
+
+/** Would a mall clover pay for itself, on the same terms the profit model prices one? */
 function mallWorthIt(remainingFights, price) {
-  var covered = Math.min(HAGGLING_FISHY_TURNS - 1, remainingFights);
-  return Math.max(0, covered - 1) * args.major.voa >= price;
+  return refreshNetTurns(remainingFights) * args.major.voa >= price;
 }
 
 // Cascade order fixed by user decision (2026-08-12): Lucky!-dedicated daily sources
@@ -25996,7 +26009,7 @@ function luckySourceReport() {
   return [" lucky fishy refresh (The Haggling: +".concat(HAGGLING_FISHY_TURNS, " Fishy per trip):"), "  Apriling band saxophone: ".concat(saxophone), "  Heartstone: LUCK: ".concat(heartstone), "  Aug. 2nd scepter: ".concat(scepter), "  11-leaf clovers in inventory: ".concat(require$$0.itemAmount(CLOVER)), "  pill keeper: ".concat(pillkeeper), "  hermit clovers left today: ".concat(Math.max(0, HERMIT_CLOVER_LIMIT - get$2("_cloversPurchased"))), "  mall clovers: ".concat(mall)];
 }
 
-var _templateObject$5, _templateObject2$5, _templateObject3$3, _templateObject4$3, _templateObject5$3, _templateObject6$3, _templateObject7$3, _templateObject8$3, _templateObject9$3, _templateObject0$3, _templateObject1$3, _templateObject10$3, _templateObject11$2, _templateObject12$2, _templateObject13$2, _templateObject14$2, _templateObject15$2, _templateObject16$2, _templateObject17$2, _templateObject18$1, _templateObject19$1, _templateObject20$1, _templateObject21, _templateObject22;
+var _templateObject$5, _templateObject2$5, _templateObject3$4, _templateObject4$3, _templateObject5$3, _templateObject6$3, _templateObject7$3, _templateObject8$3, _templateObject9$3, _templateObject0$3, _templateObject1$3, _templateObject10$3, _templateObject11$2, _templateObject12$2, _templateObject13$2, _templateObject14$2, _templateObject15$2, _templateObject16$1, _templateObject17$1, _templateObject18$1, _templateObject19$1, _templateObject20$1, _templateObject21, _templateObject22;
 
 // Every list below is wiki-verified (effect pages fetched 2026-08-07); the original
 // usefulEffects list mixed genuine resistance with stat/HP/familiar buffs — sorted here.
@@ -26012,7 +26025,7 @@ var BLOCK_EFFECTS = $effects(_templateObject2$5 || (_templateObject2$5 = _tagged
 
 // Partial resistance: cold+sleaze only. Scarysauce +2, Scariersauce +6 (Scarysauce cast
 // while wielding a velour viscometer); they stack (+8 together on top of the all-element set).
-var PARTIAL_RES_EFFECTS = [[$effect(_templateObject3$3 || (_templateObject3$3 = _taggedTemplateLiteral(["Scarysauce"]))), $elements(_templateObject4$3 || (_templateObject4$3 = _taggedTemplateLiteral(["cold, sleaze"])))], [$effect(_templateObject5$3 || (_templateObject5$3 = _taggedTemplateLiteral(["Scariersauce"]))), $elements(_templateObject6$3 || (_templateObject6$3 = _taggedTemplateLiteral(["cold, sleaze"])))]];
+var PARTIAL_RES_EFFECTS = [[$effect(_templateObject3$4 || (_templateObject3$4 = _taggedTemplateLiteral(["Scarysauce"]))), $elements(_templateObject4$3 || (_templateObject4$3 = _taggedTemplateLiteral(["cold, sleaze"])))], [$effect(_templateObject5$3 || (_templateObject5$3 = _taggedTemplateLiteral(["Scariersauce"]))), $elements(_templateObject6$3 || (_templateObject6$3 = _taggedTemplateLiteral(["cold, sleaze"])))]];
 
 // Stats: Mysticality % feeds Saucegeyser damage; Moxie % feeds dodge.
 var STAT_EFFECTS = $effects(_templateObject7$3 || (_templateObject7$3 = _taggedTemplateLiteral(["Big, Stevedave's Shanty of Superiority, Feeling Excited"])));
@@ -26091,13 +26104,13 @@ function topUpFamiliarWeight(spec, worthIt, turnsFor) {
       var ef = require$$0.effectModifier(it, "Effect");
       if (ef === $effect.none || have$1a(ef) || require$$0.itemAmount(it) === 0) continue;
       var duration = Math.max(1, require$$0.numericModifier(it, "Effect Duration"));
-      var _copies = Math.min(require$$0.itemAmount(it), Math.ceil(need / duration));
-      if (_copies <= 0) continue;
+      var copies = Math.min(require$$0.itemAmount(it), Math.ceil(need / duration));
+      if (copies <= 0) continue;
       planned.push({
         item: it,
-        copies: _copies,
+        copies,
         pounds: require$$0.numericModifier(ef, "Familiar Weight"),
-        value: _copies * getSaleValue(it)
+        value: copies * getSaleValue(it)
       });
     }
   } catch (err) {
@@ -26108,29 +26121,59 @@ function topUpFamiliarWeight(spec, worthIt, turnsFor) {
   if (planned.length === 0) return;
 
   // What the extra pounds are worth is the familiar's own step function, so ask it.
-  var equip = require$$0.equippedItem($slot(_templateObject16$2 || (_templateObject16$2 = _taggedTemplateLiteral(["familiar"]))));
+  var equip = require$$0.equippedItem($slot(_templateObject16$1 || (_templateObject16$1 = _taggedTemplateLiteral(["familiar"]))));
   var weight = require$$0.familiarWeight(familiar) + require$$0.weightAdjustment();
-  var pounds = sum(planned, p => p.pounds);
-  var gain = require$$0.numericModifier(familiar, resName, weight + pounds, equip) - require$$0.numericModifier(familiar, resName, weight, equip);
-  if (gain <= 0) return;
-  if (!worthIt(startRes, gain, sum(planned, p => p.value))) return;
-  for (var _i = 0, _planned = planned; _i < _planned.length; _i++) {
-    var _planned$_i = _planned[_i],
-      item = _planned$_i.item,
-      copies = _planned$_i.copies;
-    require$$0.use(item, copies);
+  var resAt = pounds => require$$0.numericModifier(familiar, resName, weight + pounds, equip);
+  var base = resAt(0);
+
+  // Weigh the combinations, not just the whole set: these familiars gain resistance in
+  // steps, so one potion that crosses a step must not be vetoed by another that cannot.
+  // Biggest gain first, so the best step we can afford is the one taken.
+  var subsets = Array.from({
+    length: 1 << planned.length
+  }, (_, mask) => planned.filter((_p, i) => mask & 1 << i)).filter(subset => subset.length > 0).map(subset => ({
+    subset,
+    gain: resAt(sum(subset, p => p.pounds)) - base,
+    value: sum(subset, p => p.value)
+  })).filter(c => c.gain > 0).sort((a, b) => b.gain - a.gain || a.value - b.value);
+  var chosen = subsets.find(c => worthIt(startRes, c.gain, c.value));
+  if (chosen === undefined) return;
+  var _iterator2 = _createForOfIteratorHelper(chosen.subset),
+    _step2;
+  try {
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var _step2$value = _step2.value,
+        item = _step2$value.item,
+        _copies = _step2$value.copies;
+      require$$0.use(item, _copies);
+    }
+  } catch (err) {
+    _iterator2.e(err);
+  } finally {
+    _iterator2.f();
   }
 }
 var implementWarned = new Set();
 
 /**
- * Acquire a buff for MP, never meat (user policy): mafia otherwise buys a skill's
- * casting implement through retrieveItem. Storage is off too — while either mall or
- * storage is live mafia stops at the *default* tool and errors out instead of falling
- * back to a lesser one we own. topUpRes buys potions separately, priced against turns.
- *
- * A buff we expected to land and didn't is announced once: silently dropping the
- * spell-damage songs for want of an accordion would be a large, invisible cost.
+ * Run `action` with every buy-side source off, so buffs cost MP and never meat: mafia
+ * otherwise buys a skill's casting implement through retrieveItem, stopping at the
+ * class *default* tool rather than a lesser one already owned. Wrapped around a whole
+ * buff pass rather than each cast, since mafia logs all four preferences per change.
+ */
+function withoutBuying(action) {
+  return withProperties({
+    autoSatisfyWithMall: false,
+    autoSatisfyWithNPCs: false,
+    autoSatisfyWithCoinmasters: false,
+    autoSatisfyWithStorage: false
+  }, action);
+}
+
+/**
+ * Acquire one buff. Callers must already be inside withoutBuying. A buff we expected to
+ * land and didn't is announced once: silently dropping the spell-damage songs for want
+ * of an accordion would be a large, invisible cost.
  */
 function acquireEffectFree(ef) {
   var expected = canAcquireEffect(ef);
@@ -26138,12 +26181,7 @@ function acquireEffectFree(ef) {
   // (oil pan, Ouija board) before it will fall back to a lesser one already owned, so
   // permitting any purchase permits a five-figure one that nothing here priced. Storage
   // counts as buy-side for the same reason.
-  withProperties({
-    autoSatisfyWithMall: false,
-    autoSatisfyWithNPCs: false,
-    autoSatisfyWithCoinmasters: false,
-    autoSatisfyWithStorage: false
-  }, () => tryAcquiringEffect(ef));
+  tryAcquiringEffect(ef);
   if (expected && !have$1a(ef) && !implementWarned.has(ef)) {
     implementWarned.add(ef);
     require$$0.print("pearlo: skipped ".concat(ef, " \u2014 it needs an implement or MP we don't have, and buffs ") + "never spend meat. Acquire the implement to get this buff back.", "red");
@@ -26177,18 +26215,7 @@ function castFreeResBuffs(spec) {
   var cost = pendingCastCosts(pending);
   if (require$$0.myMp() < cost.mp) require$$0.restoreMp(Math.min(require$$0.myMaxmp(), cost.mp));
   if (require$$0.myHp() <= cost.hp) require$$0.restoreHp(require$$0.myMaxhp());
-  var _iterator2 = _createForOfIteratorHelper(pending),
-    _step2;
-  try {
-    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var ef = _step2.value;
-      acquireEffectFree(ef);
-    }
-  } catch (err) {
-    _iterator2.e(err);
-  } finally {
-    _iterator2.f();
-  }
+  withoutBuying(() => pending.forEach(acquireEffectFree));
 }
 
 /**
@@ -26210,23 +26237,12 @@ function castSharedResBuffs(selected) {
     if (require$$0.myMp() < cost.mp) require$$0.restoreMp(Math.min(require$$0.myMaxmp(), cost.mp));
     if (require$$0.myHp() <= cost.hp) require$$0.restoreHp(require$$0.myMaxhp());
   });
-  var _iterator3 = _createForOfIteratorHelper(pending),
-    _step3;
-  try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var ef = _step3.value;
-      acquireEffectFree(ef);
-    }
-  } catch (err) {
-    _iterator3.e(err);
-  } finally {
-    _iterator3.f();
-  }
+  withoutBuying(() => pending.forEach(acquireEffectFree));
 }
 
 /** Feel Peaceful is 3/day, and a spent skill still reads castable. */
 function dailyCastsLeft(ef) {
-  return ef !== $effect(_templateObject17$2 || (_templateObject17$2 = _taggedTemplateLiteral(["Feeling Peaceful"]))) || get$2("_feelPeacefulUsed", 0) < 3;
+  return ef !== $effect(_templateObject17$1 || (_templateObject17$1 = _taggedTemplateLiteral(["Feeling Peaceful"]))) || get$2("_feelPeacefulUsed", 0) < 3;
 }
 
 /**
@@ -26251,11 +26267,11 @@ function resItems(key) {
     cold: args.overrides.coldresitems
   }[key];
   var items = [];
-  var _iterator4 = _createForOfIteratorHelper(raw.split(",").map(s => s.trim()).filter(s => s !== "")),
-    _step4;
+  var _iterator3 = _createForOfIteratorHelper(raw.split(",").map(s => s.trim()).filter(s => s !== "")),
+    _step3;
   try {
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var name = _step4.value;
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var name = _step3.value;
       var it = require$$0.toItem(name);
       if (it === $item.none) {
         require$$0.print("pearlo: unknown item \"".concat(name, "\" in ").concat(key, "resitems \u2014 skipping it."), "red");
@@ -26264,9 +26280,9 @@ function resItems(key) {
       }
     }
   } catch (err) {
-    _iterator4.e(err);
+    _iterator3.e(err);
   } finally {
-    _iterator4.f();
+    _iterator3.f();
   }
   resItemCache.set(key, items);
   return items;
@@ -26396,14 +26412,14 @@ function executeResPlan(spec, plan, startRes, worthIt, turnsFor) {
   // A partial fill is progress: the copies land, `want` decays as the pearl runs, and
   // the next pass finishes it. Only a fill that returns nothing is worth remembering —
   // that is an empty mall, and retrying it every fight is the waste.
-  var _iterator5 = _createForOfIteratorHelper(viable),
-    _step5;
+  var _iterator4 = _createForOfIteratorHelper(viable),
+    _step4;
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var _step5$value = _step5.value,
-        item = _step5$value.item,
-        buyPrice = _step5$value.buyPrice,
-        want = _step5$value.want;
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      var _step4$value = _step4.value,
+        item = _step4$value.item,
+        buyPrice = _step4$value.buyPrice,
+        want = _step4$value.want;
       var short = want - require$$0.itemAmount(item);
       if (short <= 0) continue;
       if (require$$0.buy(item, short, Math.ceil(buyPrice)) === 0) {
@@ -26414,9 +26430,9 @@ function executeResPlan(spec, plan, startRes, worthIt, turnsFor) {
 
     // Drink whatever fully arrived, provided it still crosses a step on its own.
   } catch (err) {
-    _iterator5.e(err);
+    _iterator4.e(err);
   } finally {
-    _iterator5.f();
+    _iterator4.f();
   }
   var obtained = viable.filter(_ref1 => {
     var item = _ref1.item,
@@ -26435,19 +26451,19 @@ function executeResPlan(spec, plan, startRes, worthIt, turnsFor) {
   }))) {
     return;
   }
-  var _iterator6 = _createForOfIteratorHelper(obtained),
-    _step6;
+  var _iterator5 = _createForOfIteratorHelper(obtained),
+    _step5;
   try {
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-      var _step6$value = _step6.value,
-        _item = _step6$value.item,
-        _want = _step6$value.want;
+    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+      var _step5$value = _step5.value,
+        _item = _step5$value.item,
+        _want = _step5$value.want;
       require$$0.use(_item, _want);
     }
   } catch (err) {
-    _iterator6.e(err);
+    _iterator5.e(err);
   } finally {
-    _iterator6.f();
+    _iterator5.f();
   }
 }
 
@@ -26496,11 +26512,11 @@ function applicableBuffs(spec) {
 function pendingCastCosts(effects) {
   var mp = 0;
   var hp = 0;
-  var _iterator7 = _createForOfIteratorHelper(effects),
-    _step7;
+  var _iterator6 = _createForOfIteratorHelper(effects),
+    _step6;
   try {
-    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-      var ef = _step7.value;
+    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+      var ef = _step6.value;
       if (have$1a(ef) || !ef.default) continue;
       var parts = ef.default.split(" ");
       if (parts[0] !== "cast") continue;
@@ -26511,9 +26527,9 @@ function pendingCastCosts(effects) {
       hp += require$$0.hpCost(sk);
     }
   } catch (err) {
-    _iterator7.e(err);
+    _iterator6.e(err);
   } finally {
-    _iterator7.f();
+    _iterator6.f();
   }
   return {
     mp,
@@ -26536,17 +26552,17 @@ function pearlMood(spec, mpPerFight, worthIt, turnsFor) {
 
   // Shed run-breaking effects first (uneffect spends a remover on non-shruggables —
   // worth it, these void turns or the one-shot guarantee outright).
-  var _iterator8 = _createForOfIteratorHelper(badEffects()),
-    _step8;
+  var _iterator7 = _createForOfIteratorHelper(badEffects()),
+    _step7;
   try {
-    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-      var ef = _step8.value;
+    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+      var ef = _step7.value;
       if (have$1a(ef)) uneffect(ef);
     }
   } catch (err) {
-    _iterator8.e(err);
+    _iterator7.e(err);
   } finally {
-    _iterator8.f();
+    _iterator7.f();
   }
   var buffs = applicableBuffs(spec);
 
@@ -26563,18 +26579,7 @@ function pearlMood(spec, mpPerFight, worthIt, turnsFor) {
   if (require$$0.myHp() <= pending.hp || require$$0.myHp() < hpFloor * require$$0.myMaxhp()) require$$0.restoreHp(require$$0.myMaxhp());
 
   // Non-resistance buffs stay free-only: their value is damage and MP, not turns.
-  var _iterator9 = _createForOfIteratorHelper(buffs),
-    _step9;
-  try {
-    for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-      var _ef = _step9.value;
-      acquireEffectFree(_ef);
-    }
-  } catch (err) {
-    _iterator9.e(err);
-  } finally {
-    _iterator9.f();
-  }
+  withoutBuying(() => buffs.forEach(acquireEffectFree));
   topUpFamiliarWeight(spec, worthIt, turnsFor);
 
   // BEFORE adventuring: the buffs spent MP/HP — re-verify the fight buffer.
@@ -26583,7 +26588,7 @@ function pearlMood(spec, mpPerFight, worthIt, turnsFor) {
   if (require$$0.myHp() < hpFloor * require$$0.myMaxhp()) require$$0.restoreHp(require$$0.myMaxhp());
 }
 
-var _templateObject$4, _templateObject2$4, _templateObject3$2, _templateObject4$2, _templateObject5$2, _templateObject6$2, _templateObject7$2, _templateObject8$2, _templateObject9$2, _templateObject0$2, _templateObject1$2, _templateObject10$2;
+var _templateObject$4, _templateObject2$4, _templateObject3$3, _templateObject4$2, _templateObject5$2, _templateObject6$2, _templateObject7$2, _templateObject8$2, _templateObject9$2, _templateObject0$2, _templateObject1$2, _templateObject10$2;
 
 // Never let the maximizer equip these in pearl zones (user directives):
 // - broken champagne bottle: its +item drains limited daily charges (2026-08-07)
@@ -26603,7 +26608,7 @@ var collisionNoticePrinted = new Set();
 /**
  * How a zone spends its familiar slot. "utility" is the default; a zone escalates to
  * "switch" only once a dressed, buffed build measures below the res cap and the switch
- * build measures higher (pearls.ts). Decided once per zone.
+ * build measures higher (pearls.ts). Each direction is tried at most once per zone.
  */
 
 var familiarModes = new Map();
@@ -26623,9 +26628,14 @@ function setFamiliarMode(key, mode) {
   familiarModes.set(key, mode);
 }
 
-/** True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.). */
-function airRequiresBackSlot() {
-  if (playerAirByEffect()) return false;
+/**
+ * True when the only air supply we could bring is back-slot gear (old SCUBA tank etc.),
+ * which is then what the back slot is spent on instead of the cape. `airByEffect` is a
+ * parameter because the profit model prices before the breathing task has run.
+ */
+function backSlotNeededForAir() {
+  var airByEffect = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : playerAirByEffect;
+  if (airByEffect()) return false;
   return !waterBreathingEquipment.some(i => require$$0.toSlot(i) !== $slot(_templateObject2$4 || (_templateObject2$4 = _taggedTemplateLiteral(["back"]))) && have$1a(i) && require$$0.canEquip(i));
 }
 
@@ -26657,23 +26667,77 @@ function capeMode(spec) {
 }
 
 /**
- * The non-resistance weights the real dress carries. Exported so the profit model can
- * speculate the same expression: a maximize for pure resistance reaches a higher figure
- * than the outfit the run actually wears, and pricing a zone on gear it will not dress
- * makes it under-buy and farm a tier below its estimate.
- *
- * Overdrunk chases the one-shot floor instead. 'effective' (weapon class matched to the
- * better attack stat) only applies when NO weapon is forced — it could contradict the
- * configured drunkweapon's class and fail every combination.
+ * The resistance objective, weighted so no tiebreaker can trade a resistance point away
+ * below the cap. Overdrunk keeps weight 1: attack-only combat aborts unless the weapon
+ * one-shots, so damage must stay able to outbid resistance there.
+ */
+function pearlResObjective(spec, overdrunk) {
+  var weight = overdrunk ? 1 : PEARL_RES_WEIGHT;
+  return "".concat(weight, " ").concat(spec.key, " res ").concat(PEARL_RES_CAP + PEARL_RES_HEADROOM, " max");
+}
+
+/**
+ * The non-resistance weights, shared with the profit model so the dress and the estimate
+ * optimize the same thing. No item-drop weight: `costZone` prices no item income.
+ * Overdrunk chases the one-shot floor; 'effective' applies only when no weapon is forced,
+ * since it could contradict the drunkweapon's class and fail every combination.
  */
 function pearlOutfitWeights(overdrunk, weaponForced) {
-  var combat = overdrunk ? "".concat(weaponForced ? "" : ", effective", ", 0.2 weapon damage, 0.2 weapon damage percent") : ", 0.1 item";
+  var combat = overdrunk ? "".concat(weaponForced ? "" : ", effective", ", 0.2 weapon damage, 0.2 weapon damage percent") : "";
   return ", 0.05 hp regen, 0.05 mp regen".concat(combat);
 }
 
 /** Items the real dress refuses, as maximizer terms, so a speculation can refuse them too. */
 function pearlAvoidTerms(spec) {
   return [].concat(_toConsumableArray(GLOBAL_AVOID), _toConsumableArray(spec.avoid ?? [])).map(i => ", -\"equip ".concat(i, "\"")).join("");
+}
+
+/**
+ * Slots the outfit commits before the maximizer gets a say: organ extenders, the
+ * overdrunk weapon pair, the lantern gear and the cape's back slot. Override pieces are
+ * not included; the caller adds them after the avoid filter. Exported so the profit
+ * model speculates against the same slots, since pricing a zone with the back slot and
+ * the lantern accessories free reports resistance the run cannot reach.
+ */
+function pearlForcedEquipment(spec, mode) {
+  var airByEffect = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : playerAirByEffect;
+  var overdrunk = mode === "wineglass";
+  var outfitName = outfitOverride(spec.key);
+  var organEquip = args.major.overcapped ? allOrganEquipment(mode) : requiredOrganEquipment(mode);
+  var equip = _toConsumableArray(organEquip);
+  if (overdrunk) {
+    // The wineglass IS the off-hand while overdrunk. A required angelbone totem
+    // displaces the configured drunkweapon; otherwise it is forced when owned.
+    equip.push($item(_templateObject3$3 || (_templateObject3$3 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
+    var totemForced = organEquip.includes($item(_templateObject4$2 || (_templateObject4$2 = _taggedTemplateLiteral(["angelbone totem"]))));
+    if (!totemForced && have$1a(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
+  }
+
+  // An outfit override owns every slot it names and all the damage gear, but its pieces
+  // are added by the caller: they still have to pass the avoid filter first.
+  if (outfitName !== undefined) return {
+    equip
+  };
+
+  // Only as much lantern gear as the one-shot needs: a lantern is worth about an extra
+  // cast, and the per-cast floor is computable. Overdrunk skips them, since lanterns
+  // duplicate spell components and the wineglass kills spells.
+  var secondLantern;
+  if (!overdrunk) {
+    var needed = lanternComponentsNeededForOneShot(spec.maxHp);
+    var accessoryBudget = 3 - organEquip.filter(i => require$$0.toSlot(i) === $slot(_templateObject5$2 || (_templateObject5$2 = _taggedTemplateLiteral(["acc1"])))).length;
+    var lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity, accessoryBudget);
+    equip.push.apply(equip, _toConsumableArray(lanterns.equip));
+    secondLantern = lanterns.secondOffhand;
+    // canEquip as well as have: the speculation drops a configuration whose forced gear
+    // cannot be worn, so an owned-but-restricted cape would price the zone at zero.
+    var cape = $item(_templateObject6$2 || (_templateObject6$2 = _taggedTemplateLiteral(["unwrapped knock-off retro superhero cape"])));
+    if (have$1a(cape) && require$$0.canEquip(cape) && !backSlotNeededForAir(airByEffect)) equip.push(cape);
+  }
+  return {
+    equip,
+    secondLantern
+  };
 }
 function buildPearlOutfit(spec, familiarMode) {
   var overdrunk = wineglassMode();
@@ -26684,33 +26748,17 @@ function buildPearlOutfit(spec, familiarMode) {
   // consumption headroom. A forced corset simply occupies the shirt: the parka never
   // equips and its mode is a harmless no-op; the maximizer chases res elsewhere.
   var organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
-  var equip = _toConsumableArray(organEquip);
-  if (overdrunk) {
-    // The wineglass IS the off-hand while overdrunk. A required angelbone totem
-    // displaces the configured drunkweapon (best-effort attack combat, user decision);
-    // otherwise the drunkweapon (default June cleaver) is forced when owned.
-    equip.push($item(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
-    var totemForced = organEquip.includes($item(_templateObject4$2 || (_templateObject4$2 = _taggedTemplateLiteral(["angelbone totem"]))));
-    if (!totemForced && have$1a(args.major.drunkweapon)) equip.push(args.major.drunkweapon);
-  }
-
-  // Equip only as much lantern gear (any slot) as the one-shot actually needs —
-  // a lantern ≈ an extra cast, and we know the per-cast floor, so the need is
-  // computable (user design). Zero need = zero damage gear forced. Overdrunk:
-  // lanterns duplicate SPELL components and the wineglass kills spells — skip all.
-  // An outfit override owns ALL damage gear itself — skip lanterns there too.
-  var secondLantern;
-  if (!overdrunk && outfitName === undefined) {
-    var needed = lanternComponentsNeededForOneShot(spec.maxHp);
-    var accessoryBudget = 3 - organEquip.filter(i => require$$0.toSlot(i) === $slot(_templateObject5$2 || (_templateObject5$2 = _taggedTemplateLiteral(["acc1"])))).length;
-    var lanterns = selectLanternGear(Number.isFinite(needed) ? needed : Infinity, accessoryBudget);
-    equip.push.apply(equip, _toConsumableArray(lanterns.equip));
-    secondLantern = lanterns.secondOffhand;
-  }
+  var forced = pearlForcedEquipment(spec, liverMode());
+  var secondLantern = forced.secondLantern;
+  // The cape is pushed below with its mode; keep it out of the shared list.
+  var cape = $item(_templateObject7$2 || (_templateObject7$2 = _taggedTemplateLiteral(["unwrapped knock-off retro superhero cape"])));
+  var equip = forced.equip.filter(i => i !== cape);
   var modes = {};
-  if (outfitName === undefined && have$1a($item(_templateObject6$2 || (_templateObject6$2 = _taggedTemplateLiteral(["Jurassic Parka"]))))) modes.parka = spec.parkaMode;
-  if (!overdrunk && outfitName === undefined && have$1a($item(_templateObject7$2 || (_templateObject7$2 = _taggedTemplateLiteral(["unwrapped knock-off retro superhero cape"])))) && !airRequiresBackSlot()) {
-    equip.push($item(_templateObject8$2 || (_templateObject8$2 = _taggedTemplateLiteral(["unwrapped knock-off retro superhero cape"]))));
+  if (outfitName === undefined && have$1a($item(_templateObject8$2 || (_templateObject8$2 = _taggedTemplateLiteral(["Jurassic Parka"]))))) modes.parka = spec.parkaMode;
+  // The helper already decided the cape's slot; re-deciding here is how the model and
+  // the dress drifted apart, and an ungated push would force gear canEquip rejects.
+  if (forced.equip.includes(cape)) {
+    equip.push(cape);
     modes.retrocape = ["heck", capeMode(spec)];
   }
 
@@ -26817,7 +26865,7 @@ function buildPearlOutfit(spec, familiarMode) {
   // class matched to the better attack stat) only applies when NO weapon is forced —
   // it could contradict the configured drunkweapon's class and fail every combination.
   var weaponForced = overdrunk && (organEquip.includes($item(_templateObject10$2 || (_templateObject10$2 = _taggedTemplateLiteral(["angelbone totem"])))) || have$1a(args.major.drunkweapon));
-  var baseModifier = "".concat(spec.key, " res ").concat(PEARL_RES_CAP + PEARL_RES_HEADROOM, " max").concat(breathingKeywords(familiarPlan)).concat(pearlOutfitWeights(overdrunk, weaponForced));
+  var baseModifier = "".concat(pearlResObjective(spec, overdrunk)).concat(breathingKeywords(familiarPlan)).concat(pearlOutfitWeights(overdrunk, weaponForced));
   var result = {
     modifier: familiarPlan.extraModifier ? "".concat(baseModifier, ", ").concat(familiarPlan.extraModifier) : baseModifier,
     equip,
@@ -26829,7 +26877,7 @@ function buildPearlOutfit(spec, familiarMode) {
   return result;
 }
 
-var _templateObject$3, _templateObject2$3, _templateObject3$1, _templateObject4$1, _templateObject5$1, _templateObject6$1, _templateObject7$1, _templateObject8$1, _templateObject9$1, _templateObject0$1, _templateObject1$1, _templateObject10$1, _templateObject11$1, _templateObject12$1, _templateObject13$1, _templateObject14$1, _templateObject15$1, _templateObject16$1, _templateObject17$1;
+var _templateObject$3, _templateObject2$3, _templateObject3$2, _templateObject4$1, _templateObject5$1, _templateObject6$1, _templateObject7$1, _templateObject8$1, _templateObject9$1, _templateObject0$1, _templateObject1$1, _templateObject10$1, _templateObject11$1, _templateObject12$1, _templateObject13$1, _templateObject14$1, _templateObject15$1;
 
 // ---------- valuation (garbo-lib preferred over raw mallPrice — user directive) ----------
 
@@ -26882,7 +26930,7 @@ function meatPerMp() {
   return require$$0.npcPrice($item(_templateObject2$3 || (_templateObject2$3 = _taggedTemplateLiteral(["Doc Galaktik's Invigorating Tonic"])))) / TONIC_AVG_MP;
 }
 function meatPerHp() {
-  return require$$0.npcPrice($item(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["Doc Galaktik's Restorative Balm"])))) / BALM_AVG_HP;
+  return require$$0.npcPrice($item(_templateObject3$2 || (_templateObject3$2 = _taggedTemplateLiteral(["Doc Galaktik's Restorative Balm"])))) / BALM_AVG_HP;
 }
 
 // ---------- progress / turns ----------
@@ -27033,16 +27081,16 @@ function speculativeResFloor(spec, forceEquip, mode, familiar) {
     var airByEffect = predictedPlayerAirByEffect();
     var playerBreathing = airByEffect ? "" : ", adventure underwater";
     var playerFlags = airByEffect ? [] : ["Adventure Underwater"];
-    var target = PEARL_RES_CAP + PEARL_RES_HEADROOM;
+    var resObjective = pearlResObjective(spec, wineglass);
     var capped = res => Math.min(res, PEARL_RES_CAP);
     if (familiar === undefined) {
       require$$0.useFamiliar($familiar.none);
-      var free = speculativeRes("".concat(spec.key, " res ").concat(target, " max").concat(playerBreathing).concat(equips), spec, forceEquip, playerFlags);
+      var free = speculativeRes("".concat(resObjective).concat(playerBreathing).concat(equips), spec, forceEquip, playerFlags);
       var best = free ?? 0;
       var switches = capped(best) < PEARL_RES_CAP ? resFamiliarSwitches(spec) : [];
       if (switches.length > 0) {
         var _familiarBreathing = airByEffect ? ", underwater familiar" : ", sea";
-        var switched = speculativeRes("".concat(spec.key, " res ").concat(target, " max").concat(_familiarBreathing).concat(equips, ", ").concat(switches), spec, forceEquip, [].concat(playerFlags, ["Underwater Familiar"]));
+        var switched = speculativeRes("".concat(resObjective).concat(_familiarBreathing).concat(equips, ", ").concat(switches), spec, forceEquip, [].concat(playerFlags, ["Underwater Familiar"]));
         if (switched !== undefined) best = Math.max(best, switched);
       }
       return free === undefined && best === 0 ? 0 : capped(best);
@@ -27050,7 +27098,7 @@ function speculativeResFloor(spec, forceEquip, mode, familiar) {
     require$$0.useFamiliar(familiar);
     var familiarNeedsGear = !familiarBreathesFree() && !familiar.underwater;
     var familiarBreathing = familiarNeedsGear ? ", underwater familiar" : "";
-    var pinned = speculativeRes("".concat(spec.key, " res ").concat(target, " max").concat(playerBreathing).concat(familiarBreathing).concat(equips), spec, forceEquip, familiarNeedsGear ? [].concat(playerFlags, ["Underwater Familiar"]) : playerFlags);
+    var pinned = speculativeRes("".concat(resObjective).concat(playerBreathing).concat(familiarBreathing).concat(equips), spec, forceEquip, familiarNeedsGear ? [].concat(playerFlags, ["Underwater Familiar"]) : playerFlags);
     return pinned === undefined ? 0 : capped(pinned);
   } finally {
     require$$0.useFamiliar(saved);
@@ -27124,7 +27172,7 @@ function computeOutlay(it, coverTurns, claimed) {
  * cheaper one behind it.
  */
 function candidateResPlans(spec, startRes, remainingPct, reserved) {
-  var carried = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
+  var covered = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : [];
   var turnsNeeded = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : res => turnsForFights(Math.ceil(remainingPct / progressRatePct(res)));
   if (startRes >= PEARL_RES_CAP || remainingPct <= 0) return [];
   var resName = resModifierName(spec.key);
@@ -27137,10 +27185,11 @@ function candidateResPlans(spec, startRes, remainingPct, reserved) {
       var it = _step.value;
       // Must grant an effect: an item whose resistance comes from wearing it would be
       // "used" to no effect and re-planned, and re-bought, every fight.
-      // Skip anything already running, or that an earlier zone's stack still covers —
-      // buying a second source of the same effect buys no resistance.
+      // Skip only what is covered for the whole zone. An effect running now but expiring
+      // part-way through is not: it needs a re-up in the plan, or nothing can restore the
+      // tier when it lapses mid-farm.
       var ef = require$$0.effectModifier(it, "Effect");
-      if (ef === $effect.none || have$1a(ef) || carried.includes(ef)) continue;
+      if (ef === $effect.none || covered.includes(ef)) continue;
       var gain = require$$0.numericModifier(ef, resName);
       if (gain > 0) gains.set(it, gain);
     }
@@ -27228,6 +27277,33 @@ function resStepWorthIt(spec, fromRes, gain, cost) {
 // ---------- per-zone economics ----------
 
 /**
+ * The zone's res effects that are running now, split by whether they outlast it. An
+ * expiring one is in the measured resistance but will not be there for the whole run,
+ * so it is discounted from the estimate and left available to be planned as a re-up.
+ */
+function activeResEffects(spec, zoneTurns) {
+  var lasting = [];
+  var expiring = [];
+  var _iterator3 = _createForOfIteratorHelper(new Set(resItems(spec.key).map(it => require$$0.effectModifier(it, "Effect")))),
+    _step3;
+  try {
+    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+      var ef = _step3.value;
+      if (ef === $effect.none || !have$1a(ef)) continue;
+      (require$$0.haveEffect(ef) >= zoneTurns ? lasting : expiring).push(ef);
+    }
+  } catch (err) {
+    _iterator3.e(err);
+  } finally {
+    _iterator3.f();
+  }
+  return {
+    lasting,
+    expiring
+  };
+}
+
+/**
  * Price a zone at a given resistance. Takes the Fishy budget by value so an option can
  * be costed without spending it, which is what lets the potion decision be made by this
  * same model rather than by a cheaper approximation of it standing outside.
@@ -27248,9 +27324,7 @@ function costZone(spec, wineglass, exposed, damage, res, potionCost, remainingPc
   var fishyUsed = Math.min(fights, pool);
   while (fishyUsed < fights && refreshCosts.length > 0) {
     var meat = refreshCosts[0];
-    var coverable = Math.min(HAGGLING_FISHY_TURNS - 1, fights - fishyUsed);
-    // Each covered fight saves one turn; the trip costs one — net (coverable-1) turns.
-    if ((coverable - 1) * args.major.voa < meat) break;
+    if (refreshNetTurns(fights - fishyUsed) * args.major.voa < meat) break;
     refreshCosts.shift();
     refreshesUsed += 1;
     refreshCost += meat;
@@ -27284,24 +27358,16 @@ function costZone(spec, wineglass, exposed, damage, res, potionCost, remainingPc
 }
 function evaluateZone(spec, mode, budget) {
   var wineglass = mode === "wineglass";
-  var forced = args.major.overcapped ? allOrganEquipment(mode) : requiredOrganEquipment(mode);
-  var equips = _toConsumableArray(forced);
-  if (wineglass) {
-    equips.push($item(_templateObject13$1 || (_templateObject13$1 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
-    // Mirror the real outfit: the drunkweapon takes the weapon slot unless the totem
-    // forces it for organ capacity — otherwise this would speculate the weapon slot as
-    // free res space the real dress never gives it.
-    if (!forced.includes($item(_templateObject14$1 || (_templateObject14$1 = _taggedTemplateLiteral(["angelbone totem"])))) && have$1a(args.major.drunkweapon)) {
-      equips.push(args.major.drunkweapon);
-    }
-  }
-  // Price overrides as they will run: outfit pieces are forced into the speculation
-  // and an override familiar is pinned exactly like Stooper (skipping the maximizer's
-  // familiar switches). Stooper still displaces the override in stooper mode.
+  // The slots the real dress commits: organ extenders, the wineglass and drunkweapon,
+  // the lantern gear and the cape's back slot, plus an override's own pieces.
+  // Speculating with any of them free reports resistance the run cannot reach.
+  // Predicted air, not current: this prices before the breathing task runs, and whether
+  // the back slot goes to the cape or to a SCUBA tank follows from it.
+  var equips = pearlForcedEquipment(spec, mode, predictedPlayerAirByEffect).equip;
   var outfitName = outfitOverride(spec.key);
   var overridePieces = outfitName !== undefined ? require$$0.outfitPieces(outfitName) : [];
   equips.push.apply(equips, _toConsumableArray(overridePieces));
-  var familiar = mode === "stooper" ? $familiar(_templateObject15$1 || (_templateObject15$1 = _taggedTemplateLiteral(["Stooper"]))) : familiarOverride(spec.key);
+  var familiar = mode === "stooper" ? $familiar(_templateObject13$1 || (_templateObject13$1 = _taggedTemplateLiteral(["Stooper"]))) : familiarOverride(spec.key);
 
   // speculativeResFloor lets the maximizer fill outfit-free slots with res gear and
   // offer familiar switches — help the real override run never gets (its outfit is
@@ -27327,12 +27393,19 @@ function evaluateZone(spec, mode, budget) {
   var resName = resModifierName(spec.key);
   var gearTurns = turnsAt(rawGearRes);
   var carried = budget.carried.filter(c => c.turnsLeft >= gearTurns);
-  var gearRes = Math.min(rawGearRes + sum(carried, c => require$$0.numericModifier(c.effect, resName)), PEARL_RES_CAP);
+  var _activeResEffects = activeResEffects(spec, gearTurns),
+    lasting = _activeResEffects.lasting,
+    expiring = _activeResEffects.expiring;
+  // Each effect counts once. One that is running now is already inside rawGearRes, so
+  // only a carried stack for an effect we do NOT have adds resistance; and an expiring
+  // one is only discounted when no carried stack covers the rest of the zone.
+  var carriedRescues = ef => carried.some(c => c.effect === ef);
+  var gearRes = Math.min(rawGearRes + sum(carried.filter(c => !require$$0.haveEffect(c.effect)), c => require$$0.numericModifier(c.effect, resName)) - sum(expiring.filter(ef => !carriedRescues(ef)), ef => require$$0.numericModifier(ef, resName)), PEARL_RES_CAP);
 
   // Resistance is purchasable, so every combination is costed by the same model that
   // prices the zone and the best profit wins. Deciding inside the cost model rather than
   // beside it is the whole point: an approximation living next to it kept disagreeing.
-  var candidates = candidateResPlans(spec, gearRes, remainingPct, budget.reserved, carried.map(c => c.effect), turnsAt);
+  var candidates = candidateResPlans(spec, gearRes, remainingPct, budget.reserved, [].concat(_toConsumableArray(carried.map(c => c.effect)), _toConsumableArray(lasting)), turnsAt);
   var gearOnly = costZone(spec, wineglass, exposed, damage, gearRes, 0, remainingPct, budget);
   // Every candidate is scored by the same function that prices the zone, so there is no
   // second model to disagree with — a combination wins only if the full profit, its own
@@ -27343,11 +27416,11 @@ function evaluateZone(spec, mode, budget) {
     cost: 0,
     use: []
   };
-  var _iterator3 = _createForOfIteratorHelper(candidates),
-    _step3;
+  var _iterator4 = _createForOfIteratorHelper(candidates),
+    _step4;
   try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var candidate = _step3.value;
+    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      var candidate = _step4.value;
       var priced = costZone(spec, wineglass, exposed, damage, candidate.res, candidate.cost, remainingPct, budget);
       if (priced.profit > costed.profit) {
         costed = priced;
@@ -27359,9 +27432,9 @@ function evaluateZone(spec, mode, budget) {
     // — or already won, which resets its progress preference to 0 and so prices as a full
     // farm — would otherwise charge its Fishy and its potions to the zones priced after it.
   } catch (err) {
-    _iterator3.e(err);
+    _iterator4.e(err);
   } finally {
-    _iterator3.f();
+    _iterator4.f();
   }
   var willFarm = !get$2(spec.obtained) && (costed.profit >= 0 || args.major.force);
   if (willFarm) {
@@ -27373,13 +27446,13 @@ function evaluateZone(spec, mode, budget) {
       effect: c.effect,
       turnsLeft: c.turnsLeft - costed.turns
     })).filter(c => c.turnsLeft > 0);
-    var _iterator4 = _createForOfIteratorHelper(potionPlan.use),
-      _step4;
+    var _iterator5 = _createForOfIteratorHelper(potionPlan.use),
+      _step5;
     try {
       var _loop2 = function _loop2() {
-        var _step4$value = _step4.value,
-          item = _step4$value.item,
-          count = _step4$value.count;
+        var _step5$value = _step5.value,
+          item = _step5$value.item,
+          count = _step5$value.count;
         budget.reserved.set(item, (budget.reserved.get(item) ?? 0) + count);
         // Whatever this zone does not drink through is available to the zones after it.
         // One entry per effect: a re-up of a still-running stack extends it — KoL merges
@@ -27395,13 +27468,13 @@ function evaluateZone(spec, mode, budget) {
           });
         }
       };
-      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
         if (_loop2()) continue;
       }
     } catch (err) {
-      _iterator4.e(err);
+      _iterator5.e(err);
     } finally {
-      _iterator4.f();
+      _iterator5.f();
     }
   }
   var res = potionPlan.res;
@@ -27459,7 +27532,7 @@ function candidateLiverModes() {
   var candidates = [];
   var liverItems = ownedExtenders("liver", "items").length;
   if (liverItems >= overage("liver")) candidates.push("items");
-  if (have$1a($familiar(_templateObject16$1 || (_templateObject16$1 = _taggedTemplateLiteral(["Stooper"])))) && liverItems >= overage("liver") - 1 && (familiarBreathesFree() || familiarWaterBreathingEquipment.some(i => have$1a(i)))) {
+  if (have$1a($familiar(_templateObject14$1 || (_templateObject14$1 = _taggedTemplateLiteral(["Stooper"])))) && liverItems >= overage("liver") - 1 && (familiarBreathesFree() || familiarWaterBreathingEquipment.some(i => have$1a(i)))) {
     candidates.push("stooper");
   }
   if (wineglassAccessible()) candidates.push("wineglass");
@@ -27472,20 +27545,20 @@ function candidateLiverModes() {
 function scoreLiverMode(selected, mode) {
   var budget = fishyBudget();
   var total = 0;
-  var _iterator5 = _createForOfIteratorHelper(selected),
-    _step5;
+  var _iterator6 = _createForOfIteratorHelper(selected),
+    _step6;
   try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var spec = _step5.value;
+    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+      var spec = _step6.value;
       // Only what will actually be farmed counts: a zone already won today prices as a
       // full farm it will never run, and a force-farmed loss is still a loss.
       var verdict = evaluateZone(spec, mode, budget);
       total += verdict.willFarm ? verdict.profit : 0;
     }
   } catch (err) {
-    _iterator5.e(err);
+    _iterator6.e(err);
   } finally {
-    _iterator5.f();
+    _iterator6.f();
   }
   return total;
 }
@@ -27530,28 +27603,28 @@ function primeZoneVerdicts(selected) {
   verdictCache.clear();
   var mode = liverMode();
   var budget = fishyBudget();
-  var _iterator6 = _createForOfIteratorHelper(selected),
-    _step6;
+  var _iterator7 = _createForOfIteratorHelper(selected),
+    _step7;
   try {
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-      var spec = _step6.value;
+    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+      var spec = _step7.value;
       verdictCache.set(spec.key, evaluateZone(spec, mode, budget));
     }
   } catch (err) {
-    _iterator6.e(err);
+    _iterator7.e(err);
   } finally {
-    _iterator6.f();
+    _iterator7.f();
   }
 }
 function printProfitReport(selected) {
   var fmt = n => Math.round(n).toLocaleString();
   require$$0.print("pearlo profit (VOA ".concat(fmt(args.major.voa), ", liver mode ").concat(liverMode(), "):"), "blue");
   require$$0.print(" unblemished pearl value: ".concat(fmt(pearlValue()), " meat"));
-  var _iterator7 = _createForOfIteratorHelper(selected),
-    _step7;
+  var _iterator8 = _createForOfIteratorHelper(selected),
+    _step8;
   try {
-    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-      var spec = _step7.value;
+    for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+      var spec = _step8.value;
       var v = zoneVerdict(spec);
       require$$0.print(" --- ".concat(spec.key, " (").concat(spec.loc, ") ---"), "blue");
       for (var _i = 0, _overrideReportLines = overrideReportLines(spec); _i < _overrideReportLines.length; _i++) {
@@ -27569,9 +27642,9 @@ function printProfitReport(selected) {
       require$$0.print("  expected profit: ".concat(fmt(v.profit), " meat \u2014 ").concat(verdict).concat(obtained), v.go ? "blue" : "red");
     }
   } catch (err) {
-    _iterator7.e(err);
+    _iterator8.e(err);
   } finally {
-    _iterator7.f();
+    _iterator8.f();
   }
 }
 
@@ -27580,7 +27653,7 @@ function overrideReportLines(spec) {
   var lines = [];
   var familiar = familiarOverride(spec.key);
   if (familiar !== undefined) {
-    var displaced = liverMode() === "stooper" && familiar !== $familiar(_templateObject17$1 || (_templateObject17$1 = _taggedTemplateLiteral(["Stooper"])));
+    var displaced = liverMode() === "stooper" && familiar !== $familiar(_templateObject15$1 || (_templateObject15$1 = _taggedTemplateLiteral(["Stooper"])));
     lines.push("  override: familiar ".concat(familiar).concat(displaced ? " (displaced by Stooper)" : ""));
   }
   var outfitName = outfitOverride(spec.key);
@@ -27701,7 +27774,7 @@ var PearloEngine = /*#__PURE__*/function (_Engine) {
   }]);
 }(Engine);
 
-var _templateObject$1, _templateObject2$1, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
+var _templateObject$1, _templateObject2$1, _templateObject3$1, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject0, _templateObject1, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20;
 
 /** True when this zone's assigned outfit already carries owned, equippable breathing gear. */
 function outfitCoversBreathing(spec) {
@@ -27796,7 +27869,7 @@ function breatheUnderwaterTask(selected) {
         printSeaworthyDebug("after Breathe Underwater do()");
         return;
       }
-      if (have$1a($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["hyperinflated seal lung"])))) && !get$2("_hyperinflatedSealLungUsed", false)) {
+      if (have$1a($item(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["hyperinflated seal lung"])))) && !get$2("_hyperinflatedSealLungUsed", false)) {
         require$$0.print("[pearlo/seaworthy] → using hyperinflated seal lung");
         strategySucceeded = require$$0.use($item(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["hyperinflated seal lung"]))));
       }
@@ -27903,7 +27976,7 @@ function worthItFor(spec) {
   return (fromRes, gain, cost) => resStepWorthIt(spec, fromRes, gain, cost);
 }
 
-/** Zones whose one escalation attempt has already been spent (win or lose). */
+/** Zone-and-direction pairs whose escalation attempt has been spent (win or lose). */
 var escalationTried = new Set();
 
 /** Below-cap fights lose progress, so say so every time — never latch this warning. */
@@ -27914,34 +27987,45 @@ function warnBelowCap(spec, res) {
 /**
  * Dress-then-verify: measure the real outfit once it is dressed and buffed, and only
  * then, if it is short of the cap, try the res-familiar build and keep whichever
- * measures higher. The experiment runs once per zone; the warning does not. Returns
+ * measures higher. Each direction is tried at most once per zone, and only while the
+ * zone is under the cap. Returns
  * true when it leaves a different build dressed than the mood was sized against.
  */
 function escalateFamiliarIfShort(spec) {
-  var res = require$$0.numericModifier(resModifierName(spec.key));
-  if (res >= PEARL_RES_CAP) return false;
+  var worn = require$$0.numericModifier(resModifierName(spec.key));
+  if (worn >= PEARL_RES_CAP) return false;
 
   // A zone that pins its familiar (stooper, familiar override, outfit override) would
   // rebuild the identical outfit, and with no res familiar owned there is nothing to
   // switch to — in both cases the dress is pure waste.
-  var canEscalate = familiarModeApplies(spec) && resFamiliarSwitches(spec).length > 0 && familiarModeFor(spec.key) !== "switch" && !escalationTried.has(spec.key);
-  if (!canEscalate) return false;
-  escalationTried.add(spec.key);
-  require$$0.print("pearlo: ".concat(spec.loc, " dressed and buffed to ").concat(res, " ").concat(spec.key, " res \u2014 trying the res familiar"));
-  Outfit.from(buildPearlOutfit(spec, "switch"), new Error("pearlo: res-familiar outfit for ".concat(spec.loc, " could not be built"))).dress();
+  if (!familiarModeApplies(spec) || resFamiliarSwitches(spec).length === 0) return false;
+
+  // Always compare against the mode we are NOT in: the outfit hook has already dressed
+  // the settled one, so re-dressing it would measure the same number and then "revert"
+  // to the loser. The first comparison per zone is the experiment; later ones only run
+  // while the zone is under the cap, which is when a re-check is worth a dress.
+  // One experiment per direction per zone. Bounding only the utility side let a settled
+  // zone re-dress twice on every fight for the rest of its life, and a single inflated
+  // measurement could then adopt the worse build with no way back.
+  var current = familiarModeFor(spec.key);
+  var other = current === "switch" ? "utility" : "switch";
+  var attempt = "".concat(spec.key, ":").concat(other);
+  if (escalationTried.has(attempt)) return false;
+  escalationTried.add(attempt);
+  require$$0.print("pearlo: ".concat(spec.loc, " dressed and buffed to ").concat(worn, " ").concat(spec.key, " res \u2014 trying ").concat(other));
+  Outfit.from(buildPearlOutfit(spec, other), new Error("pearlo: ".concat(other, " outfit for ").concat(spec.loc, " could not be built"))).dress();
   // The res familiars scale with weight, and the weight potions are only spent on a
-  // familiar that scales — the mood ran against the utility pick, so top up now or the
+  // familiar that scales — the mood ran against the other pick, so top up now or the
   // candidate is judged up to 15 lbs light.
   topUpFamiliarWeight(spec, worthItFor(spec), turnsForFights);
-  var switched = require$$0.numericModifier(resModifierName(spec.key));
-  if (switched > res) {
-    setFamiliarMode(spec.key, "switch");
-    require$$0.print("pearlo: ".concat(spec.loc, " res familiar reaches ").concat(switched, " ").concat(spec.key, " res \u2014 keeping it"));
+  var alternative = require$$0.numericModifier(resModifierName(spec.key));
+  if (alternative > worn) {
+    setFamiliarMode(spec.key, other);
+    require$$0.print("pearlo: ".concat(spec.loc, " ").concat(other, " build reaches ").concat(alternative, " ").concat(spec.key, " res \u2014 keeping it"));
     return true;
   }
-  Outfit.from(buildPearlOutfit(spec, "utility"), new Error("pearlo: utility outfit for ".concat(spec.loc, " could not be built"))).dress();
-  var reverted = require$$0.numericModifier(resModifierName(spec.key));
-  require$$0.print("pearlo: ".concat(spec.loc, " res familiar reached only ").concat(switched, " ").concat(spec.key, " res \u2014 reverted to ") + "the utility build at ".concat(reverted));
+  Outfit.from(buildPearlOutfit(spec, current), new Error("pearlo: ".concat(current, " outfit for ").concat(spec.loc, " could not be built"))).dress();
+  require$$0.print("pearlo: ".concat(spec.loc, " ").concat(other, " build reached only ").concat(alternative, " ").concat(spec.key, " res \u2014 kept the ") + "".concat(current, " build at ").concat(require$$0.numericModifier(resModifierName(spec.key))));
   return false;
 }
 function pearlTask(spec) {
@@ -28002,7 +28086,7 @@ function pearlTask(spec) {
     },
     do: spec.loc,
     // 1557 = Peering Through Your Peridot (first adventure of the day per zone with
-    // the Peridot of Peril equipped — the maximizer picks it for its +item/regen).
+    // the Peridot of Peril equipped — the maximizer can pick it for its regen).
     // Selecting a monster enters that fight immediately (no turn lost), so answer with
     // the zone's safest pick; unanswered, the NC halts the script. Property format
     // "1&bandersnatch=<monsterid>" is mafia's Map-the-Monsters-style encoding.
@@ -28086,7 +28170,7 @@ function pearlTasks(selected) {
   tasks: pearlTasks(PEARLS)
 });
 
-var _templateObject, _templateObject2;
+var _templateObject, _templateObject2, _templateObject3;
 function main(command) {
   sinceKolmafiaRevision(28100);
   Args.fill(args, command);
@@ -28219,7 +28303,7 @@ function main(command) {
     var breathing = predictedPlayerAirByEffect() ? "" : ", adventure underwater";
     // Only force the wineglass into the speculation when it is actually reachable —
     // otherwise every combination FAILs on the +equip and the res verdict is garbage.
-    var wineglass = simDrunk && wineglassAccessible() ? ", +equip Drunkula's wineglass" : "";
+    var glassReachable = !simDrunk || wineglassAccessible();
     var _iterator5 = _createForOfIteratorHelper(selected),
       _step5;
     try {
@@ -28241,16 +28325,17 @@ function main(command) {
         // damage weights in the expression the maximizer optimizes total score, so a
         // min flag reports FAIL on outfits that trade res for damage even when a
         // pure-res 18 exists. Reachability is the verdict lines' res floor above.
-        var organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
-        var totemForced = simDrunk && organEquip.includes($item(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["angelbone totem"]))));
-        var drunkweapon = simDrunk && !totemForced && have$1a(args.major.drunkweapon) ? ", +equip ".concat(args.major.drunkweapon) : "";
-        var weaponForced = totemForced || drunkweapon.length > 0;
-        var organEquips = organEquip.map(i => ", +equip ".concat(i)).join("");
-        // The same weights and refusals buildPearlOutfit and the profit model use, so the
-        // outfit this prints is the one the run would actually dress.
-        var expr = "".concat(p.key, " res ").concat(PEARL_RES_CAP + PEARL_RES_HEADROOM, " max").concat(breathing).concat(wineglass) + "".concat(drunkweapon).concat(organEquips).concat(pearlOutfitWeights(simDrunk, weaponForced)) + "".concat(pearlAvoidTerms(p));
+        // The same forced slots, weights and refusals buildPearlOutfit and the profit
+        // model use, so the outfit this prints is the one the run would dress.
+        var mode = simDrunk ? "wineglass" : liverMode();
+        // A closeted wineglass would make every combination fail the +equip, so leave it
+        // out of the expression rather than print garbage.
+        var _forced = pearlForcedEquipment(p, mode, predictedPlayerAirByEffect).equip.filter(i => glassReachable || i !== $item(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["Drunkula's wineglass"]))));
+        var weaponForced = simDrunk && (_forced.includes($item(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["angelbone totem"])))) || have$1a(args.major.drunkweapon));
+        var forcedTerms = _forced.map(i => ", +equip ".concat(i)).join("");
+        var expr = "".concat(pearlResObjective(p, simDrunk)).concat(breathing) + "".concat(forcedTerms).concat(pearlOutfitWeights(simDrunk, weaponForced)).concat(pearlAvoidTerms(p));
         var overrideNote = outfitOverride(p.key) !== undefined ? " (ignores zone overrides)" : "";
-        require$$0.print("  recommended equips (as the run would dress)".concat(wineglass ? " (wineglass in off-hand)" : "", ":").concat(overrideNote), "blue");
+        require$$0.print("  recommended equips (as the run would dress)".concat(simDrunk && glassReachable ? " (wineglass in off-hand)" : "", ":").concat(overrideNote), "blue");
         var _iterator7 = _createForOfIteratorHelper(require$$0.maximize(expr, 0, 0, true, true)),
           _step7;
         try {
