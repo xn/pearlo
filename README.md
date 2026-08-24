@@ -52,8 +52,9 @@ Useful options:
   hermit clovers per day)
 - `cloverprice=N` — also buy mall 11-leaf clovers for the refresh, at most N meat each
   (default 0 = never; purchases are skipped when the remaining farming can't repay them)
-- `potionprice=N` — also buy res top-up potions from the mall when a zone's `resitems`
-  list runs short of inventory, at most N meat each (default 0 = inventory only)
+- `potionprice=N` — max meat per res top-up potion (default 0 = never buy, inventory
+  only). Whether an owned potion is spent, and whether an allowed purchase is made, is
+  decided by the turns it saves; that cost is charged to the zone's profit estimate
 - `airmode=effects|gear|auto` — how the player gets underwater breathing when no air
   effect is active. `effects` (default) spends the 1/day consumables (ballast turtle,
   hyperinflated seal lung, potion of pneumaticity, tempura air — destroyed on use)
@@ -100,11 +101,13 @@ still apply and win their slots. Override familiars get breathing gear automatic
 the Stooper pin takes precedence over a familiar override when it's serving as your
 liver rescue. The profit model prices overridden zones as they will actually run.
 
-Each zone also has an `<element>resitems` list: potions used (from inventory,
-strongest first) until the zone's dressed resistance reaches the 18 cap — gear alone
-often lands short, especially with the `overcapped` bone set occupying slots. The
-defaults cover all five elements; set a list empty to disable it, or set
-`potionprice=N` to let the top-up buy missing potions from the mall.
+Each zone also has an `<element>resitems` list: the potions it may use toward the 18
+cap — gear alone often lands short, especially with the `overcapped` bone set occupying
+slots. The defaults cover all five elements; set a list empty to disable it. Combinations
+are weighed against the turns they save, and a potion is spent from inventory or bought
+only when it pays for itself; that cost is charged to the zone's profit estimate, and
+free resistance (buffs, then the familiar switch) is always taken first. `potionprice=N`
+caps what it will pay per potion.
 
 ## Fishy refreshes
 
