@@ -23278,6 +23278,7 @@ var PEARLS = [{
   maxAtk: 600,
   maxHp: 800,
   loc: $location(_templateObject0$c || (_templateObject0$c = _taggedTemplateLiteral(["The Dive Bar"]))),
+  luckyNoncombat: "Razor, Scooter",
   element: $element(_templateObject1$c || (_templateObject1$c = _taggedTemplateLiteral(["sleaze"]))),
   after: [],
   modifier: "sleaze res",
@@ -23328,6 +23329,7 @@ var PEARLS = [{
   maxAtk: 500,
   maxHp: 750,
   loc: $location(_templateObject14$a || (_templateObject14$a = _taggedTemplateLiteral(["Madness Reef"]))),
+  luckyNoncombat: "Dragon the Line",
   element: $element(_templateObject15$a || (_templateObject15$a = _taggedTemplateLiteral(["stench"]))),
   after: [],
   modifier: "stench res",
@@ -26606,14 +26608,18 @@ function pendingCastCosts(effects) {
     hp
   };
 }
+
+/** Said once per zone while Lucky! is up; cleared when it lapses so a re-acquire warns. */
+var luckyNoticePrinted = new Set();
 function pearlMood(spec, mpPerFight, worthIt, turnsFor) {
-  // Lucky! converts the next adventure in Lucky-capable zones (Dive Bar: Razor,
-  // Scooter; Reef: Dragon the Line) into a noncombat — a turn with no pearl progress
-  // (cost us a turn in the 2026-08-07 session). With the luckyfishy refresh enabled
-  // and Fishy low, the Get Fishy task consumes it productively before we get here;
-  // otherwise it is still a live hazard worth flagging.
-  if (have$1a($effect(_templateObject18$1 || (_templateObject18$1 = _taggedTemplateLiteral(["Lucky!"])))) && (require$$0.haveEffect($effect(_templateObject19$1 || (_templateObject19$1 = _taggedTemplateLiteral(["Fishy"])))) > 1 || !args.resources.luckyfishy)) {
-    require$$0.print("pearlo: Lucky! is active \u2014 the next ".concat(spec.loc, " adventure may be its Lucky noncombat instead of a pearl fight. Consider spending Lucky elsewhere first."), "red");
+  // Lucky! is spent on the zone's Lucky noncombat instead of a pearl fight, so only a zone
+  // that has one is worth flagging. The Fishy clause defers to Get Fishy, which spends the
+  // effect in The Brinier Deepers before we get here. Said once per zone while it is up.
+  if (!have$1a($effect(_templateObject18$1 || (_templateObject18$1 = _taggedTemplateLiteral(["Lucky!"]))))) {
+    luckyNoticePrinted.clear();
+  } else if (spec.luckyNoncombat !== undefined && (require$$0.haveEffect($effect(_templateObject19$1 || (_templateObject19$1 = _taggedTemplateLiteral(["Fishy"])))) > 1 || !args.resources.luckyfishy) && !luckyNoticePrinted.has(spec.key)) {
+    luckyNoticePrinted.add(spec.key);
+    require$$0.print("pearlo: Lucky! is active \u2014 the next ".concat(spec.loc, " adventure may be ").concat(spec.luckyNoncombat, " instead of a pearl fight. Consider spending Lucky elsewhere first."), "red");
   }
   // Fishy: free pipe only in v1 (docs/consumption-reference.md). Lutz's 30 turns are
   // taken up front by their own task, before any zone is priced against them.
