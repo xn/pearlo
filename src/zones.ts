@@ -98,6 +98,11 @@ export type PearlSpec = {
   /** choiceAdventure automation for the zone's noncombats (id → option). */
   choices?: { [id: number]: number };
   /**
+   * The zone's Lucky noncombat, where it has one. Lucky! is spent there instead of on a
+   * pearl fight, so only these zones are worth warning about.
+   */
+  luckyNoncombat?: string;
+  /**
    * Monster to pick when the Peridot of Peril's "Peering Through Your Peridot" NC
    * (choice 1557) fires — first adventure of the day per zone with the Peridot equipped.
    * Selection enters that combat immediately, no turn lost; unanswered it halts the
@@ -142,6 +147,7 @@ export const PEARLS: PearlSpec[] = [
     maxAtk: 600,
     maxHp: 800,
     loc: $location`The Dive Bar`,
+    luckyNoncombat: "Razor, Scooter",
     element: $element`sleaze`,
     after: [],
     modifier: "sleaze res",
@@ -186,6 +192,7 @@ export const PEARLS: PearlSpec[] = [
     maxAtk: 500,
     maxHp: 750,
     loc: $location`Madness Reef`,
+    luckyNoncombat: "Dragon the Line",
     element: $element`stench`,
     after: [],
     modifier: "stench res",

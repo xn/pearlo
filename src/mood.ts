@@ -569,20 +569,28 @@ function pendingCastCosts(effects: Effect[]): { mp: number; hp: number } {
   return { mp, hp };
 }
 
+/** Said once per zone while Lucky! is up; cleared when it lapses so a re-acquire warns. */
+const luckyNoticePrinted = new Set<PearlKey>();
+
 export function pearlMood(
   spec: PearlSpec,
   mpPerFight: number,
   worthIt: WorthIt,
   turnsFor: TurnsFor,
 ): void {
-  // Lucky! converts the next adventure in Lucky-capable zones (Dive Bar: Razor,
-  // Scooter; Reef: Dragon the Line) into a noncombat — a turn with no pearl progress
-  // (cost us a turn in the 2026-08-07 session). With the luckyfishy refresh enabled
-  // and Fishy low, the Get Fishy task consumes it productively before we get here;
-  // otherwise it is still a live hazard worth flagging.
-  if (have($effect`Lucky!`) && (haveEffect($effect`Fishy`) > 1 || !args.resources.luckyfishy)) {
+  // Lucky! is spent on the zone's Lucky noncombat instead of a pearl fight, so only a zone
+  // that has one is worth flagging. The Fishy clause defers to Get Fishy, which spends the
+  // effect in The Brinier Deepers before we get here. Said once per zone while it is up.
+  if (!have($effect`Lucky!`)) {
+    luckyNoticePrinted.clear();
+  } else if (
+    spec.luckyNoncombat !== undefined &&
+    (haveEffect($effect`Fishy`) > 1 || !args.resources.luckyfishy) &&
+    !luckyNoticePrinted.has(spec.key)
+  ) {
+    luckyNoticePrinted.add(spec.key);
     print(
-      `pearlo: Lucky! is active — the next ${spec.loc} adventure may be its Lucky noncombat instead of a pearl fight. Consider spending Lucky elsewhere first.`,
+      `pearlo: Lucky! is active — the next ${spec.loc} adventure may be ${spec.luckyNoncombat} instead of a pearl fight. Consider spending Lucky elsewhere first.`,
       "red",
     );
   }
