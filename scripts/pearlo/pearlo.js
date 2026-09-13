@@ -25897,8 +25897,11 @@ function lutzFishyAvailable() {
 }
 
 /**
- * Take Lutz's free Fishy. The request equips its own breathing gear, so this needs no
- * outfit. Reports whether Fishy is up afterward.
+ * Take Lutz's free Fishy. Water breathing must already be up: mafia's SkateParkRequest
+ * only self-equips a short fixed list of gear (aerated diving helmet, Mer-kin masks,
+ * SCUBA gear, old SCUBA tank) and errors out otherwise, so the caller dresses for the
+ * visit (lutzTask's outfit) and this only refuses when that still left air down.
+ * Reports whether Fishy is up afterward.
  */
 function visitLutz() {
   if (!lutzFishyAvailable()) return false;
@@ -28018,6 +28021,11 @@ function breatheUnderwaterTask(selected) {
  * Lutz's free 30 turns of Fishy, taken before any zone is farmed. The budget counts the
  * visit while it is still only on offer, so whichever way it goes the zones priced
  * against it are re-priced here, while that verdict can still change what runs.
+ *
+ * The visit needs water breathing up NOW, not merely obtainable: on a gear-air day
+ * Breathe Underwater only flags that the zone outfits will wear the gear, and nothing
+ * is worn yet when this task runs. Dress for it the way the Get Fishy trip does, or
+ * the one attempt is spent on a skip and the day's cheapest Fishy is lost (issue #11).
  */
 function lutzTask(selected) {
   return {
@@ -28025,6 +28033,18 @@ function lutzTask(selected) {
     after: ["Breathe Underwater"],
     // visitLutz spends its one attempt whatever happens, so this always settles.
     completed: () => !lutzFishyAvailable(),
+    outfit: () => {
+      // Page visit, no combat: only breathing matters. Same recipe as Get Fishy — a
+      // familiar that can breathe (or none), and player air from the maximizer unless
+      // an effect already supplies it.
+      var plan = pickUtilityFamiliar();
+      var spec = {
+        familiar: plan.familiar ?? $familiar.none
+      };
+      if (plan.famequip !== undefined) spec.famequip = plan.famequip;
+      if (!playerAirByEffect()) spec.modifier = "adventure underwater";
+      return spec;
+    },
     do: () => {
       visitLutz();
       primeZoneVerdicts(selected);
