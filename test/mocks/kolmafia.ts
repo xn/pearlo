@@ -167,6 +167,10 @@ export type GameState = {
   inventory: Map<Item, number>;
   effects: Map<Effect, number>;
   mallPrices: Map<Item, number>;
+  /** Days since each stored mall price was read. Unset reads as never priced. */
+  mallPriceAges: Map<Item, number>;
+  /** What a live mall search changes, keyed by item. */
+  mallSearchHandlers: Map<Item, () => void>;
   npcPrices: Map<Item, number>;
   historicalPrices: Map<Item, number>;
   /** garbo-lib value() and libram getSaleValue() both read this. */
@@ -225,6 +229,7 @@ export type GameState = {
     buys: BuyCall[];
     uses: UseCall[];
     cliExecutes: string[];
+    mallSearches: { item: Item; maxAge: number }[];
     skillsCast: Skill[];
     hpRestores: number[];
     mpRestores: number[];
@@ -240,6 +245,8 @@ function freshState(): GameState {
     inventory: new Map(),
     effects: new Map(),
     mallPrices: new Map(),
+    mallPriceAges: new Map(),
+    mallSearchHandlers: new Map(),
     npcPrices: new Map(),
     historicalPrices: new Map(),
     saleValues: new Map(),
@@ -300,6 +307,7 @@ function freshState(): GameState {
       buys: [],
       uses: [],
       cliExecutes: [],
+      mallSearches: [],
       skillsCast: [],
       hpRestores: [],
       mpRestores: [],
@@ -461,7 +469,11 @@ export function itemAmount(item: Item): number {
   return __state.inventory.get(item) ?? 0;
 }
 
-export function mallPrice(item: Item): number {
+export function mallPrice(item: Item, maxAge?: number): number {
+  if (maxAge !== undefined && (__state.mallPriceAges.get(item) ?? Infinity) > maxAge) {
+    __state.log.mallSearches.push({ item, maxAge });
+    __state.mallSearchHandlers.get(item)?.();
+  }
   return __state.mallPrices.get(item) ?? 0;
 }
 
