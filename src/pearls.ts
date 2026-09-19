@@ -1,4 +1,4 @@
-import { Quest, Task, CombatStrategy, Outfit, OutfitSpec } from "grimoire-kolmafia";
+import { Quest, Task, CombatStrategy, Outfit } from "grimoire-kolmafia";
 import {
   abort,
   availableAmount,
@@ -22,7 +22,6 @@ import {
 } from "kolmafia";
 import {
   $effect,
-  $familiar,
   $item,
   $location,
   AsdonMartin,
@@ -43,7 +42,7 @@ import {
   wineglassAccessible,
 } from "./combat";
 import { primeZoneVerdicts, resStepWorthIt, turnsForFights, zoneVerdict } from "./economics";
-import { pickUtilityFamiliar, playerAirByEffect, resFamiliarSwitches } from "./familiar";
+import { resFamiliarSwitches } from "./familiar";
 import {
   acquireLucky,
   luckySourceAvailable,
@@ -53,9 +52,10 @@ import {
 } from "./fishy";
 import { abortIfBeatenUp, asdonFualable, fuelUp, handlePostCombatBeatenUp } from "./lib";
 import { WorthIt, castFreeResBuffs, pearlMood, topUpFamiliarWeight, topUpRes } from "./mood";
-import { wineglassMode } from "./organs";
+import { adventuringBlockedBy, wineglassMode } from "./organs";
 import {
   FamiliarMode,
+  buildFishyTripOutfit,
   buildPearlOutfit,
   familiarModeApplies,
   familiarModeFor,
@@ -247,16 +247,10 @@ function lutzTask(selected: PearlSpec[]): Task {
     after: ["Breathe Underwater"],
     // visitLutz spends its one attempt whatever happens, so this always settles.
     completed: () => !lutzFishyAvailable(),
-    outfit: (): OutfitSpec => {
-      // Page visit, no combat: only breathing matters. Same recipe as Get Fishy — a
-      // familiar that can breathe (or none), and player air from the maximizer unless
-      // an effect already supplies it.
-      const plan = pickUtilityFamiliar();
-      const spec: OutfitSpec = { familiar: plan.familiar ?? $familiar.none };
-      if (plan.famequip !== undefined) spec.famequip = plan.famequip;
-      if (!playerAirByEffect()) spec.modifier = "adventure underwater";
-      return spec;
-    },
+    // Page visit, no combat: breathing, plus the organ layer the zones wear — a dress
+    // that drops a spleen extender at the raised cap leaves the character jaundiced
+    // (docs/consumption-reference.md §4, issue #13).
+    outfit: buildFishyTripOutfit,
     do: () => {
       visitLutz();
       primeZoneVerdicts(selected);
@@ -296,6 +290,16 @@ function getFishyTask(selected: PearlSpec[]): Task {
       // The trip outfit doesn't ask for the Peridot, but a copy left equipped by a
       // previous dress survives (this outfit maximizes nothing beyond breathing).
       if (haveEquipped($item`Peridot of Peril`)) cliExecute("unequip Peridot of Peril");
+      // Runs after the dress: an organ still over its limit means the adventure would
+      // be Food Coma / jaundice (a turn each, never The Haggling) and the abort macro
+      // would not see it. Halt before a Lucky! source is spent on it (issue #13).
+      const blocked = adventuringBlockedBy();
+      if (blocked !== undefined) {
+        abort(
+          `pearlo: the Fishy trip cannot adventure as dressed — ${blocked}. ` +
+            "Equip an organ extender (or the wineglass) and rerun.",
+        );
+      }
       if (!acquireLucky(remainingPearlFights(selected))) {
         abort(
           "pearlo: could not acquire Lucky! for the Fishy refresh — every source in " +
@@ -304,16 +308,10 @@ function getFishyTask(selected: PearlSpec[]): Task {
       }
     },
     do: $location`The Brinier Deepers`,
-    outfit: (): OutfitSpec => {
-      // Noncombat trip: only breathing matters. pickUtilityFamiliar guarantees a
-      // familiar that can breathe (or none); the maximizer patches player breathing
-      // only when no effect already covers it.
-      const plan = pickUtilityFamiliar();
-      const spec: OutfitSpec = { familiar: plan.familiar ?? $familiar.none };
-      if (plan.famequip !== undefined) spec.famequip = plan.famequip;
-      if (!playerAirByEffect()) spec.modifier = "adventure underwater";
-      return spec;
-    },
+    // Noncombat trip: breathing, plus the organ layer that keeps adventuring legal at
+    // all (issue #13: dressed for breathing alone, an overfull run landed in Food Coma
+    // ten times over).
+    outfit: buildFishyTripOutfit,
     // With Lucky! up the encounter is guaranteed to be The Haggling; a combat means
     // the plan is broken (out-of-plan monsters here) — fail loudly.
     combat: new CombatStrategy().macro(Macro.abort()),

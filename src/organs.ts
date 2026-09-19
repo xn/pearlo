@@ -158,6 +158,25 @@ export function allOrganEquipment(mode: LiverMode = liverMode()): Item[] {
   });
 }
 
+/**
+ * Why the character cannot adventure as currently dressed — or undefined when it can.
+ * Mafia's limits include the equipped extenders, so this is the live post-dress check:
+ * the stomach or spleen past its limit (Food Coma / jaundiced, each a turn-costing NC
+ * instead of the adventure), or overdrunk without the wineglass.
+ */
+export function adventuringBlockedBy(): string | undefined {
+  if (myFullness() > fullnessLimit()) {
+    return `stomach ${myFullness()}/${fullnessLimit()} (Food Coma)`;
+  }
+  if (mySpleenUse() > spleenLimit()) {
+    return `spleen ${mySpleenUse()}/${spleenLimit()} (jaundiced)`;
+  }
+  if (myInebriety() > inebrietyLimit() && !haveEquipped($item`Drunkula's wineglass`)) {
+    return `liver ${myInebriety()}/${inebrietyLimit()} without Drunkula's wineglass`;
+  }
+  return undefined;
+}
+
 /** Stomach/spleen overages coverable by owned extenders? False → nothing can adventure. */
 export function canFixOvercap(): boolean {
   return (
