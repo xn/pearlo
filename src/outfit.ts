@@ -154,6 +154,43 @@ export function pearlAvoidTerms(spec: PearlSpec): string {
 }
 
 /**
+ * Organ extenders every dress must wear: the required set (no adventuring without
+ * them — Food Coma / jaundice), or every owned one under the overcapped flag.
+ */
+export function organEquipment(mode: LiverMode = liverMode()): Item[] {
+  return args.major.overcapped ? allOrganEquipment(mode) : requiredOrganEquipment(mode);
+}
+
+/** Stooper pinned for its +1 liver, with breathing gear unless an effect covers it. */
+function stooperFamiliarPlan(): FamiliarPlan {
+  return {
+    familiar: $familiar`Stooper`,
+    famequip: familiarBreathesFree()
+      ? undefined
+      : familiarWaterBreathingEquipment.find((i) => have(i)),
+  };
+}
+
+/**
+ * Outfit for a Fishy trip (The Haggling, Lutz): no combat, so breathing is all it
+ * asks the maximizer for — plus whatever keeps the character able to adventure at
+ * all (issue #13): the organ extenders, the wineglass while overdrunk, and Stooper
+ * while its +1 is the liver rescue. Dressing for breathing alone strips every one of
+ * those, since the maximizer treats their slots as free; overfull or overspleened,
+ * the trip then lands in Food Coma instead of The Haggling.
+ */
+export function buildFishyTripOutfit(): OutfitSpec {
+  const mode = liverMode();
+  const equip = [...organEquipment(mode)];
+  if (mode === "wineglass") equip.push($item`Drunkula's wineglass`);
+  const plan = mode === "stooper" ? stooperFamiliarPlan() : pickUtilityFamiliar();
+  const spec: OutfitSpec = { equip, familiar: plan.familiar ?? $familiar.none };
+  if (plan.famequip !== undefined) spec.famequip = plan.famequip;
+  if (!playerAirByEffect()) spec.modifier = "adventure underwater";
+  return spec;
+}
+
+/**
  * Slots the outfit commits before the maximizer gets a say: organ extenders, the
  * overdrunk weapon pair, the lantern gear and the cape's back slot. Override pieces are
  * not included; the caller adds them after the avoid filter. Exported so the profit
@@ -169,7 +206,7 @@ export function pearlForcedEquipment(
 ): { equip: Item[]; secondLantern?: Item } {
   const overdrunk = mode === "wineglass";
   const outfitName = outfitOverride(spec.key);
-  const organEquip = args.major.overcapped ? allOrganEquipment(mode) : requiredOrganEquipment(mode);
+  const organEquip = organEquipment(mode);
   const equip: Item[] = [...organEquip];
 
   if (overdrunk) {
@@ -240,7 +277,7 @@ export function buildPearlOutfit(spec: PearlSpec, familiarMode?: FamiliarMode): 
   // (no adventuring without them); the overcapped flag forces the full set for
   // consumption headroom. A forced corset simply occupies the shirt: the parka never
   // equips and its mode is a harmless no-op; the maximizer chases res elsewhere.
-  const organEquip = args.major.overcapped ? allOrganEquipment() : requiredOrganEquipment();
+  const organEquip = organEquipment();
   const forced = pearlForcedEquipment(spec, liverMode());
   const secondLantern = forced.secondLantern;
   // The cape is pushed below with its mode; keep it out of the shared list.
@@ -269,12 +306,7 @@ export function buildPearlOutfit(spec: PearlSpec, familiarMode?: FamiliarMode): 
         );
       }
     }
-    familiarPlan = {
-      familiar: $familiar`Stooper`,
-      famequip: familiarBreathesFree()
-        ? undefined
-        : familiarWaterBreathingEquipment.find((i) => have(i)),
-    };
+    familiarPlan = stooperFamiliarPlan();
   } else if (override !== undefined) {
     // An override familiar gets breathing gear and nothing else — the Left-Hand Man
     // second-lantern hand-off does not apply to overrides (spec).

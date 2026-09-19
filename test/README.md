@@ -100,6 +100,10 @@ Guidelines:
 - `liver-mode.test.ts` — `chooseLiverConfiguration` scores only zones it will farm.
 - `fishy.test.ts` — `luckyRefreshCosts` cascade ordering, the mall-clover
   worth-gate, and `remainingPearlFights`.
+- `fishy-trip-organs.test.ts` — issue #13: the Get Fishy / Lutz trip outfits carry the
+  organ layer (required extenders, full set under `overcapped`, the wineglass while
+  overdrunk, the Stooper pin), and Get Fishy's `prepare` halts before spending a Lucky!
+  source when an organ is still over its limit as dressed.
 
 ## Deliberately NOT covered
 
