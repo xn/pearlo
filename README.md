@@ -41,7 +41,12 @@ Useful options:
 - `drunkweapon="June cleaver"` — weapon to wield while farming overdrunk (default shown)
 - `voa=N` — meat value of an adventure for all profit decisions (default: your
   `valueOfAdventure` mafia preference)
-- `force` — farm zones even when the profit model expects them to lose meat
+- `force` — farm zones even when the profit model expects them to lose meat (does not
+  lift the rollover adventure floor, see `strand`, or the overdrunk one-shot halt, see
+  `leroyjenkins`)
+- `leroyjenkins` — overdrunk only: fight on when the wielded weapon can't guarantee a
+  one-shot of the zone's toughest monster, instead of halting (attack-only combat can't
+  stun or heal mid-fight; the profit model still prices every fight as a one-shot)
 - `strand` — permit stranding partial pearl progress: farm selected zones down to the
   halt floor even mid-pearl (screech rundown use; pair with `force` and `halt`)
 - `overcapped` — force-equip **all** owned organ extenders (angelbone/devilbone gear)
