@@ -162,9 +162,9 @@ export function main(command?: string): void {
         const attack = weaponAttackPlan(p.maxDef, p.maxHp, simWeapon);
         const oneShotNote = attack.canOneShot
           ? ""
-          : args.major.leroyjenkins
-            ? " (leroyjenkins: would fight anyway)"
-            : " (would halt; leroyjenkins overrides)";
+          : args.major.leeroyjenkins
+            ? " (leeroyjenkins: would fight anyway)"
+            : " (would halt; leeroyjenkins overrides)";
         print(
           `  attack floor (${simWeapon ?? "equipped weapon"}, ${attack.ranged ? "ranged" : "melee"}) vs ${p.maxHp} HP: ${attack.damage} — ` +
             `hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed (need ${requiredAttackFor(p.maxDef)} ${attack.ranged ? "Moxie" : "Muscle"} vs Def ${p.maxDef})`} — ` +

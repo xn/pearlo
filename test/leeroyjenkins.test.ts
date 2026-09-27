@@ -1,7 +1,7 @@
 /**
  * The overdrunk one-shot halt and its override. Wineglass combat is attack-only, so
  * by default a zone's prepare aborts unless the wielded weapon is sure to one-shot the
- * zone's toughest monster. `leroyjenkins` charges in anyway: the halt becomes a
+ * zone's toughest monster. `leeroyjenkins` charges in anyway: the halt becomes a
  * warning and the fight proceeds.
  */
 import { describe, expect, it } from "vitest";
@@ -33,10 +33,10 @@ describe("overdrunk one-shot halt", () => {
     expect(() => prepare()).toThrow(/can't guarantee a one-shot/);
   });
 
-  it("leroyjenkins turns the halt into a warning and fights anyway", async () => {
+  it("leeroyjenkins turns the halt into a warning and fights anyway", async () => {
     const { g, prepare } = await overdrunkZone();
-    g.args.major.leroyjenkins = true;
+    g.args.major.leeroyjenkins = true;
     expect(() => prepare()).not.toThrow();
-    expect(g.state.log.prints.some((l) => /leroyjenkins/.test(l))).toBe(true);
+    expect(g.state.log.prints.some((l) => /leeroyjenkins/.test(l))).toBe(true);
   });
 });
