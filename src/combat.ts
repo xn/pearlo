@@ -1,5 +1,6 @@
 import {
   Item,
+  booleanModifier,
   canEquip,
   equippedItem,
   getPower,
@@ -242,13 +243,27 @@ export function requiredAttackFor(targetDef: number): number {
 }
 
 /**
+ * A "Cannot miss" source in play: mafia's boolean modifier "Attacks Can't Miss", carried
+ * by the June cleaver (default drunkweapon), Thor's Pliers, the Red Fox glove, and
+ * effects such as Comic Violence and Song of Battle. The player-wide reading covers
+ * whatever is worn or running; the weapon's own reading covers the sim, which judges
+ * an owned drunkweapon before anything is equipped. Per the wiki (June cleaver notes),
+ * "Cannot miss" also rules out glancing blows and fumbles.
+ */
+export function attacksCannotMiss(weapon: Item): boolean {
+  return booleanModifier("Attacks Can't Miss") || booleanModifier(weapon, "Attacks Can't Miss");
+}
+
+/**
  * Conservative plain-attack plan from the EQUIPPED weapon (wiki Weapon_Damage /
  * Hit_Chance, fetched 2026-08-08): damage =
  * floor((max(0, floor(stat×mult) − Def) + minWeaponRoll + flatWD [+ flatRanged]) × (1+pct%))
  * + elemental; ranged uses Moxie×0.75 and adds flat Ranged Damage inside the multiplier;
  * mysticality weapons hit and scale with Muscle. Hit is guaranteed when
- * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20). Residual risk the model accepts:
- * fumbles (~1/22) deal zero damage regardless of any "can't miss" source.
+ * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20), or when a "Cannot miss" source
+ * is in play (attacksCannotMiss) — that route ignores the attack stat entirely, though
+ * the damage's stat term still scales with it. Residual risk the model accepts on the
+ * stat route: fumbles (~1/22) deal zero damage.
  */
 export function weaponAttackPlan(
   targetDef: number,
@@ -269,7 +284,6 @@ export function weaponAttackPlan(
     numericModifier("Sleaze Damage");
   const statTerm = Math.max(0, Math.floor(attackStat * (ranged ? 0.75 : 1)) - targetDef);
   const damage = Math.floor((statTerm + minRoll + flatWD + flatRanged) * (1 + pctWD)) + elemental;
-  const r = 5 + Math.floor(Math.max(targetDef - 200, 0) / 20);
-  const hitGuaranteed = attackStat - r >= targetDef + 5;
+  const hitGuaranteed = attacksCannotMiss(weapon) || attackStat >= requiredAttackFor(targetDef);
   return { damage, hitGuaranteed, canOneShot: hitGuaranteed && damage >= targetHp, ranged };
 }

@@ -160,10 +160,15 @@ export function main(command?: string): void {
       if (simDrunk) {
         const simWeapon = have(args.major.drunkweapon) ? args.major.drunkweapon : undefined;
         const attack = weaponAttackPlan(p.maxDef, p.maxHp, simWeapon);
+        const oneShotNote = attack.canOneShot
+          ? ""
+          : args.major.leroyjenkins
+            ? " (leroyjenkins: would fight anyway)"
+            : " (would halt; leroyjenkins overrides)";
         print(
           `  attack floor (${simWeapon ?? "equipped weapon"}, ${attack.ranged ? "ranged" : "melee"}) vs ${p.maxHp} HP: ${attack.damage} — ` +
             `hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed (need ${requiredAttackFor(p.maxDef)} ${attack.ranged ? "Moxie" : "Muscle"} vs Def ${p.maxDef})`} — ` +
-            `one-shot: ${attack.canOneShot}`,
+            `one-shot: ${attack.canOneShot}${oneShotNote}`,
           attack.canOneShot ? "blue" : "red",
         );
       } else {

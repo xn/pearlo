@@ -175,7 +175,7 @@ export type GameState = {
   historicalPrices: Map<Item, number>;
   /** garbo-lib value() and libram getSaleValue() both read this. */
   saleValues: Map<Item, number>;
-  itemMods: Map<Item, Record<string, number>>;
+  itemMods: Map<Item, Record<string, number | boolean>>;
   itemEffects: Map<Item, Effect>;
   itemSlots: Map<Item, Slot>;
   itemDailyUses: Map<Item, number>;
@@ -353,6 +353,9 @@ export function booleanModifier(a: unknown, b?: string): boolean {
   if (a instanceof Effect && b !== undefined) {
     return Boolean(__state.effectMods.get(a)?.[b]);
   }
+  if (a instanceof Item && b !== undefined) {
+    return Boolean(__state.itemMods.get(a)?.[b]);
+  }
   return false;
 }
 
@@ -425,7 +428,8 @@ export function getOutfits(): string[] {
 }
 
 export function getPower(item: Item): number {
-  return __state.itemMods.get(item)?.Power ?? 0;
+  const power = __state.itemMods.get(item)?.Power;
+  return typeof power === "number" ? power : 0;
 }
 
 export function getWorkshed(): Item {
@@ -564,7 +568,10 @@ export function numericModifier(...args: unknown[]): number {
   }
   if (args.length === 2) {
     const [thing, modifier] = args as [unknown, string];
-    if (thing instanceof Item) return __state.itemMods.get(thing)?.[modifier] ?? 0;
+    if (thing instanceof Item) {
+      const v = __state.itemMods.get(thing)?.[modifier];
+      return typeof v === "number" ? v : 0;
+    }
     if (thing instanceof Effect) return __state.effectMods.get(thing)?.[modifier] ?? 0;
     return 0;
   }
@@ -630,7 +637,8 @@ export function use(a: Item | number, b?: Item | number): boolean {
   __state.inventory.set(item, Math.max(0, owned - count));
   const effect = __state.itemEffects.get(item);
   if (effect !== undefined && effect !== Effect.none) {
-    const duration = __state.itemMods.get(item)?.["Effect Duration"] ?? 1;
+    const configured = __state.itemMods.get(item)?.["Effect Duration"];
+    const duration = typeof configured === "number" ? configured : 1;
     __state.effects.set(effect, (__state.effects.get(effect) ?? 0) + count * duration);
   }
   return true;

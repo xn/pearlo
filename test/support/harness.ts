@@ -160,6 +160,7 @@ function makeTools(mocks: Mocks, state: GameState): Tools {
 
 export type Game = Tools & {
   zones: typeof import("../../src/zones");
+  combat: typeof import("../../src/combat");
   economics: typeof import("../../src/economics");
   mood: typeof import("../../src/mood");
   organs: typeof import("../../src/organs");
@@ -181,6 +182,7 @@ export async function loadGame(configure?: (tools: Tools) => void): Promise<Game
   const tools = makeTools(mocks, state);
   configure?.(tools);
   const zones = await import("../../src/zones");
+  const combat = await import("../../src/combat");
   const argsModule = await import("../../src/args");
   const organs = await import("../../src/organs");
   const outfit = await import("../../src/outfit");
@@ -192,6 +194,7 @@ export async function loadGame(configure?: (tools: Tools) => void): Promise<Game
   return {
     ...tools,
     zones,
+    combat,
     economics,
     mood,
     organs,

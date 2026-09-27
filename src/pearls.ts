@@ -451,14 +451,24 @@ function pearlTask(spec: PearlSpec): Task {
       if (wineglassMode()) {
         // Wineglass combat is attack-only: no stuns, no items. Policy (user): halt
         // entirely unless the equipped weapon one-shots the zone's toughest monster
-        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted.
+        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted. leroyjenkins
+        // (user request) downgrades the halt to a warning and charges in anyway.
         const attack = weaponAttackPlan(spec.maxDef, spec.maxHp);
         if (!attack.canOneShot) {
-          abort(
-            `pearlo: overdrunk in ${spec.loc} but the equipped weapon can't guarantee a one-shot ` +
-              `(damage floor ${attack.damage} vs ${spec.maxHp} HP, hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed vs Def ${spec.maxDef}`}). ` +
-              `Attack-only combat can't stun — improve weapon damage/${attack.ranged ? "Moxie" : "Muscle"} or wait for rollover.`,
-          );
+          const shortfall =
+            `overdrunk in ${spec.loc} but the equipped weapon can't guarantee a one-shot ` +
+            `(damage floor ${attack.damage} vs ${spec.maxHp} HP, hit ${attack.hitGuaranteed ? "guaranteed" : `NOT guaranteed vs Def ${spec.maxDef}`}).`;
+          if (args.major.leroyjenkins) {
+            print(
+              `pearlo: ${shortfall} leroyjenkins is set — fighting on with attack-only combat that can't stun or heal mid-fight.`,
+              "red",
+            );
+          } else {
+            abort(
+              `pearlo: ${shortfall} ` +
+                `Attack-only combat can't stun — improve weapon damage/${attack.ranged ? "Moxie" : "Muscle"}, wait for rollover, or set leroyjenkins to fight anyway.`,
+            );
+          }
         }
       }
       if (args.major.requirecap) {

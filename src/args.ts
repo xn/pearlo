@@ -67,7 +67,11 @@ export const args = Args.create(
         default: get("valueOfAdventure"),
       }),
       force: Args.flag({
-        help: "Farm zones even when the profit model expects them to lose meat.",
+        help: "Farm zones even when the profit model expects them to lose meat. Does not lift the rollover adventure floor (see strand) or the overdrunk one-shot halt (see leroyjenkins).",
+        default: false,
+      }),
+      leroyjenkins: Args.flag({
+        help: "Overdrunk (wineglass) only: fight on when the wielded weapon can't guarantee a one-shot of the zone's toughest monster, instead of halting. Attack-only combat can't stun or heal mid-fight, and the profit model still prices every fight as a one-shot.",
         default: false,
       }),
       strand: Args.flag({

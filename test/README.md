@@ -100,6 +100,11 @@ Guidelines:
 - `liver-mode.test.ts` — `chooseLiverConfiguration` scores only zones it will farm.
 - `fishy.test.ts` — `luckyRefreshCosts` cascade ordering, the mall-clover
   worth-gate, and `remainingPearlFights`.
+- `combat.test.ts` — `weaponAttackPlan`'s hit guarantee: the wiki Muscle-vs-Defense
+  threshold, and the "Attacks Can't Miss" route (June cleaver and friends) that ignores
+  Muscle for the hit while the damage term still scales with it.
+- `leroyjenkins.test.ts` — the overdrunk one-shot halt in `pearlTask.prepare`, and the
+  `leroyjenkins` flag that downgrades it to a warning.
 - `fishy-trip-organs.test.ts` — issue #13: the Get Fishy / Lutz trip outfits carry the
   organ layer (required extenders, full set under `overcapped`, the wineglass while
   overdrunk, the Stooper pin), and Get Fishy's `prepare` halts before spending a Lucky!
