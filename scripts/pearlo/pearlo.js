@@ -23415,10 +23415,10 @@ var args = Args.create("pearlo", "This is a script for farming unblemished pearl
       default: get$2("valueOfAdventure")
     }),
     force: Args.flag({
-      help: "Farm zones even when the profit model expects them to lose meat. Does not lift the rollover adventure floor (see strand) or the overdrunk one-shot halt (see leroyjenkins).",
+      help: "Farm zones even when the profit model expects them to lose meat. Does not lift the rollover adventure floor (see strand) or the overdrunk one-shot halt (see leeroyjenkins).",
       default: false
     }),
-    leroyjenkins: Args.flag({
+    leeroyjenkins: Args.flag({
       help: "Overdrunk (wineglass) only: fight on when the wielded weapon can't guarantee a one-shot of the zone's toughest monster, instead of halting. Attack-only combat can't stun or heal mid-fight, and the profit model still prices every fight as a one-shot.",
       default: false
     }),
@@ -28287,15 +28287,15 @@ function pearlTask(spec) {
       if (wineglassMode()) {
         // Wineglass combat is attack-only: no stuns, no items. Policy (user): halt
         // entirely unless the equipped weapon one-shots the zone's toughest monster
-        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted. leroyjenkins
+        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted. leeroyjenkins
         // (user request) downgrades the halt to a warning and charges in anyway.
         var attack = weaponAttackPlan(spec.maxDef, spec.maxHp);
         if (!attack.canOneShot) {
           var shortfall = "overdrunk in ".concat(spec.loc, " but the equipped weapon can't guarantee a one-shot ") + "(damage floor ".concat(attack.damage, " vs ").concat(spec.maxHp, " HP, hit ").concat(attack.hitGuaranteed ? "guaranteed" : "NOT guaranteed vs Def ".concat(spec.maxDef), ").");
-          if (args.major.leroyjenkins) {
-            require$$0.print("pearlo: ".concat(shortfall, " leroyjenkins is set \u2014 fighting on with attack-only combat that can't stun or heal mid-fight."), "red");
+          if (args.major.leeroyjenkins) {
+            require$$0.print("pearlo: ".concat(shortfall, " leeroyjenkins is set \u2014 fighting on with attack-only combat that can't stun or heal mid-fight."), "red");
           } else {
-            require$$0.abort("pearlo: ".concat(shortfall, " ") + "Attack-only combat can't stun \u2014 improve weapon damage/".concat(attack.ranged ? "Moxie" : "Muscle", ", wait for rollover, or set leroyjenkins to fight anyway."));
+            require$$0.abort("pearlo: ".concat(shortfall, " ") + "Attack-only combat can't stun \u2014 improve weapon damage/".concat(attack.ranged ? "Moxie" : "Muscle", ", wait for rollover, or set leeroyjenkins to fight anyway."));
           }
         }
       }
@@ -28538,7 +28538,7 @@ function main(command) {
         if (simDrunk) {
           var simWeapon = have$1a(args.major.drunkweapon) ? args.major.drunkweapon : undefined;
           var attack = weaponAttackPlan(p.maxDef, p.maxHp, simWeapon);
-          var oneShotNote = attack.canOneShot ? "" : args.major.leroyjenkins ? " (leroyjenkins: would fight anyway)" : " (would halt; leroyjenkins overrides)";
+          var oneShotNote = attack.canOneShot ? "" : args.major.leeroyjenkins ? " (leeroyjenkins: would fight anyway)" : " (would halt; leeroyjenkins overrides)";
           require$$0.print("  attack floor (".concat(simWeapon ?? "equipped weapon", ", ").concat(attack.ranged ? "ranged" : "melee", ") vs ").concat(p.maxHp, " HP: ").concat(attack.damage, " \u2014 ") + "hit ".concat(attack.hitGuaranteed ? "guaranteed" : "NOT guaranteed (need ".concat(requiredAttackFor(p.maxDef), " ").concat(attack.ranged ? "Moxie" : "Muscle", " vs Def ").concat(p.maxDef, ")"), " \u2014 ") + "one-shot: ".concat(attack.canOneShot).concat(oneShotNote), attack.canOneShot ? "blue" : "red");
         } else {
           var plan = pearlDamagePlan(p, mode);
