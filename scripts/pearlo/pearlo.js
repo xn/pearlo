@@ -23415,7 +23415,11 @@ var args = Args.create("pearlo", "This is a script for farming unblemished pearl
       default: get$2("valueOfAdventure")
     }),
     force: Args.flag({
-      help: "Farm zones even when the profit model expects them to lose meat.",
+      help: "Farm zones even when the profit model expects them to lose meat. Does not lift the rollover adventure floor (see strand) or the overdrunk one-shot halt (see leroyjenkins).",
+      default: false
+    }),
+    leroyjenkins: Args.flag({
+      help: "Overdrunk (wineglass) only: fight on when the wielded weapon can't guarantee a one-shot of the zone's toughest monster, instead of halting. Attack-only combat can't stun or heal mid-fight, and the profit model still prices every fight as a one-shot.",
       default: false
     }),
     strand: Args.flag({
@@ -24053,13 +24057,27 @@ function requiredAttackFor(targetDef) {
 }
 
 /**
+ * A "Cannot miss" source in play: mafia's boolean modifier "Attacks Can't Miss", carried
+ * by the June cleaver (default drunkweapon), Thor's Pliers, the Red Fox glove, and
+ * effects such as Comic Violence and Song of Battle. The player-wide reading covers
+ * whatever is worn or running; the weapon's own reading covers the sim, which judges
+ * an owned drunkweapon before anything is equipped. Per the wiki (June cleaver notes),
+ * "Cannot miss" also rules out glancing blows and fumbles.
+ */
+function attacksCannotMiss(weapon) {
+  return require$$0.booleanModifier("Attacks Can't Miss") || require$$0.booleanModifier(weapon, "Attacks Can't Miss");
+}
+
+/**
  * Conservative plain-attack plan from the EQUIPPED weapon (wiki Weapon_Damage /
  * Hit_Chance, fetched 2026-08-08): damage =
  * floor((max(0, floor(stat×mult) − Def) + minWeaponRoll + flatWD [+ flatRanged]) × (1+pct%))
  * + elemental; ranged uses Moxie×0.75 and adds flat Ranged Damage inside the multiplier;
  * mysticality weapons hit and scale with Muscle. Hit is guaranteed when
- * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20). Residual risk the model accepts:
- * fumbles (~1/22) deal zero damage regardless of any "can't miss" source.
+ * stat − R ≥ Def + 5 with R = 5 + floor((Def−200)/20), or when a "Cannot miss" source
+ * is in play (attacksCannotMiss) — that route ignores the attack stat entirely, though
+ * the damage's stat term still scales with it. Residual risk the model accepts on the
+ * stat route: fumbles (~1/22) deal zero damage.
  */
 function weaponAttackPlan(targetDef, targetHp) {
   var weapon = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : require$$0.equippedItem($slot(_templateObject28$4 || (_templateObject28$4 = _taggedTemplateLiteral(["weapon"]))));
@@ -24072,8 +24090,7 @@ function weaponAttackPlan(targetDef, targetHp) {
   var elemental = require$$0.numericModifier("Hot Damage") + require$$0.numericModifier("Cold Damage") + require$$0.numericModifier("Spooky Damage") + require$$0.numericModifier("Stench Damage") + require$$0.numericModifier("Sleaze Damage");
   var statTerm = Math.max(0, Math.floor(attackStat * (ranged ? 0.75 : 1)) - targetDef);
   var damage = Math.floor((statTerm + minRoll + flatWD + flatRanged) * (1 + pctWD)) + elemental;
-  var r = 5 + Math.floor(Math.max(targetDef - 200, 0) / 20);
-  var hitGuaranteed = attackStat - r >= targetDef + 5;
+  var hitGuaranteed = attacksCannotMiss(weapon) || attackStat >= requiredAttackFor(targetDef);
   return {
     damage,
     hitGuaranteed,
@@ -28270,10 +28287,16 @@ function pearlTask(spec) {
       if (wineglassMode()) {
         // Wineglass combat is attack-only: no stuns, no items. Policy (user): halt
         // entirely unless the equipped weapon one-shots the zone's toughest monster
-        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted.
+        // with a guaranteed hit. Residual ~1/22 fumble risk is accepted. leroyjenkins
+        // (user request) downgrades the halt to a warning and charges in anyway.
         var attack = weaponAttackPlan(spec.maxDef, spec.maxHp);
         if (!attack.canOneShot) {
-          require$$0.abort("pearlo: overdrunk in ".concat(spec.loc, " but the equipped weapon can't guarantee a one-shot ") + "(damage floor ".concat(attack.damage, " vs ").concat(spec.maxHp, " HP, hit ").concat(attack.hitGuaranteed ? "guaranteed" : "NOT guaranteed vs Def ".concat(spec.maxDef), "). ") + "Attack-only combat can't stun \u2014 improve weapon damage/".concat(attack.ranged ? "Moxie" : "Muscle", " or wait for rollover."));
+          var shortfall = "overdrunk in ".concat(spec.loc, " but the equipped weapon can't guarantee a one-shot ") + "(damage floor ".concat(attack.damage, " vs ").concat(spec.maxHp, " HP, hit ").concat(attack.hitGuaranteed ? "guaranteed" : "NOT guaranteed vs Def ".concat(spec.maxDef), ").");
+          if (args.major.leroyjenkins) {
+            require$$0.print("pearlo: ".concat(shortfall, " leroyjenkins is set \u2014 fighting on with attack-only combat that can't stun or heal mid-fight."), "red");
+          } else {
+            require$$0.abort("pearlo: ".concat(shortfall, " ") + "Attack-only combat can't stun \u2014 improve weapon damage/".concat(attack.ranged ? "Moxie" : "Muscle", ", wait for rollover, or set leroyjenkins to fight anyway."));
+          }
         }
       }
       if (args.major.requirecap) {
@@ -28515,7 +28538,8 @@ function main(command) {
         if (simDrunk) {
           var simWeapon = have$1a(args.major.drunkweapon) ? args.major.drunkweapon : undefined;
           var attack = weaponAttackPlan(p.maxDef, p.maxHp, simWeapon);
-          require$$0.print("  attack floor (".concat(simWeapon ?? "equipped weapon", ", ").concat(attack.ranged ? "ranged" : "melee", ") vs ").concat(p.maxHp, " HP: ").concat(attack.damage, " \u2014 ") + "hit ".concat(attack.hitGuaranteed ? "guaranteed" : "NOT guaranteed (need ".concat(requiredAttackFor(p.maxDef), " ").concat(attack.ranged ? "Moxie" : "Muscle", " vs Def ").concat(p.maxDef, ")"), " \u2014 ") + "one-shot: ".concat(attack.canOneShot), attack.canOneShot ? "blue" : "red");
+          var oneShotNote = attack.canOneShot ? "" : args.major.leroyjenkins ? " (leroyjenkins: would fight anyway)" : " (would halt; leroyjenkins overrides)";
+          require$$0.print("  attack floor (".concat(simWeapon ?? "equipped weapon", ", ").concat(attack.ranged ? "ranged" : "melee", ") vs ").concat(p.maxHp, " HP: ").concat(attack.damage, " \u2014 ") + "hit ".concat(attack.hitGuaranteed ? "guaranteed" : "NOT guaranteed (need ".concat(requiredAttackFor(p.maxDef), " ").concat(attack.ranged ? "Moxie" : "Muscle", " vs Def ").concat(p.maxDef, ")"), " \u2014 ") + "one-shot: ".concat(attack.canOneShot).concat(oneShotNote), attack.canOneShot ? "blue" : "red");
         } else {
           var plan = pearlDamagePlan(p, mode);
           require$$0.print("  saucegeyser floor (planned outfit) vs ".concat(p.maxHp, " HP: ").concat(plan.perCast, " \u2192 ").concat(plan.casts, " cast(s)/fight, ").concat(plan.mpPerFight, " MP/fight"));
