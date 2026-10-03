@@ -23,7 +23,7 @@ import {
 } from "./economics";
 import { PearloEngine } from "./engine";
 import { predictedPlayerAirByEffect } from "./familiar";
-import { freeFishyReport, luckySourceReport } from "./fishy";
+import { fishFactReport, freeFishyReport, luckySourceReport } from "./fishy";
 import { castSharedResBuffs, uncastResBuffBonus } from "./mood";
 import {
   allOrganEquipment,
@@ -107,6 +107,7 @@ export function main(command?: string): void {
     print(` pearls selected: ${selected.map((p) => p.key).join(", ")}`);
     print(` can breathe underwater: ${canBreathUnderwater()}`);
     print(freeFishyReport());
+    print(fishFactReport());
     for (const line of luckySourceReport()) print(line);
     print(` adventures available: ${myAdventures()}`);
     for (const line of organStatusReport()) print(line);

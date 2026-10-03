@@ -36,7 +36,7 @@ import { args, outfitOverride } from "./args";
 import {
   buildPearlMacro,
   buildWandererMacro,
-  damagePlan,
+  pearlFightPlan,
   WANDERER_MONSTERS,
   weaponAttackPlan,
   wineglassAccessible,
@@ -45,6 +45,8 @@ import { primeZoneVerdicts, resStepWorthIt, turnsForFights, zoneVerdict } from "
 import { resFamiliarSwitches } from "./familiar";
 import {
   acquireLucky,
+  fishFactApplies,
+  fishThisFight,
   luckySourceAvailable,
   lutzFishyAvailable,
   remainingPearlFights,
@@ -282,6 +284,9 @@ function getFishyTask(selected: PearlSpec[]): Task {
       !lutzFishyAvailable() &&
       !(have($item`fishy pipe`) && !get("_fishyPipeUsed")) &&
       remainingPearlFights(selected) > 0 &&
+      // Book of Facts fish refresh Fishy inside the pearl fights themselves — no
+      // clover, no trip turn — so the Lucky! cascade stands down while they apply.
+      !selected.some((spec) => !get(spec.obtained) && fishFactApplies(spec)) &&
       (have($effect`Lucky!`) || luckySourceAvailable(remainingPearlFights(selected))) &&
       myAdventures() - args.debug.halt >= (haveEffect($effect`Fishy`) > 0 ? 1 : 2),
     prepare: () => {
@@ -330,7 +335,7 @@ function turnsNeeded(spec: PearlSpec): number {
   // Lucky! refreshes are deliberately not counted: Get Fishy preempts zones while
   // sources remain, and counting them here would approve zones that strand when the
   // cascade comes up dry.
-  return turnsForFights(fights);
+  return turnsForFights(fights, fishFactApplies(spec));
 }
 
 /** The profit model's answer to "does this resistance step still pay", for one zone. */
@@ -430,14 +435,20 @@ function pearlTask(spec: PearlSpec): Task {
     prepare: () => {
       abortIfBeatenUp(`before adventuring in ${spec.loc}`);
       cleaverQueueBefore = get("juneCleaverQueue");
-      const plan = damagePlan(spec.maxHp); // post-dress: real equipped modifiers
+      // post-dress: real equipped modifiers, and whether this fight becomes some fish
+      const plan = pearlFightPlan(spec, fishThisFight(spec));
       pearlMood(spec, plan.mpPerFight, worthItFor(spec), turnsForFights);
       // Only now is the outfit both dressed and buffed, so only now is its resistance
       // worth measuring against the cap.
       if (escalateFamiliarIfShort(spec)) {
         // A kept escalation changes both familiar and cast count: re-run the mood so the
         // MP buffer and weight potions match the build we actually fight in.
-        pearlMood(spec, damagePlan(spec.maxHp).mpPerFight, worthItFor(spec), turnsForFights);
+        pearlMood(
+          spec,
+          pearlFightPlan(spec, fishThisFight(spec)).mpPerFight,
+          worthItFor(spec),
+          turnsForFights,
+        );
       }
       // Last, so the free resistance — buffs, then the familiar switch — is already
       // counted and we only ever buy the tier none of it reached.
@@ -514,7 +525,10 @@ function pearlTask(spec: PearlSpec): Task {
     // pre-mood: at worst conservative (a spare Noodles cast before buffs land).
     combat: new CombatStrategy()
       .macro(() => buildWandererMacro(), WANDERER_MONSTERS)
-      .macro(() => buildPearlMacro(spec, damagePlan(spec.maxHp))),
+      .macro(() => {
+        const fish = fishThisFight(spec);
+        return buildPearlMacro(spec, pearlFightPlan(spec, fish), fish);
+      }),
     limit: { soft: 30 },
   };
 }

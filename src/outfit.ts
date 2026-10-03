@@ -18,6 +18,7 @@ import {
   playerAirByEffect,
   resFamiliarSwitches,
 } from "./familiar";
+import { MONODENT, fishMaxxed, fishWanted } from "./fishy";
 import {
   LiverMode,
   allOrganEquipment,
@@ -48,6 +49,17 @@ const stooperNoticePrinted = new Set<string>();
 // per-zone-per-session — same rationale as stooperNoticePrinted.
 const avoidNoticePrinted = new Set<string>();
 const collisionNoticePrinted = new Set<string>();
+const monodentNoticePrinted = new Set<string>();
+
+/**
+ * A saved outfit's pieces with the Monodent in hand: kept as-is when the outfit already
+ * carries it (either hand), otherwise it displaces the saved weapon (user decision
+ * 2026-10-03) — the off-hand stays the outfit's.
+ */
+function withMonodent(pieces: Item[]): Item[] {
+  if (pieces.includes(MONODENT)) return pieces;
+  return [...pieces.filter((p) => toSlot(p) !== $slot`weapon`), MONODENT];
+}
 
 /**
  * How a zone spends its familiar slot. "utility" is the default; a zone escalates to
@@ -203,6 +215,10 @@ export function pearlForcedEquipment(
   // The profit model prices before the breathing task runs, so it passes its predicted
   // air; the dress passes what is actually up. The back slot's fate follows from it.
   airByEffect: () => boolean = playerAirByEffect,
+  // Whether the Monodent takes the weapon slot. The models plan with the standing
+  // answer (fishMaxxing); the dress passes the per-fight one, which also covers the
+  // one fight in ten that an as-needed fish refreshes Fishy.
+  fish: boolean = fishMaxxed(spec),
 ): { equip: Item[]; secondLantern?: Item } {
   const overdrunk = mode === "wineglass";
   const outfitName = outfitOverride(spec.key);
@@ -234,6 +250,8 @@ export function pearlForcedEquipment(
     );
     equip.push(...lanterns.equip);
     secondLantern = lanterns.secondOffhand;
+    // Weapon slot, not off-hand: the off-hand is the lantern's.
+    if (fish) equip.push(MONODENT);
     // canEquip as well as have: the speculation drops a configuration whose forced gear
     // cannot be worn, so an owned-but-restricted cape would price the zone at zero.
     const cape = $item`unwrapped knock-off retro superhero cape`;
@@ -255,7 +273,8 @@ export function pearlPlannedEquipment(
   const outfitName = outfitOverride(spec.key);
   if (outfitName === undefined) return [...equip];
   const avoid = pearlAvoidItems(spec);
-  return [...equip, ...outfitPieces(outfitName).filter((p) => !avoid.includes(p))];
+  const pieces = outfitPieces(outfitName).filter((p) => !avoid.includes(p));
+  return [...equip, ...(fishMaxxed(spec) ? withMonodent(pieces) : pieces)];
 }
 
 /**
@@ -278,7 +297,7 @@ export function buildPearlOutfit(spec: PearlSpec, familiarMode?: FamiliarMode): 
   // consumption headroom. A forced corset simply occupies the shirt: the parka never
   // equips and its mode is a harmless no-op; the maximizer chases res elsewhere.
   const organEquip = organEquipment();
-  const forced = pearlForcedEquipment(spec, liverMode());
+  const forced = pearlForcedEquipment(spec, liverMode(), playerAirByEffect, fishWanted(spec));
   const secondLantern = forced.secondLantern;
   // The cape is pushed below with its mode; keep it out of the shared list.
   const cape = $item`unwrapped knock-off retro superhero cape`;
@@ -378,7 +397,17 @@ export function buildPearlOutfit(spec: PearlSpec, familiarMode?: FamiliarMode): 
       }
     }
 
-    equip.push(...kept);
+    // Fish fights override the saved weapon with the Monodent, said once per zone.
+    const worn = fishWanted(spec) ? withMonodent(kept) : kept;
+    const displaced = kept.filter((p) => !worn.includes(p));
+    if (displaced.length > 0 && !monodentNoticePrinted.has(spec.key)) {
+      monodentNoticePrinted.add(spec.key);
+      print(
+        `pearlo: ${spec.key} outfit override wields the Monodent of the Sea in place of ` +
+          `${displaced.join(", ")} on fish fights`,
+      );
+    }
+    equip.push(...worn);
     if (kept.includes($item`Jurassic Parka`)) modes.parka = spec.parkaMode;
     const breathing = breathingKeywords(familiarPlan).replace(/^, /, "");
     const result: OutfitSpec = { equip, modes, avoid };

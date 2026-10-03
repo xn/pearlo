@@ -28,10 +28,12 @@ import { args, familiarOverride, outfitOverride } from "./args";
 import { DamagePlan, damagePlan, wineglassAccessible } from "./combat";
 import { familiarBreathesFree, predictedPlayerAirByEffect, resFamiliarSwitches } from "./familiar";
 import {
+  FISH_FACT_FISHY_TURNS,
   FISHY_PIPE_TURNS,
   HAGGLING_FISHY_TURNS,
   LUTZ_FISHY_TURNS,
   luckyRefreshCosts,
+  fishFactApplies,
   lutzFishyAvailable,
   refreshNetTurns,
 } from "./fishy";
@@ -147,8 +149,11 @@ const MAX_MODEL_REFRESHES = 6;
  * arithmetic without the refresh cascade — the executor's sizing figure, where the
  * live pool is ground truth. The gate sizes with the threaded budget instead.
  */
-export function turnsForFights(fights: number): number {
+export function turnsForFights(fights: number, fish = false): number {
   const pool = baseFishyFights();
+  // Fish-refreshed zones never lapse once Fishy is up: only a cold start pays double,
+  // for the one fight that summons the first fish.
+  if (fish) return fights + (pool > 0 || fights === 0 ? 0 : 1);
   const covered = Math.min(pool, fights);
   return covered + (fights - covered) * 2;
 }
@@ -614,7 +619,18 @@ function costZone(
   let refreshesUsed = 0;
   let refreshCost = 0;
   let fishyUsed = Math.min(fights, pool);
-  while (fishyUsed < fights && refreshCosts.length > 0) {
+  // Book of Facts fish: each one is +10 Fishy inside a fight already being fought, so
+  // the zone never lapses and no Lucky! refresh is worth buying. A cold start pays
+  // double for the first fight only. As needed, a fish comes on the last Fishy turn,
+  // so at least 1 turn is always left over; fishMaxxing banks 10 per fight.
+  const fish = fishFactApplies(spec) && !wineglass;
+  if (fish) {
+    fishyUsed = pool > 0 ? fights : Math.max(0, fights - 1);
+    pool = args.resources.fishMaxxing
+      ? pool + FISH_FACT_FISHY_TURNS * fights
+      : fishyUsed + Math.max(1, pool - fights);
+  }
+  while (!fish && fishyUsed < fights && refreshCosts.length > 0) {
     const meat = refreshCosts[0];
     if (refreshNetTurns(fights - fishyUsed) * args.major.voa < meat) break;
     refreshCosts.shift();

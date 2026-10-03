@@ -13,6 +13,7 @@ import {
 } from "kolmafia";
 import { $item, $monsters, $skill, $slot, $stat, Macro, get, have } from "libram";
 
+import { TALK_TO_SOME_FISH } from "./fishy";
 import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
 
@@ -173,17 +174,42 @@ export function damagePlan(targetHp = ZONE_MAX_HP, prospectiveLanterns?: number)
 }
 
 /**
+ * some fish scales: HP is 3/4 of (Muscle + ML), capped at 10000 (wiki Data:Some fish).
+ * Read post-dress, so the Monodent's all-attributes bonus is already in the stat.
+ */
+export function someFishHp(): number {
+  const muscle = myBuffedstat($stat`Muscle`);
+  const ml = Math.max(0, numericModifier("Monster Level"));
+  return Math.min(10000, Math.ceil(0.75 * (muscle + ml)));
+}
+
+/**
+ * The plan for a pearl-zone fight. A fish fight is sized against the tougher of the
+ * fish and the zone's own monsters, so it still holds if the cast fails to change the
+ * monster, and it budgets the cast's MP.
+ */
+export function pearlFightPlan(spec: PearlSpec, fish: boolean): DamagePlan {
+  if (!fish) return damagePlan(spec.maxHp);
+  const plan = damagePlan(Math.max(spec.maxHp, someFishHp()));
+  return { ...plan, mpPerFight: plan.mpPerFight + mpCost(TALK_TO_SOME_FISH) };
+}
+
+/**
  * Non-melee everywhere: the acoustic electric eel counters landed melee attacks
  * (~89-100 HP each) — spells never trigger it. Noodles (if known) buys 3-5 stunned
  * rounds when the kill isn't a one-shot; Saucegeyser repeats until the fight ends.
  */
-export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan): Macro {
+export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan, fish = false): Macro {
   void spec; // per-monster branches (stench-zone pufferfish/dragonfish stuns) arrive with those zones
   if (wineglassMode()) {
     // Wineglass combat: every skill/item becomes a plain attack anyway — say so.
     return new Macro().attack().repeat();
   }
   const macro = new Macro();
+  // Talk to Some Fish first: the parka's round-1 stagger covers the cast, and a
+  // changed monster makes once-per-combat skills usable again (wiki Monster Changing),
+  // so Noodles lands on the fish. The fish's Book of Facts fact grants the Fishy.
+  if (fish) macro.trySkill(TALK_TO_SOME_FISH);
   if (!plan.oneShot && have($skill`Entangling Noodles`)) {
     macro.trySkill($skill`Entangling Noodles`);
   }

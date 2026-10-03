@@ -1,9 +1,13 @@
 import {
   booleanModifier,
   buy,
+  canEquip,
   cliExecute,
+  effectFact,
   equip,
   equippedItem,
+  factType,
+  haveEffect,
   hermit,
   haveEquipped,
   historicalPrice,
@@ -17,6 +21,7 @@ import {
 import {
   $effect,
   $item,
+  $monster,
   $skill,
   $slot,
   AprilingBandHelmet,
@@ -27,6 +32,7 @@ import {
 } from "libram";
 
 import { args } from "./args";
+import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
 
 // Lucky!-based Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md).
@@ -81,6 +87,86 @@ export function visitLutz(): boolean {
   if (have($effect`Fishy`)) return true;
   print("pearlo: Lutz granted no Fishy, dropping it from the budget", "red");
   return false;
+}
+
+// Book of Facts Fishy (user design 2026-10-03). Sea *dent: Talk to Some Fish turns the
+// current opponent into some fish (phylum fish); for some class/path pairs that
+// monster's fact is the fish-phylum effect fact, 10 turns of Fishy per kill with no
+// daily limit (wiki Just the Facts). Cast inside a pearl-zone fight it costs neither a
+// clover nor a turn, and the fight still accrues pearl progress (user-confirmed).
+
+/** The fish-phylum effect fact grants 10 turns of Fishy (wiki Just the Facts). */
+export const FISH_FACT_FISHY_TURNS = 10;
+
+/** The skill needs it in the main hand, off-hand or on a Disembodied Hand (wiki). */
+export const MONODENT = $item`Monodent of the Sea`;
+export const TALK_TO_SOME_FISH = $skill`Sea *dent: Talk to Some Fish`;
+const SOME_FISH = $monster`some fish`;
+const JUST_THE_FACTS = $skill`Just the Facts`;
+
+/** Facts are deterministic per class and path; mafia computes the current pair's. */
+function someFishFactIsFishy(): boolean {
+  return factType(SOME_FISH) === "effect" && effectFact(SOME_FISH) === $effect`Fishy`;
+}
+
+/**
+ * Can this character farm Fishy off some fish? Overdrunk cannot: the wineglass turns
+ * every combat skill into a plain attack. Local state only — safe in ready().
+ */
+export function fishFactAvailable(): boolean {
+  return (
+    have(JUST_THE_FACTS) &&
+    have(MONODENT) &&
+    canEquip(MONODENT) &&
+    !wineglassMode() &&
+    someFishFactIsFishy()
+  );
+}
+
+/**
+ * Every zone an eligible character farms. A saved-outfit override does not opt out: the
+ * Monodent displaces the saved weapon on fish fights (outfit.ts withMonodent).
+ */
+export function fishFactApplies(spec: PearlSpec): boolean {
+  void spec;
+  return fishFactAvailable();
+}
+
+/** fishMaxxing: every fight in the zone becomes some fish. */
+export function fishMaxxed(spec: PearlSpec): boolean {
+  return args.resources.fishMaxxing && fishFactApplies(spec);
+}
+
+/**
+ * Should the zone's next fight become some fish? Always under fishMaxxing; otherwise
+ * only on the last Fishy turn, so the fight itself still costs one adventure and the
+ * other nine in ten keep the weapon slot for resistance.
+ */
+export function fishWanted(spec: PearlSpec): boolean {
+  return fishFactApplies(spec) && (args.resources.fishMaxxing || haveEffect($effect`Fishy`) <= 1);
+}
+
+/** fishWanted, and the dress actually put the Monodent in a hand. */
+export function fishThisFight(spec: PearlSpec): boolean {
+  return fishWanted(spec) && haveEquipped(MONODENT);
+}
+
+/** Sim-report line for the Book of Facts fish source. */
+export function fishFactReport(): string {
+  const status = !have(JUST_THE_FACTS)
+    ? "Just the Facts not known"
+    : !have(MONODENT)
+      ? "Monodent of the Sea not owned"
+      : !canEquip(MONODENT)
+        ? "Monodent of the Sea not equippable"
+        : wineglassMode()
+          ? "unavailable overdrunk (the wineglass turns skills into attacks)"
+          : !someFishFactIsFishy()
+            ? "this class/path's fact for some fish is not Fishy"
+            : args.resources.fishMaxxing
+              ? `fishMaxxing: every fight becomes some fish (+${FISH_FACT_FISHY_TURNS} turns each)`
+              : `available as needed (+${FISH_FACT_FISHY_TURNS} turns per fish)`;
+  return ` Book of Facts fish (Sea *dent: Talk to Some Fish): ${status}`;
 }
 
 const CLOVER = $item`11-leaf clover`;
