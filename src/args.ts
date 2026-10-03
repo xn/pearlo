@@ -149,6 +149,10 @@ export const args = Args.create(
         help: "Max meat to pay per mall 11-leaf clover for the Fishy refresh. 0 (default) never buys from the mall — free/owned sources only.",
         default: 0,
       }),
+      fishMaxxing: Args.flag({
+        help: "Turn every pearl-zone monster into some fish with the Monodent of the Sea (Sea *dent: Talk to Some Fish), banking 10 turns of Fishy per fight from the Book of Facts. Needs a class/path whose fact for some fish is Fishy. Off by default: fish are then summoned only as Fishy runs out.",
+        default: false,
+      }),
       potionprice: Args.number({
         help: "Max meat to pay per resistance potion. 0 (default) never buys — inventory only. Whether owned potions are spent, and whether allowed purchases are made, is decided by the turns they save; that cost is charged to the zone's profit estimate.",
         default: 0,
