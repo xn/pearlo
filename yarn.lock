@@ -3323,15 +3323,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libram@npm:^0.11.34":
-  version: 0.11.34
-  resolution: "libram@npm:0.11.34"
+"libram@npm:^0.11.35":
+  version: 0.11.35
+  resolution: "libram@npm:0.11.35"
   dependencies:
     core-js: "npm:^3.47.0"
     entities: "npm:^7.0.0"
   peerDependencies:
     kolmafia: ^5.29250.0
-  checksum: 10c0/2f0f9fe20e90dab02ff5a03b6281097692ffdb9fcebb16e6c99950824bb52a7fb793cbf36b59338dc09a74da8ad5de53bf169939a5464b399d92ac4153fcc7d5
+  checksum: 10c0/b2a84f41285bf7e6d553ea0bcf9f199dbfa12926d192753ee90bc6a28b26a830170b57f61fe5cee9fc698ed36e49fd6b3a029cafe6abfa5d7d05d7e5fc6348b7
   languageName: node
   linkType: hard
 
@@ -3816,7 +3816,7 @@ __metadata:
     grimoire-kolmafia: "npm:^0.3.33"
     jiti: "npm:^2.6.1"
     kolmafia: "npm:latest"
-    libram: "npm:^0.11.34"
+    libram: "npm:^0.11.35"
     prettier: "npm:^3.8.1"
     rollup: "npm:^4.57.1"
     typescript: "npm:^5.9.3"
