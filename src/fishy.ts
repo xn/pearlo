@@ -138,12 +138,21 @@ export function fishMaxxed(spec: PearlSpec): boolean {
 }
 
 /**
+ * As needed, start asking for a fish with this many Fishy turns left (user decision
+ * 2026-10-04). Monsters that are already fish can't be converted, so waiting for the
+ * last turn let Fishy lapse whenever that fight drew one; four turns gives four draws.
+ */
+const FISH_REFRESH_AT = 4;
+
+/**
  * Should the zone's next fight become some fish? Always under fishMaxxing; otherwise
- * only on the last Fishy turn, so the fight itself still costs one adventure and the
- * other nine in ten keep the weapon slot for resistance.
+ * only once Fishy is nearly out, so most fights keep the weapon slot for resistance.
  */
 export function fishWanted(spec: PearlSpec): boolean {
-  return fishFactApplies(spec) && (args.resources.fishMaxxing || haveEffect($effect`Fishy`) <= 1);
+  return (
+    fishFactApplies(spec) &&
+    (args.resources.fishMaxxing || haveEffect($effect`Fishy`) <= FISH_REFRESH_AT)
+  );
 }
 
 /** fishWanted, and the dress actually put the Monodent in a hand. */
