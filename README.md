@@ -57,6 +57,8 @@ Useful options:
   hermit clovers per day)
 - `cloverprice=N` — also buy mall 11-leaf clovers for the refresh, at most N meat each
   (default 0 = never; purchases are skipped when the remaining farming can't repay them)
+- `fishMaxxing` — turn every pearl-zone monster into some fish with the Monodent of the
+  Sea, banking 10 turns of Fishy per fight (off by default; see Fishy refreshes)
 - `potionprice=N` — max meat per res top-up potion (default 0 = never buy, inventory
   only). Whether an owned potion is spent, and whether an allowed purchase is made, is
   decided by the turns it saves; that cost is charged to the zone's profit estimate
@@ -102,7 +104,8 @@ One `<element>familiar` / `<element>outfit` pair exists per zone
 (`spooky/sleaze/hot/stench/cold`). An overridden outfit is worn as saved — the
 maximizer only patches breathing into slots it leaves free — while the safety nets
 (organ extenders, wineglass, avoided items like the Mer-kin digpick, `requirecap`)
-still apply and win their slots. Override familiars get breathing gear automatically;
+still apply and win their slots. On a fight that summons some fish (see Fishy refreshes)
+the Monodent of the Sea replaces the saved weapon. Override familiars get breathing gear automatically;
 the Stooper pin takes precedence over a familiar override when it's serving as your
 liver rescue. The profit model prices overridden zones as they will actually run.
 
@@ -123,6 +126,17 @@ clovers → mall clovers under `cloverprice`) and spends one adventure in The Br
 Deepers, where the lucky noncombat The Haggling grants 20 more turns of Fishy. The
 profit model prices these trips (clover cost + trip turn) into its GO/SKIP verdicts,
 and `sim` reports which Lucky! sources are available today.
+
+Some class/path pairs (a Seal Clubber with no path, for one) need none of that. Their
+Book of Facts fact for some fish is 10 turns of Fishy, and the Monodent of the Sea's
+Sea \*dent: Talk to Some Fish turns any monster into one. With Just the Facts and a
+Monodent, pearlo wields the Monodent and casts the skill once Fishy is down to its last 4 turns, inside
+a pearl fight it was fighting anyway — no clover, no extra turn, and the fight still
+counts toward the pearl. Monsters that are already fish can't be converted, so the cast
+waits for the next one that isn't. The Lucky! refresh stands down while this applies. Set
+`fishMaxxing` to convert every pearl-zone fight instead and stockpile Fishy. Neither
+works overdrunk (the wineglass turns skills into attacks), and `sim` reports whether
+your class and path qualify.
 
 The script requires Sea access, a way to breathe underwater, and (for a sober run) a
 spell-based kill — it is tuned for Saucegeyser. Overdrunk farming requires Drunkula's
