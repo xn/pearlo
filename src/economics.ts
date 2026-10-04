@@ -621,8 +621,8 @@ function costZone(
   let fishyUsed = Math.min(fights, pool);
   // Book of Facts fish: each one is +10 Fishy inside a fight already being fought, so
   // the zone never lapses and no Lucky! refresh is worth buying. A cold start pays
-  // double for the first fight only. As needed, a fish comes on the last Fishy turn,
-  // so at least 1 turn is always left over; fishMaxxing banks 10 per fight.
+  // double for the first fight only. As needed, a fish comes before Fishy runs
+  // out, so at least 1 turn is always left over; fishMaxxing banks 10 per fight.
   const fish = fishFactApplies(spec) && !wineglass;
   if (fish) {
     fishyUsed = pool > 0 ? fights : Math.max(0, fights - 1);

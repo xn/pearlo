@@ -3,6 +3,7 @@ import {
   booleanModifier,
   canEquip,
   equippedItem,
+  getMonsters,
   getPower,
   haveEquipped,
   itemAmount,
@@ -11,11 +12,13 @@ import {
   numericModifier,
   weaponType,
 } from "kolmafia";
-import { $item, $monsters, $skill, $slot, $stat, Macro, get, have } from "libram";
+import { $item, $monsters, $phylum, $skill, $slot, $stat, Macro, get, have } from "libram";
 
 import { TALK_TO_SOME_FISH } from "./fishy";
 import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
+
+const FISH = $phylum`fish`;
 
 export const ZONE_MAX_HP = 800; // ganger, giant squid — highest HP in any pearl zone
 
@@ -200,7 +203,6 @@ export function pearlFightPlan(spec: PearlSpec, fish: boolean): DamagePlan {
  * rounds when the kill isn't a one-shot; Saucegeyser repeats until the fight ends.
  */
 export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan, fish = false): Macro {
-  void spec; // per-monster branches (stench-zone pufferfish/dragonfish stuns) arrive with those zones
   if (wineglassMode()) {
     // Wineglass combat: every skill/item becomes a plain attack anyway — say so.
     return new Macro().attack().repeat();
@@ -209,7 +211,15 @@ export function buildPearlMacro(spec: PearlSpec, plan: DamagePlan, fish = false)
   // Talk to Some Fish first: the parka's round-1 stagger covers the cast, and a
   // changed monster makes once-per-combat skills usable again (wiki Monster Changing),
   // so Noodles lands on the fish. The fish's Book of Facts fact grants the Fishy.
-  if (fish) macro.trySkill(TALK_TO_SOME_FISH);
+  // Never on a monster that is already a fish: the cast fails there and KoL aborts the
+  // macro (user report 2026-10-04, giant squid). Macros have no phylum predicate, so
+  // the zone's fish are excluded by id.
+  if (fish) {
+    const alreadyFish = getMonsters(spec.loc).filter((m) => m.phylum === FISH);
+    const talk = Macro.trySkill(TALK_TO_SOME_FISH);
+    if (alreadyFish.length > 0) macro.ifNot(alreadyFish, talk);
+    else macro.step(talk);
+  }
   if (!plan.oneShot && have($skill`Entangling Noodles`)) {
     macro.trySkill($skill`Entangling Noodles`);
   }

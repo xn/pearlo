@@ -130,9 +130,10 @@ and `sim` reports which Lucky! sources are available today.
 Some class/path pairs (a Seal Clubber with no path, for one) need none of that. Their
 Book of Facts fact for some fish is 10 turns of Fishy, and the Monodent of the Sea's
 Sea \*dent: Talk to Some Fish turns any monster into one. With Just the Facts and a
-Monodent, pearlo wields the Monodent and casts the skill on the last Fishy turn, inside
+Monodent, pearlo wields the Monodent and casts the skill once Fishy is down to its last 4 turns, inside
 a pearl fight it was fighting anyway — no clover, no extra turn, and the fight still
-counts toward the pearl. The Lucky! refresh stands down while this applies. Set
+counts toward the pearl. Monsters that are already fish can't be converted, so the cast
+waits for the next one that isn't. The Lucky! refresh stands down while this applies. Set
 `fishMaxxing` to convert every pearl-zone fight instead and stockpile Fishy. Neither
 works overdrunk (the wineglass turns skills into attacks), and `sim` reports whether
 your class and path qualify.
