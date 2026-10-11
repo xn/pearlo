@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 
 import { Game, Tools, loadGame } from "./support/harness";
 
-// The Marinara Trench's toughest monster (docs/sea-reference.md §3): Def 630, 800 HP.
+// The Marinara Trench's toughest monster: Def 630, 800 HP.
 const DEF = 630;
 const HP = 800;
 // Guaranteed-hit threshold vs Def 630: 630 + 5 + (5 + floor(430/20)) = 661 Muscle.

@@ -56,7 +56,7 @@ export function canBreathUnderwater(): boolean {
   );
 }
 
-/** Resistance level where pearl progress caps at 10%/fight (docs/sea-reference.md §2). */
+/** Resistance level where pearl progress caps at 10%/fight. */
 export const PEARL_RES_CAP = 18;
 
 /**
@@ -106,14 +106,14 @@ export type PearlSpec = {
    * Monster to pick when the Peridot of Peril's "Peering Through Your Peridot" NC
    * (choice 1557) fires — first adventure of the day per zone with the Peridot equipped.
    * Selection enters that combat immediately, no turn lost; unanswered it halts the
-   * script. Picks are the zone's safest monster per docs/sea-reference.md §3.
+   * script. Picks are the zone's safest monster.
    */
   peridotMonster: Monster;
-  /** Highest monster HP in the zone (docs/sea-reference.md §3) — the one-shot target. */
+  /** Highest monster HP in the zone — the one-shot target. */
   maxHp: number;
-  /** Highest monster Defense in the zone (docs/sea-reference.md §3) — the hit-guarantee target. */
+  /** Highest monster Defense in the zone — the hit-guarantee target. */
   maxDef: number;
-  /** Highest monster Attack in the zone (docs/sea-reference.md §3 stat tables). */
+  /** Highest monster Attack in the zone. */
   maxAtk: number;
 };
 
@@ -131,7 +131,7 @@ export const PEARLS: PearlSpec[] = [
     obtained: "_unblemishedPearlAnemoneMine",
     progress: "_unblemishedPearlAnemoneMineProgress",
     // NEVER equip the digpick here — it swaps the whole zone to the mining mini-game
-    // (no combats, no pearl progress). docs/sea-reference.md §3.1.
+    // (no combats, no pearl progress).
     avoid: $items`Mer-kin digpick`,
     // Not a Micro Fish (306, one-time SC/TT chain): option 1 is the only button and
     // teaches Harpoon!/Summon Leviatuga.

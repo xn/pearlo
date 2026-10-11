@@ -25,7 +25,7 @@ export type LiverMode = "sober" | "items" | "stooper" | "wineglass";
 
 // 2026 Standard rewards, +1 capacity while equipped (wiki data pages, 2026-08-08).
 // Preference order: angelbone first — no +13 ML (bonus ML feeds stun resistance and
-// monster stats, docs/sea-reference.md §6) and no shirt cost (corset competes with the
+// monster stats) and no shirt cost (corset competes with the
 // Jurassic Parka).
 const STOMACH_EXTENDERS = [$item`angelbone chopsticks`, $item`devilbone corset`];
 const LIVER_EXTENDERS = [$item`angelbone dice`, $item`devilbone rosary`];
