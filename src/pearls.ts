@@ -251,7 +251,7 @@ function lutzTask(selected: PearlSpec[]): Task {
     completed: () => !lutzFishyAvailable(),
     // Page visit, no combat: breathing, plus the organ layer the zones wear — a dress
     // that drops a spleen extender at the raised cap leaves the character jaundiced
-    // (docs/consumption-reference.md §4, issue #13).
+    // (issue #13).
     outfit: buildFishyTripOutfit,
     do: () => {
       visitLutz();
@@ -262,7 +262,7 @@ function lutzTask(selected: PearlSpec[]): Task {
 }
 
 /**
- * Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md): when Fishy
+ * Fishy refresh: when Fishy
  * is down to ≤1 turn, acquire Lucky! and adventure in The Brinier Deepers — its lucky
  * NC "The Haggling" grants 20 turns of Fishy. Placed before the zone tasks: list
  * position is grimoire priority, so this preempts zones whenever Fishy runs low. NOT
@@ -329,7 +329,7 @@ const lastRecordedProgress = new Map<PearlKey, number>();
 
 function turnsNeeded(spec: PearlSpec): number {
   const remaining = 100 - get(spec.progress, 0);
-  const optimistic = 10; // 1.7 * floor(18/3), capped at 10 — see docs/sea-reference.md
+  const optimistic = 10; // 1.7 * floor(18/3), capped at 10
   const rate = observedProgressRate.get(spec.key) ?? optimistic;
   const fights = Math.ceil(remaining / Math.max(1.7, rate));
   // Lucky! refreshes are deliberately not counted: Get Fishy preempts zones while

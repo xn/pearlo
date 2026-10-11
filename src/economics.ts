@@ -217,7 +217,7 @@ function parkaIsDisplaced(spec: PearlSpec, mode: LiverMode): boolean {
  * Monster actions we expect to be exposed to per fight. The Jurassic Parka staggers
  * round 1 in every combat; without it the 0.5 reflects init being a coin flip at best
  * under pressure penalties (ESTIMATE). Entangling Noodles buys ~3 stunned rounds in
- * sober multi-cast fights (docs/sea-reference.md §6).
+ * sober multi-cast fights.
  */
 function roundsExposed(casts: number, wineglass: boolean, parkaDisplaced: boolean): number {
   const stagger = !parkaDisplaced && have($item`Jurassic Parka`) ? 1 : 0.5;
@@ -225,7 +225,7 @@ function roundsExposed(casts: number, wineglass: boolean, parkaDisplaced: boolea
   return Math.max(0, casts - stagger - stun);
 }
 
-// Debuff sources per zone (docs/sea-reference.md §3): Majorly Poisoned in the Mine and
+// Debuff sources per zone: Majorly Poisoned in the Mine and
 // Reef (anti-anti-antidote), The Colors... in the Reef (soft green echo eyedrop antidote).
 const ZONE_CURES: Partial<Record<PearlKey, Item[]>> = {
   spooky: [$item`anti-anti-antidote`],

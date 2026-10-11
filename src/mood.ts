@@ -92,7 +92,7 @@ const WEAPON_DAMAGE_EFFECTS = [
 ];
 
 // Damage mitigation (garbo sea-farming parity, wiki-verified 2026-08-15): pearl-zone
-// damage is almost entirely physical (docs/sea-reference.md), so Damage Absorption
+// damage is almost entirely physical, so Damage Absorption
 // +80 (Ghostly Shell) and −30% physical damage taken (Shield of the Pastalord)
 // cover both combat modes.
 const DEFENSE_EFFECTS = $effects`Ghostly Shell, Shield of the Pastalord`;
@@ -123,7 +123,7 @@ function badEffects(): Effect[] {
   ));
 }
 
-// Weight-scaled resistance familiars (docs/sea-reference.md): more familiar weight is
+// Weight-scaled resistance familiars: more familiar weight is
 // more elemental res toward the 18 cap — the only case the weight potions pay off.
 const WEIGHT_RES_FAMILIARS = $familiars`Exotic Parrot, Mu`;
 // Underwater-only familiar-weight potions (garbo Coral Corral parity, wiki-verified
@@ -594,7 +594,7 @@ export function pearlMood(
       "red",
     );
   }
-  // Fishy: free pipe only in v1 (docs/consumption-reference.md). Lutz's 30 turns are
+  // Fishy: free pipe only in v1. Lutz's 30 turns are
   // taken up front by their own task, before any zone is priced against them.
   if (!have($effect`Fishy`) && have($item`fishy pipe`) && !get("_fishyPipeUsed")) {
     use($item`fishy pipe`);

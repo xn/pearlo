@@ -11,7 +11,7 @@ export type FamiliarPlan = {
   extraModifier?: string;
 };
 
-// Familiar breathing that leaves the famequip slot free (docs/sea-reference.md §5).
+// Familiar breathing that leaves the famequip slot free.
 const FAMILIAR_AIR_EFFECTS = $effects`Driving Waterproofly, Wet Willied`;
 
 export function familiarBreathesFree(): boolean {
@@ -21,7 +21,7 @@ export function familiarBreathesFree(): boolean {
 // das boot (-10 lbs) preferred over little bitty bathysphere (-20 lbs).
 const BREATHING_FAMEQUIP = $items`das boot, little bitty bathysphere`;
 
-// Innate water-breathers useful as utility picks (docs/sea-reference.md §1.5):
+// Innate water-breathers useful as utility picks:
 // Space Jellyfish: 100% start-of-combat delevel + Trench/eel utilities.
 // Barrrnacle / Emo Squid: start-of-combat delevelers.
 // (Magic Dragonfish's spell% was evaluated and ruled out — not impactful enough; user 2026-08-07.)
@@ -35,7 +35,7 @@ function coolerYeti(): Familiar {
   return Familiar.get("Cooler Yeti");
 }
 
-// Effect-based air supplies for the player (docs/sea-reference.md §1.1).
+// Effect-based air supplies for the player.
 const PLAYER_AIR_EFFECTS = $effects`Driving Waterproofly, Oxygenated Blood, Pneumatic, Pumped Stomach, Really Deep Breath, Mer-kinny Flavor, Hyperoxygenated Blood`;
 
 /** Player air guaranteed by an active effect — no equipment slot involved. */

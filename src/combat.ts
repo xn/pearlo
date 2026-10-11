@@ -138,7 +138,7 @@ export function selectLanternGear(needed: number, accessorySlots = 3): LanternSe
 
 /**
  * Conservative (guaranteed-floor) Saucegeyser damage.
- * Per docs/superpowers/specs (Calculating_Spell_Damage): worst-case base roll 60,
+ * Per the wiki (Calculating_Spell_Damage): worst-case base roll 60,
  * 40% Myst, flat bonuses pre-multiplier, percent applied after the (infinite) cap.
  * Lanterns duplicate the highest component — modeled pre-multiplier (worst case)
  * and non-compounding, so the estimate is a floor.

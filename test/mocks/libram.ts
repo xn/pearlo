@@ -10,6 +10,7 @@ import {
   Item,
   Location,
   Monster,
+  Phylum,
   Skill,
   Slot,
   Stat,
@@ -54,6 +55,8 @@ export const $items = plural(Item);
 export const $location = singular(Location);
 export const $monster = singular(Monster);
 export const $monsters = plural(Monster);
+export const $phylum = singular(Phylum);
+export const $phyla = plural(Phylum);
 export const $skill = singular(Skill);
 export const $slot = singular(Slot);
 export const $stat = singular(Stat);

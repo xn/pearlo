@@ -35,7 +35,7 @@ import { args } from "./args";
 import { wineglassMode } from "./organs";
 import { PearlSpec } from "./zones";
 
-// Lucky!-based Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md).
+// Lucky!-based Fishy refresh.
 // The Haggling — The Brinier Deepers' lucky noncombat (wiki-verified 2026-08-08) —
 // grants 20 turns of Fishy. Lucky! is an intrinsic, consumed by the next lucky-capable
 // zone visited, so acquisition and the Brinier Deepers trip must happen back-to-back
@@ -43,7 +43,7 @@ import { PearlSpec } from "./zones";
 
 export const HAGGLING_FISHY_TURNS = 20;
 
-/** fishy pipe grants 10 turns of Fishy, 1/day (docs/sea-reference.md §1.2, wiki-verified). */
+/** fishy pipe grants 10 turns of Fishy, 1/day (wiki-verified). */
 export const FISHY_PIPE_TURNS = 10;
 
 /**

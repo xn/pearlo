@@ -113,6 +113,13 @@ export class Monster extends MafiaClass {
   }
 }
 
+export class Phylum extends MafiaClass {
+  private static readonly lookup = makeRegistry(Phylum);
+  static get(name: string): Phylum {
+    return Phylum.lookup(name);
+  }
+}
+
 export class Element extends MafiaClass {
   private static readonly lookup = makeRegistry(Element);
   static get(name: string): Element {
