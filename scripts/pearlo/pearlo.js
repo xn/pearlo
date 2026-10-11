@@ -23787,7 +23787,7 @@ function canBreathUnderwater() {
   return require$$0.booleanModifier("Adventure Underwater") || get$2("_subAquaEquipBreathing", false) && waterBreathingEquipment.some(item => have$1c(item) && require$$0.canEquip(item));
 }
 
-/** Resistance level where pearl progress caps at 10%/fight (docs/sea-reference.md §2). */
+/** Resistance level where pearl progress caps at 10%/fight. */
 var PEARL_RES_CAP = 18;
 
 /**
@@ -23825,7 +23825,7 @@ var PEARLS = [{
   obtained: "_unblemishedPearlAnemoneMine",
   progress: "_unblemishedPearlAnemoneMineProgress",
   // NEVER equip the digpick here — it swaps the whole zone to the mining mini-game
-  // (no combats, no pearl progress). docs/sea-reference.md §3.1.
+  // (no combats, no pearl progress).
   avoid: $items(_templateObject8$c || (_templateObject8$c = _taggedTemplateLiteral(["Mer-kin digpick"]))),
   // Not a Micro Fish (306, one-time SC/TT chain): option 1 is the only button and
   // teaches Harpoon!/Summon Leviatuga.
@@ -24223,7 +24223,7 @@ var _templateObject$k, _templateObject2$h, _templateObject3$g, _templateObject4$
 
 // 2026 Standard rewards, +1 capacity while equipped (wiki data pages, 2026-08-08).
 // Preference order: angelbone first — no +13 ML (bonus ML feeds stun resistance and
-// monster stats, docs/sea-reference.md §6) and no shirt cost (corset competes with the
+// monster stats) and no shirt cost (corset competes with the
 // Jurassic Parka).
 var STOMACH_EXTENDERS = [$item(_templateObject$k || (_templateObject$k = _taggedTemplateLiteral(["angelbone chopsticks"]))), $item(_templateObject2$h || (_templateObject2$h = _taggedTemplateLiteral(["devilbone corset"])))];
 var LIVER_EXTENDERS = [$item(_templateObject3$g || (_templateObject3$g = _taggedTemplateLiteral(["angelbone dice"]))), $item(_templateObject4$e || (_templateObject4$e = _taggedTemplateLiteral(["devilbone rosary"])))];
@@ -24370,7 +24370,7 @@ function organStatusReport() {
 }
 
 var _templateObject$j, _templateObject2$g, _templateObject3$f, _templateObject4$d, _templateObject5$d, _templateObject6$c, _templateObject7$a, _templateObject8$a, _templateObject9$a, _templateObject0$a, _templateObject1$a, _templateObject10$a, _templateObject11$a, _templateObject12$a, _templateObject13$9, _templateObject14$9, _templateObject15$9, _templateObject16$9, _templateObject17$8, _templateObject18$8, _templateObject19$8, _templateObject20$8, _templateObject21$6;
-// Lucky!-based Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md).
+// Lucky!-based Fishy refresh.
 // The Haggling — The Brinier Deepers' lucky noncombat (wiki-verified 2026-08-08) —
 // grants 20 turns of Fishy. Lucky! is an intrinsic, consumed by the next lucky-capable
 // zone visited, so acquisition and the Brinier Deepers trip must happen back-to-back
@@ -24378,7 +24378,7 @@ var _templateObject$j, _templateObject2$g, _templateObject3$f, _templateObject4$
 
 var HAGGLING_FISHY_TURNS = 20;
 
-/** fishy pipe grants 10 turns of Fishy, 1/day (docs/sea-reference.md §1.2, wiki-verified). */
+/** fishy pipe grants 10 turns of Fishy, 1/day (wiki-verified). */
 var FISHY_PIPE_TURNS = 10;
 
 /**
@@ -24815,7 +24815,7 @@ function selectLanternGear(needed) {
 
 /**
  * Conservative (guaranteed-floor) Saucegeyser damage.
- * Per docs/superpowers/specs (Calculating_Spell_Damage): worst-case base roll 60,
+ * Per the wiki (Calculating_Spell_Damage): worst-case base roll 60,
  * 40% Myst, flat bonuses pre-multiplier, percent applied after the (infinite) cap.
  * Lanterns duplicate the highest component — modeled pre-multiplier (worst case)
  * and non-compounding, so the estimate is a floor.
@@ -26686,7 +26686,7 @@ function handlePostCombatBeatenUp(context, cleaverQueueBefore) {
 }
 
 var _templateObject$6, _templateObject2$6, _templateObject3$5, _templateObject4$4, _templateObject5$4, _templateObject6$4, _templateObject7$4, _templateObject8$4, _templateObject9$4, _templateObject0$4, _templateObject1$4, _templateObject10$4, _templateObject11$4, _templateObject12$4, _templateObject13$3, _templateObject14$3, _templateObject15$3, _templateObject16$3, _templateObject17$2, _templateObject18$2, _templateObject19$2, _templateObject20$2;
-// Familiar breathing that leaves the famequip slot free (docs/sea-reference.md §5).
+// Familiar breathing that leaves the famequip slot free.
 var FAMILIAR_AIR_EFFECTS = $effects(_templateObject$6 || (_templateObject$6 = _taggedTemplateLiteral(["Driving Waterproofly, Wet Willied"])));
 function familiarBreathesFree() {
   return FAMILIAR_AIR_EFFECTS.some(ef => have$1c(ef));
@@ -26695,7 +26695,7 @@ function familiarBreathesFree() {
 // das boot (-10 lbs) preferred over little bitty bathysphere (-20 lbs).
 var BREATHING_FAMEQUIP = $items(_templateObject2$6 || (_templateObject2$6 = _taggedTemplateLiteral(["das boot, little bitty bathysphere"])));
 
-// Innate water-breathers useful as utility picks (docs/sea-reference.md §1.5):
+// Innate water-breathers useful as utility picks:
 // Space Jellyfish: 100% start-of-combat delevel + Trench/eel utilities.
 // Barrrnacle / Emo Squid: start-of-combat delevelers.
 // (Magic Dragonfish's spell% was evaluated and ruled out — not impactful enough; user 2026-08-07.)
@@ -26709,7 +26709,7 @@ function coolerYeti() {
   return require$$0.Familiar.get("Cooler Yeti");
 }
 
-// Effect-based air supplies for the player (docs/sea-reference.md §1.1).
+// Effect-based air supplies for the player.
 var PLAYER_AIR_EFFECTS = $effects(_templateObject6$4 || (_templateObject6$4 = _taggedTemplateLiteral(["Driving Waterproofly, Oxygenated Blood, Pneumatic, Pumped Stomach, Really Deep Breath, Mer-kinny Flavor, Hyperoxygenated Blood"])));
 
 /** Player air guaranteed by an active effect — no equipment slot involved. */
@@ -26830,7 +26830,7 @@ var SPELL_DAMAGE_EFFECTS = $effects(_templateObject0$3 || (_templateObject0$3 = 
 var WEAPON_DAMAGE_EFFECTS = [].concat(_toConsumableArray($effects(_templateObject1$3 || (_templateObject1$3 = _taggedTemplateLiteral(["Carol of the Bulls, Song of the North"])))), [$effect(_templateObject10$3 || (_templateObject10$3 = _taggedTemplateLiteral(["Frenzied, Bloody"])))]);
 
 // Damage mitigation (garbo sea-farming parity, wiki-verified 2026-08-15): pearl-zone
-// damage is almost entirely physical (docs/sea-reference.md), so Damage Absorption
+// damage is almost entirely physical, so Damage Absorption
 // +80 (Ghostly Shell) and −30% physical damage taken (Shield of the Pastalord)
 // cover both combat modes.
 var DEFENSE_EFFECTS = $effects(_templateObject11$3 || (_templateObject11$3 = _taggedTemplateLiteral(["Ghostly Shell, Shield of the Pastalord"])));
@@ -26855,7 +26855,7 @@ function badEffects() {
   return badEffectsCache ?? (badEffectsCache = require$$0.Effect.all().filter(ef => require$$0.booleanModifier(ef, "Adventure Randomly") || require$$0.booleanModifier(ef, "Alters Page Text") || require$$0.booleanModifier(ef, "Always Fumble") || require$$0.booleanModifier(ef, "Blind")));
 }
 
-// Weight-scaled resistance familiars (docs/sea-reference.md): more familiar weight is
+// Weight-scaled resistance familiars: more familiar weight is
 // more elemental res toward the 18 cap — the only case the weight potions pay off.
 var WEIGHT_RES_FAMILIARS = $familiars(_templateObject14$2 || (_templateObject14$2 = _taggedTemplateLiteral(["Exotic Parrot, Mu"])));
 // Underwater-only familiar-weight potions (garbo Coral Corral parity, wiki-verified
@@ -27331,7 +27331,7 @@ function pearlMood(spec, mpPerFight, worthIt, turnsFor) {
     luckyNoticePrinted.add(spec.key);
     require$$0.print("pearlo: Lucky! is active \u2014 the next ".concat(spec.loc, " adventure may be ").concat(spec.luckyNoncombat, " instead of a pearl fight. Consider spending Lucky elsewhere first."), "red");
   }
-  // Fishy: free pipe only in v1 (docs/consumption-reference.md). Lutz's 30 turns are
+  // Fishy: free pipe only in v1. Lutz's 30 turns are
   // taken up front by their own task, before any zone is priced against them.
   if (!have$1c($effect(_templateObject20$1 || (_templateObject20$1 = _taggedTemplateLiteral(["Fishy"])))) && have$1c($item(_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["fishy pipe"])))) && !get$2("_fishyPipeUsed")) {
     require$$0.use($item(_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["fishy pipe"]))));
@@ -27894,7 +27894,7 @@ function parkaIsDisplaced(spec, mode) {
  * Monster actions we expect to be exposed to per fight. The Jurassic Parka staggers
  * round 1 in every combat; without it the 0.5 reflects init being a coin flip at best
  * under pressure penalties (ESTIMATE). Entangling Noodles buys ~3 stunned rounds in
- * sober multi-cast fights (docs/sea-reference.md §6).
+ * sober multi-cast fights.
  */
 function roundsExposed(casts, wineglass, parkaDisplaced) {
   var stagger = !parkaDisplaced && have$1c($item(_templateObject0$1 || (_templateObject0$1 = _taggedTemplateLiteral(["Jurassic Parka"])))) ? 1 : 0.5;
@@ -27902,7 +27902,7 @@ function roundsExposed(casts, wineglass, parkaDisplaced) {
   return Math.max(0, casts - stagger - stun);
 }
 
-// Debuff sources per zone (docs/sea-reference.md §3): Majorly Poisoned in the Mine and
+// Debuff sources per zone: Majorly Poisoned in the Mine and
 // Reef (anti-anti-antidote), The Colors... in the Reef (soft green echo eyedrop antidote).
 var ZONE_CURES = {
   spooky: [$item(_templateObject10$1 || (_templateObject10$1 = _taggedTemplateLiteral(["anti-anti-antidote"])))],
@@ -28820,7 +28820,7 @@ function lutzTask(selected) {
     completed: () => !lutzFishyAvailable(),
     // Page visit, no combat: breathing, plus the organ layer the zones wear — a dress
     // that drops a spleen extender at the raised cap leaves the character jaundiced
-    // (docs/consumption-reference.md §4, issue #13).
+    // (issue #13).
     outfit: buildFishyTripOutfit,
     do: () => {
       visitLutz();
@@ -28833,7 +28833,7 @@ function lutzTask(selected) {
 }
 
 /**
- * Fishy refresh (docs/superpowers/specs/2026-08-08-lucky-fishy-design.md): when Fishy
+ * Fishy refresh: when Fishy
  * is down to ≤1 turn, acquire Lucky! and adventure in The Brinier Deepers — its lucky
  * NC "The Haggling" grants 20 turns of Fishy. Placed before the zone tasks: list
  * position is grimoire priority, so this preempts zones whenever Fishy runs low. NOT
@@ -28888,7 +28888,7 @@ var observedProgressRate = new Map();
 var lastRecordedProgress = new Map();
 function turnsNeeded(spec) {
   var remaining = 100 - get$2(spec.progress, 0);
-  var optimistic = 10; // 1.7 * floor(18/3), capped at 10 — see docs/sea-reference.md
+  var optimistic = 10; // 1.7 * floor(18/3), capped at 10
   var rate = observedProgressRate.get(spec.key) ?? optimistic;
   var fights = Math.ceil(remaining / Math.max(1.7, rate));
   // Lucky! refreshes are deliberately not counted: Get Fishy preempts zones while
